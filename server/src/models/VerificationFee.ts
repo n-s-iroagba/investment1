@@ -1,0 +1,104 @@
+import {
+  Model,
+  InferAttributes,
+  InferCreationAttributes,
+  CreationOptional,
+  ForeignKey,
+  NonAttribute,
+  DataTypes,
+} from 'sequelize';
+import sequelize from '../config/database';
+import Investor from './Investor';
+import Admin from './Admin';
+
+export class VerificationFee extends Model<
+  InferAttributes<VerificationFee>,
+  InferCreationAttributes<VerificationFee>
+> {
+  declare id: CreationOptional<number>;
+  declare amount: number;
+  declare isPaid?: boolean;
+  declare  proofOfPayment?:string;
+ 
+
+  // Foreign keys
+  declare investorId: ForeignKey<Investor['id']>;
+
+
+  // Associations (non-DB attributes)
+  declare investor?: NonAttribute<Investor>;
+
+
+  declare createdAt: CreationOptional<Date>;
+  declare updatedAt: CreationOptional<Date>;
+}
+
+VerificationFee.init(
+  {
+    id: {
+      type: DataTypes.INTEGER.UNSIGNED,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    amount: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    },
+    proofOfPayment:{
+      type:DataTypes.STRING,
+      allowNull:true,
+    },
+
+
+    isPaid: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
+    investorId: {
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: false,
+    },
+   
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+  },
+  {
+    sequelize,
+    modelName: 'VerificationFee',
+    tableName: 'verification_fees',
+    timestamps: true,
+  }
+);
+
+// Associations
+
+VerificationFee.belongsTo(Investor, {
+  foreignKey: 'investorId',
+  as: 'investor',
+});
+
+Investor.hasMany(VerificationFee, {
+  foreignKey: 'investorId',
+  as: 'verificationFees',
+});
+
+VerificationFee.belongsTo(Admin, {
+  foreignKey: 'adminId',
+  as: 'admin',
+});
+
+Admin.hasMany(VerificationFee, {
+  foreignKey: 'adminId',
+  as: 'verificationFees',
+});
+
+export default VerificationFee;

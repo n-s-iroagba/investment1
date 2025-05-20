@@ -1,0 +1,276 @@
+2025-05-18T19:46:21.220Z [INFO]: Request URL: POST /api/auth/signup
+2025-05-18T19:46:23.284Z [ERROR]: Failed to fetch investor by referralCode 12345: Error: Investor not found
+2025-05-18T19:46:23.286Z [ERROR]: Error in createInvestor UserService function: Error: Investor not found
+2025-05-18T19:46:23.287Z [WARN]: CustomError - 404: Investor not found - URL: /api/auth/signup
+2025-05-18T19:48:05.689Z [INFO]: Request URL: POST /api/auth/signup
+2025-05-18T19:48:06.159Z [ERROR]: Error in createInvestor UserService function: SequelizeUniqueConstraintError: Validation error
+2025-05-18T19:48:06.161Z [ERROR]: Error: Validation error - URL: /api/auth/signup - Stack: Error
+    at Query.run (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/dialects/mysql/query.js:46:25)
+    at /home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.insert (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/dialects/abstract/query-interface.js:795:21)
+    at async User.save (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:4154:35)
+    at async Function.create (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:2305:12)
+    at async Function.createInvestor (/home/udorakpuenyi/tempinvest/server/src/services/UserService.ts:22:20)
+    at async investorSignup (/home/udorakpuenyi/tempinvest/server/src/controllers/AuthController.ts:8:23)
+2025-05-18T19:50:53.139Z [INFO]: Request URL: POST /api/auth/signup
+2025-05-18T19:50:53.483Z [WARN]: No referrer found for code: 12345
+2025-05-18T19:50:53.648Z [INFO]: Created investor with userId 1
+2025-05-18T19:54:26.217Z [INFO]: Request URL: POST /api/auth/signup
+2025-05-18T19:54:26.388Z [WARN]: No referrer found for code: 12345
+2025-05-18T19:54:26.542Z [INFO]: Created investor with userId 1
+2025-05-18T19:55:38.505Z [INFO]: Request URL: POST /api/auth/signup
+2025-05-18T19:55:39.188Z [ERROR]: Failed to fetch investor by referralCode 12345: SequelizeDatabaseError: Table 'investment.investors' doesn't exist
+2025-05-18T19:55:39.191Z [ERROR]: Error in createInvestor UserService function: SequelizeDatabaseError: Table 'investment.investors' doesn't exist
+2025-05-18T19:55:39.192Z [ERROR]: Error: Table 'investment.investors' doesn't exist - URL: /api/auth/signup - Stack: Error
+    at Query.run (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/dialects/mysql/query.js:46:25)
+    at /home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/dialects/abstract/query-interface.js:1001:12)
+    at async Function.findAll (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:1824:21)
+    at async Function.findOne (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:1998:12)
+    at async Function.getInvestorByRefferalCode (/home/udorakpuenyi/tempinvest/server/src/services/InvestorService.ts:72:24)
+    at async Function.createInvestor (/home/udorakpuenyi/tempinvest/server/src/services/UserService.ts:32:26)
+    at async investorSignup (/home/udorakpuenyi/tempinvest/server/src/controllers/AuthController.ts:8:23)
+2025-05-18T19:56:00.227Z [INFO]: Request URL: POST /api/auth/signup
+2025-05-18T19:56:00.622Z [ERROR]: Error in createInvestor UserService function: SequelizeUniqueConstraintError: Validation error
+2025-05-18T19:56:00.624Z [ERROR]: Error: Validation error - URL: /api/auth/signup - Stack: Error
+    at Query.run (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/dialects/mysql/query.js:46:25)
+    at /home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.insert (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/dialects/abstract/query-interface.js:795:21)
+    at async User.save (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:4154:35)
+    at async Function.create (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:2305:12)
+    at async Function.createInvestor (/home/udorakpuenyi/tempinvest/server/src/services/UserService.ts:22:20)
+    at async investorSignup (/home/udorakpuenyi/tempinvest/server/src/controllers/AuthController.ts:8:23)
+2025-05-18T19:58:43.734Z [INFO]: Request URL: POST /api/auth/signup
+2025-05-18T19:58:44.049Z [WARN]: No referrer found for code: 12345
+2025-05-18T19:58:44.230Z [INFO]: Created investor with userId 1
+2025-05-18T20:01:25.390Z [INFO]: Request URL: POST /api/auth/signup
+2025-05-18T20:01:25.469Z [ERROR]: Error in createInvestor UserService function: SequelizeDatabaseError: Table 'investment.users' doesn't exist
+2025-05-18T20:01:25.471Z [ERROR]: Error: Table 'investment.users' doesn't exist - URL: /api/auth/signup - Stack: Error
+    at Query.run (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/dialects/mysql/query.js:46:25)
+    at /home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.insert (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/dialects/abstract/query-interface.js:795:21)
+    at async User.save (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:4154:35)
+    at async Function.create (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:2305:12)
+    at async Function.createInvestor (/home/udorakpuenyi/tempinvest/server/src/services/UserService.ts:22:20)
+    at async investorSignup (/home/udorakpuenyi/tempinvest/server/src/controllers/AuthController.ts:8:23)
+2025-05-18T20:01:54.610Z [INFO]: Request URL: POST /api/auth/signup
+2025-05-18T20:01:54.953Z [WARN]: No referrer found for code: 12345
+2025-05-18T20:01:55.101Z [INFO]: Created investor with userId 1
+2025-05-18T20:02:46.631Z [INFO]: Request URL: POST /api/auth/signup
+2025-05-18T20:02:46.867Z [WARN]: No referrer found for code: 12345
+2025-05-18T20:02:47.029Z [INFO]: Created investor with userId 1
+2025-05-18T20:04:17.497Z [INFO]: Request URL: POST /api/auth/signup
+2025-05-18T20:04:17.782Z [WARN]: No referrer found for code: 12345
+2025-05-18T20:04:17.949Z [INFO]: Created investor with userId 1
+2025-05-18T20:07:51.947Z [INFO]: Request URL: POST /api/auth/signup
+2025-05-18T20:07:52.918Z [WARN]: No referrer found for code: 12345
+2025-05-18T20:07:53.052Z [INFO]: Created investor with userId 1
+2025-05-18T20:08:49.845Z [INFO]: Request URL: POST /api/auth/signup
+2025-05-18T20:08:50.320Z [WARN]: No referrer found for code: 12345
+2025-05-18T20:08:50.597Z [INFO]: Created investor with userId 1
+2025-05-18T20:11:10.906Z [INFO]: Request URL: POST /api/auth/signup
+2025-05-18T20:11:11.178Z [WARN]: No referrer found for code: 12345
+2025-05-18T20:11:11.322Z [INFO]: Created investor with userId 1
+2025-05-18T20:13:09.928Z [INFO]: Request URL: POST /api/auth/signup
+2025-05-18T20:13:10.101Z [WARN]: No referrer found for code: 12345
+2025-05-18T20:13:10.244Z [INFO]: Created investor with userId 1
+2025-05-18T20:21:18.817Z [INFO]: Request URL: POST /api/auth/signup
+2025-05-18T20:21:19.044Z [WARN]: No referrer found for code: 12345
+2025-05-18T20:21:19.187Z [INFO]: Created investor with userId 1
+2025-05-18T20:23:21.016Z [INFO]: Request URL: POST /api/auth/signup
+2025-05-18T20:23:21.653Z [ERROR]: Error in createInvestor UserService function: SequelizeUniqueConstraintError: Validation error
+2025-05-18T20:23:21.654Z [ERROR]: Error: Validation error - URL: /api/auth/signup - Stack: Error
+    at Query.run (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/dialects/mysql/query.js:46:25)
+    at /home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.insert (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/dialects/abstract/query-interface.js:795:21)
+    at async User.save (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:4154:35)
+    at async Function.create (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:2305:12)
+    at async Function.createInvestor (/home/udorakpuenyi/tempinvest/server/src/services/UserService.ts:22:20)
+    at async investorSignup (/home/udorakpuenyi/tempinvest/server/src/controllers/AuthController.ts:8:23)
+2025-05-18T20:23:54.169Z [INFO]: Request URL: POST /api/auth/signup
+2025-05-18T20:23:54.423Z [WARN]: No referrer found for code: 12345
+2025-05-18T20:23:54.682Z [INFO]: Created investor with userId 1
+2025-05-18T20:25:52.375Z [INFO]: Request URL: POST /api/auth/signup
+2025-05-18T20:25:52.867Z [ERROR]: Error in createInvestor UserService function: SequelizeUniqueConstraintError: Validation error
+2025-05-18T20:25:52.868Z [ERROR]: Error: Validation error - URL: /api/auth/signup - Stack: Error
+    at Query.run (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/dialects/mysql/query.js:46:25)
+    at /home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.insert (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/dialects/abstract/query-interface.js:795:21)
+    at async User.save (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:4154:35)
+    at async Function.create (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:2305:12)
+    at async Function.createInvestor (/home/udorakpuenyi/tempinvest/server/src/services/UserService.ts:22:20)
+    at async investorSignup (/home/udorakpuenyi/tempinvest/server/src/controllers/AuthController.ts:8:23)
+2025-05-18T21:44:35.038Z [INFO]: Request URL: POST /api/auth/signup
+2025-05-18T21:44:36.093Z [WARN]: No referrer found for code: 12345
+2025-05-18T21:44:36.274Z [INFO]: Created investor with userId 1
+2025-05-18T22:10:19.879Z [INFO]: Request URL: POST /api/auth/signup
+2025-05-18T22:10:20.171Z [WARN]: No referrer found for code: 12345
+2025-05-18T22:10:20.657Z [INFO]: Created investor with userId 1
+2025-05-18T22:10:24.144Z [INFO]: Request URL: POST /api/auth/verify-email
+2025-05-18T22:55:26.574Z [INFO]: Request URL: POST /api/auth/signup
+2025-05-18T22:55:32.751Z [WARN]: No referrer found for code: 12345
+2025-05-18T22:55:32.938Z [INFO]: Created investor with userId 1
+2025-05-18T22:58:05.854Z [INFO]: Request URL: POST /api/auth/signup
+2025-05-18T22:58:06.084Z [WARN]: No referrer found for code: 12345
+2025-05-18T22:58:06.242Z [INFO]: Created investor with userId 1
+2025-05-18T22:58:12.898Z [INFO]: Request URL: POST /api/auth/resend-verification-token
+2025-05-18T22:58:17.279Z [INFO]: Request URL: POST /api/auth/verify-email
+2025-05-19T16:00:33.221Z [INFO]: Request URL: POST /api/managers
+2025-05-19T16:00:33.677Z [WARN]: CustomError - 403: no image path to create manager - URL: /api/managers
+2025-05-19T16:03:42.360Z [INFO]: Request URL: POST /api/managers
+2025-05-19T16:09:41.362Z [INFO]: Request URL: POST /api/managers
+2025-05-19T16:11:56.753Z [INFO]: Request URL: POST /api/managers
+2025-05-19T16:11:56.786Z [ERROR]: Failed to create Manager: SequelizeValidationError: notNull Violation: Manager.image cannot be null
+2025-05-19T16:11:57.137Z [ERROR]: Error: notNull Violation: Manager.image cannot be null - URL: /api/managers - Stack: SequelizeValidationError: notNull Violation: Manager.image cannot be null
+    at InstanceValidator._validate (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/instance-validator.js:78:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InstanceValidator._validateAndRunHooks (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/instance-validator.js:111:7)
+    at async InstanceValidator.validate (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/instance-validator.js:93:12)
+    at async Manager.save (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:4077:7)
+    at async Function.create (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:2305:12)
+    at async Function.createManager (/home/udorakpuenyi/tempinvest/server/src/services/ManagerService.ts:20:23)
+    at async createManager (/home/udorakpuenyi/tempinvest/server/src/controllers/ManagerController.ts:18:26)
+2025-05-19T16:12:20.211Z [INFO]: Request URL: POST /api/managers
+2025-05-19T16:12:20.230Z [ERROR]: Failed to create Manager: SequelizeValidationError: notNull Violation: Manager.image cannot be null
+2025-05-19T16:12:20.233Z [ERROR]: Error: notNull Violation: Manager.image cannot be null - URL: /api/managers - Stack: SequelizeValidationError: notNull Violation: Manager.image cannot be null
+    at InstanceValidator._validate (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/instance-validator.js:78:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InstanceValidator._validateAndRunHooks (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/instance-validator.js:111:7)
+    at async InstanceValidator.validate (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/instance-validator.js:93:12)
+    at async Manager.save (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:4077:7)
+    at async Function.create (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:2305:12)
+    at async Function.createManager (/home/udorakpuenyi/tempinvest/server/src/services/ManagerService.ts:20:23)
+    at async createManager (/home/udorakpuenyi/tempinvest/server/src/controllers/ManagerController.ts:18:26)
+2025-05-19T16:14:36.163Z [INFO]: Request URL: POST /api/managers, [object Object]
+2025-05-19T16:14:36.190Z [ERROR]: Failed to create Manager: SequelizeValidationError: notNull Violation: Manager.image cannot be null
+2025-05-19T16:14:36.213Z [ERROR]: Error: notNull Violation: Manager.image cannot be null - URL: /api/managers - Stack: SequelizeValidationError: notNull Violation: Manager.image cannot be null
+    at InstanceValidator._validate (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/instance-validator.js:78:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InstanceValidator._validateAndRunHooks (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/instance-validator.js:111:7)
+    at async InstanceValidator.validate (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/instance-validator.js:93:12)
+    at async Manager.save (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:4077:7)
+    at async Function.create (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:2305:12)
+    at async Function.createManager (/home/udorakpuenyi/tempinvest/server/src/services/ManagerService.ts:20:23)
+    at async createManager (/home/udorakpuenyi/tempinvest/server/src/controllers/ManagerController.ts:18:26)
+2025-05-19T16:14:44.484Z [INFO]: Request URL: POST /api/managers, [object Object]
+2025-05-19T16:14:44.496Z [ERROR]: Failed to create Manager: SequelizeValidationError: notNull Violation: Manager.image cannot be null
+2025-05-19T16:14:44.501Z [ERROR]: Error: notNull Violation: Manager.image cannot be null - URL: /api/managers - Stack: SequelizeValidationError: notNull Violation: Manager.image cannot be null
+    at InstanceValidator._validate (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/instance-validator.js:78:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InstanceValidator._validateAndRunHooks (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/instance-validator.js:111:7)
+    at async InstanceValidator.validate (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/instance-validator.js:93:12)
+    at async Manager.save (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:4077:7)
+    at async Function.create (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:2305:12)
+    at async Function.createManager (/home/udorakpuenyi/tempinvest/server/src/services/ManagerService.ts:20:23)
+    at async createManager (/home/udorakpuenyi/tempinvest/server/src/controllers/ManagerController.ts:18:26)
+2025-05-19T16:16:58.033Z [INFO]: Request URL: POST /api/managers, undefined
+2025-05-19T16:16:58.064Z [ERROR]: Failed to create Manager: SequelizeValidationError: notNull Violation: Manager.image cannot be null
+2025-05-19T16:16:58.084Z [ERROR]: Error: notNull Violation: Manager.image cannot be null - URL: /api/managers - Stack: SequelizeValidationError: notNull Violation: Manager.image cannot be null
+    at InstanceValidator._validate (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/instance-validator.js:78:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InstanceValidator._validateAndRunHooks (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/instance-validator.js:111:7)
+    at async InstanceValidator.validate (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/instance-validator.js:93:12)
+    at async Manager.save (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:4077:7)
+    at async Function.create (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:2305:12)
+    at async Function.createManager (/home/udorakpuenyi/tempinvest/server/src/services/ManagerService.ts:20:23)
+    at async createManager (/home/udorakpuenyi/tempinvest/server/src/controllers/ManagerController.ts:18:26)
+2025-05-19T16:19:08.324Z [INFO]: Request URL: POST /api/managers, undefined
+2025-05-19T16:19:08.360Z [ERROR]: Failed to create Manager: SequelizeValidationError: notNull Violation: Manager.image cannot be null
+2025-05-19T16:19:08.381Z [ERROR]: Error: notNull Violation: Manager.image cannot be null - URL: /api/managers - Stack: SequelizeValidationError: notNull Violation: Manager.image cannot be null
+    at InstanceValidator._validate (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/instance-validator.js:78:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InstanceValidator._validateAndRunHooks (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/instance-validator.js:111:7)
+    at async InstanceValidator.validate (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/instance-validator.js:93:12)
+    at async Manager.save (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:4077:7)
+    at async Function.create (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:2305:12)
+    at async Function.createManager (/home/udorakpuenyi/tempinvest/server/src/services/ManagerService.ts:20:23)
+    at async createManager (/home/udorakpuenyi/tempinvest/server/src/controllers/ManagerController.ts:18:26)
+2025-05-19T16:19:09.373Z [INFO]: Request URL: POST /api/managers, undefined
+2025-05-19T16:19:09.384Z [ERROR]: Failed to create Manager: SequelizeValidationError: notNull Violation: Manager.image cannot be null
+2025-05-19T16:19:09.389Z [ERROR]: Error: notNull Violation: Manager.image cannot be null - URL: /api/managers - Stack: SequelizeValidationError: notNull Violation: Manager.image cannot be null
+    at InstanceValidator._validate (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/instance-validator.js:78:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InstanceValidator._validateAndRunHooks (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/instance-validator.js:111:7)
+    at async InstanceValidator.validate (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/instance-validator.js:93:12)
+    at async Manager.save (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:4077:7)
+    at async Function.create (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:2305:12)
+    at async Function.createManager (/home/udorakpuenyi/tempinvest/server/src/services/ManagerService.ts:20:23)
+    at async createManager (/home/udorakpuenyi/tempinvest/server/src/controllers/ManagerController.ts:18:26)
+2025-05-19T17:47:01.203Z [INFO]: Request URL: POST /api/managers, undefined
+2025-05-19T17:47:15.444Z [ERROR]: Failed to create Manager: SequelizeValidationError: notNull Violation: Manager.image cannot be null
+2025-05-19T17:47:21.899Z [ERROR]: Error: notNull Violation: Manager.image cannot be null - URL: /api/managers - Stack: SequelizeValidationError: notNull Violation: Manager.image cannot be null
+    at InstanceValidator._validate (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/instance-validator.js:78:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InstanceValidator._validateAndRunHooks (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/instance-validator.js:111:7)
+    at async InstanceValidator.validate (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/instance-validator.js:93:12)
+    at async Manager.save (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:4077:7)
+    at async Function.create (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:2305:12)
+    at async Function.createManager (/home/udorakpuenyi/tempinvest/server/src/services/ManagerService.ts:20:23)
+    at async createManager (/home/udorakpuenyi/tempinvest/server/src/controllers/ManagerController.ts:18:26)
+2025-05-19T17:53:57.537Z [INFO]: Request URL: POST /api//managers, undefined
+2025-05-19T17:53:57.583Z [ERROR]: Failed to create Manager: SequelizeValidationError: notNull Violation: Manager.image cannot be null
+2025-05-19T17:53:57.634Z [ERROR]: Error: notNull Violation: Manager.image cannot be null - URL: /api//managers - Stack: SequelizeValidationError: notNull Violation: Manager.image cannot be null
+    at InstanceValidator._validate (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/instance-validator.js:78:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InstanceValidator._validateAndRunHooks (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/instance-validator.js:111:7)
+    at async InstanceValidator.validate (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/instance-validator.js:93:12)
+    at async Manager.save (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:4077:7)
+    at async Function.create (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:2305:12)
+    at async Function.createManager (/home/udorakpuenyi/tempinvest/server/src/services/ManagerService.ts:20:23)
+    at async createManager (/home/udorakpuenyi/tempinvest/server/src/controllers/ManagerController.ts:18:26)
+2025-05-19T17:55:02.932Z [INFO]: Request URL: POST /api//managers, undefined
+2025-05-19T17:55:02.965Z [ERROR]: Failed to create Manager: SequelizeValidationError: notNull Violation: Manager.image cannot be null
+2025-05-19T17:55:03.005Z [ERROR]: Error: notNull Violation: Manager.image cannot be null - URL: /api//managers - Stack: SequelizeValidationError: notNull Violation: Manager.image cannot be null
+    at InstanceValidator._validate (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/instance-validator.js:78:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InstanceValidator._validateAndRunHooks (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/instance-validator.js:111:7)
+    at async InstanceValidator.validate (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/instance-validator.js:93:12)
+    at async Manager.save (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:4077:7)
+    at async Function.create (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/model.js:2305:12)
+    at async Function.createManager (/home/udorakpuenyi/tempinvest/server/src/services/ManagerService.ts:20:23)
+    at async createManager (/home/udorakpuenyi/tempinvest/server/src/controllers/ManagerController.ts:18:26)
+2025-05-19T17:56:04.694Z [INFO]: Request URL: POST /api//managers, undefined
+2025-05-19T17:56:05.116Z [INFO]: Created Manager id=0
+2025-05-19T18:21:15.921Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-19T18:21:20.290Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-19T18:21:28.246Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-19T18:21:31.783Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-19T18:23:13.561Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-19T18:24:14.869Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-19T18:24:38.019Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-19T18:25:34.649Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-19T18:28:47.075Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-19T18:29:08.187Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-19T18:30:43.666Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-19T18:31:53.610Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-19T18:32:15.258Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-19T18:34:45.232Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-19T18:35:02.389Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-19T18:36:01.201Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-19T18:42:29.854Z [INFO]: Request URL: POST /api//managers, undefined
+2025-05-19T18:42:32.604Z [INFO]: Created Manager id=0
+2025-05-19T18:42:48.882Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-19T18:43:20.385Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-19T18:44:40.434Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-19T18:49:29.699Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-19T18:50:04.027Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-19T18:50:09.918Z [ERROR]: Error: connect ETIMEDOUT - URL: /api/managers - Stack: SequelizeConnectionError: connect ETIMEDOUT
+    at ConnectionManager.connect (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/dialects/mysql/connection-manager.js:126:17)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async ConnectionManager._connect (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/dialects/abstract/connection-manager.js:332:24)
+2025-05-19T19:26:27.919Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-19T19:26:44.357Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-19T19:26:44.904Z [INFO]: Request URL: GET //uploads/manager-1747680149893.jpeg, undefined
+2025-05-19T19:29:27.014Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-19T19:29:37.678Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-20T10:23:25.963Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-20T10:23:31.081Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-20T10:23:35.438Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-20T10:29:16.510Z [INFO]: Request URL: GET /api/managers/2, undefined
+2025-05-20T10:29:17.372Z [INFO]: Request URL: GET /api/admin-wallets, undefined
