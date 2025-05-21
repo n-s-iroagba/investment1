@@ -166,3 +166,13 @@
     at ConnectionManager.connect (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/dialects/mysql/connection-manager.js:126:17)
     at processTicksAndRejections (node:internal/process/task_queues:105:5)
     at async ConnectionManager._connect (/home/udorakpuenyi/tempinvest/server/node_modules/sequelize/src/dialects/abstract/connection-manager.js:332:24)
+2025-05-20T18:04:15.273Z [ERROR]: Failed to create ManagedPortfolio: SequelizeForeignKeyConstraintError: Cannot add or update a child row: a foreign key constraint fails (`investment`.`managed_portfolios`, CONSTRAINT `managed_portfolios_ibfk_1` FOREIGN KEY (`investorId`) REFERENCES `investors` (`id`) ON UPDATE CASCADE)
+2025-05-20T18:04:15.275Z [ERROR]: Error: Cannot add or update a child row: a foreign key constraint fails (`investment`.`managed_portfolios`, CONSTRAINT `managed_portfolios_ibfk_1` FOREIGN KEY (`investorId`) REFERENCES `investors` (`id`) ON UPDATE CASCADE) - URL: /api/investment/new/1 - Stack: Error
+    at Query.run (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/dialects/mysql/query.js:46:25)
+    at /home/udorakpuenyi/tempi/server/node_modules/sequelize/src/sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.insert (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/dialects/abstract/query-interface.js:795:21)
+    at async ManagedPortfolio.save (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/model.js:4154:35)
+    at async Function.create (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/model.js:2305:12)
+    at async Function.createPortfolio (/home/udorakpuenyi/tempi/server/src/services/ManagerPortfolioService.ts:26:25)
+    at async createInvestment (/home/udorakpuenyi/tempi/server/src/controllers/InvestorController.ts:13:27)

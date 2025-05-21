@@ -3,7 +3,7 @@ import { VerificationFeeService } from '../services/VerificationFeeService';
 import { CustomError } from '../utils/error/CustomError';
 import { errorHandler } from '../utils/error/errorHandler';
 
-class VerificationFeeController {
+export class VerificationFeeController {
   static async create(req: Request, res: Response) {
     try {
       const { amount, investorId } = req.body;
@@ -14,7 +14,7 @@ class VerificationFeeController {
     }
   }
 
-  static async getById(req: Request, res: Response) {
+  static async verify(req: Request, res: Response) {
     try {
       const { id } = req.params;
       const fee = await VerificationFeeService.getVerificationFeeById(Number(id));

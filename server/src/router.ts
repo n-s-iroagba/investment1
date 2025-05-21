@@ -4,10 +4,13 @@ import ManagerController from './controllers/ManagerController';
 import AdminWalletController from './controllers/AdminWalletController';
 import { upload } from './middlewares/upload';
 import InvestorController from './controllers/InvestorController';
+import KycController from './controllers/KycController';
 
 const router = Router();
 router.post('/investment/new/:investorId',InvestorController.createInvestment)
 
+
+router.get('/kyc/verify/:id',KycController.verify)
 
 // Trading Assets routes
 router.get('/trading-assets', /* tradingAssetController.list */);

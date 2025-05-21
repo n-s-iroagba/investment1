@@ -10,23 +10,20 @@ import {
 import sequelize from '../config/database';
 import Investor from './Investor';
 import Admin from './Admin';
+import Payment from './Payment';
 
 export class VerificationFee extends Model<
   InferAttributes<VerificationFee>,
   InferCreationAttributes<VerificationFee>
 > {
   declare id: CreationOptional<number>;
+  declare name:string
   declare amount: number;
   declare isPaid?: boolean;
-  declare  proofOfPayment?:string;
- 
-
-  // Foreign keys
   declare investorId: ForeignKey<Investor['id']>;
-
-
   // Associations (non-DB attributes)
   declare investor?: NonAttribute<Investor>;
+  declare payments?: NonAttribute<Payment[]>
 
 
   declare createdAt: CreationOptional<Date>;
@@ -44,12 +41,6 @@ VerificationFee.init(
       type: DataTypes.FLOAT,
       allowNull: false,
     },
-    proofOfPayment:{
-      type:DataTypes.STRING,
-      allowNull:true,
-    },
-
-
     isPaid: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
@@ -59,7 +50,7 @@ VerificationFee.init(
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
     },
-   
+
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
@@ -70,6 +61,7 @@ VerificationFee.init(
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
+    name: ''
   },
   {
     sequelize,

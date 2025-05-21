@@ -1,10 +1,11 @@
+import { Payment } from "./managedPortfolio";
+
 export type VerificationFee ={
     id:number
      amount: number;
  isPaid?: boolean;
- receipt?:string;
- paymentId?:string
- paymentType?:string
+ name:string;
+ payments: Payment[]
 }
 
 export type VerificationFeeCreationDto = {

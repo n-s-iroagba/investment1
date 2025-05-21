@@ -17,6 +17,7 @@ export class Kyc extends Model<
   declare id: CreationOptional<number>;
   declare type: string;
   declare image: string;
+  declare  isVerified?: boolean
   declare number: string;
 
   declare investorId: ForeignKey<Investor['id']>;
@@ -46,6 +47,10 @@ Kyc.init(
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
     },
+    isVerified: {
+type:DataTypes.BOOLEAN,
+defaultValue:false
+    }
   },
   {
     sequelize,

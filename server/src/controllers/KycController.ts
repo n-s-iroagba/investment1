@@ -27,6 +27,16 @@ class KycController {
     }    
   }
 
+  static async verify (req:Request,res:Response){
+    try {
+      const { id } = req.params;
+      const kyc = await KycService.verifyKyc(Number(id));
+      res.status(200).json(kyc);
+      } catch (error) {
+        errorHandler(error, req, res)
+        }
+  }
+
 
   static async update(req: Request, res: Response) {
     try {

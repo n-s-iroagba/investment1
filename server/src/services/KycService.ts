@@ -28,7 +28,20 @@ export class KycService {
       throw error;
     }
   }
-
+  static async verifyKyc(id:number){
+    try {
+      let kyc = await Kyc.findByPk(id);
+      if(!kyc){
+        throw new CustomError(404, 'Kyc not found');
+        }
+        kyc.isVerified = true;
+        await kyc.save()
+  }
+  catch (error) {
+    logger.error(`Failed to verify KYC: ${error}`);
+    throw error;
+    }
+    }
   // Read KYC by id
   static async getKycById(id: number) {
     const kyc = await Kyc.findByPk(id);

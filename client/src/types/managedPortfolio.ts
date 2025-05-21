@@ -1,8 +1,18 @@
   
 export type  ManagedInvestmentPortfolio ={
+    id:number
     amount: number;
  earnings?: number;
    amountDeposited?: number;
- lastDepositDate?: Date | null;
- firstDepositDate: Date | null
+
+ payments: Payment[]
+}
+
+
+export type Payment = {
+  id:number;
+  date:Date;
+  receipt:string
+  type:'FEE'|'PORTFOLIO'
+  amount:number
 }

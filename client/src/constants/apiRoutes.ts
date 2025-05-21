@@ -79,6 +79,9 @@ export const apiRoutes = {
     resendEmailVerificationToken: ():string => `auth/resend-verification-token`
     // password reset, email verify, etc. can be added here
   },
+  kyc:{
+    verify:(id:string|number):string =>`/kyc/verify/${id}`
+  }
 
 
 };
