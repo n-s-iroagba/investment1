@@ -6,10 +6,18 @@ import {
   ForeignKey,
   NonAttribute,
   DataTypes,
+  BelongsToGetAssociationMixin,
+  BelongsToSetAssociationMixin,
+  HasOneGetAssociationMixin,
+  HasOneSetAssociationMixin,
+  HasManyGetAssociationsMixin,
+  HasManySetAssociationsMixin,
 } from 'sequelize';
 import sequelize from '../config/database';
 import Investor from './Investor';
 import Manager from './Manager';
+import CryptoWallet from './CryptoWallet';
+import Payment from './Payment';
 
 export class ManagedPortfolio extends Model<
   InferAttributes<ManagedPortfolio>,
@@ -20,13 +28,30 @@ export class ManagedPortfolio extends Model<
   declare earnings?: number;
   declare amountDeposited?: number;
   declare lastDepositDate?: Date | null;
-  declare paymentStatus?:'COMPLETE_PAYMENT'|'INCOMPLETE_PAYMENT'|'NOT PAID'
+  declare paymentStatus?: 'COMPLETE_PAYMENT' | 'INCOMPLETE_PAYMENT' | 'NOT_PAID';
 
+  // Foreign keys
   declare investorId: ForeignKey<Investor['id']>;
-  declare investor?: NonAttribute<Investor>;
-
   declare managerId: ForeignKey<Manager['id']>;
-  declare manager?: NonAttribute<Manager | null>;
+
+  // Associations
+  declare investor?: NonAttribute<Investor>;
+  declare manager?: NonAttribute<Manager>;
+  declare cryptoWallet?: NonAttribute<CryptoWallet>;
+  declare payments?: NonAttribute<Payment[]>;
+
+  // Mixins
+  declare getInvestor: BelongsToGetAssociationMixin<Investor>;
+  declare setInvestor: BelongsToSetAssociationMixin<Investor, number>;
+  
+  declare getManager: BelongsToGetAssociationMixin<Manager>;
+  declare setManager: BelongsToSetAssociationMixin<Manager, number>;
+  
+  declare getCryptoWallet: HasOneGetAssociationMixin<CryptoWallet>;
+  declare setCryptoWallet: HasOneSetAssociationMixin<CryptoWallet, number>;
+  
+  declare getPayments: HasManyGetAssociationsMixin<Payment>;
+  declare setPayments: HasManySetAssociationsMixin<Payment, number>;
 }
 
 ManagedPortfolio.init(
@@ -54,16 +79,17 @@ ManagedPortfolio.init(
       type: DataTypes.DATE,
       allowNull: true,
     },
+    paymentStatus: {
+      type: DataTypes.ENUM('COMPLETE_PAYMENT', 'INCOMPLETE_PAYMENT', 'NOT_PAID'),
+      allowNull: true
+    },
     investorId: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     managerId: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       allowNull: false,
-    },
-    paymentStatus: {
-      type: DataTypes.ENUM('COMPLETE_PAYMENT', 'INCOMPLETE_PAYMENT', 'NOT_PAID'),
     }
   },
   {
@@ -84,10 +110,18 @@ ManagedPortfolio.belongsTo(Manager, {
   foreignKey: 'managerId',
   as: 'manager',
 });
+
+
+
+
 Manager.hasMany(ManagedPortfolio, {
   foreignKey: 'managerId',
   as: 'managedPortfolios',
 });
 
+Investor.hasMany(ManagedPortfolio, {
+  foreignKey: 'investorId',
+  as: 'managedPortfolios',
+});
 
 export default ManagedPortfolio;

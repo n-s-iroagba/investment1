@@ -1,7 +1,8 @@
 export type CryptoWallet = {
     id:number;
-     TradingAsset: string;
+     currency: string;
  address: string;
+ depositAddress:string
 }
 
-export type CryptoWalletCreationDto = Omit<CryptoWallet,'id'>
+export type CryptoWalletCreationDto = Omit<CryptoWallet,'id'> 

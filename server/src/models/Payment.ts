@@ -1,15 +1,19 @@
 // models/Payment.ts
 import { DataTypes, Model, Optional } from 'sequelize';
 import sequelize from '../config/database'; // adjust to your actual sequelize instance
+import ManagedPortfolio from './ManagedPortfolio';
+import VerificationFee from './VerificationFee';
 
 // 1. Define attributes
 export interface PaymentAttributes {
   id: number;
   date: Date;
   receipt: string;
-  type: 'FEE' | 'PORTFOLIO';
+  depositType: string;
+   paymentType:'FEE'|'INVESTMENT';
   amount: number;
-  isVerified?:boolean    
+  paymentID:string;
+  isVerified?:boolean  
 }
 
 // 2. Define creation attributes (id is auto-generated)
@@ -22,7 +26,9 @@ export class Payment
   public id!: number;
   public date!: Date;
   public receipt!: string;
-  public type!: 'FEE' | 'PORTFOLIO';
+  public depositType!: string;
+  public paymentType!:'FEE'|'INVESTMENT';
+  public paymentID!:string;
   public amount!: number;
   public isVerified?:boolean;
 
@@ -33,32 +39,41 @@ export class Payment
 // 4. Initialize the model
 Payment.init(
   {
-      id: {
-          type: DataTypes.INTEGER.UNSIGNED,
-          autoIncrement: true,
-          primaryKey: true,
-      },
-      date: {
-          type: DataTypes.DATE,
-          allowNull: false,
-      },
-      receipt: {
-          type: DataTypes.STRING,
-          allowNull: false,
-      },
-      type: {
-          type: DataTypes.ENUM('FEE', 'PORTFOLIO'),
-          allowNull: false,
-      },
-      amount: {
-          type: DataTypes.FLOAT,
-          allowNull: false,
-      },
-      isVerified: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: false
-      }
+    id: {
+      type: DataTypes.INTEGER.UNSIGNED,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    receipt: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    depositType: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    paymentType: {
+      type: DataTypes.ENUM('FEE', 'INVESTMENT'),
+      allowNull: false,
+    },
+    amount: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    },
+    isVerified: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
+    paymentID: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      
+    }
   },
   {
     sequelize,
@@ -68,3 +83,14 @@ Payment.init(
 );
 
 export default Payment;
+
+ManagedPortfolio.hasMany(Payment, {
+  foreignKey: 'managedPortfolioId',
+  as: 'payments',
+});
+
+
+VerificationFee.hasMany(Payment, {
+  foreignKey: 'verificationFeeId',
+  as: 'payments',
+});

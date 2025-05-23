@@ -2,10 +2,12 @@ import VerificationFee from '../models/VerificationFee';
 import Investor from '../models/Investor';
 import Admin from '../models/Admin';
 import { CustomError } from '../utils/error/CustomError';
+import Payment, { PaymentCreationAttributes } from '../models/Payment';
 
 interface VerificationFeeCreateInput {
   amount: number;
   investorId: number;
+  name:string
   
 }
 
@@ -15,8 +17,11 @@ interface VerificationFeeUpdateInput {
   
 }
 
-type ProofOfPaymentUpload={
-  proofOfPayment: string;
+export type  PaymentCreationDto = {
+   receipt: string;
+  depositType: string;
+  amount: number;
+   paymentID:string;
 }
 export class VerificationFeeService {
   static async createVerificationFee(data: VerificationFeeCreateInput) {
@@ -25,14 +30,17 @@ export class VerificationFeeService {
     return verificationFee;
   }
 
-  static async uploadProofOfPayment(id: number, filePath: string) {
+  static async uploadProofOfPayment(id: number, payload:PaymentCreationDto) {
   const verificationFee = await VerificationFee.findByPk(id);
   if (!verificationFee) {
     throw new CustomError(404, `VerificationFee with id ${id} not found`);
   }
-
-  verificationFee.proofOfPayment = filePath;
-  await verificationFee.save();
+  const data:PaymentCreationAttributes ={...payload,paymentType:'FEE',date:new Date()}
+  const payment = await Payment.create(data);
+  const payments = verificationFee.payments??[]
+  payments.push(payment)
+  verificationFee.payments = payments
+  await verificationFee.save()
   return verificationFee;
 }
 

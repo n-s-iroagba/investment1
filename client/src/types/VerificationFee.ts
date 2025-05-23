@@ -1,4 +1,6 @@
-import { Payment } from "./managedPortfolio";
+import { Payment } from "./Payment";
+
+
 
 export type VerificationFee ={
     id:number
@@ -9,7 +11,10 @@ export type VerificationFee ={
 }
 
 export type VerificationFeeCreationDto = {
-    amount:number
+
+      amount: number;
+
+  name:string
 }
 export type UploadVerificationFeeProofOfPaymentDto={
     receipt:File

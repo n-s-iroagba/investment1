@@ -1,42 +1,30 @@
 'use client'
 import { useState } from 'react';
-
 import { Manager } from '@/types/manager';
-
 import ManagerForm from '@/components/ManagerForm';
-import ManagerForm2 from '@/components/ManagerForm2';
+import AdminOffCanvas from '@/components/AdminOffCanvas';
+import { useGetList } from '@/hooks/useFetch';
+import AdminManagerCard from '@/components/AdminManagerCard';
+import { DeleteConfirmationModal } from '@/components/DeleteConfirmationModal';
 
 
 export default function ManagerCrudPage() {
-  // const { data: managers, loading, error } = useGetList<Manager>('managers');
-  const [selectedManager, setSelectedManager] = useState<Manager | null>(null);
+  const { data: managers, loading, error } = useGetList<Manager>('managers');
+
   const [createManager, setCreateManager] = useState(false)
-  // const [managerToDelete, setManagerToDelete] = useState<Manager | null>(null);
+  const [managerToDelete, setManagerToDelete] = useState<Manager | null>(null);
+  const [managerToUpdate, setManagerToUpdate] = useState<Manager | null>(null);
 
-  const handleFormSuccess = () => {
-    setSelectedManager(null);
-    // Add logic to refresh managers list
-  };
 
-  // const handleDelete = async () => {
-  //   if (!managerToDelete) return;
-    
-  //   try {
-  //     // Replace with actual delete API call
-  //     await fetch(`/api/managers/${managerToDelete.id}`, {
-  //       method: 'DELETE'
-  //     });
-  //     setManagerToDelete(null);
-  //     // Add logic to refresh managers list
-  //   } catch (error) {
-  //     console.error('Delete failed:', error);
-  //   }
-  // };
+
+
 
   // if (loading) return <div>Loading...</div>;
   // if (error) return <div>Error: {error}</div>;
 
   return (
+    <>
+    <AdminOffCanvas>
     <div className="container mx-auto p-4 bg-blue-50 min-h-screen">
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center mb-8">
@@ -51,30 +39,40 @@ export default function ManagerCrudPage() {
         </div>
 
         {createManager && (
-          <ManagerForm2
-         
-            // onSubmitSuccess={handleFormSuccess}
+          <ManagerForm
           />
         )}
 
-        {/* <div className="space-y-6">
+           {managerToUpdate && (
+          <ManagerForm
+          existingManager={managerToUpdate}
+          patch
+          />
+        )}
+
+        <div className="space-y-6">
           {managers.map((manager) => (
-            <ManagerCard
+            <AdminManagerCard
               key={manager.id}
               manager={manager}
-              onEdit={() => setSelectedManager(manager)}
+              onEdit={() =>{ 
+                setManagerToUpdate(manager);
+             }}
               onDelete={() => setManagerToDelete(manager)}
             />
           ))}
-        </div> */}
+        </div>
 
-        {/* <DeleteConfirmationModal
-          isOpen={!!managerToDelete}
+        {managerToDelete && <DeleteConfirmationModal
+         
           onClose={() => setManagerToDelete(null)}
-          onConfirm={handleDelete}
-          managerName={managerToDelete ? `${managerToDelete.firstName} ${managerToDelete.lastName}` : ''}
-        /> */}
+          id = {managerToDelete.id}
+          type = {'manager'}
+          message={`${managerToDelete.firstName} ${managerToDelete.lastName}`}
+        />}
       </div>
     </div>
+    </AdminOffCanvas>
+    </>
   );
 }

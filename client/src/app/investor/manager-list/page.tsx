@@ -1,6 +1,7 @@
 'use client';
 
-import { ManagerCard } from "@/components/ManagerCard";
+
+import ManagerCard from "@/components/ManagerCard";
 import { apiRoutes } from "@/constants/apiRoutes";
 import { useGetList } from "@/hooks/useFetch";
 import { Manager } from "@/types/manager";

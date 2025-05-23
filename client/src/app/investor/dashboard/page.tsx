@@ -1,38 +1,88 @@
 'use client'
 
-
-import InvestorOffcanvas from '@/components/InvestorOffCanvas'
-import { useState, useEffect } from 'react'
+import InvestorOffCanvas from '@/components/InvestorOffCanvas'
+import PaymentList from '@/components/PaymentList'
+import SocialMediaLinks from '@/components/SocialMediaLinks'
+import { UploadProofModal } from '@/components/UploadProofModal'
+import { ManagedPortfolio } from '@/types/managedPortfolio'
+import { Payment } from '@/types/Payment'
+import { useState } from 'react'
 import Chart from 'react-apexcharts'
+import { ArrowTrendingUpIcon, CurrencyDollarIcon, WalletIcon, ChartBarIcon, SparklesIcon, ArrowUpOnSquareIcon, UserIcon } from '@heroicons/react/24/outline'
+
+
+function getDaysSinceOldestPayment(portfolio: ManagedPortfolio): number {
+  const allPayments = portfolio.payments.filter(payment => payment.isVerified === true)
+  if (allPayments.length === 0) return 1
+
+  const currentDate = new Date()
+  const oldestPaymentDate = new Date(Math.min(...allPayments
+    .map((p: Payment) => new Date(p.date).getTime())
+  ))
+
+  const timeDiff = currentDate.getTime() - oldestPaymentDate.getTime()
+  const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24)) +1
+
+  if (daysDiff > portfolio.manager.duration) {
+    return portfolio.manager.duration
+  }
+  return daysDiff >= 0 ? daysDiff : 1
+}
 
 const InvestorDashboard = () => {
-  const [portfolio, setPortfolio] = useState({
-    totalValue: 25400,
-    dailyEarnings: 0,
-    returnRate: 18.4,
-    activeInvestments: 3
+  const [portfolio, setPortfolio] = useState<ManagedPortfolio>({
+    id: 1,
+    amount: 50000,
+    earnings: 2500,
+    amountDeposited: 30000,
+    payments: [
+      {
+        id: 101,
+        date: new Date("2025-05-20"),
+        receipt: "/receipts/101.pdf",
+        depositType: "Bank Transfer",
+        paymentType: "INVESTMENT",
+        amount: 30000,
+        isVerified: true
+      },
+      {
+        id: 102,
+        date: new Date("2025-05-19"),
+        receipt: "/receipts/102.jpg",
+        depositType: "Credit Card",
+        paymentType: "FEE",
+        amount: 500,
+        isVerified: false
+      },
+    ],
+    manager: {
+      id: 1,
+      lastName: "Doe",
+      firstName: "Jane",
+      image: "/images/managers/jane-doe-profile.jpg",
+      minimumInvestmentAmount: 5000,
+      percentageYield: 8.5,
+      duration: 12,
+      qualification: "CFA Charterholder, 10+ years portfolio management experience"
+    },
+    cryptoWallet: {
+      id: 1,
+      currency: "BTC",
+      address: "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq",
+      depositAddress: "3J98t1WpEZ73CNmQviecrnyiWrnqRhWNLy"
+    }
   })
 
-  // Simulate daily earnings growth
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setPortfolio(prev => ({
-        ...prev,
-        dailyEarnings: prev.dailyEarnings + (portfolio.totalValue * (portfolio.returnRate/100) / 86400)
-      }))
-    }, 1000)
+  const [showPaymentProofModal, setShowPaymentProofModal] = useState(false)
+  const days = getDaysSinceOldestPayment(portfolio)
 
-    return () => clearInterval(interval)
-  }, [portfolio.returnRate, portfolio.totalValue])
-
-  // Chart configuration
   const chartOptions = {
     chart: {
       height: 350,
       toolbar: { show: false },
-      foreColor: '#1e293b'
+      foreColor: '#1a4d2b'
     },
-    colors: ['#3B82F6'],
+    colors: ['#4b7f52'],
     fill: {
       type: 'gradient',
       gradient: {
@@ -40,179 +90,178 @@ const InvestorDashboard = () => {
         stops: [0, 100],
         colorStops: [[{
           offset: 0,
-          color: '#3B82F6',
+          color: '#4b7f52',
           opacity: 0.4
         }, {
           offset: 100,
-          color: '#3B82F6',
+          color: '#4b7f52',
           opacity: 0
         }]]
       }
     },
     dataLabels: { enabled: false },
-   
     xaxis: {
-      categories: Array.from({ length: 30 }, (_, i) => `Day ${i + 1}`),
+      categories: Array.from({ length: days }, (_, i) => `Day ${i + 1}`),
       labels: { style: { colors: '#64748b' } }
     },
-    yaxis: { 
-      labels: { 
+    yaxis: {
+      labels: {
         style: { colors: '#64748b' },
-        formatter: (value: number) => `$${value.toFixed(2)}` 
-      } 
+        formatter: (value: number) => `$${value.toFixed(2)}`
+      }
     },
-    grid: { borderColor: '#e2e8f0' }
+    grid: { 
+      borderColor: '#e2e8f0',
+      strokeDashArray: 5
+    }
   }
 
-  const chartSeries = [{
+    const chartSeries = [{
     name: 'Portfolio Value',
-    data: Array.from({ length: 30 }, (_, i) => 
-      portfolio.totalValue * (1 + (portfolio.returnRate/100)/30 * i))
+    data: Array.from({ length: days }, (_, i) =>
+      (portfolio.amountDeposited ?? 0) * (1 + (portfolio.manager.percentageYield / 100) / 365 * i))
   }]
 
   return (
     <>
-   <InvestorOffcanvas>
-    <div className="min-h-screen bg-white p-8">
-      <div className="max-w-7xl mx-auto space-y-8">
-        <header>
-          <h1 className="text-3xl font-bold text-slate-800">
-            Welcome back, <span className="text-blue-600">Sarah</span> 👋
-          </h1>
-          <p className="text-slate-500 mt-2">Your investment overview</p>
-        </header>
+      <InvestorOffCanvas>
+        <div className="min-h-screen bg-white p-4 md:p-8">
+          <div className="max-w-7xl mx-auto space-y-6">
+            <header className="px-2">
+              <h1 className="text-2xl md:text-3xl font-bold text-green-900">
+                Welcome back, <span className="text-green-700">Sarah</span> 🌱
+              </h1>
+              <p className="text-sm md:text-base text-green-600 mt-1">
+                {portfolio ? 'Your green investment journey' : 'Start growing your wealth'}
+              </p>
+            </header>
 
-        {/* Key Metrics Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-            <div className="flex items-center gap-4">
-              <div className="p-3 bg-blue-50 rounded-lg">
-                <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <div>
-                <p className="text-sm text-slate-500">Total Portfolio Value</p>
-                <p className="text-2xl font-semibold text-slate-800 mt-1">
-                  ${portfolio.totalValue.toLocaleString()}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-            <div className="flex items-center gap-4">
-              <div className="p-3 bg-emerald-50 rounded-lg">
-                <svg className="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                </svg>
-              </div>
-              <div>
-                <p className="text-sm text-slate-500">Daily Returns</p>
-                <p className="text-2xl font-semibold text-emerald-600 mt-1">
-                  +${portfolio.dailyEarnings.toFixed(2)}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-            <div className="flex items-center gap-4">
-              <div className="p-3 bg-blue-50 rounded-lg">
-                <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <div>
-                <p className="text-sm text-slate-500">Avg. Return Rate</p>
-                <p className="text-2xl font-semibold text-slate-800 mt-1">
-                  {portfolio.returnRate}%
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-            <div className="flex items-center gap-4">
-              <div className="p-3 bg-blue-50 rounded-lg">
-                <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                </svg>
-              </div>
-              <div>
-                <p className="text-sm text-slate-500">Active Investments</p>
-                <p className="text-2xl font-semibold text-slate-800 mt-1">
-                  {portfolio.activeInvestments}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Performance Chart */}
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-lg font-semibold text-slate-800">Portfolio Growth</h2>
-            <div className="flex gap-2">
-              <button className="px-3 py-1 text-sm text-blue-600 bg-blue-50 rounded-lg">1M</button>
-              <button className="px-3 py-1 text-sm text-slate-500 hover:bg-slate-50 rounded-lg">6M</button>
-              <button className="px-3 py-1 text-sm text-slate-500 hover:bg-slate-50 rounded-lg">1Y</button>
-            </div>
-          </div>
-          <Chart
-            options={chartOptions}
-            series={chartSeries}
-            type="area"
-            height={350}
-          />
-        </div>
-
-        {/* Managed Portfolios Section */}
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-          <div className="p-6 border-b border-slate-100">
-            <h2 className="text-lg font-semibold text-slate-800">Managed Portfolios</h2>
-          </div>
-          
-          <div className="divide-y divide-slate-100">
-            {[1, 2, 3].map((item) => (
-              <div key={item} className="p-6 hover:bg-slate-50 transition-colors">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="font-medium text-slate-800">Growth Fund #{item}</h3>
-                    <p className="text-sm text-slate-500 mt-1">Managed by BlackRock Assets</p>
-                  </div>
-                  
-                  <div className="text-right">
-                    <p className="text-emerald-600 font-medium">+${(2500 * item).toLocaleString()}</p>
-                    <p className="text-sm text-slate-500 mt-1">12.5% return</p>
+            {!portfolio ? (
+              <div className="bg-white p-8 rounded-2xl shadow-lg border-2 border-green-50 text-center">
+                <div className="max-w-md mx-auto">
+                  <SparklesIcon className="mx-auto h-12 w-12 text-green-600" />
+                  <h3 className="mt-4 text-lg font-medium text-green-900">No active portfolio</h3>
+                  <p className="mt-1 text-sm text-green-600">Plant your first investment seed today</p>
+                  <div className="mt-6">
+                    <button
+                      className="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-xl text-white bg-green-700 hover:bg-green-800 transition-all shadow-md"
+                    >
+                      <CurrencyDollarIcon className="w-5 h-5 mr-2" />
+                      Create New Portfolio
+                    </button>
                   </div>
                 </div>
-                
-                <div className="flex items-center gap-4 mt-4">
-                  <div className="flex-1">
-                    <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
-                      <div 
-                        className="h-full bg-emerald-500 transition-all duration-500" 
-                        style={{ width: `${Math.min(item * 33, 100)}%` }}
-                      />
-                    </div>
-                    <div className="flex justify-between text-sm text-slate-500 mt-2">
-                      <span>18 months duration</span>
-                      <span>{Math.min(item * 33, 100)}% completed</span>
-                    </div>
-                  </div>
-                  
-                  <span className="px-3 py-1 bg-emerald-100 text-emerald-700 text-sm rounded-full">
-                    Active
-                  </span>
-                </div>
               </div>
-            ))}
+            ) : (
+              <>
+                {/* Metrics Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {[
+                    {
+                      icon: WalletIcon,
+                      title: "Total Value",
+                      value: ((portfolio.earnings ?? 0) + (portfolio.amountDeposited ?? 0)).toLocaleString(),
+                      color: 'bg-green-100 text-green-700'
+                    },
+                    {
+                      icon: ArrowTrendingUpIcon,
+                      title: "Daily Returns",
+                      value: `+$${portfolio.earnings ? ((portfolio.earnings ?? 0) / 10).toFixed(2) : '0'}`,
+                      color: 'bg-emerald-100 text-emerald-700'
+                    },
+                    {
+                      icon: ChartBarIcon,
+                      title: "Yield Rate",
+                      value: `${portfolio.manager.percentageYield}%`,
+                      color: 'bg-teal-100 text-teal-700'
+                    },
+                     {
+                      icon: UserIcon,
+                      title: "Managed By",
+                      value: `${portfolio.manager.firstName}  ${portfolio.manager.firstName}`,
+                      color: 'bg-teal-100 text-teal-700'
+                    }
+                  ].map((metric, index) => (
+                    <div key={index} className="bg-white p-4 md:p-6 rounded-2xl shadow-sm border-2 border-green-50 hover:border-green-100 transition-all">
+                      <div className="flex items-center gap-4">
+                        <div className={`p-3 rounded-xl ${metric.color}`}>
+                          <metric.icon className="w-6 h-6" />
+                        </div>
+                        <div>
+                          <p className="text-sm text-green-600">{metric.title}</p>
+                          <p className="text-xl font-semibold text-green-900 mt-1">
+                            {metric.value}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Chart */}
+                <div className="bg-white p-4 md:p-6 mt-6 rounded-2xl shadow-lg border-2 border-green-50">
+                  <h3 className="text-lg font-semibold text-green-900 mb-4 flex items-center gap-2">
+                    <ArrowTrendingUpIcon className="w-5 h-5 text-green-600" />
+                    Portfolio Growth
+                  </h3>
+                  <Chart options={chartOptions} series={chartSeries} type="area" height={350} />
+                </div>
+
+                {/* Payment Section */}
+                <div className="mt-6 space-y-4">
+                  {!portfolio.amountDeposited ? (
+                    <div className="space-y-4">
+                      {!portfolio.cryptoWallet ? (
+                        <SocialMediaLinks />
+                      ) : (
+                        <div className="space-y-4 p-6 bg-green-50 rounded-2xl border-2 border-green-100">
+                          <h3 className="font-medium text-green-900 flex items-center gap-2">
+                            <CurrencyDollarIcon className="w-5 h-5 text-green-600" />
+                            Crypto Payment Instructions
+                          </h3>
+                          <div className="space-y-2 text-sm text-green-700">
+                            <div className="p-3 bg-white rounded-lg border border-green-100">
+                              <span className="font-medium">Currency:</span> {portfolio.cryptoWallet.currency}
+                            </div>
+                            <div className="p-3 bg-white rounded-lg border border-green-100">
+                              <span className="font-medium">Your Address:</span> 
+                              <span className="font-mono break-words block mt-1 text-green-600">
+                                {portfolio.cryptoWallet.address}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                      <button
+                        onClick={() => setShowPaymentProofModal(true)}
+                        className="w-full md:w-auto bg-green-700 text-white px-6 py-3 rounded-xl hover:bg-green-800 transition-all flex items-center gap-2 shadow-md"
+                      >
+                        <ArrowUpOnSquareIcon className="w-5 h-5" />
+                        Upload Payment Proof
+                      </button>
+                    </div>
+                  ) : (
+                    <>
+                      <h4 className="text-lg font-semibold text-green-900 flex items-center gap-2">
+                        <WalletIcon className="w-5 h-5 text-green-600" />
+                        Payment History
+                      </h4>
+                      <PaymentList payments={portfolio.payments} />
+                    </>
+                  )}
+                </div>
+              </>
+            )}
           </div>
         </div>
-      </div>
-    </div>
-    </InvestorOffcanvas>
+      </InvestorOffCanvas>
+
+      <UploadProofModal 
+        isOpen={showPaymentProofModal} 
+        onClose={() => setShowPaymentProofModal(false)} 
+        type={'investment'} 
+        id={portfolio.id} 
+      />
     </>
   )
 }

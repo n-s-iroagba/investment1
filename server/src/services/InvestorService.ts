@@ -1,6 +1,11 @@
+import sequelize from 'sequelize';
 import Investor from '../models/Investor';
 import { CustomError } from '../utils/error/CustomError';
 import logger from '../utils/logger/logger';
+import Kyc from '../models/Kyc';
+import ManagedPortfolio from '../models/ManagedPortfolio';
+import Referral from '../models/Referral';
+import User from '../models/User';
 
 
 export class InvestorService {
@@ -106,6 +111,62 @@ export class InvestorService {
       return investor;
     } catch (error) {
       logger.error(`Failed to update investor: ${error}`);
+      throw error;
+    }
+  }
+
+   /**
+   * Delete an investor and all associated records
+   * @param investorId - ID of the investor to delete
+   */
+  static async deleteInvestor(investorId: number): Promise<void> {
+
+    
+    try {
+      const investor = await Investor.findByPk(investorId, {
+        include: [
+          { model: ManagedPortfolio },
+      
+          { model: Kyc },
+          { model: Referral },
+          { model: User }
+        ],
+       
+      });
+
+      if (!investor) {
+        throw new CustomError(404,'Investor not found');
+      }
+
+      // Delete associated records
+      if (investor.managedPortfolio) {
+        await investor.managedPortfolio.destroy();
+      }
+
+   
+
+      if (investor.kyc) {
+        await investor.kyc.destroy();
+      }
+
+      if (investor.referrals) {
+        await Referral.destroy({
+          where: { referredId:investor.id,referrerId:investor.id },
+         
+        });
+      }
+
+      // Delete the investor
+      await investor.destroy();
+
+      // Delete associated user
+      if (investor.user) {
+        await investor.user.destroy();
+      }
+
+    
+    } catch (error) {
+     
       throw error;
     }
   }

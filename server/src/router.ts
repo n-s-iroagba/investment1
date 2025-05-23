@@ -3,11 +3,12 @@ import { AuthController } from './controllers/AuthController';
 import ManagerController from './controllers/ManagerController';
 import AdminWalletController from './controllers/AdminWalletController';
 import { upload } from './middlewares/upload';
-import InvestorController from './controllers/InvestorController';
-import KycController from './controllers/KycController';
 
+import KycController from './controllers/KycController';
+import SocialMediaController from './controllers/SocialMediaController';
+import ManagedPortfolioController from './controllers/ManagedPortfolioController';
 const router = Router();
-router.post('/investment/new/:investorId',InvestorController.createInvestment)
+router.post('/investment/new/:investorId',ManagedPortfolioController.createInvestment)
 
 
 router.get('/kyc/verify/:id',KycController.verify)
@@ -40,12 +41,7 @@ router.post('/admin-wallets',  AdminWalletController.createAdminWallet );
 router.patch('/admin-wallets/:id',  AdminWalletController.updateAdminWallet);
 router.delete('/admin-wallets/:id',  AdminWalletController.deleteAdminWallet );
 
-// // Fiat Accounts routes
-// router.get('/fiat-accounts',FiatAccountController */);
-// router.get('/fiat-accounts/:id',FiatAccountController.get */);
-// router.post('/fiat-accounts',FiatAccountController.create */);
-// router.patch('/fiat-accounts/:id',FiatAccountController.update */);
-// router.delete('/fiat-accounts/:id',FiatAccountController.delete */);
+
 
 // Crypto Wallets routes
 router.get('/crypto-wallets', /* cryptoWalletController.list */);
@@ -55,11 +51,11 @@ router.patch('/crypto-wallets/:id', /* cryptoWalletController.update */);
 router.delete('/crypto-wallets/:id', /* cryptoWalletController.delete */);
 
 // Social Media routes
-router.get('/social-media', /* socialMediaController.list */);
-router.get('/social-media/:id', /* socialMediaController.get */);
-router.post('/social-media', /* socialMediaController.create */);
-router.patch('/social-media/:id', /* socialMediaController.update */);
-router.delete('/social-media/:id', /* socialMediaController.delete */);
+router.get('/social-media',  SocialMediaController.getAll );
+router.get('/social-media/:id',  SocialMediaController.getById );
+router.post('/social-media', upload.single('logo'),  SocialMediaController.create );
+router.patch('/social-media/:id', upload.single('logo'), SocialMediaController.update );
+router.delete('/social-media/:id',  SocialMediaController.delete );
 
 // Verification Fees routes
 router.get('/verification-fees', /* verificationFeeController.list */);
@@ -76,4 +72,4 @@ router.post (`/auth/resend-verification-token`,AuthController.resendVerification
 router.post('/auth/logout', /* authController.logout */);
 router.post('/auth/refresh-token', /* authController.refreshToken */);
 
-export default router;
+export default router

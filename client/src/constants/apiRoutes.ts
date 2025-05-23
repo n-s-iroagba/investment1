@@ -18,7 +18,7 @@ export const apiRoutes = {
     list: (): string => `/managers`,
     get: (id: number | string): string => `/managers/${id}`,
     create: (): string => `/managers`,
-    update: (id: number | string): string => `/managers/${id}`,
+    update: (id: number | string): string => `managers/${id}`,
     delete: (id: number | string): string => `/managers/${id}`,
   },
 

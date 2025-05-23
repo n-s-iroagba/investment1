@@ -61,7 +61,10 @@ VerificationFee.init(
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
-    name: ''
+    name:{
+      type:DataTypes.STRING,
+      allowNull:false
+    }
   },
   {
     sequelize,
@@ -80,16 +83,6 @@ VerificationFee.belongsTo(Investor, {
 
 Investor.hasMany(VerificationFee, {
   foreignKey: 'investorId',
-  as: 'verificationFees',
-});
-
-VerificationFee.belongsTo(Admin, {
-  foreignKey: 'adminId',
-  as: 'admin',
-});
-
-Admin.hasMany(VerificationFee, {
-  foreignKey: 'adminId',
   as: 'verificationFees',
 });
 

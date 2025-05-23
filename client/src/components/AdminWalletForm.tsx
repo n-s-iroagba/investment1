@@ -1,96 +1,148 @@
 // components/AdminWalletForm.tsx
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
+import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { AdminWallet, AdminWalletCreationDto } from '@/types/adminWallet';
-
-const schema = yup.object().shape({
-  address: yup.string().required('Wallet address is required'),
-  TradingAsset: yup.string().required('TradingAsset is required'),
-});
+import { patch, post } from '@/utils/apiClient';
+import { apiRoutes } from '@/constants/apiRoutes';
+import { WalletIcon, CurrencyDollarIcon } from '@heroicons/react/24/outline';
 
 interface AdminWalletFormProps {
-  onSubmitSuccess: () => void;
   existingWallet?: AdminWallet;
 }
 
-export default function AdminWalletForm({ onSubmitSuccess, existingWallet }: AdminWalletFormProps) {
-  const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm<AdminWalletCreationDto>({
-    resolver: yupResolver(schema),
-    defaultValues: existingWallet || {},
+export default function AdminWalletForm({ existingWallet }: AdminWalletFormProps) {
+  const [formData, setFormData] = useState<AdminWalletCreationDto>({
+    address: existingWallet?.address || '',
+    currency: existingWallet?.currency || '',
   });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const onSubmit = async (data: AdminWalletCreationDto) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    setErrors(prev => ({ ...prev, [name]: '' }));
+  };
+
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+    if (!formData.address) newErrors.address = 'Wallet address is required';
+    if (!formData.currency) newErrors.currency = 'Currency is required';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+
+    setIsSubmitting(true);
     try {
-      // Replace with actual API call
+    
+      
       if (existingWallet) {
-        await fetch(`/api/admin-wallets/${existingWallet.id}`, {
-          method: 'PUT',
-          body: JSON.stringify(data),
-        });
+        await patch(apiRoutes.adminWallet.update(existingWallet.id),formData );
         toast.success('Wallet updated successfully!');
       } else {
-        await fetch('/api/admin-wallets', {
-          method: 'POST',
-          body: JSON.stringify(data),
-        });
+        await post(apiRoutes.adminWallet.create(),formData)
         toast.success('Wallet created successfully!');
+        setFormData({ address: '', currency: '' });
       }
-      onSubmitSuccess();
-      if (!existingWallet) reset();
+      window.location.reload()
     } catch (error) {
-      console.error('error occured in submit function of admin wallet form',error)
+      console.error('Submission error:', error);
       toast.error('An error occurred. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
+  const handleCancel = () => {
+    setFormData({
+      address: existingWallet?.address || '',
+      currency: existingWallet?.currency || '',
+    });
+    setErrors({});
+    window.location.reload()
+  };
+
+
+
+
   return (
-    <div className="bg-white p-6 rounded-xl shadow-lg mt-4">
-      <h2 className="text-xl font-semibold text-blue-600 mb-4">
+    <div className="bg-white p-6 rounded-2xl shadow-lg border-2 border-green-50 relative overflow-hidden">
+      {/* Decorative Corner Borders */}
+      <div className="absolute top-2 right-2 w-8 h-8 border-t-2 border-r-2 border-green-800 opacity-20" />
+      <div className="absolute bottom-2 left-2 w-8 h-8 border-b-2 border-l-2 border-green-800 opacity-20" />
+
+      <h2 className="text-xl font-semibold text-green-900 mb-6 flex items-center gap-2">
+        <WalletIcon className="w-6 h-6 text-green-700" />
         {existingWallet ? 'Edit Wallet' : 'Add New Wallet'}
       </h2>
       
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700">TradingAsset</label>
-
-          {errors.TradingAsset && (
-            <p className="text-red-500 text-sm mt-1">{errors.TradingAsset.message}</p>
-          )}
-             <input
-            {...register('TradingAsset')}
-            className="mt-1 block w-full rounded-md border-blue-200 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-            placeholder="Enter wallet address"
+          <label className="block text-sm font-medium text-green-700 mb-2">
+            <span className="flex items-center gap-1">
+              <CurrencyDollarIcon className="w-4 h-4" />
+              Currency
+            </span>
+          </label>
+          <input
+            name="currency"
+            value={formData.currency}
+            onChange={handleInputChange}
+            className={`mt-1 block w-full rounded-xl border-2 ${
+              errors.currency ? 'border-red-300' : 'border-green-100'
+            } p-3 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all`}
+            placeholder="BTC, ETH, USD..."
           />
+          {errors.currency && (
+            <p className="text-red-600 text-sm mt-2 ml-1">{errors.currency}</p>
+          )}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">Wallet Address</label>
+          <label className="block text-sm font-medium text-green-700 mb-2">
+            Wallet Address
+          </label>
           <input
-            {...register('address')}
-            className="mt-1 block w-full rounded-md border-blue-200 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-            placeholder="Enter wallet address"
+            name="address"
+            value={formData.address}
+            onChange={handleInputChange}
+            className={`mt-1 block w-full rounded-xl border-2 ${
+              errors.address ? 'border-red-300' : 'border-green-100'
+            } p-3 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all`}
+            placeholder="Enter blockchain address"
           />
           {errors.address && (
-            <p className="text-red-500 text-sm mt-1">{errors.address.message}</p>
+            <p className="text-red-600 text-sm mt-2 ml-1">{errors.address}</p>
           )}
         </div>
 
-        <div className="flex justify-end gap-4 mt-6">
+        <div className="flex justify-end gap-4 mt-8">
           <button
             type="button"
-            onClick={onSubmitSuccess}
-            className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+            onClick={handleCancel}
+            className="px-6 py-2 border-2 border-green-200 text-green-800 rounded-xl hover:bg-green-50 transition-all"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={isSubmitting}
-            className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
+            className="px-8 py-2 bg-green-700 text-white rounded-xl hover:bg-green-800 disabled:opacity-50 transition-all flex items-center gap-2"
           >
-            {existingWallet ? 'Update Wallet' : 'Create Wallet'}
+            {isSubmitting ? (
+              <>
+                <span className="animate-spin">🌀</span>
+                Processing...
+              </>
+            ) : existingWallet ? (
+              'Update Wallet'
+            ) : (
+              'Create Wallet'
+            )}
           </button>
         </div>
       </form>

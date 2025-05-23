@@ -12,7 +12,6 @@ import User from './User';
 import Admin from './Admin';
 import Kyc from './Kyc';
 import ManagedPortfolio from './ManagedPortfolio';
-import InvestorPortfolio from './InvestorPortfolio';
 import Referral from './Referral';
 
 export class Investor extends Model<
@@ -39,7 +38,7 @@ export class Investor extends Model<
   declare admin?: NonAttribute<Admin>;
   declare kyc?: NonAttribute<Kyc>;
   declare managedPortfolio?: NonAttribute<ManagedPortfolio>;
-  declare investorPortfolio?: NonAttribute<InvestorPortfolio>;
+
   declare referrals?: NonAttribute<Referral[]>;
 }
 

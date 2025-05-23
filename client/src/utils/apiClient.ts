@@ -16,6 +16,10 @@ const baseURL: string = (() => {
 // Create Axios instance
 const apiClient: AxiosInstance = axios.create({
   baseURL,
+   headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  }
 
 });
 

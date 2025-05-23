@@ -1,21 +1,44 @@
 // components/UploadProofModal.tsx
+import { apiRoutes } from '@/constants/apiRoutes';
+import { post } from '@/utils/apiClient';
 import { useState } from 'react';
-import { UploadVerificationFeeProofOfPaymentDto } from '@/types/fee';
+
 
 interface UploadProofModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onUpload: (data: UploadVerificationFeeProofOfPaymentDto) => void;
+  type: 'verificationFee'|'investment'
+  id:number|string,
+
 }
 
-export function UploadProofModal({ isOpen, onClose, onUpload }: UploadProofModalProps) {
-  const [paymentId, setPaymentId] = useState('');
+export function UploadProofModal({ isOpen, onClose,id, type }: UploadProofModalProps) {
+  const [amount, setAmount] = useState('');
   const [paymentType, setPaymentType] = useState('');
+    const [paymentID, setPaymentID] = useState('');
   const [file, setFile] = useState<File | null>(null);
 
   const handleSubmit = () => {
-    if (!file) return;
-    onUpload({ receipt: file, paymentId, paymentType });
+ 
+      const formData = new FormData()
+
+    if(file){
+     formData.append('file', file)
+    }else{
+      alert('no receipt file uploaded')
+      return;
+    }
+     formData.append('amount', amount)
+     formData.append('paymentType', paymentType)
+     formData.append('paymentID',paymentID)
+    if (type==='verificationFee'){
+          post(apiRoutes.verificationFee)
+    }else if (type === 'investment'){
+      post(apiRoutes.investment)
+
+    }else{
+      alert('invalid type')
+    }
     onClose();
   };
 
@@ -28,10 +51,10 @@ export function UploadProofModal({ isOpen, onClose, onUpload }: UploadProofModal
         
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Payment ID</label>
+            <label className="block text-sm font-medium text-gray-700">Amount Paid</label>
             <input
-              value={paymentId}
-              onChange={(e) => setPaymentId(e.target.value)}
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
               className="mt-1 block w-full rounded-md border-blue-200 shadow-sm focus:border-blue-500 focus:ring-blue-500"
             />
           </div>
@@ -45,9 +68,16 @@ export function UploadProofModal({ isOpen, onClose, onUpload }: UploadProofModal
             >
               <option value="">Select Type</option>
               <option value="bank_transfer">Bank Transfer</option>
-              <option value="credit_card">Credit Card</option>
               <option value="crypto">Crypto</option>
             </select>
+          </div>
+             <div>
+            <label className="block text-sm font-medium text-gray-700">{paymentType ==='Crypto'?'Wallet Address':'Account Number or Tag'}</label>
+            <input
+              value={amount}
+              onChange={(e) => setPaymentID(e.target.value)}
+              className="mt-1 block w-full rounded-md border-blue-200 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            />
           </div>
           
           <div>

@@ -6,6 +6,7 @@ import { FullInvestor } from '@/types/Investor';
 import { useRouter } from 'next/navigation';
 import { get } from '@/utils/apiClient';
 import { apiRoutes } from '@/constants/apiRoutes';
+import PaymentList from '@/components/PaymentList';
 
 export default function InvestorDetail() {
   const [showEmailModal, setShowEmailModal] = useState(false);
@@ -106,11 +107,11 @@ const investor:FullInvestor = {
                 {investor.user.email}
               </a>
             </p>
-            <p>
+          
               <p  className="text-emerald-600 hover:underline">
               Country of Residence :  {investor.countryOfResidence}
               </p>
-            </p>
+            
           </div>
         </div>
       </details>
@@ -194,17 +195,7 @@ const investor:FullInvestor = {
               
             </div>
             <div>
-               {portfolio.payments.map((payment)=>(
-                <>
-                <div>
-                     {!payment.amount? <p>Kindly, verify payment</p>: <p>Amount : {payment.amount}</p>}
-                  <div>Date : {payment.date.toDateString()}</div>
-                    <button onClick={()=>setSelectedDocument(payment.receipt)}>View Payment Receipt</button>
-                  {!payment.amount && <button onClick={()=>handleVerifyPortfolioPayment(portfolio.id,payment.id)}>Verify Payment</button> }
-                 
-                </div>
-                </>
-               ))}
+               {portfolio.paymentsm && <PaymentList payments={portfolio.payments} isAdmin/>}
 
             </div>
             </>
@@ -242,27 +233,12 @@ const investor:FullInvestor = {
         <p><strong>Amount:</strong> {verificationFee.amount}</p>
 
         <div className="pt-2 space-y-3">
-          {verificationFee.payments.map((payment, index) => (
-            <div key={index} className="border-l-2 border-emerald-200 pl-4 relative">
-              {!payment.amount ? (
-                <p className="text-sm text-rose-600">Kindly, verify payment</p>
-              ) : (
-                <p><strong>Amount:</strong> {payment.amount}</p>
-              )}
-              <div><strong>Date:</strong> {new Date(payment.date).toDateString()}</div>
-              <div className="mt-2 space-x-2">
-                <button className="text-sm text-blue-600 hover:underline" onClick={()=>setSelectedDocument(payment.receipt)}>View Receipt</button>
-                {!payment.amount && (
-                  <button className="text-sm text-green-600 hover:underline" onClick={()=>handleVerifVerificationFeePayment(verificationFee.id,payment.id)}>Verify Payment</button>
-                )}
+          {verificationFee.payments && <PaymentList payments={verificationFee.payments} isAdmin/>}
               </div>
-            </div>
-          ))}
+            
         </div>
-
+))}
       </div>
-    ))}
-  </div>
 </details>
 
 

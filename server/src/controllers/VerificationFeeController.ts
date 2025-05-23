@@ -5,9 +5,10 @@ import { errorHandler } from '../utils/error/errorHandler';
 
 export class VerificationFeeController {
   static async create(req: Request, res: Response) {
+    const investorId = req.params.investorId
     try {
-      const { amount, investorId } = req.body;
-      const fee = await VerificationFeeService.createVerificationFee({ amount, investorId });
+      const { amount, investorId,name,  } = req.body;
+      const fee = await VerificationFeeService.createVerificationFee({ amount, investorId,name,  } );
       res.status(201).json(fee);
     } catch (error) {
       errorHandler(error,req,res)
@@ -42,7 +43,7 @@ export class VerificationFeeController {
         throw new CustomError(400,'proof of payment required')
       }
 
-      const updated = await VerificationFeeService.uploadProofOfPayment(Number(id), req.file.path);
+      const updated = await VerificationFeeService.uploadProofOfPayment(Number(id), req.body);
       res.status(200).json(updated);
     } catch (error) {
       errorHandler(error,req,res)

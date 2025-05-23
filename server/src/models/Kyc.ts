@@ -81,7 +81,4 @@ export default Kyc;
 
 
 
-Investor.hasOne(Kyc, {
-  foreignKey: 'investorId',
-  as: 'kyc',
-});
+

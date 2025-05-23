@@ -10,12 +10,7 @@ export default function InvestorList() {
   if (!investors.length) {
     return (
       <div className="space-y-4">
-        {[1, 2, 3].map((i) => (
-          <div key={i} className="animate-pulse bg-emerald-50/20 rounded-lg p-4">
-            <div className="h-4 bg-emerald-100/30 rounded w-1/3 mb-2"></div>
-            <div className="h-4 bg-emerald-100/30 rounded w-1/2"></div>
-          </div>
-        ))}
+       No investors
       </div>
     );
   }

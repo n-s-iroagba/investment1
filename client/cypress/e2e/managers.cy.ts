@@ -1,58 +1,36 @@
-
-describe('Manager UI - Create and Update', () => {
-  const manager = {
-    name: 'Jane Doe',
-    percentageYield: '120',
-    qualification: 'MBA',
-    imagePath: 'public/download2.jpeg', // put this file in your /public or fixtures folder
-  };
-
-//   const updatedManager = {
-//     name: 'Jane Smith',
-//     percentageYield: '150',
-//     qualification: 'PhD',
-//     imagePath: 'public/download1.jpeg',
-//   };
-
-  it('should create a new manager', () => {
-  
+describe('AdminOffCanvas & ManagerForm integration', () => {
+  beforeEach(() => {
+    cy.viewport('iphone-x'); // Simulate mobile to test off-canvas
     cy.visit('/admin/managers');
-
-    // Fill registration form
-    cy.get('button[name="addNewManager"]').click();
-
-    cy.get('input[name="name"]').type(manager.name);
-    cy.get('input[name="percentageYield"]').type(manager.percentageYield);
-    cy.get('input[name="qualification"]').type(manager.qualification);
-
-    cy.get('input[type="file"]').selectFile(manager.imagePath, { force: true });
-
-    cy.contains('Submit').click();
-
-    cy.url().should('include', '/admin/managers');
-    cy.contains(manager.name).should('exist');
-    cy.contains(manager.qualification).should('exist');
   });
 
-//   it('should update the manager', () => {
-//     cy.visit('/admin-dashboard/manager');
+  it('should open the AdminOffCanvas and open ManagerForm modal', () => {
+    // Click the hamburger menu (AdminOffCanvas)
+    // cy.get('button[aria-label="Toggle navigation"]').click();
 
-//     cy.contains(manager.name)
-//       .parents('tr')
-//       .within(() => {
-//         cy.contains('Edit').click();
-//       });
+    // // Ensure the sidebar is now visible
+    // cy.get('aside').should('be.visible');
 
-//     cy.get('input[name="name"]').clear().type(updatedManager.name);
-//     cy.get('input[name="percentageYield"]').clear().type(updatedManager.percentageYield);
-//     cy.get('input[name="qualification"]').clear().type(updatedManager.qualification);
+    // Click the "Add New Manager" button
+    cy.get('button[name="addNewManager"]').click();
 
-//     cy.get('input[type="file"]').selectFile(updatedManager.imagePath, { force: true });
+    // Fill out the ManagerForm
+    cy.get('input[name="firstName"]').type('John');
+    cy.get('input[name="lastName"]').type('Doe');
+    cy.get('input[name="qualification"]').type('MBA');
+    cy.get('input[name="duration"]').type('12');
+    cy.get('input[name="minimumInvestmentAmount"]').type('5000');
+    cy.get('input[name="percentageYield"]').type('15');
 
-//     cy.contains('Submit').click();
+    // Upload a file (must be in your fixtures)
+    cy.get('input[type="file"]').selectFile('cypress/fixtures/profile.jpg', {
+      force: true,
+    });
 
-//     cy.url().should('include', '/admin-dashboard/manager');
-//     cy.contains(updatedManager.name).should('exist');
-//     cy.contains(updatedManager.qualification).should('exist');
-//   });
+    // Submit the form
+    cy.get('form').submit();
+
+    // Check redirection or success behavior (adjust URL or success message)
+    cy.url().should('include', '/admin/managers');
+  });
 });

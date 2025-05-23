@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
 
 // Base Modal Component
 interface BaseModalProps {
@@ -113,6 +114,13 @@ interface DocumentModalProps {
   documentUrl: string;
 }
 
+// Document Modal
+interface DocumentModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  documentUrl: string;
+}
+
 export function DocumentModal({ isOpen, onClose, documentUrl }: DocumentModalProps) {
   return (
     <BaseModal isOpen={isOpen} onClose={onClose} title="Document Preview">
@@ -124,11 +132,16 @@ export function DocumentModal({ isOpen, onClose, documentUrl }: DocumentModalPro
             title="Document Preview"
           />
         ) : (
-          <Image
-            src={documentUrl}
-            alt="Document preview"
-            className="max-h-full max-w-full object-contain"
-          />
+          <div className="relative w-full h-full">
+            <Image
+              src={documentUrl}
+              alt="Document preview"
+              fill
+              style={{ objectFit: 'contain' }}
+              loader={({ src }) => src} 
+              unoptimized={true} 
+            />
+          </div>
         )}
       </div>
     </BaseModal>
@@ -142,12 +155,12 @@ interface CreditModalProps {
   
 }
 
-export function CreditModal({ isOpen, onClose, onCredit }: CreditModalProps) {
+export function CreditModal({ isOpen, onClose,  }: CreditModalProps) {
   const [amount, setAmount] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onCredit(Number(amount));
+   
     onClose();
   };
 
@@ -184,12 +197,12 @@ interface VerificationModalProps {
 
 }
 
-export function VerificationFeeCreationtModal({ isOpen, onClose, onCreateFee }: VerificationModalProps) {
+export function VerificationFeeCreationModal({ isOpen, onClose }: VerificationModalProps) {
   const [amount, setAmount] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onCreateFee(Number(amount));
+
     onClose();
   };
 

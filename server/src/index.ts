@@ -44,6 +44,7 @@ sequelize
 // force:true
  
   })
+  
   .then(() => console.log('models formed'))
   .catch((err:any) => console.log(err));
 app.listen(PORT, () => {

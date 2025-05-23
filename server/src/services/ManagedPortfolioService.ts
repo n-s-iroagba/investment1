@@ -1,6 +1,10 @@
+import Admin from '../models/Admin';
+import Investor from '../models/Investor';
 import ManagedPortfolio from '../models/ManagedPortfolio';
+import Payment, { PaymentCreationAttributes } from '../models/Payment';
 import { CustomError } from '../utils/error/CustomError';
 import logger from '../utils/logger/logger';
+import { PaymentCreationDto } from './VerificationFeeService';
 
 
 interface ManagedPortfolioInput {
@@ -21,7 +25,7 @@ export class ManagedPortfolioService {
     if (amount == null || managerId == null || investorId == null) {
       throw new CustomError(400, 'amount, managerId, and investorId are required');
     }
-
+  
     try {
       const portfolio = await ManagedPortfolio.create(data);
       logger.info(`Created ManagedPortfolio id=${portfolio.id}`);
@@ -70,6 +74,25 @@ export class ManagedPortfolioService {
       return portfolio;
     } catch (error) {
       logger.error(`Failed to update ManagedPortfolio: ${error}`);
+      throw error;
+    }
+  }
+
+      static async uploadProofOfPayment(id: number, payload:PaymentCreationDto) {
+    const managedPortfolio = await ManagedPortfolio.findByPk(id);
+    if (!managedPortfolio) {
+      throw new CustomError(404, `ManagedPortfolio with id ${id} not found`);
+    }
+    const data:PaymentCreationAttributes ={...payload,paymentType:'INVESTMENT',date:new Date()}
+    try{
+    const payment = await Payment.create(data);
+    const payments = managedPortfolio.payments??[]
+    payments.push(payment)
+    managedPortfolio.setPayments(payments)
+    await managedPortfolio.save()
+    return managedPortfolio;
+    }catch(error){
+       logger.error(`Failed to upload managed portfolio proof of payment: ${error}`);
       throw error;
     }
   }
