@@ -1,8 +1,10 @@
 import { Kyc } from "./Kyc";
-import { ManagedInvestmentPortfolio } from "./managedPortfolio";
+
 import { VerificationFee } from "./VerificationFee";
 
-export type FullInvestor ={
+import { ManagedPortfolio } from "./managedPortfolio";
+
+export type InvestorAndInvestment ={
       id:number;
 
    lastName: string;
@@ -12,17 +14,12 @@ export type FullInvestor ={
    countryOfResidence: string;
 
    referralCode: number | null;
-   referrerId: number | null;
+
    user: {
     email:string
    }
-
-
-
-   
-
-   kyc:Kyc
-   managedPortfolios?: ManagedInvestmentPortfolio[]
+   kyc?:Kyc
+   managedPortfolios?: ManagedPortfolio[]
    verificationFees?: VerificationFee[]
 
   

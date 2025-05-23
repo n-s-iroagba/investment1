@@ -42,14 +42,7 @@ export class KycService {
     throw error;
     }
     }
-  // Read KYC by id
-  static async getKycById(id: number) {
-    const kyc = await Kyc.findByPk(id);
-    if (!kyc) {
-      throw new CustomError(404, `KYC with id ${id} not found`);
-    }
-    return kyc;
-  }
+
 
   // Update KYC by id (all attributes except id required)
   static async updateKyc(id: number, data: KycInput) {

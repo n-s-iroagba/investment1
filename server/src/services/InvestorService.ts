@@ -1,12 +1,11 @@
-import sequelize from 'sequelize';
-import Investor from '../models/Investor';
-import { CustomError } from '../utils/error/CustomError';
-import logger from '../utils/logger/logger';
-import Kyc from '../models/Kyc';
-import ManagedPortfolio from '../models/ManagedPortfolio';
-import Referral from '../models/Referral';
-import User from '../models/User';
-
+import sequelize from "sequelize";
+import Investor from "../models/Investor";
+import { CustomError } from "../utils/error/CustomError";
+import logger from "../utils/logger/logger";
+import Kyc from "../models/Kyc";
+import ManagedPortfolio from "../models/ManagedPortfolio";
+import Referral from "../models/Referral";
+import User from "../models/User";
 
 export class InvestorService {
   // Create a new Investor
@@ -16,10 +15,9 @@ export class InvestorService {
     dateOfBirth: Date;
     gender: string;
     countryOfResidence: string;
-   
+
     referrerId?: number;
     userId: number;
-
   }) {
     try {
       const {
@@ -28,15 +26,21 @@ export class InvestorService {
         dateOfBirth,
         gender,
         countryOfResidence,
- 
+
         referrerId,
         userId,
-
       } = data;
 
-      if (!firstName || !lastName || !dateOfBirth || !gender || !countryOfResidence || !userId) {
-        console.log(data)
-        throw new CustomError(400, 'Missing required fields');
+      if (
+        !firstName ||
+        !lastName ||
+        !dateOfBirth ||
+        !gender ||
+        !countryOfResidence ||
+        !userId
+      ) {
+        console.log(data);
+        throw new CustomError(400, "Missing required fields");
       }
       const investor = await Investor.create({
         firstName,
@@ -47,8 +51,8 @@ export class InvestorService {
         referrerId: referrerId,
         userId,
       });
-      investor.referralCode = investor.id+2197
-      investor.save()
+      investor.referralCode = investor.id + 2197;
+      investor.save();
       logger.info(`Created investor with userId ${userId}`);
       return investor;
     } catch (error) {
@@ -62,7 +66,7 @@ export class InvestorService {
     try {
       const investor = await Investor.findByPk(id);
       if (!investor) {
-        throw new CustomError(404, 'Investor not found');
+        throw new CustomError(404, "Investor not found");
       }
       return investor;
     } catch (error) {
@@ -71,37 +75,42 @@ export class InvestorService {
     }
   }
 
-    static async getInvestorByRefferalCode(code: number) {
+  static async getInvestorByRefferalCode(code: number) {
     try {
       const investor = await Investor.findOne({
-        where:{
-          referralCode:code
-        }
+        where: {
+          referralCode: code,
+        },
       });
       if (!investor) {
-        return
+        return;
       }
       return investor;
     } catch (error) {
-      logger.error(`Failed to fetch investor by referralCode ${code}: ${error}`);
+      logger.error(
+        `Failed to fetch investor by referralCode ${code}: ${error}`
+      );
       throw error;
     }
   }
 
   // Update Investor
-  static async updateInvestor(id: number, updates: Partial<{
-    firstName: string;
-    lastName: string;
-    dateOfBirth: Date;
-    gender: string;
-    country: string;
-    referralCode: number | null;
-    referrerId: number | null;
-  }>) {
+  static async updateInvestor(
+    id: number,
+    updates: Partial<{
+      firstName: string;
+      lastName: string;
+      dateOfBirth: Date;
+      gender: string;
+      country: string;
+      referralCode: number | null;
+      referrerId: number | null;
+    }>
+  ) {
     try {
       const investor = await Investor.findByPk(id);
       if (!investor) {
-        throw new CustomError(404, 'Investor not found');
+        throw new CustomError(404, "Investor not found");
       }
 
       Object.assign(investor, updates);
@@ -115,27 +124,24 @@ export class InvestorService {
     }
   }
 
-   /**
+  /**
    * Delete an investor and all associated records
    * @param investorId - ID of the investor to delete
    */
   static async deleteInvestor(investorId: number): Promise<void> {
-
-    
     try {
       const investor = await Investor.findByPk(investorId, {
         include: [
           { model: ManagedPortfolio },
-      
+
           { model: Kyc },
           { model: Referral },
-          { model: User }
+          { model: User },
         ],
-       
       });
 
       if (!investor) {
-        throw new CustomError(404,'Investor not found');
+        throw new CustomError(404, "Investor not found");
       }
 
       // Delete associated records
@@ -143,16 +149,13 @@ export class InvestorService {
         await investor.managedPortfolio.destroy();
       }
 
-   
-
       if (investor.kyc) {
         await investor.kyc.destroy();
       }
 
       if (investor.referrals) {
         await Referral.destroy({
-          where: { referredId:investor.id,referrerId:investor.id },
-         
+          where: { referredId: investor.id, referrerId: investor.id },
         });
       }
 
@@ -163,10 +166,9 @@ export class InvestorService {
       if (investor.user) {
         await investor.user.destroy();
       }
-
-    
+      logger.info(`deleted investor with id ${investorId}`);
     } catch (error) {
-     
+      logger.error(`Failed to delete investor: ${error}`);
       throw error;
     }
   }

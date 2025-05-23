@@ -7,18 +7,16 @@ import { upload } from './middlewares/upload';
 import KycController from './controllers/KycController';
 import SocialMediaController from './controllers/SocialMediaController';
 import ManagedPortfolioController from './controllers/ManagedPortfolioController';
+import InvestorController from './controllers/InvestorController';
+import { VerificationFeeController } from './controllers/VerificationFeeController';
 const router = Router();
 router.post('/investment/new/:investorId',ManagedPortfolioController.createInvestment)
+router.post('/investment/:investorId',ManagedPortfolioController.getInvestment)
 
 
+router.post('/kyc/:investorId',KycController.create)
+router.patch('/kyc/:id',KycController.update)
 router.get('/kyc/verify/:id',KycController.verify)
-
-// Trading Assets routes
-router.get('/trading-assets', /* tradingAssetController.list */);
-router.get('/trading-assets/:id', /* tradingAssetController.get */);
-router.post('/trading-assets', /* tradingAssetController.create */);
-router.patch('/trading-assets/:id', /* tradingAssetController.update */);
-router.delete('/trading-assets/:id', /* tradingAssetController.delete */);
 
 // Managers routes
 router.get('/managers',  ManagerController.getAllManagers );
@@ -27,12 +25,6 @@ router.post('/managers',  upload.single("image"), ManagerController.createManage
 router.patch('/managers/:id',  upload.single("image"), ManagerController.updateManager );
 router.delete('/managers/:id',  ManagerController.deleteManager);
 
-// Trade Options routes
-router.get('/trade-options', /* tradeOptionController.list */);
-router.get('/trade-options/:id', /* tradeOptionController.get */);
-router.post('/trade-options', /* tradeOptionController.create */);
-router.patch('/trade-options/:id', /* tradeOptionController.update */);
-router.delete('/trade-options/:id', /* tradeOptionController.delete */);
 
 // Admin Wallet routes
 router.get('/admin-wallets',  AdminWalletController.getAllAdminWallets );
@@ -43,12 +35,7 @@ router.delete('/admin-wallets/:id',  AdminWalletController.deleteAdminWallet );
 
 
 
-// Crypto Wallets routes
-router.get('/crypto-wallets', /* cryptoWalletController.list */);
-router.get('/crypto-wallets/:id', /* cryptoWalletController.get */);
-router.post('/crypto-wallets', /* cryptoWalletController.create */);
-router.patch('/crypto-wallets/:id', /* cryptoWalletController.update */);
-router.delete('/crypto-wallets/:id', /* cryptoWalletController.delete */);
+
 
 // Social Media routes
 router.get('/social-media',  SocialMediaController.getAll );
@@ -58,11 +45,11 @@ router.patch('/social-media/:id', upload.single('logo'), SocialMediaController.u
 router.delete('/social-media/:id',  SocialMediaController.delete );
 
 // Verification Fees routes
-router.get('/verification-fees', /* verificationFeeController.list */);
-router.get('/verification-fees/:id', /* verificationFeeController.get */);
-router.post('/verification-fees', /* verificationFeeController.create */);
-router.patch('/verification-fees/:id', /* verificationFeeController.update */);
-router.delete('/verification-fees/:id', /* verificationFeeController.delete */);
+
+router.post('/verification-fees/:id', VerificationFeeController.uploadProofOfPayment);
+router.post('/verification-fees', VerificationFeeController.create);
+router.patch('/verification-fees/:id', VerificationFeeController.update);
+router.delete('/verification-fees/:id', VerificationFeeController.delete);
 
 // Auth routes
 router.post('/auth/login', /* authController.login */);

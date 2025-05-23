@@ -6,6 +6,7 @@ import { InvestorService } from "../services/InvestorService";
 import { ManagedPortfolioService } from "../services/ManagedPortfolioService";
 import { errorHandler } from "../utils/error/errorHandler";
 import {  CustomError } from "../utils/error/CustomError";
+import { resolveSoa } from "dns";
 
 
 type InvestmentCreationDto = {
@@ -68,20 +69,16 @@ class ManagedPortfolioController {
       errorHandler(error, req, res);
     }
   }
-
-  static async deleteInvestor(req: Request, res: Response) {
+   static async getInvestment(req:Request, res:Response){
     try {
-      const investorId = Number(req.params.id);
-      if (isNaN(investorId)) {
-        return res.status(400).json({ error: "Invalid investor ID" });
-      }
-
-      await InvestorService.deleteInvestor(investorId);
-      res.status(204).end();
-    } catch (error) {
+      const investorId = Number(req.params.investorId); 
+      const  investorAndInvestment = await ManagedPortfolioService.getInvestorAndInvestmentById(investorId)
+      return res.status(200).json(investorAndInvestment)
+    }catch(error){
       errorHandler(error, req, res);
     }
-  }
+   }
+
 }
 
 export default ManagedPortfolioController;

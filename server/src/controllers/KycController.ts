@@ -6,8 +6,10 @@ import { errorHandler } from '../utils/error/errorHandler';
 
 class KycController {
   static async create(req: Request, res: Response) {
+  
     try {
-      const { type, number, investorId } = req.body;
+      const investorId = Number(req.params.investorId)
+      const { type, number } = req.body;
       const image = req.file?.path || ''; // assuming multer is used and path is stored as string
 
       const kyc = await KycService.createKyc({ type, image, number, investorId });
@@ -17,15 +19,7 @@ class KycController {
     }
   }
 
-  static async getById(req: Request, res: Response) {
-    try {
-      const { id } = req.params;
-      const kyc = await KycService.getKycById(Number(id));
-      res.status(200).json(kyc);
-    } catch (error) {
-        errorHandler(error, req, res)
-    }    
-  }
+
 
   static async verify (req:Request,res:Response){
     try {

@@ -20,38 +20,4 @@ export class CryptoWalletService {
     }
   }
 
-  // Retrieve a CryptoWallet by ID
-  static async getCryptoWalletById(id: number) {
-    try {
-      const wallet = await CryptoWallet.findByPk(id);
-      if (!wallet) {
-        throw new CustomError(404, 'CryptoWallet not found');
-      }
-
-      return wallet;
-    } catch (error) {
-      logger.error(`Failed to retrieve CryptoWallet: ${error}`);
-      throw error;
-    }
-  }
-
-  // Update a CryptoWallet
-  static async updateCryptoWallet(id: number, updates: Partial<{ currency: string; address: string }>) {
-    try {
-      const wallet = await CryptoWallet.findByPk(id);
-      if (!wallet) {
-        throw new CustomError(404, 'CryptoWallet not found');
-      }
-
-      if (updates.currency) wallet.currency = updates.currency;
-      if (updates.address) wallet.address = updates.address;
-
-      await wallet.save();
-      logger.info(`Updated CryptoWallet with id ${id}`);
-      return wallet;
-    } catch (error) {
-      logger.error(`Failed to update CryptoWallet: ${error}`);
-      throw error;
-    }
-  }
 }

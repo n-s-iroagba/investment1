@@ -50,14 +50,7 @@ export class VerificationFeeController {
     }
   }
 
-  static async getAll(req: Request, res: Response) {
-    try {
-      const fees = await VerificationFeeService.getAllVerificationFees();
-      res.status(200).json(fees);
-    } catch (error) {
-      errorHandler(error,req,res)
-    }
-  }
+
 
   static async delete(req: Request, res: Response) {
     try {

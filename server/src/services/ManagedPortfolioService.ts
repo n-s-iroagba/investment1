@@ -1,7 +1,10 @@
 import Admin from '../models/Admin';
 import Investor from '../models/Investor';
+import Kyc from '../models/Kyc';
 import ManagedPortfolio from '../models/ManagedPortfolio';
 import Payment, { PaymentCreationAttributes } from '../models/Payment';
+import User from '../models/User';
+import VerificationFee from '../models/VerificationFee';
 import { CustomError } from '../utils/error/CustomError';
 import logger from '../utils/logger/logger';
 import { PaymentCreationDto } from './VerificationFeeService';
@@ -15,6 +18,27 @@ interface ManagedPortfolioInput {
   isPaused?: boolean;
   investorId: number;
   managerId: number;
+}
+
+export type InvestorAndInvestment ={
+      id:number;
+
+   lastName: string;
+   firstName: string;
+   dateOfBirth: Date;
+   gender: string;
+   countryOfResidence: string;
+
+   referralCode: number | null;
+
+   user: {
+    email:string
+   }
+   kyc?:Kyc
+   managedPortfolios?: ManagedPortfolio[]
+   verificationFees?: VerificationFee[]
+
+  
 }
 
 export class ManagedPortfolioService {
@@ -36,14 +60,55 @@ export class ManagedPortfolioService {
     }
   }
 
-  // Read by id
-  static async getPortfolioById(id: number) {
-    const portfolio = await ManagedPortfolio.findByPk(id);
-    if (!portfolio) {
-      throw new CustomError(404, `ManagedPortfolio with id ${id} not found`);
-    }
-    return portfolio;
-  }
+
+
+static async getInvestorAndInvestmentById  (
+  investorId: number
+): Promise<InvestorAndInvestment | null> {
+  const investor = await Investor.findByPk(investorId, {
+    attributes: ['id', 'firstName', 'lastName', 'gender', 'countryOfResidence', 'dateOfBirth', 'referralCode'],
+    include: [
+      {
+        model: User,
+        attributes: ['email'],
+        as: 'user',
+      },
+      {
+        model: Kyc,
+        as: 'kyc',
+      },
+      {
+        model: ManagedPortfolio,
+        as: 'managedPortfolios',
+      },
+      {
+        model: VerificationFee,
+        as: 'verificationFees',
+      },
+    ],
+  });
+
+  if (!investor) return null;
+
+  const investorAndInvestment: InvestorAndInvestment = {
+    id: investor.id,
+    firstName: investor.firstName,
+    lastName: investor.lastName,
+    dateOfBirth: investor.dateOfBirth,
+    gender: investor.gender,
+    countryOfResidence: investor.countryOfResidence,
+    referralCode: investor.referralCode,
+    user: {
+      email: (investor as any).user?.email || '',
+    },
+    kyc: (investor as any).kyc || undefined,
+    managedPortfolios: (investor as any).managedPortfolios || [],
+    verificationFees: (investor as any).verificationFees || [],
+  };
+
+  return investorAndInvestment;
+};
+
 
   // Update by id - must include amount and managerId
   static async updatePortfolio(id: number, data: ManagedPortfolioInput) {
