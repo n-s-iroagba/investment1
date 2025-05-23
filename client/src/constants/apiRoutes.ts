@@ -14,6 +14,10 @@ export const apiRoutes = {
     new:(id:string|number):string => `/investment/new/${id}`
   },
 
+  investor : {
+    update:(id:string|number):string => `  /investors/new/${id}`,
+    delete:(id:string|number):string => `  /investors/new/${id}`
+  },
   manager: {
     list: (): string => `/managers`,
     get: (id: number | string): string => `/managers/${id}`,

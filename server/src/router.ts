@@ -8,10 +8,13 @@ import KycController from './controllers/KycController';
 import SocialMediaController from './controllers/SocialMediaController';
 import ManagedPortfolioController from './controllers/ManagedPortfolioController';
 import { VerificationFeeController } from './controllers/VerificationFeeController';
+import InvestorController from './controllers/InvestorController';
 const router = Router();
 router.post('/investment/new/:investorId',ManagedPortfolioController.createInvestment)
 router.post('/investment/:investorId',ManagedPortfolioController.getInvestment)
 
+router.patch('/investors/:id',InvestorController.updateInvestor)
+router.delete('/investors/:id',InvestorController.deleteInvestor)
 
 router.post('/kyc/:investorId',KycController.create)
 router.patch('/kyc/:id',KycController.update)

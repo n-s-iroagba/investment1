@@ -343,3 +343,13 @@
     at async Function.create (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/model.js:2305:12)
     at async Function.createAdmin (/home/udorakpuenyi/tempi/server/src/services/UserService.ts:68:20)
     at async adminSignup (/home/udorakpuenyi/tempi/server/src/controllers/AuthController.ts:18:23)
+2025-05-23T22:08:05.196Z [ERROR]: Error in createInvestor UserService function: SequelizeUniqueConstraintError: Validation error
+2025-05-23T22:08:05.198Z [ERROR]: Error: Validation error - URL: /api/admin/auth/signup - Stack: Error
+    at Query.run (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/dialects/mysql/query.js:46:25)
+    at /home/udorakpuenyi/tempi/server/node_modules/sequelize/src/sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.insert (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/dialects/abstract/query-interface.js:795:21)
+    at async User.save (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/model.js:4154:35)
+    at async Function.create (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/model.js:2305:12)
+    at async Function.createAdmin (/home/udorakpuenyi/tempi/server/src/services/UserService.ts:76:20)
+    at async adminSignup (/home/udorakpuenyi/tempi/server/src/controllers/AuthController.ts:18:27)

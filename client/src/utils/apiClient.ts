@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 // Determine base URL based on environment
-const baseURL: string = (() => {
+export const baseURL: string = (() => {
   const env = process.env.NEXT_PUBLIC_NODE_ENV || process.env.NODE_ENV || 'development';
   switch (env) {
     case 'production':

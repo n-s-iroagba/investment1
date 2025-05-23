@@ -21,7 +21,7 @@ export function DeleteConfirmationModal({
   id, 
   onClose, 
   type,
-  message 
+  message  
 }: DeleteModalProps) {
   const [isDeleting, setIsDeleting] = useState(false);
   const [error, setError] = useState('');
@@ -34,7 +34,7 @@ export function DeleteConfirmationModal({
       const endpoint = API_ROUTES_MAP[type](id);
       if (!endpoint) throw new Error('Invalid deletion type');
       
-      await remove(endpoint(id));
+      await remove(endpoint)
       onClose();
       // Consider adding a success toast here
     } catch (err) {

@@ -8,17 +8,39 @@ import { AdminWallet } from "@/types/adminWallet"
 import { ReactNode } from "react"
 import { Spinner } from "@/components/Spinner" // Assume you have a Spinner component
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
+import { Manager } from "@/types/manager"
+import { SocialMedia } from "@/types/socialMedia"
 
 const AdminDashboard = () => {
     const { data: wallets, error: walletError, loading: walletLoading } = useGetList<AdminWallet>(apiRoutes.adminWallet.list())
-    
+     const { data: managers, error: managerError, loading: managerLoading } = useGetList<Manager>(apiRoutes.manager.list())
+      const { data: socialmedias, error: socialMediaError, loading: socialMediaLoading } = useGetList<SocialMedia>(apiRoutes.socialMedia.list())
     const todos: ReactNode[] = []
+          if (!managers.length) {
+        todos.push(
+            <TodoAlert 
+                key="manager-alert"
+                message="You do not have any managers, add managers for investors" 
+                link="/admin/managers"
+            />
+        )
+    }
     if (!wallets.length) {
         todos.push(
             <TodoAlert 
                 key="wallet-alert"
                 message="You do not have any wallets, add wallets to start managing transactions" 
                 link="/admin/wallets"
+            />
+        )
+    }
+
+      if (!socialmedias.length) {
+        todos.push(
+            <TodoAlert 
+                key="socialmedia-alert"
+                message="You do not have any social media links, add social media to start managing transactions" 
+                link="/admin/social-media"
             />
         )
     }
@@ -31,13 +53,13 @@ const AdminDashboard = () => {
                     Admin Tasks
                 </h2>
 
-                {walletLoading ? (
+                {walletLoading || managerLoading||socialMediaLoading ? (
                     <div className="flex justify-center items-center h-32">
                         <Spinner className="w-8 h-8 text-green-600" />
                     </div>
-                ) : walletError ? (
+                ) : walletError || managerError || socialMediaError ? (
                     <div className="p-4 bg-red-50 rounded-lg border-2 border-red-100 text-red-700">
-                        Error loading wallet information
+                        Error loading  information
                     </div>
                 ) : (
                     <div className="space-y-4">

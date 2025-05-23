@@ -569,3 +569,40 @@
     at async Function.createAdmin (/home/udorakpuenyi/tempi/server/src/services/UserService.ts:68:20)
     at async adminSignup (/home/udorakpuenyi/tempi/server/src/controllers/AuthController.ts:18:23)
 2025-05-23T15:55:32.107Z [INFO]: Request URL: POST /api/admin/auth/signup, undefined
+2025-05-23T22:08:03.427Z [INFO]: Request URL: POST /api/admin/auth/signup, undefined
+2025-05-23T22:08:05.196Z [ERROR]: Error in createInvestor UserService function: SequelizeUniqueConstraintError: Validation error
+2025-05-23T22:08:05.198Z [ERROR]: Error: Validation error - URL: /api/admin/auth/signup - Stack: Error
+    at Query.run (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/dialects/mysql/query.js:46:25)
+    at /home/udorakpuenyi/tempi/server/node_modules/sequelize/src/sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.insert (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/dialects/abstract/query-interface.js:795:21)
+    at async User.save (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/model.js:4154:35)
+    at async Function.create (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/model.js:2305:12)
+    at async Function.createAdmin (/home/udorakpuenyi/tempi/server/src/services/UserService.ts:76:20)
+    at async adminSignup (/home/udorakpuenyi/tempi/server/src/controllers/AuthController.ts:18:27)
+2025-05-23T22:09:46.751Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-23T22:16:22.458Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-23T22:16:22.532Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-23T22:16:22.538Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-23T22:16:22.571Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-23T22:16:22.816Z [INFO]: Retrieved 0 social media records
+2025-05-23T22:34:54.258Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-23T22:34:54.277Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-23T22:34:54.294Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-23T22:34:54.298Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-23T22:34:54.424Z [INFO]: Retrieved 0 social media records
+2025-05-23T22:34:54.429Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-23T22:34:54.434Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-23T22:34:54.446Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-23T22:34:54.446Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-23T22:34:54.464Z [INFO]: Retrieved 0 social media records
+2025-05-23T22:35:24.056Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-23T22:35:24.060Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-23T22:35:24.066Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-23T22:35:24.068Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-23T22:35:24.173Z [INFO]: Retrieved 0 social media records
+2025-05-23T22:35:24.177Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-23T22:35:24.182Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-23T22:35:24.190Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-23T22:35:24.192Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-23T22:35:24.237Z [INFO]: Retrieved 0 social media records

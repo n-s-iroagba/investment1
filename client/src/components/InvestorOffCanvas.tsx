@@ -62,7 +62,7 @@ export default function InvestorOffcanvas({ children }: InvestorOffcanvasProps) 
 
       {/* Sidebar */}
       <aside
-        className={`fixed lg:relative h-screen z-50 transform transition-transform duration-300 ease-in-out
+        className={`fixed lg:relative h-auto z-50 transform transition-transform duration-300 ease-in-out
           ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
           lg:translate-x-0 w-64 bg-green-900 border-r-4 border-green-700`}
       >
@@ -73,10 +73,10 @@ export default function InvestorOffcanvas({ children }: InvestorOffcanvasProps) 
           </div>
 
           {[
-            { href: "/dashboard", text: "My Profile", icon: UserCircleIcon },
-            { href: "/profile", text: "My Portfolio", icon: BriefcaseIcon },
+            { href: "/investor/dashboard", text: "My Profile", icon: UserCircleIcon },
+            { href: "/investor/profile", text: "My Portfolio", icon: BriefcaseIcon },
             { href: "/investor/manager-list", text: "Invest", icon: CurrencyDollarIcon },
-            { href: "/dashboard", text: "My Referrals", icon: ShareIcon },
+            { href: "/investor/referrals", text: "My Referrals", icon: ShareIcon },
             { href: "/profile", text: "Withdraw", icon: ArrowUpOnSquareIcon },
           ].map((item, index) => (
             <Link 
@@ -95,7 +95,7 @@ export default function InvestorOffcanvas({ children }: InvestorOffcanvasProps) 
       </aside>
 
       {/* Main Content Area */}
-      <main className={`flex-1 transition-all duration-300 ${isOpen ? 'ml-64' : 'ml-0'}`}>
+      <main className={`flex-1 transition-all duration-300 ${isOpen ? '' : 'ml-0'}`}>
         <div className="p-4 lg:p-6 border-l-4 border-green-100 min-h-screen">
           <div className="max-w-6xl mx-auto bg-white rounded-xl shadow-sm
                         border-2 border-green-50 p-6 lg:p-8">

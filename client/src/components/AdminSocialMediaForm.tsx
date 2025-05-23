@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { SocialMedia, SocialMediaCreationDto } from '@/types/socialMedia';
-import { patch, post } from '@/utils/apiClient';
 import { apiRoutes } from '@/constants/apiRoutes';
 import { HashtagIcon, LinkIcon, PhotoIcon } from '@heroicons/react/24/outline';
+import { baseURL } from '@/utils/apiClient';
 
 interface SocialMediaFormProps {
   existingSocialMedia?: SocialMedia;
@@ -62,7 +62,7 @@ const handleSubmit = async (e: React.FormEvent) => {
   const method = existingSocialMedia ? 'PATCH' : 'POST';
 
   try {
-    const response = await fetch(`http://localhost:5000/api/${url}`, {
+    const response = await fetch(`${baseURL}/${url}`, {
       method,
       body: data,
     });

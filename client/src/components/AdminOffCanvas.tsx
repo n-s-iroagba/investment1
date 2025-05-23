@@ -7,7 +7,8 @@ import {
   WalletIcon,
   UserGroupIcon,
   LinkIcon,
-  ShareIcon
+  ShareIcon,
+  CurrencyDollarIcon
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
@@ -62,7 +63,7 @@ export default function AdminOffcanvas({ children }: AdminOffcanvasProps) {
 
       {/* Sidebar */}
       <aside
-        className={`fixed lg:relative h-screen z-50 transform transition-transform duration-300 ease-in-out
+        className={`fixed lg:relative h-auto z-50 transform transition-transform duration-300 ease-in-out
           ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
           lg:translate-x-0 w-64 bg-green-900 border-r-4 border-green-700`}
       >
@@ -78,6 +79,7 @@ export default function AdminOffcanvas({ children }: AdminOffcanvasProps) {
             { href: "/admin/investors", text: "My Investors", icon: UserCircleIcon },
             { href: "/admin/social-media", text: "Social Media Links", icon: LinkIcon },
             { href: "/admin/referrals", text: "Referrals", icon: ShareIcon },
+             { href: "/admin/mock-withdrawal", text: "Mock Withdrawal", icon: CurrencyDollarIcon }
           ].map((item, index) => (
             <Link 
               key={index}

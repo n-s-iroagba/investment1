@@ -15,6 +15,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { hasEmptyKey } from "@/utils/common";
 import { apiRoutes } from "@/constants/apiRoutes";
+import { baseURL } from "@/utils/apiClient";
 
 interface ManagerFormProps {
   patch?: boolean;
@@ -95,7 +96,7 @@ try {
       ? apiRoutes.manager.update(existingManager.id)
       : apiRoutes.manager.create();
 
-  const res = await fetch(`http://localhost:5000/api/${endpoint}`, {
+  const res = await fetch(`${baseURL}/${endpoint}`, {
     method: patch ? "PATCH" : "POST",
     body: formData,
     // Do NOT set 'Content-Type', the browser will do it for you with the correct boundary
