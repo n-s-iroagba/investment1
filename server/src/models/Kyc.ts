@@ -22,12 +22,12 @@ export class Kyc extends Model<
 
   declare investorId: ForeignKey<Investor['id']>;
   declare investor: NonAttribute<Investor>;
-}
+} 
 
 Kyc.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
@@ -44,7 +44,7 @@ Kyc.init(
       allowNull: false,
     },
     investorId: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     isVerified: {

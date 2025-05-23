@@ -7,7 +7,6 @@ import { upload } from './middlewares/upload';
 import KycController from './controllers/KycController';
 import SocialMediaController from './controllers/SocialMediaController';
 import ManagedPortfolioController from './controllers/ManagedPortfolioController';
-import InvestorController from './controllers/InvestorController';
 import { VerificationFeeController } from './controllers/VerificationFeeController';
 const router = Router();
 router.post('/investment/new/:investorId',ManagedPortfolioController.createInvestment)
@@ -51,8 +50,10 @@ router.post('/verification-fees', VerificationFeeController.create);
 router.patch('/verification-fees/:id', VerificationFeeController.update);
 router.delete('/verification-fees/:id', VerificationFeeController.delete);
 
-// Auth routes
-router.post('/auth/login', /* authController.login */);
+// Auth routes 
+router.post('/auth/forgot-password',AuthController.forgotPassword)
+router.post('/auth/reset-password',AuthController.resetPassword)
+router.post('/auth/login', AuthController.login);
 router.post('/auth/signup', AuthController.investorSignup);
 router.post('/admin/auth/signup', AuthController.adminSignup);
 router.post ('/auth/verify-email',AuthController.verifyEmail)

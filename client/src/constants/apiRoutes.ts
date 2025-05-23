@@ -71,6 +71,7 @@ export const apiRoutes = {
   },
 
   auth: {
+    forgotPassword:():string => '/auth/forgot-password',
     login: (): string => `/auth/login`,
     adminSignup: (): string => `/admin/auth/signup`,
     signup: (): string => `/auth/signup`,

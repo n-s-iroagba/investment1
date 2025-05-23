@@ -1,25 +1,23 @@
-'use client';
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { post } from '@/utils/apiClient';
-import { apiRoutes } from '@/constants/apiRoutes';
-import { UserCircleIcon, EnvelopeIcon, LockClosedIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
+"use client";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { post } from "@/utils/apiClient";
+import { apiRoutes } from "@/constants/apiRoutes";
+import {
+  UserCircleIcon,
+  EnvelopeIcon,
+  ArrowPathIcon,
+} from "@heroicons/react/24/outline";
 
 interface FormState {
-  username: string;
   email: string;
-  password: string;
-  confirmPassword: string;
 }
 
-export default function AdminSignupPage() {
+export default function LoginPage() {
   const router = useRouter();
   const [isMounted, setIsMounted] = useState(false);
   const [form, setForm] = useState<FormState>({
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+    email: "",
   });
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -29,31 +27,29 @@ export default function AdminSignupPage() {
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
 
-    if (form.password !== form.confirmPassword) {
-      return setError("Passwords don't match");
-    }
-
     setSubmitting(true);
     try {
       const payload = {
         email: form.email,
-        password: form.password,
-        username: form.username,
       };
 
-      const token = await post<typeof payload, string>(apiRoutes.auth.adminSignup(), payload);
-      router.push(`/auth/verify-email/${token}`);
+      const response = await post<
+        typeof payload,
+        { resetPasswordToken: string }
+      >(apiRoutes.auth.forgotPassword(), payload);
+
+      router.push(`/auth/reset-password/${response.resetPasswordToken}`);
     } catch (err: unknown) {
-      let msg = 'Unexpected error';
+      let msg = "Unexpected error";
       if (err instanceof Error) msg = err.message;
-      console.error('Error in signup handleSubmit function', err);
+      console.error("Error in  forgot password handleSubmit function", err);
       setError(msg);
     } finally {
       setSubmitting(false);
@@ -71,7 +67,7 @@ export default function AdminSignupPage() {
 
         <h1 className="text-2xl font-bold text-green-900 mb-8 text-center flex items-center justify-center gap-2">
           <UserCircleIcon className="w-8 h-8 text-green-700" />
-          Admin Registration
+          Enter your email
         </h1>
 
         {error && (
@@ -82,10 +78,12 @@ export default function AdminSignupPage() {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {[
-            { label: 'Username', name: 'username', type: 'text', Icon: UserCircleIcon },
-            { label: 'Email', name: 'email', type: 'email', Icon: EnvelopeIcon },
-            { label: 'Password', name: 'password', type: 'password', Icon: LockClosedIcon },
-            { label: 'Confirm Password', name: 'confirmPassword', type: 'password', Icon: LockClosedIcon },
+            {
+              label: "Email",
+              name: "email",
+              type: "email",
+              Icon: EnvelopeIcon,
+            },
           ].map(({ label, name, type, Icon }) => (
             <div key={name}>
               <label className="block text-sm font-medium text-green-700 mb-2 flex items-center gap-1">
@@ -99,7 +97,9 @@ export default function AdminSignupPage() {
                 onChange={handleChange}
                 required
                 className={`w-full p-3 rounded-xl border-2 ${
-                  error?.toLowerCase().includes(name) ? 'border-red-300' : 'border-green-100'
+                  error?.toLowerCase().includes(name)
+                    ? "border-red-300"
+                    : "border-green-100"
                 } focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all`}
               />
             </div>
@@ -113,10 +113,10 @@ export default function AdminSignupPage() {
             {submitting ? (
               <>
                 <ArrowPathIcon className="w-5 h-5 animate-spin" />
-                Creating Account...
+                Submitting...
               </>
             ) : (
-              'Create Admin Account'
+              "Submit"
             )}
           </button>
         </form>

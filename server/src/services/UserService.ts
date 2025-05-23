@@ -1,11 +1,19 @@
 import Admin from "../models/Admin";
 import User from "../models/User";
-import AuthUtils, { EmailVerificationDto } from "../utils/auth/AuthUtils";
+import AuthUtils, { EmailVerificationDto, JWTUtils } from "../utils/auth/AuthUtils";
 import { CustomError } from "../utils/error/CustomError";
 import logger from "../utils/logger/logger";
 import { InvestorService } from "./InvestorService";
+import MailService from "./MailService";
 import { ReferralService } from "./ReferralService"; // assumed import
+import bcrypt from 'bcrypt'
 
+const hashPassword=async (password:string):Promise<string> =>{
+  return await  bcrypt.hash(password,5)
+}
+const comparePassword = async ( payloadPassword:string, userPassword:string,):Promise<boolean>=>{
+  return await bcrypt.compare(payloadPassword,userPassword)
+}
 export type InvestorCreationDto = {
   email: string;
   password: string;
@@ -24,10 +32,10 @@ export type ResendTokenDto ={
 class UserService {
   static async createInvestor(data: InvestorCreationDto) {
     try {
-      // Create user
+      const password = await hashPassword(data.password)
       const user = await User.create({
         email: data.email,
-        password: data.password,
+        password,
         role: 'INVESTOR',
       });
 
@@ -70,8 +78,8 @@ class UserService {
         password: data.password,
         role: 'ADMIN',
       });
-
-       const investor = await Admin.create({
+console.log(user)
+       await Admin.create({
         username: data.username
       });
       // Trigger email verification
@@ -117,6 +125,71 @@ class UserService {
       throw error;
     }
 }
+
+
+  static async login (data:{email:string,password:string}):Promise<{loginToken:string,user:User}|{verificationToken:string}>{
+    try{
+        const user = await User.findOne({where:{
+        email:data.email
+      }})
+      if(!user){
+        throw new CustomError(404,'login user not found')
+      }
+      if (!comparePassword(data.password,user.password)){
+        throw new CustomError(409,'wrong credentials')
+      }
+      if(!user.isEmailVerified){
+        return{verificationToken: await AuthUtils.initiateEmailVerificationProcess(user,'Esteemed User,')}
+      }
+      return{loginToken: await AuthUtils.generateLoginToken(user),user}
+    
+    }
+    catch(error){
+     logger.error(`Error in login  UserService function: ${error}`);
+      throw error;
+}
+  }
+static async forgotPassword(email:string){
+  try{
+    const user = await User.findOne({where:{email}})
+    if (!user){
+      throw new CustomError(404,'user not found')
+    }
+    const token = await JWTUtils.generateForgotPasswordToken(user)
+    await MailService.sendForgotPasswordMail(user,token)
+    return token
+
+}catch(error){
+   logger.error(`Error in forgot password  UserService function: ${error}`);
+      throw error;
+    }
+}
+
+static async resetPassword(data: { resetPasswordToken: string; password: string }) {
+  try {
+    // 1. Decode and validate the reset token
+    const decoded = await JWTUtils.verifyForgotPasswordToken(data.resetPasswordToken);
+
+    // 2. Find the user by ID or email in token payload
+    const user = await User.findOne({ where: { id: decoded.id } });
+    if (!user) {
+      throw new CustomError(404, 'User not found');
+    }
+
+    // 3. Hash the new password
+    const hashedPassword = await hashPassword(data.password);
+
+    // 4. Update password and clear token-related fields if needed
+    user.password = hashedPassword;
+    await user.save();
+
+   return this.login({email:user.email,password:user.password})
+  } catch (error) {
+    logger.error(`Error in resetPassword UserService function: ${error}`);
+    throw new CustomError(400, 'Invalid or expired reset token');
+  }
+}
+
 }
 
 export default UserService;

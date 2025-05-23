@@ -19,7 +19,7 @@ export class Admin extends Model<InferAttributes<Admin>, InferCreationAttributes
 Admin.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },

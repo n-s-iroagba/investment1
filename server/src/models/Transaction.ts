@@ -29,7 +29,7 @@ export class Transaction extends Model<
 Transaction.init(
   {
       id: {
-          type: DataTypes.INTEGER.UNSIGNED,
+          type: DataTypes.INTEGER,
           autoIncrement: true,
           primaryKey: true,
       },
@@ -58,7 +58,7 @@ Transaction.init(
           allowNull: false,
       },
       investorId: {
-          type: DataTypes.INTEGER.UNSIGNED,
+          type: DataTypes.INTEGER,
           allowNull: false,
       },
       isConfirmed: {

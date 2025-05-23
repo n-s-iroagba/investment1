@@ -87,6 +87,31 @@ this.transporter.use(
       console.error('Error sending email:', error);
     }
   }
+
+  static async sendForgotPasswordMail(user: User, token: string) {
+    const resetUrl = `${process.env.CLIENT_URL}/reset-password?token=${token}`;
+
+    const mailOptions = {
+      from: `"Support Team" <${process.env.SMTP_FROM}>`,
+      to: user.email,
+      subject: 'Password Reset Request',
+      html: `
+        <p>Hi ${'Esteemed user'},</p>
+        <p>You recently requested to reset your password. Click the link below to do so:</p>
+        <a href="${resetUrl}">${resetUrl}</a>
+        <p>This link will expire in 30 minutes. If you didn’t request this, please ignore this email.</p>
+        <p>Thanks,<br/>YourApp Team</p>
+      `,
+    };
+
+    try {
+      await this.transporter.sendMail(mailOptions);
+      console.log(`Password reset email sent to ${user.email}`);
+    } catch (error) {
+      console.error(`Failed to send password reset email to ${user.email}`, error);
+      throw new Error('Failed to send password reset email');
+    }
+  }
 }
 
 export default MailService;

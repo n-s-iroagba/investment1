@@ -33,7 +33,7 @@ export class VerificationFee extends Model<
 VerificationFee.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
@@ -47,7 +47,7 @@ VerificationFee.init(
       defaultValue: false,
     },
     investorId: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
 

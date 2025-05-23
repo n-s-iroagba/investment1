@@ -27,7 +27,7 @@ export class Referral extends Model<
 Referral.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
@@ -37,11 +37,11 @@ Referral.init(
       defaultValue: 0,
     },
     referrerId: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     referredId: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     settled: {

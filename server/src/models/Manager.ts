@@ -32,7 +32,7 @@ export class Manager extends Model<
 Manager.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
@@ -57,7 +57,7 @@ Manager.init(
       allowNull: false,
     },
     duration: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     qualification: {

@@ -1,23 +1,21 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { post } from '@/utils/apiClient';
 import { apiRoutes } from '@/constants/apiRoutes';
-import { UserCircleIcon, EnvelopeIcon, LockClosedIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
+import { UserCircleIcon,  LockClosedIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
 
 interface FormState {
-  username: string;
-  email: string;
   password: string;
   confirmPassword: string;
 }
 
-export default function AdminSignupPage() {
+export default function ResetPasswordPage() {
   const router = useRouter();
+  const params = useParams();
+  const urlToken = params.token;
   const [isMounted, setIsMounted] = useState(false);
   const [form, setForm] = useState<FormState>({
-    username: '',
-    email: '',
     password: '',
     confirmPassword: '',
   });
@@ -43,17 +41,28 @@ export default function AdminSignupPage() {
     setSubmitting(true);
     try {
       const payload = {
-        email: form.email,
+        resetPasswordToken: urlToken,
         password: form.password,
-        username: form.username,
       };
 
-      const token = await post<typeof payload, string>(apiRoutes.auth.adminSignup(), payload);
-      router.push(`/auth/verify-email/${token}`);
+      const response = await post<typeof payload, {role:'ADMIN'|'INVESTOR',verificationToken?:string}>(apiRoutes.auth.login(), payload);
+      if(response.verificationToken){
+        alert('email is not verified')
+         router.push(`/auth/verify-email/${response.verificationToken}`);
+      }
+      else if (response.role ==='ADMIN'){
+        router.push(`/admin/dashboard`);
+      }else if (response.role === 'INVESTOR'){
+        router.push('/investor/dashboard')
+      }else{
+        alert('authenticaation failed, try again later')
+        console.log(response)
+      }
+      
     } catch (err: unknown) {
       let msg = 'Unexpected error';
       if (err instanceof Error) msg = err.message;
-      console.error('Error in signup handleSubmit function', err);
+      console.error('Error in  login handleSubmit function', err);
       setError(msg);
     } finally {
       setSubmitting(false);
@@ -71,7 +80,7 @@ export default function AdminSignupPage() {
 
         <h1 className="text-2xl font-bold text-green-900 mb-8 text-center flex items-center justify-center gap-2">
           <UserCircleIcon className="w-8 h-8 text-green-700" />
-          Admin Registration
+          New Password
         </h1>
 
         {error && (
@@ -82,8 +91,6 @@ export default function AdminSignupPage() {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {[
-            { label: 'Username', name: 'username', type: 'text', Icon: UserCircleIcon },
-            { label: 'Email', name: 'email', type: 'email', Icon: EnvelopeIcon },
             { label: 'Password', name: 'password', type: 'password', Icon: LockClosedIcon },
             { label: 'Confirm Password', name: 'confirmPassword', type: 'password', Icon: LockClosedIcon },
           ].map(({ label, name, type, Icon }) => (
@@ -113,10 +120,10 @@ export default function AdminSignupPage() {
             {submitting ? (
               <>
                 <ArrowPathIcon className="w-5 h-5 animate-spin" />
-                Creating Account...
+                Resetting Password...
               </>
             ) : (
-              'Create Admin Account'
+              'Reset Password'
             )}
           </button>
         </form>

@@ -28,7 +28,7 @@ import ManagedPortfolio from './ManagedPortfolio';
 CryptoWallet.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
@@ -41,7 +41,7 @@ CryptoWallet.init(
       allowNull: false,
     },
     managedPortfolioId: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     depositAddress: {

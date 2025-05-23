@@ -45,7 +45,7 @@ export class Investor extends Model<
 Investor.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
@@ -78,7 +78,7 @@ Investor.init(
       allowNull: true,
     },
     userId: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
   },

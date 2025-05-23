@@ -64,32 +64,20 @@ class AuthUtils {
     return randomCode
 }
 
-static async login(user: User, res: Response) {
+static async generateLoginToken(user: User):Promise<string> {
     const payload = {
       id: user.id,
       email: user.email,
     };
 
-const token = await JWTUtils.generateAuthToken(user);
-    res.cookie('token', token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-    });
+return await JWTUtils.generateAuthToken(user);
 
-  return  res.status(200).json({
-      message: 'Login successful',
-      user: {
-        username: user.id,
-        role: user.role,
-      },
-    });
+
   }
 }
 export default AuthUtils
 
-class JWTUtils {
+export class JWTUtils {
     // Generate the email verification token
     static async generateVerificationToken(user: User): Promise<string> {
         const payload: JWTPayload = {
@@ -103,6 +91,25 @@ class JWTUtils {
         const token = jwt.sign(payload, secret, { expiresIn: '10m' }); // '10m' for 10 minutes
         return token;
     }
+    
+        static async generateForgotPasswordToken(user: User): Promise<string> {
+        const payload: JWTPayload = {
+            role: user.role,
+            type: 'PASSWORD_RESET',
+            secret: secret,
+            userId: user.id,
+        };
+
+
+        
+        // Generate and sign the token with an expiration of 10 minutes
+        const token = jwt.sign(payload, secret, { expiresIn: '7d' }); // '10m' for 10 minutes
+        return token;
+    }
+
+     static async verifyForgotPasswordToken(token: string): Promise<{ id: number }> {
+    return jwt.verify(token, secret) as { id: number };
+  }
 
         static async generateAuthToken(user: User): Promise<string> {
         const payload: JWTPayload = {
