@@ -72,6 +72,7 @@ export const apiRoutes = {
 
   auth: {
     login: (): string => `/auth/login`,
+    adminSignup: (): string => `/admin/auth/signup`,
     signup: (): string => `/auth/signup`,
     logout: (): string => `/auth/logout`,
     refresh: (): string => `/auth/refresh-token`,

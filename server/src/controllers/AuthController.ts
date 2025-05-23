@@ -12,7 +12,15 @@ export class AuthController {
        errorHandler(error,req,res)
     }
     }
-
+    static async adminSignup(req:Request,res:Response){
+        const {password, username,email} = req.body
+    try{
+        const token = await UserService.createAdmin({password, username,email});
+        return res.status(201).json(token)
+    }catch(error){
+       errorHandler(error,req,res)
+    }
+    }
     static async verifyEmail(req:Request, res:Response){
         try{
             const user = await UserService.verifyEmail(req.body as EmailVerificationDto )

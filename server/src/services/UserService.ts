@@ -1,3 +1,4 @@
+import Admin from "../models/Admin";
 import User from "../models/User";
 import AuthUtils, { EmailVerificationDto } from "../utils/auth/AuthUtils";
 import { CustomError } from "../utils/error/CustomError";
@@ -53,6 +54,28 @@ class UserService {
       });
       // Trigger email verification
       const token = await AuthUtils.initiateEmailVerificationProcess(user, data.firstName);
+
+      return token
+    } catch (error) {
+      logger.error(`Error in createInvestor UserService function: ${error}`);
+      throw error;
+    }
+  }
+
+    static async createAdmin(data: {password:string, username:string,email:string}){
+    try {
+      // Create user
+      const user = await User.create({
+        email: data.email,
+        password: data.password,
+        role: 'ADMIN',
+      });
+
+       const investor = await Admin.create({
+        username: data.username
+      });
+      // Trigger email verification
+      const token = await AuthUtils.initiateEmailVerificationProcess(user, data.username);
 
       return token
     } catch (error) {

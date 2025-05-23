@@ -54,6 +54,7 @@ router.delete('/verification-fees/:id', VerificationFeeController.delete);
 // Auth routes
 router.post('/auth/login', /* authController.login */);
 router.post('/auth/signup', AuthController.investorSignup);
+router.post('/admin/auth/signup', AuthController.adminSignup);
 router.post ('/auth/verify-email',AuthController.verifyEmail)
 router.post (`/auth/resend-verification-token`,AuthController.resendVerificationToken)
 router.post('/auth/logout', /* authController.logout */);

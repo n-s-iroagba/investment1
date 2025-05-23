@@ -7,18 +7,11 @@ import {
   NonAttribute,
 } from 'sequelize';
 import sequelize from '../config/database';
-import { AdminWallet } from './AdminWallet';
-import { Manager } from './Manager';
-import { Investor } from './Investor';
-import SocialMedia from './SocialMedia';
+
 
 export class Admin extends Model<InferAttributes<Admin>, InferCreationAttributes<Admin>> {
   declare id: CreationOptional<number>;
   declare username: string;
-  declare  wallets?: NonAttribute<AdminWallet[]>
-  declare socialMedia?: NonAttribute<SocialMedia[]>
-  declare managers?: NonAttribute<Manager[]>
-  declare investors?: NonAttribute<Investor[]>
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
 }

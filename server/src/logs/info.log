@@ -494,3 +494,5 @@
     at async createInvestment (/home/udorakpuenyi/tempi/server/src/controllers/ManagedPortfolioController.ts:55:25)
 2025-05-23T11:53:04.064Z [INFO]: Request URL: GET /api/managers/2, undefined
 2025-05-23T11:53:08.029Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-23T12:47:29.972Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-23T12:47:31.047Z [INFO]: Request URL: GET /api/managers/2, undefined
