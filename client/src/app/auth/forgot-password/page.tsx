@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { post } from "@/utils/apiClient";
 import { apiRoutes } from "@/constants/apiRoutes";
 import {
@@ -8,19 +7,23 @@ import {
   EnvelopeIcon,
   ArrowPathIcon,
 } from "@heroicons/react/24/outline";
+import { useRouter } from "next/navigation";
 
 interface FormState {
   email: string;
 }
 
 export default function LoginPage() {
-  const router = useRouter();
+
+  const router = useRouter()
+  
   const [isMounted, setIsMounted] = useState(false);
   const [form, setForm] = useState<FormState>({
     email: "",
   });
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [message, setMessage]= useState('')
 
   useEffect(() => {
     setIsMounted(true);
@@ -40,12 +43,12 @@ export default function LoginPage() {
         email: form.email,
       };
 
-      const response = await post<
+     await post<
         typeof payload,
         { resetPasswordToken: string }
       >(apiRoutes.auth.forgotPassword(), payload);
 
-      router.push(`/auth/reset-password/${response.resetPasswordToken}`);
+     setMessage('A password reset email has been sent to your email address.')
     } catch (err: unknown) {
       let msg = "Unexpected error";
       if (err instanceof Error) msg = err.message;
@@ -67,15 +70,22 @@ export default function LoginPage() {
 
         <h1 className="text-2xl font-bold text-green-900 mb-8 text-center flex items-center justify-center gap-2">
           <UserCircleIcon className="w-8 h-8 text-green-700" />
-          Enter your email
+        {message?'Kindly Check Your Mail'  :'Enter your email'}
         </h1>
 
         {error && (
-          <div className="mb-6 p-3 bg-red-50 text-red-700 rounded-xl border-2 border-red-100">
+          <div className="mb-6 p-3 bg-red-50 text-red-700 text-center rounded-xl border-2 border-red-100">
             {error}
           </div>
         )}
 
+            {message && (
+          <div className="mb-6 p-3 bg-green-100 text-green-800 text-center rounded-xl border-2 border-green-200">
+            {message}
+          </div>
+        )}
+
+            {!message?
         <form onSubmit={handleSubmit} className="space-y-6">
           {[
             {
@@ -119,7 +129,19 @@ export default function LoginPage() {
               "Submit"
             )}
           </button>
-        </form>
+:   </form>:
+            <button
+
+             onClick={()=>router.push('/login')}
+            className="w-full py-3 bg-green-700 text-white rounded-xl hover:bg-green-800 disabled:bg-green-400 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
+          >
+        
+                <ArrowPathIcon className="w-5 h-5 " />
+                Log in
+      
+          </button>
+}
+      
       </div>
     </div>
   );

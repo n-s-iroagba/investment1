@@ -1,8 +1,9 @@
 import UserService, { InvestorCreationDto, ResendTokenDto } from "../services/UserService";
-import AuthUtils, { EmailVerificationDto } from "../utils/auth/AuthUtils";
+import AuthUtils, { EmailVerificationDto, secret } from "../utils/auth/AuthUtils";
+import { CustomError } from "../utils/error/CustomError";
 import { errorHandler } from "../utils/error/errorHandler";
 import { Request, Response } from "express";
-
+import jwt from "jsonwebtoken";
 export class AuthController {
     static async investorSignup(req: Request, res: Response) {
         try {
@@ -47,7 +48,7 @@ static async verifyEmail(req: Request, res: Response) {
       });
     } else {
       // User needs to verify email again (shouldn't happen here but handled just in case)
-      return res.status(403).json({
+      return res.status(200).json({
         verificationToken: result.verificationToken,
       });
     }
@@ -85,7 +86,7 @@ static async verifyEmail(req: Request, res: Response) {
           role: result.user.role,
       });
     } else {
-      return res.status(403).json({
+      return res.status(200).json({
         verificationToken: result.verificationToken,
       })
 
@@ -123,7 +124,7 @@ static async verifyEmail(req: Request, res: Response) {
           role: result.user.role,
       });
     } else {
-      return res.status(403).json({
+      return res.status(200).json({
         verificationToken: result.verificationToken,
       })
 
@@ -132,4 +133,16 @@ static async verifyEmail(req: Request, res: Response) {
         }
 
     }
+    static async  verifyResetToken(req: Request, res: Response) {
+  const token = req.body.token || req.query.token;
+  if (!token) throw new CustomError(400,'Token is required is missing');
+
+  try {
+    const payload = jwt.verify(token, secret) as { id: string };
+    res.status(200).end()
+    
+  } catch (error) {
+    return res.status(401).json({ message: 'Invalid or expired token' });
+  }
+}
 }

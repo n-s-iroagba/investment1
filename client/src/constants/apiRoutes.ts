@@ -82,8 +82,8 @@ export const apiRoutes = {
     logout: (): string => `/auth/logout`,
     refresh: (): string => `/auth/refresh-token`,
     verifyEmail: ():string => `auth/verify-email`,
-    resendEmailVerificationToken: ():string => `auth/resend-verification-token`
-    // password reset, email verify, etc. can be added here
+    resendEmailVerificationToken: ():string => `auth/resend-verification-token`,
+    resetPassword:():string => `/auth/reset-password`
   },
   kyc:{
     verify:(id:string|number):string =>`/kyc/verify/${id}`

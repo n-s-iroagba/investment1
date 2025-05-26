@@ -353,3 +353,63 @@
     at async Function.create (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/model.js:2305:12)
     at async Function.createAdmin (/home/udorakpuenyi/tempi/server/src/services/UserService.ts:76:20)
     at async adminSignup (/home/udorakpuenyi/tempi/server/src/controllers/AuthController.ts:18:27)
+2025-05-24T01:25:47.760Z [ERROR]: Error: connect ETIMEDOUT - URL: /api/managers - Stack: SequelizeConnectionError: connect ETIMEDOUT
+    at ConnectionManager.connect (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/dialects/mysql/connection-manager.js:126:17)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async ConnectionManager._connect (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/dialects/abstract/connection-manager.js:332:24)
+2025-05-24T01:25:48.974Z [ERROR]: Error: connect ETIMEDOUT - URL: /api/managers - Stack: SequelizeConnectionError: connect ETIMEDOUT
+    at ConnectionManager.connect (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/dialects/mysql/connection-manager.js:126:17)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async ConnectionManager._connect (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/dialects/abstract/connection-manager.js:332:24)
+2025-05-24T22:39:06.533Z [ERROR]: Error in createInvestor UserService function: SequelizeUniqueConstraintError: Validation error
+2025-05-24T22:39:06.535Z [ERROR]: Error: Validation error - URL: /api/admin/auth/signup - Stack: Error
+    at Query.run (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/dialects/mysql/query.js:46:25)
+    at /home/udorakpuenyi/tempi/server/node_modules/sequelize/src/sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.insert (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/dialects/abstract/query-interface.js:795:21)
+    at async User.save (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/model.js:4154:35)
+    at async Function.create (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/model.js:2305:12)
+    at async Function.createAdmin (/home/udorakpuenyi/tempi/server/src/services/UserService.ts:76:20)
+    at async adminSignup (/home/udorakpuenyi/tempi/server/src/controllers/AuthController.ts:19:27)
+2025-05-24T22:43:23.835Z [ERROR]: Error in createInvestor UserService function: SequelizeUniqueConstraintError: Validation error
+2025-05-24T22:43:23.835Z [ERROR]: Error: Validation error - URL: /api/admin/auth/signup - Stack: Error
+    at Query.run (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/dialects/mysql/query.js:46:25)
+    at /home/udorakpuenyi/tempi/server/node_modules/sequelize/src/sequelize.js:650:28
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.insert (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/dialects/abstract/query-interface.js:795:21)
+    at async User.save (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/model.js:4154:35)
+    at async Function.create (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/model.js:2305:12)
+    at async Function.createAdmin (/home/udorakpuenyi/tempi/server/src/services/UserService.ts:76:20)
+    at async adminSignup (/home/udorakpuenyi/tempi/server/src/controllers/AuthController.ts:19:27)
+2025-05-24T22:48:17.492Z [ERROR]: Error in createInvestor UserService function: Error: user already exists with this email
+2025-05-24T22:48:17.494Z [WARN]: CustomError - 409: user already exists with this email - URL: /api/admin/auth/signup
+2025-05-24T23:06:23.795Z [ERROR]: Error in forgot password  UserService function: Error: Failed to send password reset email
+2025-05-24T23:23:22.630Z [ERROR]: Error in forgot password  UserService function: Error: Failed to send password reset email
+2025-05-24T23:28:27.417Z [ERROR]: Error in login  UserService function: Error: WHERE parameter "email" has invalid "undefined" value
+2025-05-24T23:28:27.711Z [ERROR]: Error: WHERE parameter "email" has invalid "undefined" value - URL: /api/auth/login - Stack: Error: WHERE parameter "email" has invalid "undefined" value
+    at MySQLQueryGenerator.whereItemQuery (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/dialects/abstract/query-generator.js:2445:13)
+    at /home/udorakpuenyi/tempi/server/node_modules/sequelize/src/dialects/abstract/query-generator.js:2434:25
+    at Array.forEach (<anonymous>)
+    at MySQLQueryGenerator.whereItemsQuery (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/dialects/abstract/query-generator.js:2432:35)
+    at MySQLQueryGenerator.getWhereConditions (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/dialects/abstract/query-generator.js:2860:19)
+    at MySQLQueryGenerator.selectQuery (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/dialects/abstract/query-generator.js:1460:28)
+    at MySQLQueryInterface.select (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/dialects/abstract/query-interface.js:1002:27)
+    at Function.findAll (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/model.js:1824:47)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Function.findOne (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/model.js:1998:12)
+2025-05-24T23:32:34.475Z [ERROR]: Error in resetPassword UserService function: Error: WHERE parameter "id" has invalid "undefined" value
+2025-05-24T23:32:34.476Z [WARN]: CustomError - 400: Invalid or expired reset token - URL: /api/auth/reset-password
+2025-05-24T23:34:48.689Z [ERROR]: Error in resetPassword UserService function: Error: WHERE parameter "id" has invalid "undefined" value
+2025-05-24T23:34:48.694Z [WARN]: CustomError - 400: Invalid or expired reset token - URL: /api/auth/reset-password
+2025-05-24T23:38:43.241Z [ERROR]: Error in resetPassword UserService function: Error: WHERE parameter "id" has invalid "undefined" value
+2025-05-24T23:38:43.330Z [ERROR]: Error: WHERE parameter "id" has invalid "undefined" value - URL: /api/auth/reset-password - Stack: Error: WHERE parameter "id" has invalid "undefined" value
+    at MySQLQueryGenerator.whereItemQuery (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/dialects/abstract/query-generator.js:2445:13)
+    at /home/udorakpuenyi/tempi/server/node_modules/sequelize/src/dialects/abstract/query-generator.js:2434:25
+    at Array.forEach (<anonymous>)
+    at MySQLQueryGenerator.whereItemsQuery (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/dialects/abstract/query-generator.js:2432:35)
+    at MySQLQueryGenerator.getWhereConditions (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/dialects/abstract/query-generator.js:2860:19)
+    at MySQLQueryGenerator.selectQuery (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/dialects/abstract/query-generator.js:1460:28)
+    at MySQLQueryInterface.select (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/dialects/abstract/query-interface.js:1002:27)
+    at Function.findAll (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/model.js:1824:47)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Function.findOne (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/model.js:1998:12)

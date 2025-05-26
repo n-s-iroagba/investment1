@@ -9,6 +9,11 @@ import SocialMediaController from './controllers/SocialMediaController';
 import ManagedPortfolioController from './controllers/ManagedPortfolioController';
 import { VerificationFeeController } from './controllers/VerificationFeeController';
 import InvestorController from './controllers/InvestorController';
+import { authenticate, AuthenticatedRequest } from './middlewares/authenticate';
+import Investor from './models/Investor';
+import Admin from './models/Admin';
+import { CustomError } from './utils/error/CustomError';
+import { errorHandler } from './utils/error/errorHandler';
 const router = Router();
 router.post('/investment/new/:investorId',ManagedPortfolioController.createInvestment)
 router.post('/investment/:investorId',ManagedPortfolioController.getInvestment)
@@ -61,7 +66,50 @@ router.post('/auth/signup', AuthController.investorSignup);
 router.post('/admin/auth/signup', AuthController.adminSignup);
 router.post ('/auth/verify-email',AuthController.verifyEmail)
 router.post (`/auth/resend-verification-token`,AuthController.resendVerificationToken)
-router.post('/auth/logout', /* authController.logout */);
+router.post('/auth/logout', (req, res) => {
+  res.clearCookie('token');
+  res.json({ message: 'Logged out' });
+});
+async function getInvestorById(id: string): Promise<Investor | null> {
+  // Replace with real DB query
+  return await Investor.findByPk(id);
+}
+
+async function getAdminById(id: string): Promise<Admin | null> {
+  // Replace with real DB query
+  return await Admin.findByPk(id);
+}
+router.get('/me', authenticate, async (req: AuthenticatedRequest, res) => {
+  const { id, role } = req.user!;
+
+  try {
+    if (role === 'investor') {
+      const investor = await getInvestorById(id);
+      if (!investor)  throw new CustomError(404,'Investor not found');
+
+      return res.json({
+        id: investor.id,
+        firstName: investor.firstName,
+      });
+    }
+
+    if (role === 'admin') {
+      const admin = await getAdminById(id);
+      if (!admin)  throw new CustomError(404, 'Admin not found');
+
+      return res.json({
+        id: admin.id,
+        username: admin.username,
+      });
+    }
+
+    return res.status(400).json({ message: 'Unknown role' });
+  } catch (err) {
+    console.error(err);
+    errorHandler(err,req,res)
+  }
+})
+
 router.post('/auth/refresh-token', /* authController.refreshToken */);
 
 export default router

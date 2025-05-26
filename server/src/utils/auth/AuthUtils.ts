@@ -11,7 +11,7 @@ import { Response } from "express";
 dotenv.config();
 
 // Secret from environment variables, fallback to a default in case it's not set
-const secret = process.env.JWT_SECRET || 'udorakpuenyi';
+export const secret = process.env.JWT_SECRET || 'udorakpuenyi';
 
 // Define the JWT Payload Type
 type JWTPayload = {
@@ -107,8 +107,8 @@ export class JWTUtils {
         return token;
     }
 
-     static async verifyForgotPasswordToken(token: string): Promise<{ id: number }> {
-    return jwt.verify(token, secret) as { id: number };
+     static async verifyForgotPasswordToken(token: string): Promise<{ userId: number }> {
+    return jwt.verify(token, secret) as { userId: number };
   }
 
         static async generateAuthToken(user: User): Promise<string> {

@@ -10,10 +10,10 @@ interface TodoAlertProps {
 export default function TodoAlert({ message, link }: TodoAlertProps) {
   const router = useRouter()
   return (
-    <div className="relative group p-6 bg-green-900/10 rounded-lg border-2 border-green-800 backdrop-blur-sm transition-all hover:bg-green-900/20" onClick={()=>router.push(link)}>
-      <div className="flex items-center gap-4"> {/* Changed from items-start to items-center */}
+    <div className="relative group bg-green-900/10 rounded-lg border-2 border-green-800 backdrop-blur-sm transition-all hover:bg-green-900/20" onClick={()=>router.push(link)}>
+      <div className="flex flex-col items-center gap-4"> {/* Changed from items-start to items-center */}
         {/* Icon Container */}
-        <div className="flex-shrink-0 p-2 bg-green-100 rounded-full">
+        <div className="flex-wrap p-2 bg-green-100 rounded-full">
           <CheckCircleIcon className="w-6 h-6 text-green-900 mx-auto" /> {/* Added mx-auto */}
         </div>
 

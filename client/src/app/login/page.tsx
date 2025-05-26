@@ -115,6 +115,12 @@ export default function LoginPage() {
             </div>
           ))}
 
+  {/* Forgot password link */}
+  <div className="text-right text-sm">
+    <a href="/auth/forgot-password" className="text-green-600 hover:underline">
+      Forgot password?
+    </a>
+  </div>
           <button
             type="submit"
             disabled={submitting}

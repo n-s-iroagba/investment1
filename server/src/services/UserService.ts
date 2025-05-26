@@ -73,12 +73,16 @@ class UserService {
     static async createAdmin(data: {password:string, username:string,email:string}){
     try {
       // Create user
-      const user = await User.create({
+      let user = await User.findOne({where:{
+        email:data.email
+      }}) 
+      if (user) throw new CustomError(409,'user already exists with this email')
+      user = await User.create({
         email: data.email,
         password: data.password,
         role: 'ADMIN',
       });
-console.log(user)
+
        await Admin.create({
         username: data.username
       });
@@ -170,8 +174,10 @@ static async resetPassword(data: { resetPasswordToken: string; password: string 
     // 1. Decode and validate the reset token
     const decoded = await JWTUtils.verifyForgotPasswordToken(data.resetPasswordToken);
 
+    console.log('decoded', decoded)
+
     // 2. Find the user by ID or email in token payload
-    const user = await User.findOne({ where: { id: decoded.id } });
+    const user = await User.findOne({ where: { id: decoded.userId } });
     if (!user) {
       throw new CustomError(404, 'User not found');
     }
@@ -186,7 +192,7 @@ static async resetPassword(data: { resetPasswordToken: string; password: string 
    return this.login({email:user.email,password:user.password})
   } catch (error) {
     logger.error(`Error in resetPassword UserService function: ${error}`);
-    throw new CustomError(400, 'Invalid or expired reset token');
+    throw  error
   }
 }
 

@@ -39,7 +39,7 @@ export default function AdminOffcanvas({ children }: AdminOffcanvasProps) {
   };
 
   return (
-    <div className="flex min-h-screen bg-white">
+    <div className="flex min-h-auto bg-white">
       {/* Mobile Menu Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}

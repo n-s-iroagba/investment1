@@ -30,7 +30,25 @@ export default function ResetPasswordPage() {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+type VerificationResponse = {
+  verificationToken: string;
+};
+
+interface RoleResponse {
+  role: 'ADMIN' | 'INVESTOR';
+}
+
+type AuthResponse = VerificationResponse | RoleResponse;
+
+function isVerificationResponse(res: AuthResponse): res is VerificationResponse {
+  return typeof (res as VerificationResponse).verificationToken === 'string';
+}
+
+function isRoleResponse(res: AuthResponse): res is RoleResponse {
+  return res != null && (res as RoleResponse).role === 'ADMIN' || (res as RoleResponse).role === 'INVESTOR';
+}
+
+const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
 
@@ -39,35 +57,40 @@ export default function ResetPasswordPage() {
     }
 
     setSubmitting(true);
-    try {
+    
       const payload = {
         resetPasswordToken: urlToken,
         password: form.password,
       };
+    
+try {
+  const response = await post<typeof payload, AuthResponse>(
+    apiRoutes.auth.resetPassword(),
+    payload
+  );
 
-      const response = await post<typeof payload, {role:'ADMIN'|'INVESTOR',verificationToken?:string}>(apiRoutes.auth.login(), payload);
-      if(response.verificationToken){
-        alert('email is not verified')
-         router.push(`/auth/verify-email/${response.verificationToken}`);
-      }
-      else if (response.role ==='ADMIN'){
-        router.push(`/admin/dashboard`);
-      }else if (response.role === 'INVESTOR'){
-        router.push('/investor/dashboard')
-      }else{
-        alert('authenticaation failed, try again later')
-        console.log(response)
-      }
-      
-    } catch (err: unknown) {
-      let msg = 'Unexpected error';
-      if (err instanceof Error) msg = err.message;
-      console.error('Error in  login handleSubmit function', err);
-      setError(msg);
-    } finally {
-      setSubmitting(false);
+  if (isVerificationResponse(response)) {
+    alert('Email is not verified');
+    router.push(`/auth/verify-email/${response.verificationToken}`);
+  } else if (isRoleResponse(response)) {
+    if (response.role === 'ADMIN') {
+      router.push('/admin/dashboard');
+    } else if (response.role === 'INVESTOR') {
+      router.push('/investor/dashboard');
     }
-  };
+  } else {
+    alert('Authentication failed, try again later');
+    console.log(response);
+  }
+} catch (err: unknown) {
+  let msg = 'Unexpected error';
+  if (err instanceof Error) msg = err.message;
+  console.error('Error in login handleSubmit function', err);
+  setError(msg);
+} finally {
+  setSubmitting(false);
+}
+    }
 
   if (!isMounted) return null;
 

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { post } from '@/utils/apiClient';
 import { apiRoutes } from '@/constants/apiRoutes';
+import { ArrowPathIcon, EnvelopeIcon, LockClosedIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 
 interface FormState {
   firstName: string;
@@ -77,62 +78,70 @@ export default function SignupPage() {
   if (!isMounted) return null;
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-blue-50 p-4">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white rounded-2xl shadow-lg p-8 max-w-md w-full space-y-6"
-      >
-        <h1 className="text-2xl font-bold text-blue-600 text-center">Investor Signup</h1>
+ <div className="min-h-screen flex items-center justify-center bg-green-50 p-4">
+      <div className="bg-white rounded-2xl shadow-sm border-2 border-green-50 relative max-w-md w-full p-8">
+        {/* Decorative Corner Borders */}
+        <div className="absolute top-2 right-2 w-8 h-8 border-t-2 border-r-2 border-green-800 opacity-20" />
+        <div className="absolute bottom-2 left-2 w-8 h-8 border-b-2 border-l-2 border-green-800 opacity-20" />
 
-        {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+        <h1 className="text-2xl font-bold text-green-900 mb-8 text-center flex items-center justify-center gap-2">
+          <UserCircleIcon className="w-8 h-8 text-green-700" />
+          Create Account
+        </h1>
+
+        {error && (
+          <div className="mb-6 p-3 bg-red-50 text-red-700 rounded-xl border-2 border-red-100">
+            {error}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="space-y-6">
 
         {[
-          { label: 'First Name', name: 'firstName', type: 'text' },
-          { label: 'Last Name', name: 'lastName', type: 'text' },
-          { label: 'Country of Residence', name: 'countryOfResidence', type: 'text' },
-          { label: 'Date of Birth', name: 'dateOfBirth', type: 'date' },
-          { label: 'Email', name: 'email', type: 'email' },
-          { label: 'Password', name: 'password', type: 'password' },
-          { label: 'Confirm Password', name: 'confirmPassword', type: 'password' },
-          { label: 'Referrer Code (optional)', name: 'referrerCode', type: 'text' },
-        ].map(({ label, name, type }) => (
-          <div key={name}>
-            <label className="block text-sm font-medium text-blue-600">{label}</label>
-            <input
-              type={type}
-              name={name}
-            value={form[name as keyof typeof form]}
-              onChange={handleChange}
-              required={name !== 'referrerCode'}
-              className="mt-1 w-full p-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
-            />
-          </div>
-        ))}
-
-        <div>
-          <label className="block text-sm font-medium text-blue-600">Gender</label>
-          <select
-            name="gender"
-            value={form.gender}
-            onChange={handleChange}
-            required
-            className="mt-1 w-full p-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
-          >
-            <option value="" disabled>Select gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="non-binary">Non-binary</option>
-          </select>
-        </div>
+          { label: 'First Name', name: 'firstName', type: 'text', Icon: UserCircleIcon },
+          { label: 'Last Name', name: 'lastName', type: 'text', Icon: UserCircleIcon },
+          { label: 'Country of Residence', name: 'countryOfResidence', type: 'text', Icon: UserCircleIcon },
+          { label: 'Date of Birth', name: 'dateOfBirth', type: 'date', Icon: UserCircleIcon },
+          { label: 'Email', name: 'email', type: 'email', Icon: EnvelopeIcon },
+          { label: 'Password', name: 'password', type: 'password', Icon: LockClosedIcon  },
+          { label: 'Confirm Password', name: 'confirmPassword', type: 'password', Icon: LockClosedIcon  },
+          { label: 'Referrer Code (optional)', name: 'referrerCode', type: 'text', Icon: UserCircleIcon },
+        ].map(({ label, name, type, Icon }) => (
+            <div key={name}>
+              <label className="block text-sm font-medium text-green-700 mb-2 flex items-center gap-1">
+                <Icon className="w-4 h-4" />
+                {label}
+              </label>
+              <input
+                type={type}
+                name={name}
+                value={form[name as keyof FormState]}
+                onChange={handleChange}
+                required
+                className={`w-full p-3 rounded-xl border-2 ${
+                  error?.toLowerCase().includes(name) ? 'border-red-300' : 'border-green-100'
+                } focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all`}
+              />
+            </div>
+          ))}
 
         <button
-          type="submit"
-          disabled={submitting}
-          className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50"
-        >
-          {submitting ? 'Signing up…' : 'Sign Up'}
-        </button>
-      </form>
+            type="submit"
+            disabled={submitting}
+            className="w-full py-3 bg-green-700 text-white rounded-xl hover:bg-green-800 disabled:bg-green-400 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
+          >
+            {submitting ? (
+              <>
+                <ArrowPathIcon className="w-5 h-5 animate-spin" />
+                Creating Account...
+              </>
+            ) : (
+              'Create Admin Account'
+            )}
+          </button>
+        </form>
+    </div>
     </div>
   );
 }
+ 

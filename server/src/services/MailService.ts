@@ -89,7 +89,7 @@ this.transporter.use(
   }
 
   static async sendForgotPasswordMail(user: User, token: string) {
-    const resetUrl = `${process.env.CLIENT_URL}/reset-password?token=${token}`;
+    const resetUrl = `${process.env.CLIENT_URL??'http://localhost:3000/auth'}/reset-password/${token}`;
 
     const mailOptions = {
       from: `"Support Team" <${process.env.SMTP_FROM}>`,
@@ -98,7 +98,7 @@ this.transporter.use(
       html: `
         <p>Hi ${'Esteemed user'},</p>
         <p>You recently requested to reset your password. Click the link below to do so:</p>
-        <a href="${resetUrl}">${resetUrl}</a>
+        <a href="${resetUrl}">Reset Password</a>
         <p>This link will expire in 30 minutes. If you didn’t request this, please ignore this email.</p>
         <p>Thanks,<br/>YourApp Team</p>
       `,

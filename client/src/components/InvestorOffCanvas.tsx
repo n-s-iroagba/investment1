@@ -38,7 +38,7 @@ export default function InvestorOffcanvas({ children }: InvestorOffcanvasProps) 
   };
 
   return (
-    <div className="flex min-h-screen bg-white">
+    <div className="flex min-h-auto h-screen bg-white">
       {/* Mobile Menu Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
