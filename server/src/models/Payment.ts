@@ -13,7 +13,7 @@ export interface PaymentAttributes {
    paymentType:'FEE'|'INVESTMENT';
   amount: number;
   paymentID:string;
-  isVerified?:boolean  
+  isVerified:boolean  
 }
 
 // 2. Define creation attributes (id is auto-generated)
@@ -30,7 +30,7 @@ export class Payment
   public paymentType!:'FEE'|'INVESTMENT';
   public paymentID!:string;
   public amount!: number;
-  public isVerified?:boolean;
+  public isVerified!:boolean;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;

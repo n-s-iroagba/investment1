@@ -1,11 +1,13 @@
 "use client";
-import { useState } from 'react';
-
+import { apiRoutes } from '@/constants/apiRoutes';
+import { useGetList } from '@/hooks/useFetch';
+import { Investor } from '@/types/Investor';
+import { useRouter } from 'next/navigation';
 
 export default function InvestorList() {
-  const [selectedInvestor, setSelectedInvestor] = useState<string | null>(null);
-  // const {data:investors, error, loading}= useGetList<Investor>(apiRoutes.investor.list())
-  const investors:FullInvestor[] = []
+ const router = useRouter()
+  const {data:investors, error, loading}= useGetList<Investor>(apiRoutes.investor.list())
+
   // Skeleton loading state
   if (!investors.length) {
     return (
@@ -36,7 +38,7 @@ export default function InvestorList() {
               </td>
               <td className="p-4 text-right">
                 <button
-                  onClick={() => setSelectedInvestor(investor.id)}
+                  onClick={() => router.push(`/admin/investors/${investor.id}`)}
                   className="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
                 >
                   View More
@@ -61,7 +63,7 @@ export default function InvestorList() {
                 </p>
               </div>
               <button
-                onClick={() => setSelectedInvestor(investor.id)}
+                onClick={() => router.push(`/admin/investors/${investor.id}`)}
                 className="bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-md text-sm font-medium transition-colors"
                 aria-label={`View details for ${investor.firstName} ${investor.lastName}`}
               >

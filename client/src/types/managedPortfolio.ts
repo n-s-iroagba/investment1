@@ -11,5 +11,3 @@ export type  ManagedPortfolio ={
  manager:Manager
  cryptoWallet:CryptoWallet
 }
-
-

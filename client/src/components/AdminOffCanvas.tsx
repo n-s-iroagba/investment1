@@ -1,42 +1,44 @@
-"use client";
-import { useState, useEffect } from 'react';
-import { 
-  XMarkIcon, 
+"use client"
+import { useState, useEffect } from "react"
+import type React from "react"
+
+import {
+  XMarkIcon,
   Bars3Icon,
   UserCircleIcon,
   WalletIcon,
   UserGroupIcon,
   LinkIcon,
   ShareIcon,
-  CurrencyDollarIcon
-} from '@heroicons/react/24/outline';
-import Link from 'next/link';
+  CurrencyDollarIcon,
+} from "@heroicons/react/24/outline"
+import Link from "next/link"
 
 interface AdminOffcanvasProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 export default function AdminOffcanvas({ children }: AdminOffcanvasProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
+  const [isDesktop, setIsDesktop] = useState(false)
 
   useEffect(() => {
     const handleResize = () => {
-      const isLargeScreen = window.innerWidth >= 1024;
-      setIsDesktop(isLargeScreen);
-      setIsOpen(isLargeScreen);
-    };
+      const isLargeScreen = window.innerWidth >= 1024
+      setIsDesktop(isLargeScreen)
+      setIsOpen(isLargeScreen)
+    }
 
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+    handleResize()
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
 
   const handleNavClick = () => {
     if (!isDesktop) {
-      setIsOpen(false);
+      setIsOpen(false)
     }
-  };
+  }
 
   return (
     <div className="flex min-h-auto bg-white">
@@ -46,25 +48,16 @@ export default function AdminOffcanvas({ children }: AdminOffcanvasProps) {
         className="lg:hidden fixed top-4 z-50 left-4 p-2 rounded-lg bg-green-100 border-2 border-green-900 text-green-900 shadow-md hover:bg-green-200 transition-all"
         aria-label="Toggle navigation"
       >
-        {isOpen ? (
-          <XMarkIcon className="h-6 w-6" />
-        ) : (
-          <Bars3Icon className="h-6 w-6" />
-        )}
+        {isOpen ? <XMarkIcon className="h-6 w-6" /> : <Bars3Icon className="h-6 w-6" />}
       </button>
 
       {/* Overlay */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 bg-black/50 lg:hidden z-40"
-          onClick={() => setIsOpen(false)}
-        />
-      )}
+      {isOpen && <div className="fixed inset-0 bg-black/50 lg:hidden z-40" onClick={() => setIsOpen(false)} />}
 
       {/* Sidebar */}
       <aside
         className={`fixed lg:relative h-auto z-50 transform transition-transform duration-300 ease-in-out
-          ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
+          ${isOpen ? "translate-x-0" : "-translate-x-full"} 
           lg:translate-x-0 w-64 bg-green-900 border-r-4 border-green-700`}
       >
         <nav className="h-full overflow-y-auto p-4 flex flex-col gap-1">
@@ -79,11 +72,11 @@ export default function AdminOffcanvas({ children }: AdminOffcanvasProps) {
             { href: "/admin/investors", text: "My Investors", icon: UserCircleIcon },
             { href: "/admin/social-media", text: "Social Media Links", icon: LinkIcon },
             { href: "/admin/referrals", text: "Referrals", icon: ShareIcon },
-             { href: "/admin/mock-withdrawal", text: "Mock Withdrawal", icon: CurrencyDollarIcon }
+            { href: "/admin/mock-withdrawal", text: "Mock Withdrawal", icon: CurrencyDollarIcon },
           ].map((item, index) => (
-            <Link 
+            <Link
               key={index}
-              href={item.href} 
+              href={item.href}
               className="flex items-center gap-3 text-green-900 p-3 rounded-lg
                        bg-green-100/10 hover:bg-green-100/20 transition-all
                        border border-transparent hover:border-green-100/30"
@@ -99,12 +92,16 @@ export default function AdminOffcanvas({ children }: AdminOffcanvasProps) {
       {/* Main Content Area */}
       <main className={`flex-1 transition-all duration-300`}>
         <div className="p-4 lg:p-6 border-l-4 border-green-100 min-h-screen">
-          <div className="max-w-6xl mx-auto bg-white rounded-xl shadow-sm
-                        border-2 border-green-50 p-6 lg:p-8">
+          <div
+            className="max-w-6xl mx-auto bg-white rounded-xl shadow-sm
+                        border-2 border-green-50 p-6 lg:p-8"
+          >
             {children}
           </div>
         </div>
       </main>
     </div>
-  );
+  )
 }
+
+export default AdminOffcanvas;

@@ -20,26 +20,6 @@ interface ManagedPortfolioInput {
   managerId: number;
 }
 
-export type InvestorAndInvestment ={
-      id:number;
-
-   lastName: string;
-   firstName: string;
-   dateOfBirth: Date;
-   gender: string;
-   countryOfResidence: string;
-
-   referralCode: number | null;
-
-   user: {
-    email:string
-   }
-   kyc?:Kyc
-   managedPortfolios?: ManagedPortfolio[]
-   verificationFees?: VerificationFee[]
-
-  
-}
 
 export class ManagedPortfolioService {
   // Create with required amount and managerId (and investorId)
@@ -59,12 +39,24 @@ export class ManagedPortfolioService {
       throw error;
     }
   }
+static async creditInvestment(id:string, amount:number){
+  try{
+  const portfolio = await ManagedPortfolio.findOne({where:{investorId:id}})
+  if(!portfolio){
+    throw new CustomError(404, 'Portfolio not found')
+  }
+  portfolio.amountDeposited? portfolio.amountDeposited += amount : portfolio.amountDeposited = amount
+  await portfolio.save()
+}
+catch (error) {
+      logger.error(`Failed to credit ManagedPortfolio: ${error}`);
+      throw error;
+    }
+  }
 
-
-
-static async getInvestorAndInvestmentById  (
+static async getInvestorById  (
   investorId: number
-): Promise<InvestorAndInvestment | null> {
+): Promise<Investor | null> {
   const investor = await Investor.findByPk(investorId, {
     attributes: ['id', 'firstName', 'lastName', 'gender', 'countryOfResidence', 'dateOfBirth', 'referralCode'],
     include: [
@@ -88,25 +80,9 @@ static async getInvestorAndInvestmentById  (
     ],
   });
 
-  if (!investor) return null;
+  if (!investor) throw new CustomError(404, 'investor not found');
 
-  const investorAndInvestment: InvestorAndInvestment = {
-    id: investor.id,
-    firstName: investor.firstName,
-    lastName: investor.lastName,
-    dateOfBirth: investor.dateOfBirth,
-    gender: investor.gender,
-    countryOfResidence: investor.countryOfResidence,
-    referralCode: investor.referralCode,
-    user: {
-      email: (investor as any).user?.email || '',
-    },
-    kyc: (investor as any).kyc || undefined,
-    managedPortfolios: (investor as any).managedPortfolios || [],
-    verificationFees: (investor as any).verificationFees || [],
-  };
-
-  return investorAndInvestment;
+  return investor;
 };
 
 
@@ -148,7 +124,7 @@ static async getInvestorAndInvestmentById  (
     if (!managedPortfolio) {
       throw new CustomError(404, `ManagedPortfolio with id ${id} not found`);
     }
-    const data:PaymentCreationAttributes ={...payload,paymentType:'INVESTMENT',date:new Date()}
+    const data:PaymentCreationAttributes ={...payload,paymentType:'INVESTMENT',date:new Date(),isVerified:false}
     try{
     const payment = await Payment.create(data);
     const payments = managedPortfolio.payments??[]

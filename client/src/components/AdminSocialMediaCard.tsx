@@ -1,11 +1,13 @@
-import Image from 'next/image';
-import { SocialMedia } from '@/types/socialMedia';
-import { PencilSquareIcon, TrashIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
+"use client"
+
+import Image from "next/image"
+import type { SocialMedia } from "@/types/socialMedia"
+import { PencilSquareIcon, TrashIcon, ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline"
 
 interface SocialMediaCardProps {
-  socialMedia: SocialMedia;
-  onEdit: () => void;
-  onDelete: () => void;
+  socialMedia: SocialMedia
+  onEdit: () => void
+  onDelete: () => void
 }
 
 export const SocialMediaCard = ({ socialMedia, onEdit, onDelete }: SocialMediaCardProps) => (
@@ -18,19 +20,19 @@ export const SocialMediaCard = ({ socialMedia, onEdit, onDelete }: SocialMediaCa
       <div className="flex items-center gap-4 flex-1">
         <div className="p-2 bg-green-100 rounded-lg">
           <Image
-            src={socialMedia.logo} 
-            alt={`${socialMedia.name} logo`} 
+            src={socialMedia.logo || "/placeholder.svg"}
+            alt={`${socialMedia.name} logo`}
             width={32}
             height={32}
             className="object-contain"
           />
         </div>
-        
+
         <div className="flex-1 min-w-0">
           <h3 className="font-semibold text-green-900 truncate">{socialMedia.name}</h3>
-          <a 
-            href={socialMedia.link} 
-            target="_blank" 
+          <a
+            href={socialMedia.link}
+            target="_blank"
             rel="noopener noreferrer"
             className="text-green-700 text-sm hover:text-green-800 transition-colors flex items-center gap-1"
           >
@@ -58,4 +60,4 @@ export const SocialMediaCard = ({ socialMedia, onEdit, onDelete }: SocialMediaCa
       </div>
     </div>
   </div>
-);
+)

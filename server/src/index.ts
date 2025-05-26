@@ -50,5 +50,3 @@ sequelize
 app.listen(PORT, () => {
   console.log(`takum listening on port ${PORT}`);
 });
-
-

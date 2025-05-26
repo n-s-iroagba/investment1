@@ -1,4 +1,3 @@
-
 import Investor from '../models/Investor';
 import Transaction from '../models/Transaction';
 import { CustomError } from '../utils/error/CustomError';

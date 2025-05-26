@@ -71,14 +71,3 @@ Kyc.belongsTo(Investor, {
 });
 
 export default Kyc;
-
-
-
-
-
-
-
-
-
-
-

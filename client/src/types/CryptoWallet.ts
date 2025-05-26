@@ -5,4 +5,4 @@ export type CryptoWallet = {
  depositAddress:string
 }
 
-export type CryptoWalletCreationDto = Omit<CryptoWallet,'id'> 
+export type CryptoWalletCreationDto = Omit<CryptoWallet,'id'>

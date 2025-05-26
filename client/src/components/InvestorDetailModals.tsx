@@ -1,235 +1,391 @@
-"use client";
-import { useState, useEffect } from 'react';
-import { XMarkIcon } from '@heroicons/react/24/outline';
-import Image from 'next/image';
+"use client"
 
-// Base Modal Component
-interface BaseModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  title: string;
-  children: React.ReactNode;
-}
+import type React from "react"
 
-function BaseModal({ isOpen, onClose, title, children }: BaseModalProps) {
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
-  }, [onClose]);
-
-  if (!isOpen) return null;
-
-  return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg p-6 w-full max-w-md relative">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold text-emerald-900">{title}</h2>
-          <button
-            onClick={onClose}
-            className="text-emerald-600 hover:text-emerald-700"
-          >
-            <XMarkIcon className="h-6 w-6" />
-          </button>
-        </div>
-        {children}
-      </div>
-    </div>
-  );
-}
+import { useState } from "react"
+import { XMarkIcon, EnvelopeIcon, DocumentIcon, CreditCardIcon, CheckCircleIcon } from "@heroicons/react/24/outline"
+import { Spinner } from "./Spinner"
+import toast from "react-hot-toast"
+import Image from "next/image"
 
 // Email Modal
 interface EmailModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  email: string;
+  isOpen: boolean
+  onClose: () => void
+  investorEmail: string
+  investorName: string
+  onSend: (email:string, mail:{subject: string, message: string}) => Promise<void>
 }
 
-export function EmailModal({ isOpen, onClose, email }: EmailModalProps) {
-  const [message, setMessage] = useState('');
-  const [subject, setSubject] = useState('');
+export function EmailModal({ isOpen, onClose, investorEmail, investorName, onSend }: EmailModalProps) {
+  const [subject, setSubject] = useState("")
+  const [message, setMessage] = useState("")
+  const [isSending, setIsSending] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Implement email sending logic
-    console.log({ email, subject, message });
-    onClose();
-  };
+  if (!isOpen) return null
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!subject.trim() || !message.trim()) {
+      toast.error("Please fill in all fields")
+      return
+    }
+
+    setIsSending(true)
+    try {
+      await onSend(investorEmail ,{subject, message})
+      toast.success("Email sent successfully!")
+      onClose()
+      setSubject("")
+      setMessage("")
+    } catch (error) {
+      console.error(error)
+      toast.error("Failed to send email")
+    } finally {
+      setIsSending(false)
+    }
+  }
 
   return (
-    <BaseModal isOpen={isOpen} onClose={onClose} title="Compose Email">
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-emerald-700 mb-1">
-            To
-          </label>
-          <input
-            type="email"
-            value={email}
-            readOnly
-            className="w-full p-2 border border-emerald-200 rounded-md bg-emerald-50"
-          />
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+      <div className="bg-white p-6 rounded-2xl shadow-lg border-2 border-green-50 relative max-w-md w-full">
+        <div className="flex justify-between items-start mb-4">
+          <h3 className="text-xl font-semibold text-green-900 flex items-center gap-2">
+            <EnvelopeIcon className="w-6 h-6" />
+            Send Email
+          </h3>
+          <button
+            onClick={onClose}
+            disabled={isSending}
+            className="p-1 text-green-600 hover:text-green-800 rounded-full hover:bg-green-50"
+          >
+            <XMarkIcon className="w-5 h-5" />
+          </button>
         </div>
-        <div>
-          <label className="block text-sm font-medium text-emerald-700 mb-1">
-            Subject
-          </label>
-          <input
-            type="text"
-            value={subject}
-            onChange={(e) => setSubject(e.target.value)}
-            className="w-full p-2 border border-emerald-200 rounded-md"
-            required
-          />
+
+        <div className="mb-4 p-3 bg-green-50 rounded-lg">
+          <p className="text-sm text-green-700">
+            <span className="font-medium">To:</span> {investorName} ({investorEmail})
+          </p>
         </div>
-        <div>
-          <label className="block text-sm font-medium text-emerald-700 mb-1">
-            Message
-          </label>
-          <textarea
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            className="w-full p-2 border border-emerald-200 rounded-md h-32"
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-md"
-        >
-          Send Email
-        </button>
-      </form>
-    </BaseModal>
-  );
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-green-700 mb-2">Subject</label>
+            <input
+              type="text"
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
+              className="w-full p-3 border-2 border-green-100 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200"
+              placeholder="Enter email subject..."
+              disabled={isSending}
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-green-700 mb-2">Message</label>
+            <textarea
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              rows={6}
+              className="w-full p-3 border-2 border-green-100 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 resize-none"
+              placeholder="Enter your message..."
+              disabled={isSending}
+            />
+          </div>
+
+          <div className="flex justify-end gap-3">
+            <button
+              type="button"
+              onClick={onClose}
+              disabled={isSending}
+              className="px-5 py-2 border-2 border-green-200 text-green-800 rounded-xl hover:bg-green-50 disabled:opacity-50"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              disabled={isSending}
+              className="px-5 py-2 bg-green-600 text-white rounded-xl hover:bg-green-700 disabled:bg-green-400 flex items-center gap-2"
+            >
+              {isSending ? (
+                <>
+                  <Spinner className="w-4 h-4" />
+                  Sending...
+                </>
+              ) : (
+                "Send Email"
+              )}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  )
 }
 
 // Document Modal
 interface DocumentModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  documentUrl: string;
-}
-
-// Document Modal
-interface DocumentModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  documentUrl: string;
+  isOpen: boolean
+  onClose: () => void
+  documentUrl:string
 }
 
 export function DocumentModal({ isOpen, onClose, documentUrl }: DocumentModalProps) {
+  if (!isOpen) return null
+
   return (
-    <BaseModal isOpen={isOpen} onClose={onClose} title="Document Preview">
-      <div className="h-96 bg-emerald-50 rounded-lg flex items-center justify-center">
-        {documentUrl.endsWith('.pdf') ? (
-          <iframe
-            src={documentUrl}
-            className="w-full h-full rounded-lg"
-            title="Document Preview"
-          />
-        ) : (
-          <div className="relative w-full h-full">
-            <Image
-              src={documentUrl}
-              alt="Document preview"
-              fill
-              style={{ objectFit: 'contain' }}
-              loader={({ src }) => src} 
-              unoptimized={true} 
-            />
-          </div>
-        )}
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+      <div className="bg-white p-6 rounded-2xl shadow-lg border-2 border-green-50 relative max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+        <div className="flex justify-between items-start mb-4">
+          <h3 className="text-xl font-semibold text-green-900 flex items-center gap-2">
+            <DocumentIcon className="w-6 h-6" />
+          </h3>
+          <button onClick={onClose} className="p-1 text-green-600 hover:text-green-800 rounded-full hover:bg-green-50">
+            <XMarkIcon className="w-5 h-5" />
+          </button>
+        </div>
+
+      
+        <Image
+        src={documentUrl}
+        alt="Document"
+        />
+      
       </div>
-    </BaseModal>
-  );
+    </div>
+  )
 }
 
 // Credit Modal
 interface CreditModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  
+  isOpen: boolean
+  onClose: () => void
+  investorId: string | number
+  currentBalance: number
+  onCredit: (investorId: string | number,amount: number,) => Promise<void>
 }
 
-export function CreditModal({ isOpen, onClose,  }: CreditModalProps) {
-  const [amount, setAmount] = useState('');
+export function CreditModal({ isOpen, onClose, investorId, currentBalance, onCredit }: CreditModalProps) {
+  const [amount, setAmount] = useState("")
+  const [isProcessing, setIsProcessing] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-   
-    onClose();
-  };
+  if (!isOpen) return null
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    const creditAmount = Number.parseFloat(amount)
+
+    if (!creditAmount || creditAmount <= 0) {
+      toast.error("Please enter a valid amount")
+      return
+    }
+
+
+
+    setIsProcessing(true)
+    try {
+      await onCredit(investorId,creditAmount)
+      toast.success("Credit applied successfully!")
+      onClose()
+      setAmount("")
+    } catch (error) {
+      console.error(error)
+      toast.error("Failed to apply credit")
+    } finally {
+      setIsProcessing(false)
+    }
+  }
 
   return (
-    <BaseModal isOpen={isOpen} onClose={onClose} title="Credit Investor">
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-emerald-700 mb-1">
-            Amount
-          </label>
-          <input
-            type="number"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            className="w-full p-2 border border-emerald-200 rounded-md"
-            required
-          />
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+      <div className="bg-white p-6 rounded-2xl shadow-lg border-2 border-green-50 relative max-w-md w-full">
+        <div className="flex justify-between items-start mb-4">
+          <h3 className="text-xl font-semibold text-green-900 flex items-center gap-2">
+            <CreditCardIcon className="w-6 h-6" />
+            Credit Account
+          </h3>
+          <button
+            onClick={onClose}
+            disabled={isProcessing}
+            className="p-1 text-green-600 hover:text-green-800 rounded-full hover:bg-green-50"
+          >
+            <XMarkIcon className="w-5 h-5" />
+          </button>
         </div>
-        <button
-          type="submit"
-          className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-md"
-        >
-          Process Credit
-        </button>
-      </form>
-    </BaseModal>
-  );
+
+        <div className="mb-4 p-3 bg-green-50 rounded-lg">
+          <p className="text-sm text-green-700">
+            <span className="font-medium">Current Balance:</span> ${currentBalance.toLocaleString()}
+          </p>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-green-700 mb-2">Credit Amount ($)</label>
+            <input
+              type="number"
+              step="0.01"
+              min="0"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              className="w-full p-3 border-2 border-green-100 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200"
+              placeholder="0.00"
+              disabled={isProcessing}
+            />
+          </div>
+
+     
+
+          <div className="flex justify-end gap-3">
+            <button
+              type="button"
+              onClick={onClose}
+              disabled={isProcessing}
+              className="px-5 py-2 border-2 border-green-200 text-green-800 rounded-xl hover:bg-green-50 disabled:opacity-50"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              disabled={isProcessing}
+              className="px-5 py-2 bg-green-600 text-white rounded-xl hover:bg-green-700 disabled:bg-green-400 flex items-center gap-2"
+            >
+              {isProcessing ? (
+                <>
+                  <Spinner className="w-4 h-4" />
+                  Processing...
+                </>
+              ) : (
+                "Apply Credit"
+              )}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  )
 }
 
-// Verification Fee Modal
-interface VerificationModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-
+// Verification Fee Creation Modal
+interface VerificationFeeCreationtModalProps {
+  isOpen: boolean
+  onClose: () => void
+  investorId: string | number
+  onCreateFee: ( investorId: string | number, amount: number,name:string ) => Promise<void>
 }
 
-export function VerificationFeeCreationModal({ isOpen, onClose }: VerificationModalProps) {
-  const [amount, setAmount] = useState('');
+export function VerificationFeeCreationtModal({
+  isOpen,
+  onClose,
+  investorId,
+  onCreateFee,
+}: VerificationFeeCreationtModalProps) {
+  const [amount, setAmount] = useState("")
+  const [name, setname] = useState("")
+  const [isCreating, setIsCreating] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  if (!isOpen) return null
 
-    onClose();
-  };
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    const feeAmount = Number.parseFloat(amount)
+
+    if (!feeAmount || feeAmount <= 0) {
+      toast.error("Please enter a valid amount")
+      return
+    }
+
+    if (!name.trim()) {
+      toast.error("Please enter a name")
+      return
+    }
+
+    setIsCreating(true)
+    try {
+      await onCreateFee(investorId, feeAmount,name)
+      toast.success("Verification fee created successfully!")
+      onClose()
+      setAmount("")
+      setname("")
+    } catch (error) {
+      console.error(error)
+      toast.error("Failed to create verification fee")
+    } finally {
+      setIsCreating(false)
+    }
+  }
 
   return (
-    <BaseModal isOpen={isOpen} onClose={onClose} title="Create Verification Fee">
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-emerald-700 mb-1">
-            Fee Amount
-          </label>
-          <input
-            type="number"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            className="w-full p-2 border border-emerald-200 rounded-md"
-            required
-          />
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+      <div className="bg-white p-6 rounded-2xl shadow-lg border-2 border-green-50 relative max-w-md w-full">
+        <div className="flex justify-between items-start mb-4">
+          <h3 className="text-xl font-semibold text-green-900 flex items-center gap-2">
+            <CheckCircleIcon className="w-6 h-6" />
+            Create Verification Fee
+          </h3>
+          <button
+            onClick={onClose}
+            disabled={isCreating}
+            className="p-1 text-green-600 hover:text-green-800 rounded-full hover:bg-green-50"
+          >
+            <XMarkIcon className="w-5 h-5" />
+          </button>
         </div>
-        <button
-          type="submit"
-          className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-md"
-        >
-          Create Fee
-        </button>
-      </form>
-    </BaseModal>
-  );
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-green-700 mb-2">Fee Amount ($)</label>
+            <input
+              type="number"
+              step="0.01"
+              min="0"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              className="w-full p-3 border-2 border-green-100 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200"
+              placeholder="0.00"
+              disabled={isCreating}
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-green-700 mb-2">name</label>
+            <textarea
+              value={name}
+              onChange={(e) => setname(e.target.value)}
+              rows={3}
+              className="w-full p-3 border-2 border-green-100 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 resize-none"
+              placeholder="Verification fee name..."
+              disabled={isCreating}
+            />
+          </div>
+
+          <div className="flex justify-end gap-3">
+            <button
+              type="button"
+              onClick={onClose}
+              disabled={isCreating}
+              className="px-5 py-2 border-2 border-green-200 text-green-800 rounded-xl hover:bg-green-50 disabled:opacity-50"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              disabled={isCreating}
+              className="px-5 py-2 bg-green-600 text-white rounded-xl hover:bg-green-700 disabled:bg-green-400 flex items-center gap-2"
+            >
+              {isCreating ? (
+                <>
+                  <Spinner className="w-4 h-4" />
+                  Creating...
+                </>
+              ) : (
+                "Create Fee"
+              )}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  )
 }
-
-

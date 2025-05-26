@@ -1,104 +1,74 @@
-import { useState } from 'react';
-import { CheckBadgeIcon, ClockIcon } from '@heroicons/react/24/outline';
-import { DocumentModal } from './InvestorDetailModals';
-import { Payment } from '@/types/Payment';
+"use client"
+
+import { CheckCircleIcon, XCircleIcon, ClockIcon, CurrencyDollarIcon } from "@heroicons/react/24/outline"
+import { Payment } from "@/types/Payment"
+
 
 interface PaymentListProps {
-  payments: Payment[];
-  isAdmin?: boolean;
-  onVerify?: (paymentId: number) => Promise<void>;
+  payments: Payment[]
+  onVerifyPayment?:(id:number)=>Promise<void>
+  isAdmin?:boolean
 }
 
-const PaymentList = ({ payments, isAdmin = false, onVerify }: PaymentListProps) => {
-  const [selectedReceipt, setSelectedReceipt] = useState<string | null>(null);
-  const [verifyingId, setVerifyingId] = useState<number | null>(null);
+export default function PaymentList({ payments, onVerifyPayment, isAdmin }: PaymentListProps) {
 
-  const handleVerify = async (paymentId: number) => {
-    if (!onVerify) return;
-    setVerifyingId(paymentId);
-    try {
-      await onVerify(paymentId);
-    } finally {
-      setVerifyingId(null);
+
+
+  const getStatusIcon = (status: Payment["isVerified"]) => {
+    switch (status) {
+      case true:
+        return <CheckCircleIcon className="w-5 h-5 text-green-600" />
+      case false:
+        return <XCircleIcon className="w-5 h-5 text-red-600" />
+      default:
+        return <ClockIcon className="w-5 h-5 text-yellow-600" />
     }
-  };
+  }
+
+  const getStatusColor = (status: Payment["isVerified"]) => {
+    switch (status) {
+      case true:
+        return "bg-green-100 text-green-800 border-green-200"
+      case false:
+        return "bg-red-100 text-red-800 border-red-200"
+      default:
+        return "bg-yellow-100 text-yellow-800 border-yellow-200"
+    }
+  }
+
 
   return (
     <div className="space-y-4">
-      <DocumentModal
-        isOpen={!!selectedReceipt}
-        onClose={() => setSelectedReceipt(null)}
-        documentUrl={selectedReceipt || ''}
-      />
+      <h3 className="text-lg font-semibold text-green-900 flex items-center gap-2">
+        <CurrencyDollarIcon className="w-6 h-6" />
+        Payment History
+      </h3>
 
-      {payments.map((payment) => (
-        <div
-          key={payment.id}
-          className="bg-white p-4 rounded-lg shadow-md flex items-center justify-between"
-        >
-          <div className="flex-1">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-sm font-medium">
-                {new Date(payment.date).toLocaleDateString()}
-              </span>
-              <span className={`px-2 py-1 rounded-full text-xs ${
-                payment.paymentType === 'FEE'
-                  ? 'bg-blue-100 text-blue-600'
-                  : 'bg-emerald-100 text-emerald-600'
-              }`}>
-                {payment.paymentType}
-              </span>
-              {isAdmin && (
-                <span className="flex items-center gap-1 text-sm">
-                  {payment.isVerified ? (
-                    <CheckBadgeIcon className="h-4 w-4 text-green-600" />
-                  ) : (
-                    <ClockIcon className="h-4 w-4 text-yellow-600" />
-                  )}
-                  <span className={payment.isVerified ? 'text-green-600' : 'text-yellow-600'}>
-                    {payment.isVerified ? 'Verified' : 'Pending'}
-                  </span>
-                </span>
-              )}
-            </div>
-            
-            <div className="flex items-center gap-4">
-              <div className="flex-1">
-                <p className="font-semibold">${payment.amount.toFixed(2)}</p>
-                <p className="text-sm text-gray-500">{payment.depositType}</p>
+      <div className="grid gap-4">
+        {payments.map((payment) => (
+          <div
+            key={payment.id}
+            className="bg-white p-4 rounded-lg border-2 border-green-100 hover:border-green-200 transition-colors"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                {getStatusIcon(payment.isVerified)}
+                <div>
+                  <p className="font-semibold text-green-900">
+                    Amount {payment.amount.toLocaleString()}
+                  </p>
+                  <p className="text-sm text-green-700">{new Date(payment.date).toLocaleDateString()}</p>
+                </div>
               </div>
-              
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => setSelectedReceipt(payment.receipt)}
-                  className="px-3 py-1 text-sm bg-gray-100 text-gray-600 rounded-md hover:bg-gray-200"
-                >
-                  View Receipt
-                </button>
-                
-                {isAdmin && (
-                  <button
-                    onClick={() => handleVerify(payment.id)}
-                    disabled={verifyingId === payment.id}
-                    className={`px-3 py-1 text-sm rounded-md ${
-                      payment.isVerified
-                        ? 'bg-green-100 text-green-600 hover:bg-green-200'
-                        : 'bg-orange-100 text-orange-600 hover:bg-orange-200'
-                    }`}
-                  >
-                    {verifyingId === payment.id 
-                      ? 'Verifying...' 
-                      : payment.isVerified 
-                        ? 'Unverify' 
-                        : 'Verify'}
-                  </button>
-                )}
-              </div>
+
+              <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(payment.isVerified)}`}>
+                    {payment.isVerified?'verified':'unverified'}
+              </span>
             </div>
+            {isAdmin && onVerifyPayment && <button onClick={()=>onVerifyPayment(payment.id)}>{payment.isVerified?'Unverify payment':'Verify Payment'}</button>}
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
-  );
-};
-export default PaymentList
+  )
+}

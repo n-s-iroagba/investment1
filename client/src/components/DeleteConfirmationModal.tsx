@@ -1,49 +1,46 @@
-import { apiRoutes } from "@/constants/apiRoutes";
-import { remove } from "@/utils/apiClient";
-import { ExclamationTriangleIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import { useState } from 'react';
+"use client"
+
+import { apiRoutes } from "@/constants/apiRoutes"
+import { remove } from "@/utils/apiClient"
+import { ExclamationTriangleIcon, XMarkIcon } from "@heroicons/react/24/outline"
+import { useState } from "react"
 
 interface DeleteModalProps {
-  id: number | string;
-  onClose: () => void;
-  type: "manager" | 'wallet' | 'investor' | 'social-media';
-  message: string;
+  id: number | string
+  onClose: () => void
+  type: "manager" | "wallet" | "investor" | "social-media"
+  message: string
 }
 
 const API_ROUTES_MAP = {
   manager: apiRoutes.manager.delete,
   wallet: apiRoutes.adminWallet.delete,
   investor: apiRoutes.investor.delete,
-  'social-media': apiRoutes.socialMedia.delete,
-};
+  "social-media": apiRoutes.socialMedia.delete,
+}
 
-export function DeleteConfirmationModal({ 
-  id, 
-  onClose, 
-  type,
-  message  
-}: DeleteModalProps) {
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [error, setError] = useState('');
+export function DeleteConfirmationModal({ id, onClose, type, message }: DeleteModalProps) {
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [error, setError] = useState("")
 
   const handleDelete = async () => {
-    setIsDeleting(true);
-    setError('');
-    
+    setIsDeleting(true)
+    setError("")
+
     try {
-      const endpoint = API_ROUTES_MAP[type](id);
-      if (!endpoint) throw new Error('Invalid deletion type');
-      
+      const endpoint = API_ROUTES_MAP[type](id)
+      if (!endpoint) throw new Error("Invalid deletion type")
+
       await remove(endpoint)
-      onClose();
+      onClose()
       // Consider adding a success toast here
     } catch (err) {
-      console.error('Deletion failed:', err);
-      setError('Failed to delete. Please try again.');
+      console.error("Deletion failed:", err)
+      setError("Failed to delete. Please try again.")
     } finally {
-      setIsDeleting(false);
+      setIsDeleting(false)
     }
-  };
+  }
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
@@ -67,15 +64,11 @@ export function DeleteConfirmationModal({
         </div>
 
         <p className="text-green-700 mb-6">
-          Are you sure you want to delete <span className="font-semibold">"{message}"</span>? 
-          This action cannot be undone.
+          Are you sure you want to delete <span className="font-semibold">"{message}"</span>? This action cannot be
+          undone.
         </p>
 
-        {error && (
-          <div className="mb-4 p-3 bg-red-50 text-red-700 rounded-lg border-2 border-red-100">
-            {error}
-          </div>
-        )}
+        {error && <div className="mb-4 p-3 bg-red-50 text-red-700 rounded-lg border-2 border-red-100">{error}</div>}
 
         <div className="flex justify-end gap-3">
           <button
@@ -96,11 +89,11 @@ export function DeleteConfirmationModal({
                 Deleting...
               </>
             ) : (
-              'Confirm Delete'
+              "Confirm Delete"
             )}
           </button>
         </div>
       </div>
     </div>
-  );
+  )
 }

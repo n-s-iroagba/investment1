@@ -1,29 +1,24 @@
-import { Request, Response, NextFunction } from 'express';
-import logger from '../logger/logger'
-import { CustomError } from './CustomError';
+import type { Request, Response } from "express"
+import logger from "../logger/logger"
+import { CustomError } from "./CustomError"
 
-export function errorHandler(
-  err: unknown,
-  req: Request,
-  res: Response,
-) {
+export function errorHandler(err: unknown, req: Request, res: Response) {
   // Default to 500 if no code provided
-  let statusCode = 500;
-  let message = 'Internal Server Error';
+  let statusCode = 500
+  let message = "Internal Server Error"
 
   if (err instanceof CustomError) {
-    statusCode = err.code;
-    message = err.message;
+    statusCode = err.code
+    message = err.message
 
-
-    logger.warn(`CustomError - ${statusCode}: ${message} - URL: ${req.originalUrl}`);
+    logger.warn(`CustomError - ${statusCode}: ${message} - URL: ${req.originalUrl}`)
   } else if (err instanceof Error) {
-    message = err.message;
+    message = err.message
     // Log unknown errors at 'error' level
-    logger.error(`Error: ${message} - URL: ${req.originalUrl} - Stack: ${err.stack}`);
+    logger.error(`Error: ${message} - URL: ${req.originalUrl} - Stack: ${err.stack}`)
   } else {
     // If err is something else (string, object, etc)
-    logger.error(`Unknown error type: ${JSON.stringify(err)} - URL: ${req.originalUrl}`);
+    logger.error(`Unknown error type: ${JSON.stringify(err)} - URL: ${req.originalUrl}`)
   }
 
   return res.status(statusCode).json({
@@ -31,5 +26,7 @@ export function errorHandler(
       code: statusCode,
       message,
     },
-  });
+  })
 }
+
+export { CustomError } from "./CustomError"

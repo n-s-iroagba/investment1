@@ -35,7 +35,7 @@ export class VerificationFeeService {
   if (!verificationFee) {
     throw new CustomError(404, `VerificationFee with id ${id} not found`);
   }
-  const data:PaymentCreationAttributes ={...payload,paymentType:'FEE',date:new Date()}
+  const data:PaymentCreationAttributes ={...payload,paymentType:'FEE',date:new Date(),isVerified:false}
   const payment = await Payment.create(data);
   const payments = verificationFee.payments??[]
   payments.push(payment)

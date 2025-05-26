@@ -1,25 +1,26 @@
-"use client";
+"use client"
 
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import "react-image-crop/dist/ReactCrop.css";
-import { Manager, ManagerCreationDto } from "@/types/manager";
-import { 
-  UserCircleIcon, 
-  AcademicCapIcon, 
-  CurrencyDollarIcon, 
-  CalendarIcon, 
-  ChartBarIcon, 
+import type React from "react"
+import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
+import "react-image-crop/dist/ReactCrop.css"
+import type { Manager, ManagerCreationDto } from "@/types/manager"
+import {
+  UserCircleIcon,
+  AcademicCapIcon,
+  CurrencyDollarIcon,
+  CalendarIcon,
+  ChartBarIcon,
   IdentificationIcon,
-  PhotoIcon
-} from '@heroicons/react/24/outline';
-import { hasEmptyKey } from "@/utils/common";
-import { apiRoutes } from "@/constants/apiRoutes";
-import { baseURL } from "@/utils/apiClient";
+  PhotoIcon,
+} from "@heroicons/react/24/outline"
+import { hasEmptyKey } from "@/utils/common"
+import { apiRoutes } from "@/constants/apiRoutes"
+import { baseURL } from "@/utils/apiClient"
 
 interface ManagerFormProps {
-  patch?: boolean;
-  existingManager?:Manager
+  patch?: boolean
+  existingManager?: Manager
 }
 const ManagerForm: React.FC<ManagerFormProps> = ({ patch, existingManager }) => {
   const [managerData, setManagerData] = useState<ManagerCreationDto | Manager>({
@@ -31,93 +32,84 @@ const ManagerForm: React.FC<ManagerFormProps> = ({ patch, existingManager }) => 
     qualification: "",
     minimumInvestmentAmount: 0,
     percentageYield: 0,
-  });
+  })
 
-  const [submitting, setSubmitting] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [files, setFiles] = useState<File | null>(null);
-  const [validated, setValidated] = useState(false);
+  const [submitting, setSubmitting] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("")
+  const [files, setFiles] = useState<File | null>(null)
+  const [validated, setValidated] = useState(false)
 
-  
-
-  const router = useRouter();
+  const router = useRouter()
 
   useEffect(() => {
     if (existingManager) {
-      setManagerData(existingManager);
+      setManagerData(existingManager)
     }
-  }, [existingManager]);
+  }, [existingManager])
 
- 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setManagerData((prev) => ({ ...prev, [name]: value }));
-  };
+    const { name, value } = e.target
+    setManagerData((prev) => ({ ...prev, [name]: value }))
+  }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.[0]) {
-      setFiles(e.target.files[0]);
+      setFiles(e.target.files[0])
     }
-  };
+  }
 
-  
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!managerData.image || (patch && hasEmptyKey(managerData as Manager))) {
-      setValidated(false);
-      setErrorMessage("Please fill in all required fields and upload an image.");
-      return;
+      setValidated(false)
+      setErrorMessage("Please fill in all required fields and upload an image.")
+      return
     }
 
-    setSubmitting(true);
-    setValidated(true);
-try {
-  const formData = new FormData();
+    setSubmitting(true)
+    setValidated(true)
+    try {
+      const formData = new FormData()
 
-  // Append all form fields
-  Object.entries(managerData).forEach(([key, value]) => {
-    if (typeof value === "number") {
-      formData.append(key, value.toString());
-    } else if (value) {
-      formData.append(key, value); // string or Blob
+      // Append all form fields
+      Object.entries(managerData).forEach(([key, value]) => {
+        if (typeof value === "number") {
+          formData.append(key, value.toString())
+        } else if (value) {
+          formData.append(key, value) // string or Blob
+        }
+      })
+
+      if (files) {
+        formData.append("image", files)
+        alert("hi") // Make sure 'files' is a File or Blob
+      }
+
+      const endpoint =
+        patch && existingManager?.id ? apiRoutes.manager.update(existingManager.id) : apiRoutes.manager.create()
+
+      const res = await fetch(`${baseURL}/${endpoint}`, {
+        method: patch ? "PATCH" : "POST",
+        body: formData,
+        // Do NOT set 'Content-Type', the browser will do it for you with the correct boundary
+      })
+
+      if (!res.ok) {
+        const errMsg = await res.text()
+        throw new Error(errMsg)
+      }
+
+      router.push("/admin/managers")
+    } catch (err) {
+      console.error(err)
+      setErrorMessage("An error occurred")
+    } finally {
+      setSubmitting(false)
     }
-  });
-
-  if (files) {
-    formData.append("image", files);
-      alert("hi"); // Make sure 'files' is a File or Blob
   }
 
-
-
-  const endpoint =
-    patch && existingManager?.id
-      ? apiRoutes.manager.update(existingManager.id)
-      : apiRoutes.manager.create();
-
-  const res = await fetch(`${baseURL}/${endpoint}`, {
-    method: patch ? "PATCH" : "POST",
-    body: formData,
-    // Do NOT set 'Content-Type', the browser will do it for you with the correct boundary
-  });
-
-  if (!res.ok) {
-    const errMsg = await res.text();
-    throw new Error(errMsg);
-  }
-
-  router.push("/admin/managers");
-} catch (err) {
-  console.error(err);
-  setErrorMessage("An error occurred");
-}
- finally {
-      setSubmitting(false);
-    }
-  };
-
-   return (
+  return (
     <div className="bg-white p-6 rounded-2xl shadow-sm border-2 border-green-50 relative max-w-2xl mx-auto">
       {/* Decorative Corner Borders */}
       <div className="absolute top-2 right-2 w-8 h-8 border-t-2 border-r-2 border-green-800 opacity-20" />
@@ -125,7 +117,7 @@ try {
 
       <h2 className="text-2xl font-bold text-green-900 mb-6 flex items-center gap-2">
         <IdentificationIcon className="w-6 h-6 text-green-700" />
-        {patch ? 'Edit Manager' : 'Create New Manager'}
+        {patch ? "Edit Manager" : "Create New Manager"}
       </h2>
 
       <form className="space-y-4" onSubmit={handleSubmit}>
@@ -141,7 +133,7 @@ try {
               value={managerData.firstName}
               onChange={handleChange}
               className={`w-full p-3 rounded-xl border-2 ${
-                validated && !managerData.firstName ? 'border-red-300' : 'border-green-100'
+                validated && !managerData.firstName ? "border-red-300" : "border-green-100"
               } focus:border-green-500 focus:ring-2 focus:ring-green-200`}
               required={!patch}
             />
@@ -157,7 +149,7 @@ try {
               value={managerData.lastName}
               onChange={handleChange}
               className={`w-full p-3 rounded-xl border-2 ${
-                validated && !managerData.lastName ? 'border-red-300' : 'border-green-100'
+                validated && !managerData.lastName ? "border-red-300" : "border-green-100"
               } focus:border-green-500 focus:ring-2 focus:ring-green-200`}
               required={!patch}
             />
@@ -175,7 +167,7 @@ try {
             value={managerData.qualification}
             onChange={handleChange}
             className={`w-full p-3 rounded-xl border-2 ${
-              validated && !managerData.qualification ? 'border-red-300' : 'border-green-100'
+              validated && !managerData.qualification ? "border-red-300" : "border-green-100"
             } focus:border-green-500 focus:ring-2 focus:ring-green-200`}
             required={!patch}
           />
@@ -193,7 +185,7 @@ try {
               value={managerData.percentageYield}
               onChange={handleChange}
               className={`w-full p-3 rounded-xl border-2 ${
-                validated && !managerData.percentageYield ? 'border-red-300' : 'border-green-100'
+                validated && !managerData.percentageYield ? "border-red-300" : "border-green-100"
               } focus:border-green-500 focus:ring-2 focus:ring-green-200`}
               required
             />
@@ -209,7 +201,7 @@ try {
               value={managerData.duration}
               onChange={handleChange}
               className={`w-full p-3 rounded-xl border-2 ${
-                validated && !managerData.duration ? 'border-red-300' : 'border-green-100'
+                validated && !managerData.duration ? "border-red-300" : "border-green-100"
               } focus:border-green-500 focus:ring-2 focus:ring-green-200`}
               required
             />
@@ -227,7 +219,7 @@ try {
             value={managerData.minimumInvestmentAmount}
             onChange={handleChange}
             className={`w-full p-3 rounded-xl border-2 ${
-              validated && !managerData.minimumInvestmentAmount ? 'border-red-300' : 'border-green-100'
+              validated && !managerData.minimumInvestmentAmount ? "border-red-300" : "border-green-100"
             } focus:border-green-500 focus:ring-2 focus:ring-green-200`}
             required
           />
@@ -239,13 +231,12 @@ try {
             Manager Picture
           </label>
           <div className="flex items-center gap-4">
-            
             <input
               type="file"
               name="image"
               onChange={handleFileChange}
               className={`block w-full text-sm text-green-700 file:mr-4 file:py-2 file:px-4
-                file:rounded-lg file:border-2 ${validated && !files ? 'file:border-red-300' : 'file:border-green-200'}
+                file:rounded-lg file:border-2 ${validated && !files ? "file:border-red-300" : "file:border-green-200"}
                 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700
                 hover:file:bg-green-100 transition-all`}
               accept="image/*"
@@ -254,9 +245,7 @@ try {
         </div>
 
         {errorMessage && (
-          <div className="p-3 bg-red-50 text-red-700 rounded-xl border-2 border-red-100">
-            {errorMessage}
-          </div>
+          <div className="p-3 bg-red-50 text-red-700 rounded-xl border-2 border-red-100">{errorMessage}</div>
         )}
 
         <div className="flex gap-4 mt-6">
@@ -271,12 +260,12 @@ try {
                 Processing...
               </>
             ) : (
-              'Submit'
+              "Submit"
             )}
           </button>
         </div>
       </form>
     </div>
-  );
+  )
 }
 export default ManagerForm

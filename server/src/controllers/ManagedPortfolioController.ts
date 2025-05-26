@@ -21,6 +21,17 @@ type InvestmentCreationDto = {
 };
 
 class ManagedPortfolioController {
+
+static async creditInvestment (req: Request, res: Response) {
+  try {
+    const investorId = req.params.investorId;
+    const amount = req.body.amount;
+    await ManagedPortfolioService.creditInvestment(investorId, amount)
+  }catch(error) {
+    errorHandler(error, req, res)
+  }
+}
+  
   static async createInvestment(req: Request, res: Response) {
     try {
       const investorId = Number(req.params.investorId);
@@ -72,7 +83,7 @@ class ManagedPortfolioController {
    static async getInvestment(req:Request, res:Response){
     try {
       const investorId = Number(req.params.investorId); 
-      const  investorAndInvestment = await ManagedPortfolioService.getInvestorAndInvestmentById(investorId)
+      const  investorAndInvestment = await ManagedPortfolioService.getInvestorById(investorId)
       return res.status(200).json(investorAndInvestment)
     }catch(error){
       errorHandler(error, req, res);

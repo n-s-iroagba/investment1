@@ -75,6 +75,18 @@ export class InvestorService {
     }
   }
 
+
+  static async getAllInvestors() {
+    try {
+      const investors = await Investor.findAll();
+     
+      return investors;
+    } catch (error) {
+      logger.error(`Failed to fetch all investors: ${error}`);
+      throw error;
+    }
+  }
+
   static async getInvestorByRefferalCode(code: number) {
     try {
       const investor = await Investor.findOne({

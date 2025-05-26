@@ -1,17 +1,25 @@
+"use client"
+
 // components/ManagerCard.tsx
-import { Manager } from '@/types/manager';
-import Image from 'next/image';
-import { UserCircleIcon, AcademicCapIcon, CurrencyDollarIcon, ChartBarIcon, CalendarIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline';
+import type { Manager } from "@/types/manager"
+import Image from "next/image"
+import {
+  UserCircleIcon,
+  AcademicCapIcon,
+  CurrencyDollarIcon,
+  ChartBarIcon,
+  CalendarIcon,
+  PencilSquareIcon,
+  TrashIcon,
+} from "@heroicons/react/24/outline"
 
 interface ManagerCardProps {
-  manager: Manager;
-  onEdit: () => void;
-  onDelete: () => void;
+  manager: Manager
+  onEdit: () => void
+  onDelete: () => void
 }
 
 export default function AdminManagerCard({ manager, onEdit, onDelete }: ManagerCardProps) {
-
-
   return (
     <div className="bg-white p-6 rounded-2xl shadow-sm border-2 border-green-50 hover:border-green-100 transition-all relative group">
       {/* Decorative Corner Borders */}
@@ -23,7 +31,7 @@ export default function AdminManagerCard({ manager, onEdit, onDelete }: ManagerC
         <div className="w-full md:w-32 h-32 relative group/image">
           <div className="p-1 rounded-full border-2 border-green-100 bg-white">
             <Image
-              src={manager.image as string}
+              src={(manager.image as string) || "/placeholder.svg"}
               alt={`${manager.firstName} ${manager.lastName}`}
               className="rounded-full object-cover"
               width={128}
@@ -39,27 +47,37 @@ export default function AdminManagerCard({ manager, onEdit, onDelete }: ManagerC
             <UserCircleIcon className="w-6 h-6 text-green-700" />
             {manager.firstName} {manager.lastName}
           </h3>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-green-700">
             <div className="space-y-2">
               <div className="flex items-center gap-2">
                 <AcademicCapIcon className="w-5 h-5 text-green-600" />
-                <p><span className="font-semibold">Qualification:</span> {manager.qualification}</p>
+                <p>
+                  <span className="font-semibold">Qualification:</span> {manager.qualification}
+                </p>
               </div>
               <div className="flex items-center gap-2">
                 <CurrencyDollarIcon className="w-5 h-5 text-green-600" />
-                <p><span className="font-semibold">Min. Investment:</span> 
-                   ${manager.minimumInvestmentAmount > 0 ?manager.minimumInvestmentAmount.toLocaleString():'Any Amount'}</p>
+                <p>
+                  <span className="font-semibold">Min. Investment:</span>$
+                  {manager.minimumInvestmentAmount > 0
+                    ? manager.minimumInvestmentAmount.toLocaleString()
+                    : "Any Amount"}
+                </p>
               </div>
             </div>
             <div className="space-y-2">
               <div className="flex items-center gap-2">
                 <ChartBarIcon className="w-5 h-5 text-green-600" />
-                <p><span className="font-semibold">Yield:</span> {manager.percentageYield}%</p>
+                <p>
+                  <span className="font-semibold">Yield:</span> {manager.percentageYield}%
+                </p>
               </div>
               <div className="flex items-center gap-2">
                 <CalendarIcon className="w-5 h-5 text-green-600" />
-                <p><span className="font-semibold">Duration:</span> {manager.duration} months</p>
+                <p>
+                  <span className="font-semibold">Duration:</span> {manager.duration} months
+                </p>
               </div>
             </div>
           </div>
@@ -90,5 +108,5 @@ export default function AdminManagerCard({ manager, onEdit, onDelete }: ManagerC
         <span className="text-xs text-green-600">Active</span>
       </div>
     </div>
-  );
+  )
 }

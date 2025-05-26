@@ -1,26 +1,27 @@
-import { Kyc } from "./Kyc";
+import type { Kyc } from "./Kyc"
+import type { VerificationFee } from "./VerificationFee"
+import type { ManagedPortfolio } from "./managedPortfolio"
 
-import { VerificationFee } from "./VerificationFee";
-
-import { ManagedPortfolio } from "./managedPortfolio";
-
-export type InvestorAndInvestment ={
-      id:number;
-
-   lastName: string;
-   firstName: string;
-   dateOfBirth: Date;
-   gender: string;
-   countryOfResidence: string;
-
-   referralCode: number | null;
-
-   user: {
-    email:string
-   }
-   kyc?:Kyc
-   managedPortfolios?: ManagedPortfolio[]
-   verificationFees?: VerificationFee[]
-
-  
+export interface Investor {
+  id: number
+  lastName: string
+  firstName: string
+  dateOfBirth: Date
+  gender: string
+  countryOfResidence: string
+  referralCode: number | null
+  referrerId: number | null
+  userId: number
+  user: {
+    id: number
+    email: string
+    isEmailVerified: boolean
+  }
+  kyc?: Kyc
+  managedPortfolio?: ManagedPortfolio
+  verificationFees?: VerificationFee[]
+  createdAt: Date
+  updatedAt: Date
 }
+
+
