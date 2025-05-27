@@ -413,3 +413,13 @@
     at Function.findAll (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/model.js:1824:47)
     at processTicksAndRejections (node:internal/process/task_queues:105:5)
     at async Function.findOne (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/model.js:1998:12)
+2025-05-27T13:36:26.762Z [ERROR]: Error in createInvestor UserService function: Error: user already exists with this email
+2025-05-27T13:36:26.763Z [WARN]: CustomError - 409: user already exists with this email - URL: /api/auth/admin/signup
+2025-05-27T16:25:51.592Z [ERROR]: Error in createInvestor UserService function: Error: user already exists with this email
+2025-05-27T16:25:51.594Z [WARN]: CustomError - 409: user already exists with this email - URL: /api/auth/admin/signup
+2025-05-27T17:20:49.012Z [WARN]: CustomError - 404: Admin not found - URL: /api/auth/me
+2025-05-27T17:21:47.254Z [WARN]: CustomError - 404: Admin not found - URL: /api/auth/me
+2025-05-27T17:25:29.692Z [WARN]: CustomError - 404: Admin not found - URL: /api/auth/me
+2025-05-27T17:28:19.427Z [WARN]: CustomError - 404: Admin not found - URL: /api/auth/me
+2025-05-27T17:30:23.498Z [WARN]: CustomError - 404: Admin not found - URL: /api/auth/me
+2025-05-27T17:31:34.995Z [WARN]: CustomError - 404: Admin not found - URL: /api/auth/me

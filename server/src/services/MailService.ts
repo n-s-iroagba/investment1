@@ -8,7 +8,11 @@ import fs from "fs"
 dotenv.config()
 
 const { EMAIL_USER, EMAIL_PASS, NODE_ENV } = process.env
-
+// async function getHandlebars() {
+//   const nodemailerExpressHandlebars = await import('nodemailer-express-handlebars');
+//   return nodemailerExpressHandlebars.default;
+// }
+// const hbs = await getHandlebars()
 class MailService {
   private static transporter = nodemailer.createTransport({
     service: "Gmail",

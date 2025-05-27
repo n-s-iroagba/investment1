@@ -386,3 +386,5 @@
     at Function.findAll (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/model.js:1824:47)
     at processTicksAndRejections (node:internal/process/task_queues:105:5)
     at async Function.findOne (/home/udorakpuenyi/tempi/server/node_modules/sequelize/src/model.js:1998:12)
+2025-05-27T13:36:26.762Z [ERROR]: Error in createInvestor UserService function: Error: user already exists with this email
+2025-05-27T16:25:51.592Z [ERROR]: Error in createInvestor UserService function: Error: user already exists with this email

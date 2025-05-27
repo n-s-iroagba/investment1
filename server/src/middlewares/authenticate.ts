@@ -6,8 +6,8 @@ import { CustomError } from '../utils/error/CustomError';
 
 export interface AuthenticatedRequest extends Request {
   user?: {
-    id: string;
-    role: 'admin' | 'investor';
+    userId: string;
+    role: 'ADMIN' | 'INVESTOR';
   };
 }
 
@@ -20,10 +20,10 @@ export function authenticate(req: AuthenticatedRequest, res: Response, next: Nex
 
   try {
     const decoded = jwt.verify(token, secret) as {
-      id: string;
-      role: 'admin' | 'investor';
+      userId: string;
+      role: 'ADMIN' | 'INVESTOR';
     };
-
+     console.log('decoded',decoded)
     req.user = decoded;
     next();
   } catch (err) {

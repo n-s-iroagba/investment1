@@ -1,13 +1,26 @@
 import { Sequelize } from 'sequelize';
+import dotenv from 'dotenv';
 
-// Set up the Sequelize instance with the necessary database connection details
-const sequelize = new Sequelize({
-  dialect: 'mysql', // or 'postgres', 'sqlite', etc. based on your DB
-  host: 'localhost', // your database host
-  username: 'root', // your database username
-  password: '97chocho', // your database password
-  database: 'investment', // your database name
-  logging: false, // set to true to see raw SQL queries in the console
+dotenv.config(); // Load environment variables
+
+const  sequelize =
+(process.env.NODE_ENV === 'production')?
+new Sequelize({
+  dialect: 'mysql',
+  host: process.env.db_host,
+  username: process.env.db_user,
+  password: process.env.db_password,
+  database: process.env.db_database,
+ 
+  
+  logging: false,
+}):new Sequelize({
+  dialect: 'mysql',
+  host: 'localhost',
+  username: 'root',
+  password: '97chocho',
+  database: 'investment',
+  logging: false,
 });
 
 export default sequelize;

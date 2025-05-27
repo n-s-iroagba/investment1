@@ -1,0 +1,60 @@
+import { VerificationFeeService } from '../services/VerificationFeeService.js';
+import { CustomError } from '../utils/error/CustomError.js';
+import { errorHandler } from '../utils/error/errorHandler.js';
+export class VerificationFeeController {
+    static async create(req, res) {
+        const investorId = req.params.investorId;
+        try {
+            const { amount, investorId, name, } = req.body;
+            const fee = await VerificationFeeService.createVerificationFee({ amount, investorId, name, });
+            res.status(201).json(fee);
+        }
+        catch (error) {
+            errorHandler(error, req, res);
+        }
+    }
+    static async verify(req, res) {
+        try {
+            const { id } = req.params;
+            const fee = await VerificationFeeService.getVerificationFeeById(Number(id));
+            res.status(200).json(fee);
+        }
+        catch (error) {
+            errorHandler(error, req, res);
+        }
+    }
+    static async update(req, res) {
+        try {
+            const { id } = req.params;
+            const updates = req.body;
+            const updated = await VerificationFeeService.updateVerificationFee(Number(id), updates);
+            res.status(200).json(updated);
+        }
+        catch (error) {
+            errorHandler(error, req, res);
+        }
+    }
+    static async uploadProofOfPayment(req, res) {
+        try {
+            const { id } = req.params;
+            if (!req.file || !req.file.path) {
+                throw new CustomError(400, 'proof of payment required');
+            }
+            const updated = await VerificationFeeService.uploadProofOfPayment(Number(id), req.body);
+            res.status(200).json(updated);
+        }
+        catch (error) {
+            errorHandler(error, req, res);
+        }
+    }
+    static async delete(req, res) {
+        try {
+            const { id } = req.params;
+            await VerificationFeeService.deleteVerificationFee(Number(id));
+            res.status(204).send();
+        }
+        catch (error) {
+            errorHandler(error, req, res);
+        }
+    }
+}

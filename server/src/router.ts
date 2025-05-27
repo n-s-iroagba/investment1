@@ -1,4 +1,4 @@
-import { Router } from "express"
+import { Response, Router } from "express"
 import { AuthController } from "./controllers/AuthController"
 import ManagerController from "./controllers/ManagerController"
 import AdminWalletController from "./controllers/AdminWalletController"
@@ -16,6 +16,7 @@ import Admin from "./models/Admin"
 import { CustomError } from "./utils/error/CustomError"
 import { errorHandler } from "./utils/error/errorHandler"
 import { PaymentController } from "./controllers/PaymentController"
+import User from "./models/User"
 const router = Router()
 router.post("/investment/new/:investorId", ManagedPortfolioController.createInvestment)
 router.post("/investment/:investorId", ManagedPortfolioController.getInvestment)
@@ -66,7 +67,7 @@ router.post("/auth/forgot-password", AuthController.forgotPassword)
 router.post("/auth/reset-password", AuthController.resetPassword)
 router.post("/auth/login", AuthController.login)
 router.post("/auth/signup", AuthController.investorSignup)
-router.post("/admin/auth/signup", AuthController.adminSignup)
+router.post("/auth/admin/signup", AuthController.adminSignup)
 router.post("/auth/verify-email", AuthController.verifyEmail)
 router.post(`/auth/resend-verification-token`, AuthController.resendVerificationToken)
 router.post("/auth/logout", (req, res) => {
@@ -88,36 +89,57 @@ async function getAdminById(id: string): Promise<Admin | null> {
   return await Admin.findByPk(id)
 }
 
-router.get("/me", authenticate, async (req: AuthenticatedRequest, res) => {
-  const { id, role } = req.user!
+router.get("/auth/me", authenticate, async (req: AuthenticatedRequest, res: Response) => {
+  const { userId, role } = req.user!
+  console.log('id', userId)
 
   try {
-    if (role === "investor") {
-      const investor = await getInvestorById(id)
+    if (role === "INVESTOR") {
+      const investor = await getInvestorById(userId)
+      const use = await User.findByPk(investor?.userId)
       if (!investor) throw new CustomError(404, "Investor not found")
 
-      return res.json({
+      const user = {
         id: investor.id,
-        firstName: investor.firstName,
-      })
+        email:use?.email,
+        role: "INVESTOR",
+        investor: {
+          id: investor.id,
+          firstName: investor.firstName,
+          lastName: investor.lastName,
+        },
+      }
+
+      return res.json(user)
     }
 
-    if (role === "admin") {
-      const admin = await getAdminById(id)
+    if (role === "ADMIN") {
+      const admin = await getAdminById(userId)
+      const admins = await Admin.findAll()
+      console.log(admins)
+        // const use = await User.findByPk(admin?.userId)
       if (!admin) throw new CustomError(404, "Admin not found")
 
-      return res.json({
+      const user = {
         id: admin.id,
+         email:'nnamdisolomon1@gmail.com',
+        role: "ADMIN",
         username: admin.username,
-      })
+        admin: {
+          id: admin.id,
+          username: admin.username,
+        },
+      }
+
+      return res.json(user)
     }
 
-    return res.status(400).json({ message: "Unknown role" })
+    throw new CustomError(404,'unknown user')
   } catch (err) {
     console.error(err)
     errorHandler(err, req, res)
   }
-})
+  })
 
 router.post("/auth/refresh-token" /* authController.refreshToken */)
 
