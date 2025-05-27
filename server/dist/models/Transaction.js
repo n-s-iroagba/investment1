@@ -1,6 +1,6 @@
 import { Model, DataTypes, } from 'sequelize';
-import sequelize from '../config/database.js';
-import { Investor } from './Investor.js'; // adjust the path as needed
+import sequelize from '../config/database';
+import { Investor } from './Investor'; // adjust the path as needed
 export class Transaction extends Model {
 }
 Transaction.init({

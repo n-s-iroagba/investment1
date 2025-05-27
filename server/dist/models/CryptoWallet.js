@@ -1,6 +1,6 @@
 import { Model, DataTypes, } from 'sequelize';
-import sequelize from '../config/database.js';
-import ManagedPortfolio from './ManagedPortfolio.js';
+import sequelize from '../config/database';
+import ManagedPortfolio from './ManagedPortfolio';
 class CryptoWallet extends Model {
 }
 CryptoWallet.init({

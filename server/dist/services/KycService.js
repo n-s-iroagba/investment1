@@ -1,6 +1,6 @@
-import Kyc from '../models/Kyc.js';
-import { CustomError } from '../utils/error/CustomError.js';
-import logger from '../utils/logger/logger.js';
+import Kyc from '../models/Kyc';
+import { CustomError } from '../utils/error/CustomError';
+import logger from '../utils/logger/logger';
 export class KycService {
     // Create new KYC record (all attributes except id required)
     static async createKyc(data) {

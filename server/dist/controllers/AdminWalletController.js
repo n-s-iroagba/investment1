@@ -1,6 +1,6 @@
-import { AdminWalletService } from '../services/AdminWalletService.js';
-import { errorHandler } from '../utils/error/errorHandler.js';
-import { CustomError } from '../utils/error/CustomError.js';
+import { AdminWalletService } from '../services/AdminWalletService';
+import { errorHandler } from '../utils/error/errorHandler';
+import { CustomError } from '../utils/error/CustomError';
 class AdminWalletController {
     static async createAdminWallet(req, res) {
         try {

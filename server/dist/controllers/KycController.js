@@ -1,5 +1,5 @@
-import { KycService } from '../services/KycService.js';
-import { errorHandler } from '../utils/error/errorHandler.js';
+import { KycService } from '../services/KycService';
+import { errorHandler } from '../utils/error/errorHandler';
 class KycController {
     static async create(req, res) {
         try {

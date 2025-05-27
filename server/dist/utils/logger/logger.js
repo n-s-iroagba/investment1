@@ -1,6 +1,6 @@
 import { createLogger, format, transports } from "winston";
 const logger = createLogger({
-    level: "info", // minimum log level to log
+    level: "info",
     format: format.combine(format.timestamp(), format.printf(({ timestamp, level, message }) => {
         return `${timestamp} [${level.toUpperCase()}]: ${message}`;
     })),

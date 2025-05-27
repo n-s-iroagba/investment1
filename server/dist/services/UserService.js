@@ -1,10 +1,10 @@
-import Admin from "../models/Admin.js";
-import User from "../models/User.js";
-import AuthUtils, { JWTUtils } from "../utils/auth/AuthUtils.js";
-import { CustomError } from "../utils/error/CustomError.js";
-import logger from "../utils/logger/logger.js";
-import { InvestorService } from "./InvestorService.js";
-import MailService from "./MailService.js";
+import Admin from "../models/Admin";
+import User from "../models/User";
+import AuthUtils, { JWTUtils } from "../utils/auth/AuthUtils";
+import { CustomError } from "../utils/error/CustomError";
+import logger from "../utils/logger/logger";
+import { InvestorService } from "./InvestorService";
+import MailService from "./MailService";
 import bcrypt from 'bcrypt';
 const hashPassword = async (password) => {
     return await bcrypt.hash(password, 5);

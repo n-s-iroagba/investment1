@@ -1,8 +1,8 @@
-import VerificationFee from '../models/VerificationFee.js';
-import Investor from '../models/Investor.js';
-import Admin from '../models/Admin.js';
-import { CustomError } from '../utils/error/CustomError.js';
-import Payment from '../models/Payment.js';
+import VerificationFee from '../models/VerificationFee';
+import Investor from '../models/Investor';
+import Admin from '../models/Admin';
+import { CustomError } from '../utils/error/CustomError';
+import Payment from '../models/Payment';
 export class VerificationFeeService {
     static async createVerificationFee(data) {
         // Optionally verify Investor and Admin existence if needed here

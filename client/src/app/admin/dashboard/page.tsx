@@ -12,10 +12,11 @@ import { ExclamationTriangleIcon } from "@heroicons/react/24/outline"
 import type { Manager } from "@/types/manager"
 import type { SocialMedia } from "@/types/socialMedia"
 import { useRouter } from "next/navigation"
-import { Payment } from "@/types/Payment"
+
 
 const AdminDashboard = () => {
-  const {  loading: authLoading, isAdmin, displayName } = useAuth()
+  const {  loading: authLoading, isAdmin, displayName,user } = useAuth()
+  console.log(displayName,isAdmin,user)
   const router = useRouter()
 
   const {
@@ -31,11 +32,11 @@ const AdminDashboard = () => {
   } = useGetList<SocialMedia>(apiRoutes.socialMedia.list())
 
 
-    const {
-    data: payments,
-    error: paymentError,
-    loading: paymentLoading,
-  } = useGetList<Payment>(apiRoutes.payments.unverified())
+  //   const {
+  //   data: payments,
+  //   error: paymentError,
+  //   loading: paymentLoading,
+  // } = useGetList<Payment>(apiRoutes.payments.unverified())
 
   // Redirect if not admin
   useEffect(() => {
@@ -75,15 +76,15 @@ const AdminDashboard = () => {
     )
   }
 
-   if (!payments.length) {
-    todos.push(
-      <TodoAlert
-        key="payments-alert"
-        message="You have pending payments to process"
-        link="/admin/investors"
-      />,
-    )
-  }
+  //  if (!payments.length) {
+  //   todos.push(
+  //     <TodoAlert
+  //       key="payments-alert"
+  //       message="You have pending payments to process"
+  //       link="/admin/investors"
+  //     />,
+  //   )
+  // }
 
 
 
@@ -108,11 +109,11 @@ const AdminDashboard = () => {
         </h2>
         <h3 className="text-lg font-semibold text-green-700 mb-6">Admin Tasks</h3>
 
-        {walletLoading || managerLoading || socialMediaLoading || paymentLoading ? (
+        {walletLoading || managerLoading || socialMediaLoading  ? (
           <div className="flex justify-center items-center h-32">
             <Spinner className="w-8 h-8 text-green-600" />
           </div>
-        ) : walletError || managerError || socialMediaError || paymentError ? (
+        ) : walletError || managerError || socialMediaError  ? (
           <div className="p-4 bg-red-50 rounded-lg border-2 border-red-100 text-red-700">Error loading information</div>
         ) : (
           <div className="space-y-4">

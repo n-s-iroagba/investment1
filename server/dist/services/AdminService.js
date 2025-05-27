@@ -1,6 +1,6 @@
-import Admin from '../models/Admin.js';
-import { CustomError } from '../utils/error/CustomError.js';
-import logger from '../utils/logger/logger.js';
+import Admin from '../models/Admin';
+import { CustomError } from '../utils/error/CustomError';
+import logger from '../utils/logger/logger';
 export class AdminService {
     // Method to create an admin
     static async createAdmin(username) {

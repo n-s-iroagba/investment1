@@ -2,11 +2,11 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import sequelize from './config/database.js';
-import logger from './utils/logger/logger.js';
-import router from './router.js';
+import logger from './utils/logger/logger';
+import router from './router';
 import path from 'path';
-import fs from 'fs';
 import cookieParser from 'cookie-parser';
+import { fileURLToPath } from 'url';
 export const app = express();
 const PORT = 3000;
 app.use(cors({
@@ -18,10 +18,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
-const uploadDir = path.join(__dirname, "./uploads");
-if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir, { recursive: true });
-}
+// const uploadDir = path.join(__dirname, "./uploads");
+// if (!fs.existsSync(uploadDir)) {
+//   fs.mkdirSync(uploadDir, { recursive: true });
+// }
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const uploadDir = path.join(__dirname, 'uploads');
 app.use("/uploads", express.static(uploadDir));
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', 'http://localhost:3001');

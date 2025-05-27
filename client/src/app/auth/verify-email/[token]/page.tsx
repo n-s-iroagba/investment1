@@ -88,7 +88,7 @@ const VerifyEmail = () => {
 
   const handleResendCode = async () => {
    try {
-    const newToken = await post<{token:string},string>(apiRoutes.auth.resendEmailVerificationToken(),{token:token})
+    const newToken = await post<{token:string},string>(apiRoutes.auth.resendVerificationEmail(),{token:token})
     router.push(`/auth/verify-email/${newToken}`)
    }catch(error){
     setMessage('Error sending verification code.')

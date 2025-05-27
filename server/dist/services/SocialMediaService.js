@@ -1,6 +1,6 @@
-import SocialMedia from '../models/SocialMedia.js';
-import { CustomError } from '../utils/error/CustomError.js';
-import logger from '../utils/logger/logger.js';
+import SocialMedia from '../models/SocialMedia';
+import { CustomError } from '../utils/error/CustomError';
+import logger from '../utils/logger/logger';
 export class SocialMediaService {
     static async createSocialMedia(data) {
         logger.info('SocialMediaService.createSocialMedia called', { data });

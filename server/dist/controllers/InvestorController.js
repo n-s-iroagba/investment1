@@ -1,5 +1,5 @@
-import { InvestorService } from "../services/InvestorService.js";
-import { errorHandler } from "../utils/error/errorHandler.js";
+import { InvestorService } from "../services/InvestorService";
+import { errorHandler } from "../utils/error/errorHandler";
 export default class InvestorController {
     static async getInvestorProfile(req, res) {
         try {

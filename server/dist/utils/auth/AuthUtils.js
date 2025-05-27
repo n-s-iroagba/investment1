@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken";
 import dotenv from 'dotenv';
 import crypto from 'crypto';
-import logger from "../logger/logger.js";
-import MailService from "../../services/MailService.js";
+import logger from "../logger/logger";
+import MailService from "../../services/MailService";
 // Load environment variables
 dotenv.config();
 // Secret from environment variables, fallback to a default in case it's not set

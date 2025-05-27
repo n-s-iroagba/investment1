@@ -47,6 +47,7 @@ export default function LoginPage() {
       };
 
       const response = await post<typeof payload, {role:'ADMIN'|'INVESTOR',verificationToken?:string}>(apiRoutes.auth.login(), payload);
+      console.log('response is',response)
       if(response.verificationToken){
         alert('email is not verified')
          router.push(`/auth/verify-email/${response.verificationToken}`);

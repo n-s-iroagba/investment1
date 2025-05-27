@@ -1,8 +1,8 @@
 // models/Payment.ts
 import { DataTypes, Model } from 'sequelize';
-import sequelize from '../config/database.js'; // adjust to your actual sequelize instance
-import ManagedPortfolio from './ManagedPortfolio.js';
-import VerificationFee from './VerificationFee.js';
+import sequelize from '../config/database'; // adjust to your actual sequelize instance
+import ManagedPortfolio from './ManagedPortfolio';
+import VerificationFee from './VerificationFee';
 // 3. Define the model class
 export class Payment extends Model {
 }

@@ -1,6 +1,6 @@
-import { VerificationFeeService } from '../services/VerificationFeeService.js';
-import { CustomError } from '../utils/error/CustomError.js';
-import { errorHandler } from '../utils/error/errorHandler.js';
+import { VerificationFeeService } from '../services/VerificationFeeService';
+import { CustomError } from '../utils/error/CustomError';
+import { errorHandler } from '../utils/error/errorHandler';
 export class VerificationFeeController {
     static async create(req, res) {
         const investorId = req.params.investorId;

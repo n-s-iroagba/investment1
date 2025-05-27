@@ -1,5 +1,5 @@
-import Notification from '../models/Notification.js';
-import logger from '../utils/logger/logger.js';
+import Notification from '../models/Notification';
+import logger from '../utils/logger/logger';
 export class NotificationService {
     // Create a notification - all fields required
     static async createNotification(data) {

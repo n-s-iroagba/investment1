@@ -20,7 +20,8 @@ const apiClient: AxiosInstance = axios.create({
     "Content-Type": "application/json",
     Accept: "application/json",
   },
-})
+  withCredentials: true, // ✅ This goes here
+});
 
 // Generic response wrapper
 type ApiResponse<T> = Promise<T>

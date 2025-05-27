@@ -1,6 +1,6 @@
-import { AdminWallet } from '../models/AdminWallet.js';
-import { CustomError } from '../utils/error/CustomError.js';
-import logger from '../utils/logger/logger.js';
+import { AdminWallet } from '../models/AdminWallet';
+import { CustomError } from '../utils/error/CustomError';
+import logger from '../utils/logger/logger';
 export class AdminWalletService {
     // Create a new AdminWallet
     static async createAdminWallet(data) {

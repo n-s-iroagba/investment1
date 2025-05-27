@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
-import { secret } from '../utils/auth/AuthUtils.js';
-import { CustomError } from '../utils/error/CustomError.js';
+import { secret } from '../utils/auth/AuthUtils';
+import { CustomError } from '../utils/error/CustomError';
 export function authenticate(req, res, next) {
     const token = req.cookies?.token;
     if (!token) {

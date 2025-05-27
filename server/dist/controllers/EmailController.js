@@ -1,6 +1,6 @@
-import MailService from "../services/MailService.js";
-import { errorHandler } from "../utils/error/errorHandler.js";
-import User from "../models/User.js";
+import MailService from "../services/MailService";
+import { errorHandler } from "../utils/error/errorHandler";
+import User from "../models/User";
 export default class EmailController {
     static async sendEmailToInvestor(req, res) {
         try {

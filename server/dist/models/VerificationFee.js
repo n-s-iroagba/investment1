@@ -1,6 +1,6 @@
 import { Model, DataTypes, } from 'sequelize';
-import sequelize from '../config/database.js';
-import Investor from './Investor.js';
+import sequelize from '../config/database';
+import Investor from './Investor';
 export class VerificationFee extends Model {
 }
 VerificationFee.init({

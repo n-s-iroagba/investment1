@@ -1,10 +1,10 @@
-import Investor from "../models/Investor.js";
-import { CustomError } from "../utils/error/CustomError.js";
-import logger from "../utils/logger/logger.js";
-import Kyc from "../models/Kyc.js";
-import ManagedPortfolio from "../models/ManagedPortfolio.js";
-import Referral from "../models/Referral.js";
-import User from "../models/User.js";
+import Investor from "../models/Investor";
+import { CustomError } from "../utils/error/CustomError";
+import logger from "../utils/logger/logger";
+import Kyc from "../models/Kyc";
+import ManagedPortfolio from "../models/ManagedPortfolio";
+import Referral from "../models/Referral";
+import User from "../models/User";
 export class InvestorService {
     // Create a new Investor
     static async createInvestor(data) {

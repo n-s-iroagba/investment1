@@ -1,7 +1,7 @@
-import Investor from '../models/Investor.js';
-import Transaction from '../models/Transaction.js';
-import { CustomError } from '../utils/error/CustomError.js';
-import logger from '../utils/logger/logger.js';
+import Investor from '../models/Investor';
+import Transaction from '../models/Transaction';
+import { CustomError } from '../utils/error/CustomError';
+import logger from '../utils/logger/logger';
 export class TransactionService {
     static async createTransaction(data) {
         logger.info('TransactionService.createTransaction called', { data });

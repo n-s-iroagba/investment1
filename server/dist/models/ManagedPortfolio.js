@@ -1,7 +1,7 @@
 import { Model, DataTypes, } from 'sequelize';
-import sequelize from '../config/database.js';
-import Investor from './Investor.js';
-import Manager from './Manager.js';
+import sequelize from '../config/database';
+import Investor from './Investor';
+import Manager from './Manager';
 export class ManagedPortfolio extends Model {
 }
 ManagedPortfolio.init({

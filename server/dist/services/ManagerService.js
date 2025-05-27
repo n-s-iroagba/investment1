@@ -1,6 +1,6 @@
-import Manager from '../models/Manager.js';
-import { CustomError } from '../utils/error/CustomError.js';
-import logger from '../utils/logger/logger.js';
+import Manager from '../models/Manager';
+import { CustomError } from '../utils/error/CustomError';
+import logger from '../utils/logger/logger';
 export class ManagerService {
     // Create a new manager - all fields required
     static async createManager(data) {

@@ -2,6 +2,7 @@ export const apiRoutes = {
   auth: {
     login: (): string => `/auth/login`,
     logout: (): string => `/auth/logout`,
+    adminSignup: (): string => '/auth/admin/signup',
     register: (): string => `/auth/register`,
     forgotPassword: (): string => `/auth/forgot-password`,
     resetPassword: (): string => `/auth/reset-password`,

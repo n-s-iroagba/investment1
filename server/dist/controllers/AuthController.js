@@ -1,7 +1,7 @@
-import UserService from "../services/UserService.js";
-import { secret } from "../utils/auth/AuthUtils.js";
-import { CustomError } from "../utils/error/CustomError.js";
-import { errorHandler } from "../utils/error/errorHandler.js";
+import UserService from "../services/UserService";
+import { secret } from "../utils/auth/AuthUtils";
+import { CustomError } from "../utils/error/CustomError";
+import { errorHandler } from "../utils/error/errorHandler";
 import jwt from "jsonwebtoken";
 export class AuthController {
     static async investorSignup(req, res) {

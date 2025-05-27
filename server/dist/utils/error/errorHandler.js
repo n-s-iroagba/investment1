@@ -1,5 +1,5 @@
-import logger from "../logger/logger.js";
-import { CustomError } from "./CustomError.js";
+import logger from "../logger/logger";
+import { CustomError } from "./CustomError";
 export function errorHandler(err, req, res) {
     // Default to 500 if no code provided
     let statusCode = 500;
@@ -25,4 +25,4 @@ export function errorHandler(err, req, res) {
         },
     });
 }
-export { CustomError } from "./CustomError.js";
+export { CustomError } from "./CustomError";

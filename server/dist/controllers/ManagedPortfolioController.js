@@ -1,9 +1,9 @@
-import { ManagerService } from "../services/ManagerService.js";
-import { AdminWalletService } from "../services/AdminWalletService.js";
-import { CryptoWalletService } from "../services/CryptoWalletService.js";
-import { ManagedPortfolioService } from "../services/ManagedPortfolioService.js";
-import { errorHandler } from "../utils/error/errorHandler.js";
-import { CustomError } from "../utils/error/CustomError.js";
+import { ManagerService } from "../services/ManagerService";
+import { AdminWalletService } from "../services/AdminWalletService";
+import { CryptoWalletService } from "../services/CryptoWalletService";
+import { ManagedPortfolioService } from "../services/ManagedPortfolioService";
+import { errorHandler } from "../utils/error/errorHandler";
+import { CustomError } from "../utils/error/CustomError";
 class ManagedPortfolioController {
     static async creditInvestment(req, res) {
         try {

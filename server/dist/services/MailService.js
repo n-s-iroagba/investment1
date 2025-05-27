@@ -31,7 +31,7 @@ class MailService {
             from: EMAIL_USER,
             to: user.email,
             subject: "Email Verification",
-            template: "emailVerification", // Template file (without .hbs extension)
+            template: "emailVerification",
             context: {
                 name: name,
                 code: user.emailVerificationCode,
@@ -51,7 +51,7 @@ class MailService {
             from: EMAIL_USER,
             to: user.email,
             subject: "New Email Verification code",
-            template: "resendEmailVerification", // Template file (without .hbs extension)
+            template: "resendEmailVerification",
             context: {
                 code: user.emailVerificationCode,
             },
@@ -126,7 +126,7 @@ MailService.transporter = nodemailer.createTransport({
         user: "hauteequity@gmail.com",
         pass: "cprf immt omzt espd",
     },
-    logger: true, // Enable logger
+    logger: true,
     debug: true, // Enable debug output
 });
 export default MailService;

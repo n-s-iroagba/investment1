@@ -1,6 +1,6 @@
 import { Model, DataTypes, } from 'sequelize';
-import sequelize from '../config/database.js';
-import User from './User.js';
+import sequelize from '../config/database';
+import User from './User';
 export class Notification extends Model {
 }
 Notification.init({

@@ -1,6 +1,6 @@
-import { errorHandler } from '../utils/error/errorHandler.js';
-import { ManagerService } from '../services/ManagerService.js';
-import { CustomError } from '../utils/error/CustomError.js';
+import { errorHandler } from '../utils/error/errorHandler';
+import { ManagerService } from '../services/ManagerService';
+import { CustomError } from '../utils/error/CustomError';
 class ManagerController {
     static async createManager(req, res) {
         try {

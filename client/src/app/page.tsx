@@ -41,7 +41,7 @@ export default function Page() {
             <h1 className="text-4xl md:text-6xl font-bold text-green-900 mb-6">
               Welcome to{" "}
               <span className="bg-gradient-to-r from-green-600 to-green-800 bg-clip-text text-transparent">
-                InvestPro
+                
               </span>
             </h1>
             <p className="text-xl text-green-700 mb-8 max-w-3xl mx-auto">

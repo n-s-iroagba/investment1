@@ -1,5 +1,5 @@
 import { Model, DataTypes, } from "sequelize";
-import sequelize from "../config/database.js";
+import sequelize from "../config/database";
 export class AdminWallet extends Model {
 }
 AdminWallet.init({
