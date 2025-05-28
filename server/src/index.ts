@@ -9,7 +9,7 @@ import fs from 'fs'
 import cookieParser from 'cookie-parser';
 import { fileURLToPath } from 'url';
 export const app = express();
-const PORT = 3000;
+const PORT = (process.env.NODE_ENV === 'production')?process.env.PORT : 5000;
 
 
 
