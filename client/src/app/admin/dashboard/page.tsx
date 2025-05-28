@@ -15,8 +15,8 @@ import { useRouter } from "next/navigation"
 
 
 const AdminDashboard = () => {
-  const {  loading: authLoading, isAdmin, displayName,user } = useAuth()
-  console.log(displayName,isAdmin,user)
+  const {  loading: authLoading, isAdmin, displayName } = useAuth()
+  console.log(displayName,isAdmin)
   const router = useRouter()
 
   const {

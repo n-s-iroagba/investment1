@@ -92,43 +92,35 @@ async function getAdminById(id: string): Promise<Admin | null> {
 router.get("/auth/me", authenticate, async (req: AuthenticatedRequest, res: Response) => {
   const { userId, role } = req.user!
   console.log('id', userId)
-
+ type LoggedInUser ={
+  displayName:string
+  isAdmin:boolean
+  roleId:number
+}
   try {
     if (role === "INVESTOR") {
-      const investor = await getInvestorById(userId)
-      const use = await User.findByPk(investor?.userId)
+     
+      const investor = await Investor.findOne({where:{userId}})
       if (!investor) throw new CustomError(404, "Investor not found")
 
-      const user = {
-        id: investor.id,
-        email:use?.email,
-        role: "INVESTOR",
-        investor: {
-          id: investor.id,
-          firstName: investor.firstName,
-          lastName: investor.lastName,
-        },
+      const user:LoggedInUser = {
+          displayName:investor.firstName,
+          isAdmin:false,
+          roleId:investor.id
       }
-
       return res.json(user)
     }
 
     if (role === "ADMIN") {
-      const admin = await getAdminById(userId)
-      const admins = await Admin.findAll()
-      console.log(admins)
-        // const use = await User.findByPk(admin?.userId)
+     
+      const admin = await Admin.findOne({where:{userId}})
+    
       if (!admin) throw new CustomError(404, "Admin not found")
 
-      const user = {
-        id: admin.id,
-         email:'nnamdisolomon1@gmail.com',
-        role: "ADMIN",
-        username: admin.username,
-        admin: {
-          id: admin.id,
-          username: admin.username,
-        },
+      const user:LoggedInUser = {
+         displayName:admin.username,
+         isAdmin:true,
+         roleId:admin.id
       }
 
       return res.json(user)

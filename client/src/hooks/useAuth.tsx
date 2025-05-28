@@ -3,36 +3,20 @@
 import { get } from "@/utils/apiClient"
 import { apiRoutes } from "@/constants/apiRoutes"
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react"
+import { LoggedInUser } from "@/types/User"
 
-// User interface that matches your backend structure
-interface User {
-  id: number
-  email: string
-  role: "ADMIN" | "INVESTOR"
-  username?: string // For admin users
-  admin?: {
-    id: number
-    username: string
-  }
-  investor?: {
-    id: number
-    firstName: string
-    lastName: string
-  }
-}
+
 
 interface AuthContextValue {
-  user: User | null
   loading: boolean
   refreshUser: () => void
-  isAdmin: boolean
+  isAdmin: boolean|null
   isInvestor: boolean
   userId: number | null
   displayName: string
 }
 
 const AuthContext = createContext<AuthContextValue>({
-  user: null,
   loading: true,
   refreshUser: () => {},
   isAdmin: false,
@@ -42,13 +26,13 @@ const AuthContext = createContext<AuthContextValue>({
 })
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null)
+  const [user, setUser] = useState<LoggedInUser | null>(null)
   const [loading, setLoading] = useState(true)
 
   const fetchUser = () => {
     setLoading(true)
-    get<User>(apiRoutes.auth.me())
-      .then((data: User) => {console.log(data); setUser(data)})
+    get<LoggedInUser>(apiRoutes.auth.me())
+      .then((data: LoggedInUser) => {console.log(data); setUser(data)})
       .catch(() => setUser(null))
       .finally(() => setLoading(false))
   }
@@ -57,15 +41,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     fetchUser()
   }, [])
 
-  const isAdmin = user?.role === "ADMIN"
-  const isInvestor = user?.role === "INVESTOR"
-  const userId = user?.id || null
-  const displayName = isAdmin ? user?.admin?.username || user?.username || "Admin" : user?.investor?.firstName || "User"
+  const isAdmin = user?.isAdmin??null
+  const isInvestor = !user?.isAdmin
+  const userId = user?.roleId??null
+  const displayName = user?.displayName?? 'user'
 
   return (
     <AuthContext.Provider
       value={{
-        user,
+     
         loading,
         refreshUser: fetchUser,
         isAdmin,

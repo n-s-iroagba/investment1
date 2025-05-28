@@ -1,0 +1,88 @@
+2025-05-28T19:04:29.459Z [ERROR]: Error: Unknown column 'Admin.userId' in 'where clause' - URL: /api/auth/me - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Admin.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1140:21)
+    at async Admin.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async file:///home/udorakpuenyi/tem/server/src/router.ts:96:27
+2025-05-28T19:05:24.063Z [ERROR]: Error: Unknown column 'Admin.userId' in 'where clause' - URL: /api/auth/me - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Admin.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1140:21)
+    at async Admin.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async file:///home/udorakpuenyi/tem/server/src/router.ts:96:27
+2025-05-28T19:06:36.266Z [ERROR]: Error: Unknown column 'Admin.userId' in 'where clause' - URL: /api/auth/me - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Admin.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1140:21)
+    at async Admin.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async file:///home/udorakpuenyi/tem/server/src/router.ts:96:27
+2025-05-28T19:08:03.634Z [ERROR]: Error in createInvestor UserService function: SequelizeConnectionError: Unknown database 'investment'
+2025-05-28T19:08:03.636Z [ERROR]: Error: Unknown database 'investment' - URL: /api/auth/admin/signup - Stack: SequelizeConnectionError: Unknown database 'investment'
+    at ConnectionManager.connect (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/connection-manager.js:102:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async ConnectionManager._connect (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:222:24)
+2025-05-28T19:21:27.848Z [ERROR]: Error: Unknown column 'Admin.userId' in 'where clause' - URL: /api/auth/me - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Admin.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1140:21)
+    at async Admin.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async file:///home/udorakpuenyi/tem/server/src/router.ts:96:27
+2025-05-28T20:02:01.508Z [ERROR]: Error: Unknown column 'Admin.userId' in 'where clause' - URL: /api/auth/me - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Admin.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1140:21)
+    at async Admin.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async file:///home/udorakpuenyi/tem/server/src/router.ts:96:27
+2025-05-28T20:09:17.032Z [ERROR]: Error: Unknown column 'Admin.userId' in 'where clause' - URL: /api/auth/me - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Admin.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1140:21)
+    at async Admin.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async file:///home/udorakpuenyi/tem/server/src/router.ts:96:27
+2025-05-28T20:57:30.117Z [ERROR]: Error: Unknown column 'Admin.userId' in 'where clause' - URL: /api/auth/me - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Admin.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1140:21)
+    at async Admin.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async file:///home/udorakpuenyi/tem/server/src/router.ts:96:27
+2025-05-28T20:57:37.720Z [ERROR]: Error: Unknown column 'Admin.userId' in 'where clause' - URL: /api/auth/me - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Admin.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1140:21)
+    at async Admin.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async file:///home/udorakpuenyi/tem/server/src/router.ts:96:27
+2025-05-28T21:00:43.328Z [ERROR]: Error: Unknown column 'Admin.userId' in 'where clause' - URL: /api/auth/me - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Admin.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1140:21)
+    at async Admin.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async file:///home/udorakpuenyi/tem/server/src/router.ts:96:27
+2025-05-28T21:00:58.546Z [ERROR]: Error: Unknown column 'Admin.userId' in 'where clause' - URL: /api/auth/me - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Admin.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1140:21)
+    at async Admin.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async file:///home/udorakpuenyi/tem/server/src/router.ts:96:27
+2025-05-28T21:08:58.197Z [WARN]: CustomError - 404: Admin not found - URL: /api/auth/me
+2025-05-28T21:09:13.212Z [WARN]: CustomError - 404: Admin not found - URL: /api/auth/me
+2025-05-28T21:09:29.944Z [WARN]: CustomError - 404: Admin not found - URL: /api/auth/me

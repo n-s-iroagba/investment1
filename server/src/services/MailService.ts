@@ -1,12 +1,14 @@
 import nodemailer from "nodemailer"
-import path from "path"
+import path from "path";
+import { fileURLToPath } from "url";
 import hbs from "nodemailer-express-handlebars"
 import dotenv from "dotenv"
 import type User from "../models/User.js"
 import fs from "fs"
 
 dotenv.config()
-
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const { EMAIL_USER, EMAIL_PASS, NODE_ENV } = process.env
 // async function getHandlebars() {
 //   const nodemailerExpressHandlebars = await import('nodemailer-express-handlebars');
@@ -27,9 +29,9 @@ class MailService {
   })
 
   private static setupHandlebars() {
-    const templateDir = path.join(__dirname, "..", "templates") // 👈 Just the directory
-    const templatePath = path.join(templateDir, "emailVerification.hbs") // 👈 Full path to read manually if needed
-    const source = fs.readFileSync(templatePath, "utf8")
+    const templateDir = path.join(__dirname, "..", "templates");
+  const templatePath = path.join(templateDir, "emailVerification.hbs");
+  const source = fs.readFileSync(templatePath, "utf8");
 
     this.transporter.use(
       "compile",

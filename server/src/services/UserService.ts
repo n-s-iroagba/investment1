@@ -81,10 +81,12 @@ class UserService {
         email: data.email,
         password: data.password,
         role: 'ADMIN',
+     
       });
 
        await Admin.create({
-        username: data.username
+        username: data.username,
+        userId:user.id
       });
       // Trigger email verification
       const token = await AuthUtils.initiateEmailVerificationProcess(user, data.username);

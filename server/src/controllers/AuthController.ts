@@ -30,6 +30,7 @@ static async verifyEmail(req: Request, res: Response) {
       email: user.email,
       password: user.password,
     });
+   
 
     if ('loginToken' in result) {
       res.cookie('token', result.loginToken, {
@@ -38,19 +39,13 @@ static async verifyEmail(req: Request, res: Response) {
         sameSite: 'lax',
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       });
-
+   const role = user.role
+    console.log('role is', role)
       return res.status(200).json({
-        message: 'Login successful',
-        user: {
-          username: user.id,
-          role: user.role,
-        },
-      });
+          role
+      }); 
     } else {
-      // User needs to verify email again (shouldn't happen here but handled just in case)
-      return res.status(200).json({
-        verificationToken: result.verificationToken,
-      });
+       throw new CustomError(500,'malformed token')
     }
   } catch (error) {
     errorHandler(error, req, res);

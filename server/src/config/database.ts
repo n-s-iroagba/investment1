@@ -10,7 +10,7 @@ new Sequelize(process.env.db_string):new Sequelize({
   host: 'localhost',
   username: 'root',
   password: '97chocho',
-  database: 'investment',
+  database: 'iv',
   logging: false,
 });
 

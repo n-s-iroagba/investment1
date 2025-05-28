@@ -17,7 +17,7 @@ const VerifyEmail = () => {
   const [code, setCode] = useState(["", "", "", "", "", ""]);
   const inputRefs = useRef<HTMLInputElement[]>([]);
   const [message, setMessage] = useState("");
-  const [timeLeft, setTimeLeft] = useState(0); // 5-minute countdown
+  const [timeLeft, setTimeLeft] = useState(300); // 5-minute countdown
   const [canResend, setCanResend] = useState(false);
   const [token, setToken] = useState<string>('');
   const [submitting, setSubmitting] = useState(false)
@@ -69,10 +69,11 @@ const VerifyEmail = () => {
     const verificationCode = code.join("");
     setSubmitting(true)
     try {
-      const response =await post<EmailVerificationDto, {role:'INVESTOR'|'ADMIN'}>(apiRoutes.auth.verifyEmail(), { code: verificationCode, token })
-      if (response.role = 'INVESTOR'){
+      const response =await post<EmailVerificationDto, {role:string}>(apiRoutes.auth.verifyEmail(), { code: verificationCode, token })
+      console.log(response)
+      if (response.role === 'INVESTOR'){
         router.push('/investor/dashboard');
-      }else if (response.role = 'ADMIN'){
+      }else if (response.role === 'ADMIN'){
       
       router.push(`/admin/dashboard`)
       }else{

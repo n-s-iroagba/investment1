@@ -7,7 +7,7 @@ export const apiRoutes = {
     forgotPassword: (): string => `/auth/forgot-password`,
     resetPassword: (): string => `/auth/reset-password`,
     verifyEmail: (): string => `/auth/verify-email`,
-    resendVerificationEmail: (): string => `/auth/resend-verification-email`,
+    resendVerificationEmail: (): string => `/auth/resend-verification-token`,
     me: (): string => `/auth/me`,
   },
 

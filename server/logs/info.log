@@ -1,0 +1,257 @@
+2025-05-28T17:40:00.979Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T17:40:01.007Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T17:40:01.010Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T17:40:01.018Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T17:40:01.171Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T17:40:05.237Z [INFO]: Retrieved 0 social media records
+2025-05-28T17:45:19.034Z [INFO]: Request URL: POST /api/auth/login, undefined
+2025-05-28T17:45:19.754Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T17:45:19.776Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T17:45:19.785Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T17:45:19.794Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T17:45:19.796Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T17:45:19.809Z [INFO]: Retrieved 0 social media records
+2025-05-28T17:45:19.813Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T17:45:19.822Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T17:45:19.823Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T17:45:19.828Z [INFO]: Retrieved 0 social media records
+2025-05-28T18:51:24.165Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T18:51:24.206Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T18:51:24.246Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T18:51:24.257Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T18:51:24.304Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T18:51:24.541Z [INFO]: Retrieved 0 social media records
+2025-05-28T19:04:29.179Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T19:04:29.237Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T19:04:29.264Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T19:04:29.271Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T19:04:29.289Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T19:04:29.459Z [ERROR]: Error: Unknown column 'Admin.userId' in 'where clause' - URL: /api/auth/me - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Admin.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1140:21)
+    at async Admin.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async file:///home/udorakpuenyi/tem/server/src/router.ts:96:27
+2025-05-28T19:04:29.687Z [INFO]: Retrieved 0 social media records
+2025-05-28T19:05:23.851Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T19:05:23.875Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T19:05:23.908Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T19:05:23.916Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T19:05:23.943Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T19:05:24.021Z [INFO]: Retrieved 0 social media records
+2025-05-28T19:05:24.063Z [ERROR]: Error: Unknown column 'Admin.userId' in 'where clause' - URL: /api/auth/me - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Admin.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1140:21)
+    at async Admin.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async file:///home/udorakpuenyi/tem/server/src/router.ts:96:27
+2025-05-28T19:06:34.936Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T19:06:36.266Z [ERROR]: Error: Unknown column 'Admin.userId' in 'where clause' - URL: /api/auth/me - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Admin.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1140:21)
+    at async Admin.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async file:///home/udorakpuenyi/tem/server/src/router.ts:96:27
+2025-05-28T19:08:03.602Z [INFO]: Request URL: POST /api/auth/admin/signup, undefined
+2025-05-28T19:08:03.634Z [ERROR]: Error in createInvestor UserService function: SequelizeConnectionError: Unknown database 'investment'
+2025-05-28T19:08:03.636Z [ERROR]: Error: Unknown database 'investment' - URL: /api/auth/admin/signup - Stack: SequelizeConnectionError: Unknown database 'investment'
+    at ConnectionManager.connect (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/connection-manager.js:102:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async ConnectionManager._connect (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:222:24)
+2025-05-28T19:12:43.762Z [INFO]: Request URL: POST /api/auth/admin/signup, undefined
+2025-05-28T19:18:04.295Z [INFO]: Request URL: POST /api/auth/admin/signup, undefined
+2025-05-28T19:18:51.616Z [INFO]: Request URL: POST /api/auth/resend-verification-email, undefined
+2025-05-28T19:21:27.704Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T19:21:27.848Z [ERROR]: Error: Unknown column 'Admin.userId' in 'where clause' - URL: /api/auth/me - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Admin.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1140:21)
+    at async Admin.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async file:///home/udorakpuenyi/tem/server/src/router.ts:96:27
+2025-05-28T19:22:20.537Z [INFO]: Request URL: POST /api/auth/resend-verification-token, undefined
+2025-05-28T19:23:46.398Z [INFO]: Request URL: POST /api/auth/verify-email, undefined
+2025-05-28T19:24:03.113Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T19:24:03.147Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T19:27:41.524Z [INFO]: Request URL: POST /api/auth/admin/signup, undefined
+2025-05-28T19:27:54.702Z [INFO]: Request URL: POST /api/auth/verify-email, undefined
+2025-05-28T19:27:55.135Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T19:27:55.146Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T19:31:47.343Z [INFO]: Request URL: POST /api/auth/admin/signup, undefined
+2025-05-28T19:31:56.634Z [INFO]: Request URL: POST /api/auth/verify-email, undefined
+2025-05-28T19:31:57.084Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T19:31:57.096Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T19:34:22.515Z [INFO]: Request URL: POST /api/auth/admin/signup, undefined
+2025-05-28T19:34:35.473Z [INFO]: Request URL: POST /api/auth/verify-email, undefined
+2025-05-28T19:34:35.900Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T19:34:35.915Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T19:39:47.747Z [INFO]: Request URL: POST /api/auth/admin/signup, undefined
+2025-05-28T19:39:56.677Z [INFO]: Request URL: POST /api/auth/verify-email, undefined
+2025-05-28T19:39:57.056Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T19:39:57.076Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T19:43:18.887Z [INFO]: Request URL: POST /api/auth/admin/signup, undefined
+2025-05-28T19:43:26.578Z [INFO]: Request URL: POST /api/auth/verify-email, undefined
+2025-05-28T19:43:26.974Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T19:43:26.996Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T19:45:30.041Z [INFO]: Request URL: POST /api/auth/admin/signup, undefined
+2025-05-28T19:45:37.035Z [INFO]: Request URL: POST /api/auth/verify-email, undefined
+2025-05-28T19:45:37.374Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T19:45:37.398Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T19:53:23.785Z [INFO]: Request URL: POST /api/auth/admin/signup, undefined
+2025-05-28T19:53:31.176Z [INFO]: Request URL: POST /api/auth/verify-email, undefined
+2025-05-28T19:53:31.591Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T19:53:31.611Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T19:58:56.364Z [INFO]: Request URL: POST /api/auth/admin/signup, undefined
+2025-05-28T19:59:06.983Z [INFO]: Request URL: POST /api/auth/verify-email, undefined
+2025-05-28T19:59:07.579Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T19:59:07.589Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T20:01:20.971Z [INFO]: Request URL: POST /api/auth/admin/signup, undefined
+2025-05-28T20:01:31.727Z [INFO]: Request URL: POST /api/auth/verify-email, undefined
+2025-05-28T20:01:32.254Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T20:01:32.295Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T20:02:01.272Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T20:02:01.289Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T20:02:01.508Z [ERROR]: Error: Unknown column 'Admin.userId' in 'where clause' - URL: /api/auth/me - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Admin.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1140:21)
+    at async Admin.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async file:///home/udorakpuenyi/tem/server/src/router.ts:96:27
+2025-05-28T20:03:43.453Z [INFO]: Request URL: POST /api/auth/admin/signup, undefined
+2025-05-28T20:03:52.644Z [INFO]: Request URL: POST /api/auth/verify-email, undefined
+2025-05-28T20:03:53.231Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T20:03:53.243Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T20:09:11.816Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T20:09:17.032Z [ERROR]: Error: Unknown column 'Admin.userId' in 'where clause' - URL: /api/auth/me - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Admin.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1140:21)
+    at async Admin.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async file:///home/udorakpuenyi/tem/server/src/router.ts:96:27
+2025-05-28T20:09:44.760Z [INFO]: Request URL: POST /api/auth/admin/signup, undefined
+2025-05-28T20:10:05.269Z [INFO]: Request URL: POST /api/auth/verify-email, undefined
+2025-05-28T20:10:09.138Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T20:10:09.156Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T20:14:57.439Z [INFO]: Request URL: POST /api/auth/admin/signup, undefined
+2025-05-28T20:15:10.948Z [INFO]: Request URL: POST /api/auth/verify-email, undefined
+2025-05-28T20:15:13.470Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T20:15:13.812Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T20:18:18.063Z [INFO]: Request URL: POST /api/auth/admin/signup, undefined
+2025-05-28T20:18:27.385Z [INFO]: Request URL: POST /api/auth/verify-email, undefined
+2025-05-28T20:18:28.282Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T20:18:28.299Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T20:21:42.491Z [INFO]: Request URL: POST /api/auth/admin/signup, undefined
+2025-05-28T20:21:50.750Z [INFO]: Request URL: POST /api/auth/verify-email, undefined
+2025-05-28T20:57:29.604Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T20:57:30.117Z [ERROR]: Error: Unknown column 'Admin.userId' in 'where clause' - URL: /api/auth/me - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Admin.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1140:21)
+    at async Admin.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async file:///home/udorakpuenyi/tem/server/src/router.ts:96:27
+2025-05-28T20:57:37.705Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T20:57:37.720Z [ERROR]: Error: Unknown column 'Admin.userId' in 'where clause' - URL: /api/auth/me - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Admin.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1140:21)
+    at async Admin.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async file:///home/udorakpuenyi/tem/server/src/router.ts:96:27
+2025-05-28T20:57:46.541Z [INFO]: Request URL: POST /api/auth/admin/signup, undefined
+2025-05-28T20:58:00.487Z [INFO]: Request URL: POST /api/auth/verify-email, undefined
+2025-05-28T20:58:01.528Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T20:58:01.682Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T20:58:01.683Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T20:58:01.690Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T20:58:01.705Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T20:58:01.945Z [INFO]: Retrieved 0 social media records
+2025-05-28T20:58:01.953Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T20:58:01.955Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T20:58:02.233Z [INFO]: Retrieved 0 social media records
+2025-05-28T20:58:02.375Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T21:00:42.987Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T21:00:43.003Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T21:00:43.023Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T21:00:43.027Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T21:00:43.072Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T21:00:43.287Z [INFO]: Retrieved 0 social media records
+2025-05-28T21:00:43.328Z [ERROR]: Error: Unknown column 'Admin.userId' in 'where clause' - URL: /api/auth/me - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Admin.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1140:21)
+    at async Admin.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async file:///home/udorakpuenyi/tem/server/src/router.ts:96:27
+2025-05-28T21:00:58.077Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T21:00:58.111Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T21:00:58.131Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T21:00:58.131Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T21:00:58.173Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T21:00:58.525Z [INFO]: Retrieved 0 social media records
+2025-05-28T21:00:58.546Z [ERROR]: Error: Unknown column 'Admin.userId' in 'where clause' - URL: /api/auth/me - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Admin.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1140:21)
+    at async Admin.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async file:///home/udorakpuenyi/tem/server/src/router.ts:96:27
+2025-05-28T21:08:57.446Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T21:08:57.771Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T21:08:57.779Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T21:08:57.780Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T21:08:57.863Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T21:08:58.172Z [INFO]: Retrieved 0 social media records
+2025-05-28T21:08:58.197Z [WARN]: CustomError - 404: Admin not found - URL: /api/auth/me
+2025-05-28T21:09:12.930Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T21:09:12.948Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T21:09:12.969Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T21:09:12.970Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T21:09:12.993Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T21:09:13.212Z [WARN]: CustomError - 404: Admin not found - URL: /api/auth/me
+2025-05-28T21:09:13.218Z [INFO]: Retrieved 0 social media records
+2025-05-28T21:09:29.628Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T21:09:29.944Z [WARN]: CustomError - 404: Admin not found - URL: /api/auth/me
+2025-05-28T21:09:38.635Z [INFO]: Request URL: POST /api/auth/admin/signup, undefined
+2025-05-28T21:09:48.629Z [INFO]: Request URL: POST /api/auth/verify-email, undefined
+2025-05-28T21:09:49.588Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T21:09:49.596Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T21:09:49.605Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T21:09:49.610Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T21:09:49.628Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T21:09:49.659Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T21:09:49.672Z [INFO]: Retrieved 0 social media records
+2025-05-28T21:09:49.693Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T21:09:49.697Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T21:09:49.701Z [INFO]: Retrieved 0 social media records
+2025-05-28T21:10:17.951Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T21:10:17.972Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T21:10:18.007Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T21:10:18.027Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T21:10:18.029Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T21:10:18.131Z [INFO]: Retrieved 0 social media records
+2025-05-28T21:10:44.675Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T21:10:44.681Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T21:10:44.685Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T21:10:44.686Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T21:10:44.833Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T21:10:44.845Z [INFO]: Retrieved 0 social media records
+2025-05-28T21:10:44.857Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T21:10:44.861Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T21:10:44.876Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T21:10:44.882Z [INFO]: Retrieved 0 social media records
