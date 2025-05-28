@@ -255,3 +255,13 @@
 2025-05-28T21:10:44.861Z [INFO]: SocialMediaService.getAllSocialMedias called
 2025-05-28T21:10:44.876Z [INFO]: Request URL: GET /api/admin-wallets, undefined
 2025-05-28T21:10:44.882Z [INFO]: Retrieved 0 social media records
+2025-05-28T21:28:37.188Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T21:28:37.217Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T21:28:37.222Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T21:28:37.229Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T21:28:40.062Z [INFO]: Retrieved 0 social media records
+2025-05-28T21:28:40.203Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T21:28:40.204Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T21:28:40.211Z [INFO]: Retrieved 0 social media records
+2025-05-28T21:28:40.214Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T21:28:40.516Z [INFO]: Request URL: GET /api/managers, undefined

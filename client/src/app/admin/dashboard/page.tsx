@@ -13,10 +13,9 @@ import type { Manager } from "@/types/manager"
 import type { SocialMedia } from "@/types/socialMedia"
 import { useRouter } from "next/navigation"
 
-
 const AdminDashboard = () => {
-  const {  loading: authLoading, isAdmin, displayName } = useAuth()
-  console.log(displayName,isAdmin)
+  const { loading: authLoading, isAdmin, displayName } = useAuth()
+  console.log(displayName, isAdmin)
   const router = useRouter()
 
   const {
@@ -30,13 +29,6 @@ const AdminDashboard = () => {
     error: socialMediaError,
     loading: socialMediaLoading,
   } = useGetList<SocialMedia>(apiRoutes.socialMedia.list())
-
-
-  //   const {
-  //   data: payments,
-  //   error: paymentError,
-  //   loading: paymentLoading,
-  // } = useGetList<Payment>(apiRoutes.payments.unverified())
 
   // Redirect if not admin
   useEffect(() => {
@@ -76,21 +68,9 @@ const AdminDashboard = () => {
     )
   }
 
-  //  if (!payments.length) {
-  //   todos.push(
-  //     <TodoAlert
-  //       key="payments-alert"
-  //       message="You have pending payments to process"
-  //       link="/admin/investors"
-  //     />,
-  //   )
-  // }
-
-
-
   if (authLoading) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center h-screen px-4">
         <Spinner className="w-8 h-8 text-green-600" />
       </div>
     )
@@ -102,30 +82,42 @@ const AdminDashboard = () => {
 
   return (
     <AdminOffcanvas>
-      <div className="bg-white rounded-2xl shadow-sm border-2 border-green-50 p-6 lg:p-8">
-        <h2 className="text-2xl font-bold text-green-900 mb-2 flex items-center gap-2">
-          <ExclamationTriangleIcon className="w-6 h-6 text-green-600" />
-          Welcome back, {displayName}!
-        </h2>
-        <h3 className="text-lg font-semibold text-green-700 mb-6">Admin Tasks</h3>
+      {/* Mobile-optimized content container */}
+      <div className="w-full">
+        {/* Header - Responsive text sizing */}
+        <div className="mb-4 sm:mb-6">
+          <h2 className="text-xl sm:text-2xl font-bold text-green-900 mb-2 flex items-center gap-2 flex-wrap">
+            <ExclamationTriangleIcon className="w-5 h-5 sm:w-6 sm:h-6 text-green-600 flex-shrink-0" />
+            <span className="break-words">Welcome back, {displayName}!</span>
+          </h2>
+          <h3 className="text-base sm:text-lg font-semibold text-green-700">Admin Tasks</h3>
+        </div>
 
-        {walletLoading || managerLoading || socialMediaLoading  ? (
+        {/* Loading/Error States */}
+        {walletLoading || managerLoading || socialMediaLoading ? (
           <div className="flex justify-center items-center h-32">
             <Spinner className="w-8 h-8 text-green-600" />
           </div>
-        ) : walletError || managerError || socialMediaError  ? (
-          <div className="p-4 bg-red-50 rounded-lg border-2 border-red-100 text-red-700">Error loading information</div>
+        ) : walletError || managerError || socialMediaError ? (
+          <div className="p-3 sm:p-4 bg-red-50 rounded-lg border border-red-200 text-red-700 text-sm sm:text-base">
+            Error loading information
+          </div>
         ) : (
-          <div className="space-y-4">
+          /* Tasks Grid - Mobile responsive */
+          <div className="space-y-3 sm:space-y-4">
             {todos.length > 0 ? (
-              <div className="grid gap-4">
+              <div className="grid gap-3 sm:gap-4">
                 {todos.map((todo, index) => (
-                  <div key={index}>{todo}</div>
+                  <div key={index} className="w-full">
+                    {todo}
+                  </div>
                 ))}
               </div>
             ) : (
-              <div className="p-6 bg-green-50 rounded-xl border-2 border-green-100 text-center">
-                <p className="text-green-700 font-medium">🎉 All caught up! No pending tasks</p>
+              <div className="p-4 sm:p-6 bg-green-50 rounded-lg sm:rounded-xl border border-green-200 text-center">
+                <p className="text-green-700 font-medium text-sm sm:text-base">
+                  🎉 All caught up! No pending tasks
+                </p>
               </div>
             )}
           </div>
