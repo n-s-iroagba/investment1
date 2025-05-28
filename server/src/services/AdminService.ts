@@ -1,6 +1,6 @@
-import Admin from '../models/Admin'; 
-import { CustomError } from '../utils/error/CustomError';
-import logger from '../utils/logger/logger';
+import Admin from '../models/Admin.js'; 
+import { CustomError } from '../utils/error/CustomError.js';
+import logger from '../utils/logger/logger.js';
 
 
 export class AdminService {

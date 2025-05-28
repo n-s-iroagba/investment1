@@ -7,8 +7,8 @@ import {
   DataTypes,
   HasManyGetAssociationsMixin,
 } from 'sequelize';
-import sequelize from '../config/database';
-import ManagedPortfolio from './ManagedPortfolio';
+import sequelize from '../config/database.js';
+import ManagedPortfolio from './ManagedPortfolio.js';
 
 export class Manager extends Model<
   InferAttributes<Manager>,

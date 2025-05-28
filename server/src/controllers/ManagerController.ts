@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 
-import { errorHandler } from '../utils/error/errorHandler';
-import { ManagerService } from '../services/ManagerService';
-import { CustomError } from '../utils/error/CustomError';
+import { errorHandler } from '../utils/error/errorHandler.js';
+import { ManagerService } from '../services/ManagerService.js';
+import { CustomError } from '../utils/error/CustomError.js';
 
 class ManagerController {
   static async createManager(req: Request, res: Response) {

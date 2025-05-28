@@ -1,9 +1,9 @@
 import jwt from "jsonwebtoken";
 import dotenv from 'dotenv';
-import User from "../../models/User";
+import User from "../../models/User.js";
 import crypto from 'crypto';
-import logger from "../logger/logger";
-import MailService from "../../services/MailService";
+import logger from "../logger/logger.js";
+import MailService from "../../services/MailService.js";
 import { Response } from "express";
 
 

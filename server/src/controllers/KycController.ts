@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { KycService } from '../services/KycService';
-import { CustomError } from '../utils/error/CustomError';
-import logger from '../utils/logger/logger';
-import { errorHandler } from '../utils/error/errorHandler';
+import { KycService } from '../services/KycService.js';
+import { CustomError } from '../utils/error/CustomError.js';
+import logger from '../utils/logger/logger.js';
+import { errorHandler } from '../utils/error/errorHandler.js';
 
 class KycController {
   static async create(req: Request, res: Response) {

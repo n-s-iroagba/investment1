@@ -2,7 +2,7 @@ import nodemailer from "nodemailer"
 import path from "path"
 import hbs from "nodemailer-express-handlebars"
 import dotenv from "dotenv"
-import type User from "../models/User"
+import type User from "../models/User.js"
 import fs from "fs"
 
 dotenv.config()

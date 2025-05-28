@@ -1,6 +1,6 @@
-import Kyc from '../models/Kyc';
-import { CustomError } from '../utils/error/CustomError';
-import logger from '../utils/logger/logger';
+import Kyc from '../models/Kyc.js';
+import { CustomError } from '../utils/error/CustomError.js';
+import logger from '../utils/logger/logger.js';
 
 
 interface KycInput {

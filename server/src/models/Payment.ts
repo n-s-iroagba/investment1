@@ -1,8 +1,8 @@
 // models/Payment.ts
 import { DataTypes, Model, Optional } from 'sequelize';
-import sequelize from '../config/database'; // adjust to your actual sequelize instance
-import ManagedPortfolio from './ManagedPortfolio';
-import VerificationFee from './VerificationFee';
+import sequelize from '../config/database.js'; // adjust to your actual sequelize instance
+import ManagedPortfolio from './ManagedPortfolio.js';
+import VerificationFee from './VerificationFee.js';
 
 // 1. Define attributes
 export interface PaymentAttributes {

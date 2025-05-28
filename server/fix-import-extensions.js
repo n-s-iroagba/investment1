@@ -7,7 +7,7 @@ async function fixImports(dir) {
     const fullPath = path.join(dir, file.name)
     if (file.isDirectory()) {
       await fixImports(fullPath)
-    } else if (file.name.endsWith('.js')) {
+    } else if (file.name.endsWith('.ts')) {
       let content = await fs.readFile(fullPath, 'utf-8')
       // Improved regex to handle both ./ and ../ relative paths
       content = content.replace(
@@ -24,6 +24,6 @@ async function fixImports(dir) {
   }
 }
 
-fixImports(path.resolve('./dist')).then(() => {
+fixImports(path.resolve('./src')).then(() => {
   console.log('Import extensions fixed in dist/')
 }).catch(console.error)

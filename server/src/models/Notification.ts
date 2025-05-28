@@ -7,8 +7,8 @@ import {
   NonAttribute,
   DataTypes,
 } from 'sequelize';
-import sequelize from '../config/database';
-import User from './User';
+import sequelize from '../config/database.js';
+import User from './User.js';
 export class Notification extends Model<
   InferAttributes<Notification>,
   InferCreationAttributes<Notification>

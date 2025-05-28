@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 
 import path from 'path';
-import { SocialMediaService } from '../services/SocialMediaService';
-import { CustomError } from '../utils/error/CustomError';
-import { errorHandler } from '../utils/error/errorHandler';
+import { SocialMediaService } from '../services/SocialMediaService.js';
+import { CustomError } from '../utils/error/CustomError.js';
+import { errorHandler } from '../utils/error/errorHandler.js';
 
 class SocialMediaController {
   static async create(req: Request, res: Response) {

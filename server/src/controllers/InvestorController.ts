@@ -1,6 +1,6 @@
 import type { Request, Response } from "express"
-import { InvestorService } from "../services/InvestorService"
-import { errorHandler } from "../utils/error/errorHandler"
+import { InvestorService } from "../services/InvestorService.js"
+import { errorHandler } from "../utils/error/errorHandler.js"
 
 export default class InvestorController {
   static async getInvestorProfile(req: Request, res: Response) {

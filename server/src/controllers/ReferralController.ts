@@ -1,7 +1,7 @@
 import type { Request, Response } from "express"
-import { ReferralService } from "../services/ReferralService"
-import { errorHandler } from "../utils/error/errorHandler"
-import logger from "../utils/logger/logger"
+import { ReferralService } from "../services/ReferralService.js"
+import { errorHandler } from "../utils/error/errorHandler.js"
+import logger from "../utils/logger/logger.js"
 
 export class ReferralController {
   static async getAllReferrals(req: Request, res: Response) {

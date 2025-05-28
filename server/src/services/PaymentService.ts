@@ -1,7 +1,7 @@
 
-import { Payment } from "../models/Payment"
-import { CustomError } from "../utils/error/CustomError"
-import logger from "../utils/logger/logger"
+import { Payment } from "../models/Payment.js"
+import { CustomError } from "../utils/error/CustomError.js"
+import logger from "../utils/logger/logger.js"
 
 
 class PaymentService {

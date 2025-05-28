@@ -2,8 +2,8 @@ import express, { Response } from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import sequelize from './config/database.js';
-import logger from './utils/logger/logger';
-import router from './router';
+import logger from './utils/logger/logger.js';
+import router from './router.js';
 import path from 'path'
 import fs from 'fs'
 import cookieParser from 'cookie-parser';

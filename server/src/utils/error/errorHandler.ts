@@ -1,6 +1,6 @@
 import type { Request, Response } from "express"
-import logger from "../logger/logger"
-import { CustomError } from "./CustomError"
+import logger from "../logger/logger.js"
+import { CustomError } from "./CustomError.js"
 
 export function errorHandler(err: unknown, req: Request, res: Response) {
   // Default to 500 if no code provided
@@ -29,4 +29,4 @@ export function errorHandler(err: unknown, req: Request, res: Response) {
   })
 }
 
-export { CustomError } from "./CustomError"
+export { CustomError } from "./CustomError.js"

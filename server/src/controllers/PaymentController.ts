@@ -1,9 +1,9 @@
 import type { Request, Response } from "express"
-import { PaymentService } from "../services/PaymentService"
-import { CustomError, errorHandler } from "../utils/error/errorHandler"
-import ManagedPortfolio from "../models/ManagedPortfolio"
-import VerificationFee from "../models/VerificationFee"
-import Payment from "../models/Payment"
+import { PaymentService } from "../services/PaymentService.js"
+import { CustomError, errorHandler } from "../utils/error/errorHandler.js"
+import ManagedPortfolio from "../models/ManagedPortfolio.js"
+import VerificationFee from "../models/VerificationFee.js"
+import Payment from "../models/Payment.js"
 
 export class PaymentController {
   static async getUnverifiedPayments(req:Request, res:Response){

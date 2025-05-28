@@ -7,8 +7,8 @@ import {
   NonAttribute,
   DataTypes,
 } from 'sequelize';
-import sequelize from '../config/database';
-import { Investor } from './Investor';
+import sequelize from '../config/database.js';
+import { Investor } from './Investor.js';
 
 export class Referral extends Model<
   InferAttributes<Referral>,

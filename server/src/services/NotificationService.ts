@@ -1,5 +1,5 @@
-import Notification from '../models/Notification';
-import logger from '../utils/logger/logger';
+import Notification from '../models/Notification.js';
+import logger from '../utils/logger/logger.js';
 
 
 interface NotificationInput {

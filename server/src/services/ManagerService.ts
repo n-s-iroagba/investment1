@@ -1,6 +1,6 @@
-import Manager from '../models/Manager';
-import { CustomError } from '../utils/error/CustomError';
-import logger from '../utils/logger/logger';
+import Manager from '../models/Manager.js';
+import { CustomError } from '../utils/error/CustomError.js';
+import logger from '../utils/logger/logger.js';
 
 
 interface ManagerInput {

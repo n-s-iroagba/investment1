@@ -1,7 +1,7 @@
-import UserService, { InvestorCreationDto, ResendTokenDto } from "../services/UserService";
-import AuthUtils, { EmailVerificationDto, secret } from "../utils/auth/AuthUtils";
-import { CustomError } from "../utils/error/CustomError";
-import { errorHandler } from "../utils/error/errorHandler";
+import UserService, { InvestorCreationDto, ResendTokenDto } from "../services/UserService.js";
+import AuthUtils, { EmailVerificationDto, secret } from "../utils/auth/AuthUtils.js";
+import { CustomError } from "../utils/error/CustomError.js";
+import { errorHandler } from "../utils/error/errorHandler.js";
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 export class AuthController {

@@ -7,12 +7,12 @@ import {
   NonAttribute,
   DataTypes,
 } from 'sequelize';
-import sequelize from '../config/database';
-import User from './User';
-import Admin from './Admin';
-import Kyc from './Kyc';
-import ManagedPortfolio from './ManagedPortfolio';
-import Referral from './Referral';
+import sequelize from '../config/database.js';
+import User from './User.js';
+import Admin from './Admin.js';
+import Kyc from './Kyc.js';
+import ManagedPortfolio from './ManagedPortfolio.js';
+import Referral from './Referral.js';
 
 export class Investor extends Model<
   InferAttributes<Investor>,

@@ -1,6 +1,6 @@
-import Referral from "../models/Referral"
-import { CustomError } from "../utils/error/CustomError"
-import logger from "../utils/logger/logger"
+import Referral from "../models/Referral.js"
+import { CustomError } from "../utils/error/CustomError.js"
+import logger from "../utils/logger/logger.js"
 
 interface ReferralCreateInput {
   referrerId: number

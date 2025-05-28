@@ -13,11 +13,11 @@ import {
   HasManyGetAssociationsMixin,
   HasManySetAssociationsMixin,
 } from 'sequelize';
-import sequelize from '../config/database';
-import Investor from './Investor';
-import Manager from './Manager';
-import CryptoWallet from './CryptoWallet';
-import Payment from './Payment';
+import sequelize from '../config/database.js';
+import Investor from './Investor.js';
+import Manager from './Manager.js';
+import CryptoWallet from './CryptoWallet.js';
+import Payment from './Payment.js';
 
 export class ManagedPortfolio extends Model<
   InferAttributes<ManagedPortfolio>,

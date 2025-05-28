@@ -7,8 +7,8 @@ import {
   NonAttribute,
   DataTypes,
 } from 'sequelize';
-import sequelize from '../config/database';
-import Admin from './Admin';
+import sequelize from '../config/database.js';
+import Admin from './Admin.js';
 
 export class SocialMedia extends Model<
   InferAttributes<SocialMedia>,

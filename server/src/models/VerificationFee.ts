@@ -7,10 +7,10 @@ import {
   NonAttribute,
   DataTypes,
 } from 'sequelize';
-import sequelize from '../config/database';
-import Investor from './Investor';
-import Admin from './Admin';
-import Payment from './Payment';
+import sequelize from '../config/database.js';
+import Investor from './Investor.js';
+import Admin from './Admin.js';
+import Payment from './Payment.js';
 
 export class VerificationFee extends Model<
   InferAttributes<VerificationFee>,

@@ -5,16 +5,7 @@ dotenv.config(); // Load environment variables
 
 const  sequelize =
 (process.env.NODE_ENV === 'production')?
-new Sequelize({
-  dialect: 'mysql',
-  host: process.env.db_host,
-  username: process.env.db_user,
-  password: process.env.db_password,
-  database: process.env.db_database,
- 
-  
-  logging: false,
-}):new Sequelize({
+new Sequelize(process.env.db_string):new Sequelize({
   dialect: 'mysql',
   host: 'localhost',
   username: 'root',

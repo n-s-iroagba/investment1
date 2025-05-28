@@ -1,8 +1,8 @@
 import type { Request, Response } from "express"
-import MailService from "../services/MailService"
-import { InvestorService } from "../services/InvestorService"
-import { errorHandler } from "../utils/error/errorHandler"
-import User from "../models/User"
+import MailService from "../services/MailService.js"
+import { InvestorService } from "../services/InvestorService.js"
+import { errorHandler } from "../utils/error/errorHandler.js"
+import User from "../models/User.js"
 
 export default class EmailController {
   static async sendEmailToInvestor(req: Request, res: Response) {

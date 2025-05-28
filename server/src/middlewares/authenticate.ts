@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
-import { secret } from '../utils/auth/AuthUtils';
-import { CustomError } from '../utils/error/CustomError';
+import { secret } from '../utils/auth/AuthUtils.js';
+import { CustomError } from '../utils/error/CustomError.js';
 
 
 export interface AuthenticatedRequest extends Request {

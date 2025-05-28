@@ -1,7 +1,7 @@
 import { StringLiteralLike } from 'typescript';
-import CryptoWallet from '../models/CryptoWallet';
-import { CustomError } from '../utils/error/CustomError';
-import logger from '../utils/logger/logger';
+import CryptoWallet from '../models/CryptoWallet.js';
+import { CustomError } from '../utils/error/CustomError.js';
+import logger from '../utils/logger/logger.js';
 
 export class CryptoWalletService {
   // Create a CryptoWallet

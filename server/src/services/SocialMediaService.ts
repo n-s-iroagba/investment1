@@ -1,6 +1,6 @@
-import SocialMedia from '../models/SocialMedia';
-import { CustomError } from '../utils/error/CustomError';
-import logger from '../utils/logger/logger';
+import SocialMedia from '../models/SocialMedia.js';
+import { CustomError } from '../utils/error/CustomError.js';
+import logger from '../utils/logger/logger.js';
 
 
 interface SocialMediaCreateInput {

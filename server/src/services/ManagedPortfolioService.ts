@@ -1,13 +1,13 @@
-import Admin from '../models/Admin';
-import Investor from '../models/Investor';
-import Kyc from '../models/Kyc';
-import ManagedPortfolio from '../models/ManagedPortfolio';
-import Payment, { PaymentCreationAttributes } from '../models/Payment';
-import User from '../models/User';
-import VerificationFee from '../models/VerificationFee';
-import { CustomError } from '../utils/error/CustomError';
-import logger from '../utils/logger/logger';
-import { PaymentCreationDto } from './VerificationFeeService';
+import Admin from '../models/Admin.js';
+import Investor from '../models/Investor.js';
+import Kyc from '../models/Kyc.js';
+import ManagedPortfolio from '../models/ManagedPortfolio.js';
+import Payment, { PaymentCreationAttributes } from '../models/Payment.js';
+import User from '../models/User.js';
+import VerificationFee from '../models/VerificationFee.js';
+import { CustomError } from '../utils/error/CustomError.js';
+import logger from '../utils/logger/logger.js';
+import { PaymentCreationDto } from './VerificationFeeService.js';
 
 
 interface ManagedPortfolioInput {

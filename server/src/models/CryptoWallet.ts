@@ -7,8 +7,8 @@ import {
   NonAttribute,
   DataTypes,
 } from 'sequelize';
-import sequelize from '../config/database';
-import ManagedPortfolio from './ManagedPortfolio';
+import sequelize from '../config/database.js';
+import ManagedPortfolio from './ManagedPortfolio.js';
 
 
  class CryptoWallet extends Model<
