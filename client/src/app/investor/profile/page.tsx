@@ -16,7 +16,7 @@ import {
   IdentificationIcon,
   EnvelopeIcon,
 } from "@heroicons/react/24/outline"
-import type { Investor } from "@/types"
+import type { Investor } from "@/types/Investor"
 import { get, patch } from "@/utils/apiClient"
 import { apiRoutes } from "@/constants/apiRoutes"
 import { useAuth } from "@/hooks/useAuth"
@@ -393,7 +393,7 @@ export default function InvestorProfile() {
                       <option value="">Select document type</option>
                       <option value="passport">Passport</option>
                       <option value="national_id">National ID</option>
-                      <option value="drivers_license">Driver's License</option>
+                      <option value="drivers_license">Driver`&apos;`s License</option>
                     </select>
                   </div>
 
@@ -447,7 +447,7 @@ export default function InvestorProfile() {
                   </div>
                   <div className="flex-1">
                     <h4 className="font-semibold text-green-900 text-lg">
-                      {investor.kyc.type.replace("_", " ").toUpperCase()} - {investor.kyc.number}
+                      {investor.kyc.type.replace("_", " ").toUpperCase()} 
                     </h4>
                     <p
                       className={`text-sm font-medium ${

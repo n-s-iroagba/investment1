@@ -6,8 +6,6 @@ export const baseURL: string = (() => {
   switch (env) {
     case "production":
       return process.env.NEXT_PUBLIC_API_BASE_URL_PROD || ""
-    case "staging":
-      return process.env.NEXT_PUBLIC_API_BASE_URL_STAGING || ""
     default:
       return process.env.NEXT_PUBLIC_API_BASE_URL_DEV || "http://localhost:5000/api"
   }
