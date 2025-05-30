@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const fetchUser = () => {
     setLoading(true)
-    alert('in use Auth')
+  
     get<LoggedInUser>(apiRoutes.auth.me())
       .then((data: LoggedInUser) => {console.log(data); setUser(data)})
       .catch(() => setUser(null))
