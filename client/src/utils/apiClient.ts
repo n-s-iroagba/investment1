@@ -5,7 +5,7 @@ export const baseURL: string = (() => {
   const env = process.env.NEXT_PUBLIC_NODE_ENV || process.env.NODE_ENV || "development"
   switch (env) {
     case "production":
-      return process.env.NEXT_PUBLIC_API_BASE_URL_PROD || "https://investment1.fly.dev"
+      return process.env.NEXT_PUBLIC_API_BASE_URL_PROD || "https://investment1.fly.dev/api"
     default:
       return process.env.NEXT_PUBLIC_API_BASE_URL_DEV || "http://localhost:5000/api"
   }
