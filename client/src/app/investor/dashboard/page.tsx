@@ -9,7 +9,7 @@ import type { ManagedPortfolio } from "@/types/managedPortfolio"
 import type { Payment } from "@/types/Payment"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import Chart from "react-apexcharts"
+import dynamic from "next/dynamic"
 import {
   ArrowTrendingUpIcon,
   CurrencyDollarIcon,
@@ -23,6 +23,16 @@ import {
 import { Spinner } from "@/components/Spinner"
 import { useGetSingle } from "@/hooks/useFetch"
 import { apiRoutes } from "@/constants/apiRoutes"
+
+// Dynamically import Chart component to avoid SSR issues
+const Chart = dynamic(() => import("react-apexcharts"), { 
+  ssr: false,
+  loading: () => (
+    <div className="flex items-center justify-center h-60">
+      <Spinner className="w-6 h-6 text-green-600" />
+    </div>
+  )
+})
 
 function getDaysSinceOldestPayment(portfolio: ManagedPortfolio | null): number {
   if (!portfolio?.manager) return 0
@@ -55,11 +65,33 @@ const InvestorDashboard = () => {
   const [showPaymentProofModal, setShowPaymentProofModal] = useState(false)
   const [copiedAddress, setCopiedAddress] = useState(false)
   const [isChartReady, setIsChartReady] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
 
-  // Copy to clipboard function
+  // Ensure component is mounted before accessing browser APIs
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  // Copy to clipboard function with proper browser detection
   const copyToClipboard = async (text: string) => {
+    if (!isMounted || typeof window === 'undefined') return
+    
     try {
-      await navigator.clipboard.writeText(text)
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text)
+      } else {
+        // Fallback for older browsers or non-secure contexts
+        const textArea = document.createElement('textarea')
+        textArea.value = text
+        textArea.style.position = 'fixed'
+        textArea.style.left = '-999999px'
+        textArea.style.top = '-999999px'
+        document.body.appendChild(textArea)
+        textArea.focus()
+        textArea.select()
+        document.execCommand('copy')
+        textArea.remove()
+      }
       setCopiedAddress(true)
       setTimeout(() => setCopiedAddress(false), 2000)
     } catch (err) {
@@ -76,11 +108,11 @@ const InvestorDashboard = () => {
 
   // Chart ready state
   useEffect(() => {
-    if (portfolio) {
+    if (portfolio && isMounted) {
       const timer = setTimeout(() => setIsChartReady(true), 100)
       return () => clearTimeout(timer)
     }
-  }, [portfolio])
+  }, [portfolio, isMounted])
 
   // Loading state with fixed layout
   if (authLoading || (shouldFetchPortfolio && loading)) {
@@ -110,7 +142,7 @@ const InvestorDashboard = () => {
               <h3 className="text-red-900 font-medium text-lg mb-2">Something went wrong</h3>
               <p className="text-sm text-red-600 mb-6 leading-relaxed">{error || 'Please try again later'}</p>
               <button 
-                onClick={() => window.location.reload()} 
+                onClick={() => isMounted && window.location.reload()} 
                 className="w-full px-6 py-3 bg-red-600 text-white rounded-xl text-sm font-medium hover:bg-red-700 active:bg-red-800 transition-colors touch-manipulation"
               >
                 Try Again
@@ -326,7 +358,7 @@ const InvestorDashboard = () => {
                   Portfolio Growth
                 </h3>
                 <div className="w-full h-60 flex items-center justify-center">
-                  {isChartReady ? (
+                  {isChartReady && isMounted ? (
                     <Chart 
                       options={chartOptions} 
                       series={chartSeries} 
