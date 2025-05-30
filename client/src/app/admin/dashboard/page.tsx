@@ -33,7 +33,7 @@ const AdminDashboard = () => {
   // Redirect if not admin
   useEffect(() => {
     if (!authLoading && !isAdmin) {
-      
+      router.push("/login")
     }
   }, [authLoading, isAdmin, router])
 
