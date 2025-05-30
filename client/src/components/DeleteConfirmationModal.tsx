@@ -64,7 +64,7 @@ export function DeleteConfirmationModal({ id, onClose, type, message }: DeleteMo
         </div>
 
         <p className="text-green-700 mb-6">
-          Are you sure you want to delete <span className="font-semibold">"{message}"</span>? This action cannot be
+          Are you sure you want to delete <span className="font-semibold">{message}</span>? This action cannot be
           undone.
         </p>
 
