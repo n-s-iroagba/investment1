@@ -815,3 +815,5 @@
 2025-05-30T01:23:14.361Z [INFO]: Request URL: GET /api/investors/me/1, undefined
 2025-05-30T01:26:04.293Z [INFO]: Request URL: GET /api/managers, undefined
 2025-05-30T01:26:04.578Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-30T02:23:12.163Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-30T02:23:59.320Z [INFO]: Request URL: GET /api/auth/me, undefined
