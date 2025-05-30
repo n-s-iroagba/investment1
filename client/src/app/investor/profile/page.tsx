@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import {
   PencilSquareIcon,
   CheckCircleIcon,
@@ -53,15 +53,7 @@ export default function InvestorProfile() {
       router.push("/login")
     }
   }, [authLoading, roleId, router])
-
-  // Fetch investor profile
-  useEffect(() => {
-    if (roleId && !authLoading) {
-      fetchProfile()
-    }
-  }, [roleId, authLoading])
-
-  const fetchProfile = async () => {
+  const fetchProfile = useCallback(async () => {
     try {
       setLoading(true)
       setError("")
@@ -80,7 +72,15 @@ export default function InvestorProfile() {
     } finally {
       setLoading(false)
     }
-  }
+  },[roleId])
+
+  // Fetch investor profile
+  useEffect(() => {
+    if (roleId && !authLoading) {
+      fetchProfile()
+    }
+  }, [roleId, authLoading, fetchProfile])
+
 
   const handleProfileChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setProfileData({ ...profileData, [e.target.name]: e.target.value })

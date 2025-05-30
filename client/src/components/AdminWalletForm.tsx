@@ -11,9 +11,10 @@ import { baseURL } from "@/utils/apiClient"
 
 interface AdminWalletFormProps {
   existingWallet?: AdminWallet
+  onClose:()=>void
 }
 
-export default function AdminWalletForm({ existingWallet }: AdminWalletFormProps) {
+export default function AdminWalletForm({ existingWallet,onClose }: AdminWalletFormProps) {
   const [formData, setFormData] = useState<AdminWalletCreationDto>({
     address: existingWallet?.address || "",
     currency: existingWallet?.currency || "",
@@ -64,6 +65,7 @@ export default function AdminWalletForm({ existingWallet }: AdminWalletFormProps
       if (!existingWallet) {
         setFormData({ address: "", currency: "" })
       }
+      onClose()
     } catch (error) {
       console.error("Submission error:", error)
       toast.error("An error occurred. Please try again.")

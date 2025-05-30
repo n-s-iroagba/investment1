@@ -71,13 +71,13 @@ console.log(params)
     }
   };
 
-  const verifyAddress = (addr: string) => WAValidator.validate(addr);
+  const verifyAddress = process.env.NODE_ENV=='production'? (addr: string) => WAValidator.validate(addr) :()=>true
 
   const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setAddress(value);
     const valid = true
-    // verifyAddress(value);
+    verifyAddress(value);
     setWalletVerified(valid);
   };
 
@@ -99,7 +99,7 @@ console.log(params)
     setSubmitting(true);
 
     try {
-      const response = await post<
+       await post<
         InvestmentCreationDto,
         { investmentId: number | string }
       >(apiRoutes.investment.new(userId), payload);

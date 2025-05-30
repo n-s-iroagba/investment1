@@ -2,10 +2,11 @@
 
 import InvestorOffCanvas from "@/components/InvestorOffCanvas"
 import { apiRoutes } from "@/constants/apiRoutes"
+import { useAuth } from "@/hooks/useAuth"
 import type { Referral } from "@/types/Referral"
 import { UserGroupIcon, CheckCircleIcon, ClockIcon, CurrencyDollarIcon } from "@heroicons/react/24/outline"
 import { motion } from "framer-motion"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 
 export default function InvestorReferrals() {
   const [referrals, setReferrals] = useState<Referral[]>([])
@@ -13,10 +14,9 @@ export default function InvestorReferrals() {
   const [error, setError] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState<"all" | "settled" | "unsettled">("all")
 
-  // Mock investor ID - in real app, get from auth context
-  const investorId = 1
 
-  const fetchReferrals = async () => {
+  const {   roleId } = useAuth()
+  const fetchReferrals = useCallback(async () => {
     try {
       setLoading(true)
       setError(null)
@@ -24,13 +24,13 @@ export default function InvestorReferrals() {
       let endpoint = ""
       switch (activeTab) {
         case "settled":
-          endpoint = apiRoutes.referral.investorSettledReferrals(investorId)
+          endpoint = apiRoutes.referral.investorSettledReferrals(roleId)
           break
         case "unsettled":
-          endpoint = apiRoutes.referral.investorUnsettledReferrals(investorId)
+          endpoint = apiRoutes.referral.investorUnsettledReferrals(roleId)
           break
         default:
-          endpoint = apiRoutes.referral.investorReferrals(investorId)
+          endpoint = apiRoutes.referral.investorReferrals(roleId)
       }
 
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${endpoint}`)
@@ -45,11 +45,11 @@ export default function InvestorReferrals() {
     } finally {
       setLoading(false)
     }
-  }
+  },[activeTab, roleId])
 
   useEffect(() => {
     fetchReferrals()
-  }, [activeTab])
+  }, [activeTab, fetchReferrals])
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-US", {

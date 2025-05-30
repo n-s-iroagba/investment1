@@ -11,9 +11,10 @@ import { baseURL } from "@/utils/apiClient"
 
 interface SocialMediaFormProps {
   existingSocialMedia?: SocialMedia
+  onClose:()=>void
 }
 
-export default function SocialMediaForm({ existingSocialMedia }: SocialMediaFormProps) {
+export default function SocialMediaForm({ existingSocialMedia,onClose }: SocialMediaFormProps) {
   const [formData, setFormData] = useState<SocialMediaCreationDto>({
     name: existingSocialMedia?.name || "",
     link: existingSocialMedia?.link || "",
@@ -79,6 +80,7 @@ export default function SocialMediaForm({ existingSocialMedia }: SocialMediaForm
       if (!existingSocialMedia) {
         setFormData({ name: "", link: "", logo: "" })
       }
+      onClose()
     } catch (error) {
       console.error("Submission error:", error)
       toast.error("An error occurred. Please try again.")

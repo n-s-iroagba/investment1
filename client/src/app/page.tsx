@@ -7,19 +7,19 @@ import { Spinner } from "@/components/Spinner"
 import { ChartBarIcon, UserGroupIcon, CurrencyDollarIcon, ShieldCheckIcon } from "@heroicons/react/24/outline"
 
 export default function Page() {
-  const { user, loading } = useAuth()
+  const { isAdmin, roleId ,loading } = useAuth()
   const router = useRouter()
 
   useEffect(() => {
-    if (!loading && user) {
+    if (!loading) {
       // Redirect authenticated users to their respective dashboards
-      if (user.role === "ADMIN") {
+      if (isAdmin) {
         router.push("/admin/dashboard")
-      } else if (user.role === "INVESTOR") {
+      } else if (roleId && !isAdmin) {
         router.push("/investor/dashboard")
       }
     }
-  }, [user, loading, router])
+  }, [isAdmin, loading, roleId, router])
 
   if (loading) {
     return (
