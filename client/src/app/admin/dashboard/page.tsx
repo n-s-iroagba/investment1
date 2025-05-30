@@ -6,17 +6,17 @@ import { apiRoutes } from "@/constants/apiRoutes"
 import { useGetList } from "@/hooks/useFetch"
 import { useAuth } from "@/hooks/useAuth"
 import type { AdminWallet } from "@/types/adminWallet"
-import { type ReactNode, useEffect } from "react"
+import { type ReactNode, } from "react"
 import { Spinner } from "@/components/Spinner"
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline"
 import type { Manager } from "@/types/manager"
 import type { SocialMedia } from "@/types/socialMedia"
-import { useRouter } from "next/navigation"
+
 
 const AdminDashboard = () => {
   const { loading: authLoading, isAdmin, displayName } = useAuth()
   console.log(displayName, isAdmin)
-  const router = useRouter()
+ 
 
   const {
     data: wallets,
@@ -31,11 +31,11 @@ const AdminDashboard = () => {
   } = useGetList<SocialMedia>(apiRoutes.socialMedia.list())
 
   // Redirect if not admin
-  useEffect(() => {
-    if (!authLoading && !isAdmin) {
-      router.push("/login")
-    }
-  }, [authLoading, isAdmin, router])
+  // useEffect(() => {
+  //   if (!authLoading && !isAdmin) {
+  //     router.push("/login")
+  //   }
+  // }, [authLoading, isAdmin, router])
 
   const todos: ReactNode[] = []
 
