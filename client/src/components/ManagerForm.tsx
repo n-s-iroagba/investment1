@@ -2,7 +2,6 @@
 
 import type React from "react"
 import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
 import "react-image-crop/dist/ReactCrop.css"
 import type { Manager, ManagerCreationDto } from "@/types/manager"
 import {
@@ -39,7 +38,7 @@ const ManagerForm: React.FC<ManagerFormProps> = ({ patch, existingManager }) => 
   const [files, setFiles] = useState<File | null>(null)
   const [validated, setValidated] = useState(false)
 
-  const router = useRouter()
+
 
   useEffect(() => {
     if (existingManager) {
@@ -61,7 +60,7 @@ const ManagerForm: React.FC<ManagerFormProps> = ({ patch, existingManager }) => 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (!managerData.image || (patch && hasEmptyKey(managerData as Manager))) {
+    if (!patch && !files || (patch && hasEmptyKey(managerData as Manager))) {
       setValidated(false)
       setErrorMessage("Please fill in all required fields and upload an image.")
       return
@@ -83,7 +82,7 @@ const ManagerForm: React.FC<ManagerFormProps> = ({ patch, existingManager }) => 
 
       if (files) {
         formData.append("image", files)
-        alert("hi") // Make sure 'files' is a File or Blob
+    
       }
 
       const endpoint =
@@ -100,7 +99,7 @@ const ManagerForm: React.FC<ManagerFormProps> = ({ patch, existingManager }) => 
         throw new Error(errMsg)
       }
 
-      router.push("/admin/managers")
+      window.location.reload()
     } catch (err) {
       console.error(err)
       setErrorMessage("An error occurred")
@@ -187,13 +186,13 @@ const ManagerForm: React.FC<ManagerFormProps> = ({ patch, existingManager }) => 
               className={`w-full p-3 rounded-xl border-2 ${
                 validated && !managerData.percentageYield ? "border-red-300" : "border-green-100"
               } focus:border-green-500 focus:ring-2 focus:ring-green-200`}
-              required
+           required
             />
           </div>
           <div>
             <label className="block text-sm font-medium text-green-700 mb-2 flex items-center gap-1">
               <CalendarIcon className="w-4 h-4" />
-              Duration (months)
+              Duration (days)
             </label>
             <input
               type="number"
@@ -221,7 +220,7 @@ const ManagerForm: React.FC<ManagerFormProps> = ({ patch, existingManager }) => 
             className={`w-full p-3 rounded-xl border-2 ${
               validated && !managerData.minimumInvestmentAmount ? "border-red-300" : "border-green-100"
             } focus:border-green-500 focus:ring-2 focus:ring-green-200`}
-            required
+     
           />
         </div>
 

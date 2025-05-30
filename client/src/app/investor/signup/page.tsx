@@ -105,7 +105,6 @@ export default function SignupPage() {
           { label: 'Email', name: 'email', type: 'email', Icon: EnvelopeIcon },
           { label: 'Password', name: 'password', type: 'password', Icon: LockClosedIcon  },
           { label: 'Confirm Password', name: 'confirmPassword', type: 'password', Icon: LockClosedIcon  },
-          { label: 'Referrer Code (optional)', name: 'referrerCode', type: 'text', Icon: UserCircleIcon },
         ].map(({ label, name, type, Icon }) => (
             <div key={name}>
               <label className="block text-sm font-medium text-green-700 mb-2 flex items-center gap-1">
@@ -124,6 +123,45 @@ export default function SignupPage() {
               />
             </div>
           ))}
+
+          {/* Gender Dropdown */}
+          <div>
+            <label className="block text-sm font-medium text-green-700 mb-2 flex items-center gap-1">
+              <UserCircleIcon className="w-4 h-4" />
+              Gender
+            </label>
+            <select
+              name="gender"
+              value={form.gender}
+              onChange={handleChange}
+              required
+              className={`w-full p-3 rounded-xl border-2 ${
+                error?.toLowerCase().includes('gender') ? 'border-red-300' : 'border-green-100'
+              } focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all bg-white`}
+            >
+              <option value="">Select Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="non-binary">Non-Binary</option>
+            </select>
+          </div>
+
+          {/* Referrer Code */}
+          <div>
+            <label className="block text-sm font-medium text-green-700 mb-2 flex items-center gap-1">
+              <UserCircleIcon className="w-4 h-4" />
+              Referrer Code (optional)
+            </label>
+            <input
+              type='text'
+              name='referrerCode'
+              value={form['referrerCode']}
+              onChange={handleChange}
+              className={`w-full p-3 rounded-xl border-2 ${
+                error?.toLowerCase().includes('referrerCode') ? 'border-red-300' : 'border-green-100'
+              } focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all`}
+            />
+          </div>
 
         <button
             type="submit"

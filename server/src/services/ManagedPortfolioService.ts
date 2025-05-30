@@ -2,6 +2,7 @@ import Admin from '../models/Admin.js';
 import Investor from '../models/Investor.js';
 import Kyc from '../models/Kyc.js';
 import ManagedPortfolio from '../models/ManagedPortfolio.js';
+import Manager from '../models/Manager.js';
 import Payment, { PaymentCreationAttributes } from '../models/Payment.js';
 import User from '../models/User.js';
 import VerificationFee from '../models/VerificationFee.js';
@@ -54,37 +55,28 @@ catch (error) {
     }
   }
 
-static async getInvestorById  (
+  static async getInvestmentByInvestorId(
   investorId: number
-): Promise<Investor | null> {
-  const investor = await Investor.findByPk(investorId, {
-    attributes: ['id', 'firstName', 'lastName', 'gender', 'countryOfResidence', 'dateOfBirth', 'referralCode'],
+): Promise<ManagedPortfolio | null> {
+  const portfolio = await ManagedPortfolio.findOne({
+    where: { investorId },
     include: [
       {
-        model: User,
-        attributes: ['email'],
-        as: 'user',
+        model: Manager,
+        as: 'manager',
       },
-      {
-        model: Kyc,
-        as: 'kyc',
-      },
-      {
-        model: ManagedPortfolio,
-        as: 'managedPortfolios',
-      },
-      {
-        model: VerificationFee,
-        as: 'verificationFees',
-      },
+      // {
+      //   model: VerificationFee,
+      //   as: 'verificationFees',
+      // },
     ],
   });
+  
+  if (!portfolio) throw new CustomError(404, 'portfolio not found');
+  console.log('managed portfolio', portfolio);
 
-  if (!investor) throw new CustomError(404, 'investor not found');
-
-  return investor;
+  return portfolio;
 };
-
 
   // Update by id - must include amount and managerId
   static async updatePortfolio(id: number, data: ManagedPortfolioInput) {

@@ -3,7 +3,7 @@ export const apiRoutes = {
     login: (): string => `/auth/login`,
     logout: (): string => `/auth/logout`,
     adminSignup: (): string => '/auth/admin/signup',
-    register: (): string => `/auth/register`,
+    signup: (): string => `/auth/signup`,
     forgotPassword: (): string => `/auth/forgot-password`,
     resetPassword: (): string => `/auth/reset-password`,
     verifyEmail: (): string => `/auth/verify-email`,
@@ -43,8 +43,8 @@ export const apiRoutes = {
     profile: (id: string | number): string => `/investors/${id}`,
     update: (id: string | number): string => `/investors/${id}`,
     delete: (id: string | number): string => `/investors/${id}`,
-    me: (): string => `/investors/me`,
-    updateMe: (): string => `/investors/me`,
+    me: (id:string|number): string => `/investors/me/${id}`,
+    updateMe: (): string => `/investors/me/`,
     list:():string => `/investors`,
   },
   email: {
@@ -74,5 +74,6 @@ export const apiRoutes = {
   },
   kyc:{
     verify:(id:string|number):string => `/kyc/verify/${id}`,
+    create:(id:string|number):string => `/kyc/${id}`
   }
 }

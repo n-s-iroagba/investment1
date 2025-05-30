@@ -11,8 +11,12 @@ import {
   LinkIcon,
   ShareIcon,
   CurrencyDollarIcon,
+  UserMinusIcon,
 } from "@heroicons/react/24/outline"
 import Link from "next/link"
+import { apiRoutes } from "@/constants/apiRoutes"
+import { get } from "@/utils/apiClient"
+import { useRouter } from "next/navigation"
 
 interface AdminOffcanvasProps {
   children: React.ReactNode
@@ -21,7 +25,7 @@ interface AdminOffcanvasProps {
 export default function AdminOffcanvas({ children }: AdminOffcanvasProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [isDesktop, setIsDesktop] = useState(false)
-
+  const router = useRouter()
   useEffect(() => {
     const handleResize = () => {
       const isLargeScreen = window.innerWidth >= 1024
@@ -38,6 +42,19 @@ export default function AdminOffcanvas({ children }: AdminOffcanvasProps) {
     if (!isDesktop) {
       setIsOpen(false)
     }
+  }
+
+  const logout= ()=>{
+    try{
+    get(apiRoutes.auth.logout())
+   
+    router.push('/login')
+    }
+    catch(err){
+      alert('Unable to log out an error occured')
+      console.log(err)
+    }
+    
   }
 
   return (
@@ -89,6 +106,17 @@ export default function AdminOffcanvas({ children }: AdminOffcanvasProps) {
                 <span className="text-green-100 font-medium text-sm lg:text-base truncate">{item.text}</span>
               </Link>
             ))}
+                <Link
+              href={''}
+             
+                className="flex items-center gap-3 text-green-900 p-3 rounded-lg
+                         bg-green-100/10 hover:bg-green-100/20 active:bg-green-100/30 transition-all
+                         border border-transparent hover:border-green-100/30 touch-manipulation"
+                onClick={()=>logout()}
+              >
+                <UserMinusIcon className="h-4 w-4 lg:h-5 lg:w-5 text-green-100 flex-shrink-0" />
+                <span className="text-green-100 font-medium text-sm lg:text-base truncate">Log out</span>
+              </Link>
           </div>
         </nav>
       </aside>

@@ -20,6 +20,7 @@ interface ManagerCardProps {
 }
 
 export default function AdminManagerCard({ manager, onEdit, onDelete }: ManagerCardProps) {
+  console.log(manager.image)
   return (
     <div className="bg-white p-6 rounded-2xl shadow-sm border-2 border-green-50 hover:border-green-100 transition-all relative group">
       {/* Decorative Corner Borders */}
@@ -31,7 +32,7 @@ export default function AdminManagerCard({ manager, onEdit, onDelete }: ManagerC
         <div className="w-full md:w-32 h-32 relative group/image">
           <div className="p-1 rounded-full border-2 border-green-100 bg-white">
             <Image
-              src={(manager.image as string) || "/placeholder.svg"}
+              src={`${manager.image}` || "/placeholder.svg"}
               alt={`${manager.firstName} ${manager.lastName}`}
               className="rounded-full object-cover"
               width={128}
@@ -59,9 +60,9 @@ export default function AdminManagerCard({ manager, onEdit, onDelete }: ManagerC
               <div className="flex items-center gap-2">
                 <CurrencyDollarIcon className="w-5 h-5 text-green-600" />
                 <p>
-                  <span className="font-semibold">Min. Investment:</span>$
+                  <span className="font-semibold">Min. Investment:</span>
                   {manager.minimumInvestmentAmount > 0
-                    ? manager.minimumInvestmentAmount.toLocaleString()
+                    ? '$'+manager.minimumInvestmentAmount.toLocaleString()
                     : "Any Amount"}
                 </p>
               </div>
@@ -76,7 +77,7 @@ export default function AdminManagerCard({ manager, onEdit, onDelete }: ManagerC
               <div className="flex items-center gap-2">
                 <CalendarIcon className="w-5 h-5 text-green-600" />
                 <p>
-                  <span className="font-semibold">Duration:</span> {manager.duration} months
+                  <span className="font-semibold">Duration:</span> {manager.duration} days
                 </p>
               </div>
             </div>

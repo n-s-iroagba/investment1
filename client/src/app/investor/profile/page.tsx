@@ -14,10 +14,9 @@ import {
   CalendarIcon,
   GlobeAltIcon,
   IdentificationIcon,
-  EnvelopeIcon,
 } from "@heroicons/react/24/outline"
 import type { Investor } from "@/types/Investor"
-import { get, patch } from "@/utils/apiClient"
+import { get, patch, post } from "@/utils/apiClient"
 import { apiRoutes } from "@/constants/apiRoutes"
 import { useAuth } from "@/hooks/useAuth"
 import { useRouter } from "next/navigation"
@@ -25,7 +24,7 @@ import InvestorOffCanvas from "@/components/InvestorOffCanvas"
 import { Spinner } from "@/components/Spinner"
 
 export default function InvestorProfile() {
-  const { user, loading: authLoading, isInvestor, userId } = useAuth()
+  const { roleId, loading: authLoading } = useAuth()
   const router = useRouter()
 
   const [investor, setInvestor] = useState<Investor | null>(null)
@@ -50,29 +49,30 @@ export default function InvestorProfile() {
 
   // Redirect if not investor
   useEffect(() => {
-    if (!authLoading && !isInvestor) {
+    if (!authLoading && !roleId) {
       router.push("/login")
     }
-  }, [authLoading, isInvestor, router])
+  }, [authLoading, roleId, router])
 
   // Fetch investor profile
   useEffect(() => {
-    if (isInvestor && userId) {
+    if (roleId && !authLoading) {
       fetchProfile()
     }
-  }, [isInvestor, userId])
+  }, [roleId, authLoading])
 
   const fetchProfile = async () => {
     try {
       setLoading(true)
-      const data = await get<Investor>(apiRoutes.investor.me())
+      setError("")
+      const data = await get<Investor>(apiRoutes.investor.me(roleId))
       setInvestor(data)
       setProfileData({
-        firstName: data.firstName,
-        lastName: data.lastName,
-        dateOfBirth: new Date(data.dateOfBirth).toISOString().split("T")[0],
-        gender: data.gender,
-        countryOfResidence: data.countryOfResidence,
+        firstName: data.firstName || "",
+        lastName: data.lastName || "",
+        dateOfBirth: data.dateOfBirth ? new Date(data.dateOfBirth).toISOString().split("T")[0] : "",
+        gender: data.gender || "",
+        countryOfResidence: data.countryOfResidence || "",
       })
     } catch (err) {
       setError("Failed to load profile")
@@ -102,7 +102,7 @@ export default function InvestorProfile() {
 
       const updateData = {
         ...profileData,
-        dateOfBirth: new Date(profileData.dateOfBirth),
+        dateOfBirth: profileData.dateOfBirth ? new Date(profileData.dateOfBirth) : undefined,
       }
 
       const updatedInvestor = await patch<typeof updateData, Investor>(apiRoutes.investor.updateMe(), updateData)
@@ -127,8 +127,8 @@ export default function InvestorProfile() {
       formData.append("number", kycData.number)
       if (kycData.image) formData.append("image", kycData.image)
 
-      // Note: You'll need to implement the KYC submission endpoint
-      // await post(apiRoutes.kyc.create(), formData);
+      // Submit KYC - adjust this endpoint as needed
+      await post(apiRoutes.kyc.create(roleId), formData)
 
       // Refresh profile to get updated KYC status
       await fetchProfile()
@@ -156,7 +156,7 @@ export default function InvestorProfile() {
     )
   }
 
-  if (!isInvestor) {
+  if (!roleId) {
     return null // Will redirect
   }
 
@@ -207,19 +207,18 @@ export default function InvestorProfile() {
                 <div className="flex items-center gap-4">
                   <div className="w-16 h-16 bg-gradient-to-br from-green-600 to-green-700 rounded-2xl flex items-center justify-center">
                     <span className="text-2xl font-bold text-white">
-                      {investor?.firstName?.[0]}
-                      {investor?.lastName?.[0]}
+                      {investor?.firstName?.[0] || "U"}
+                      {investor?.lastName?.[0] || ""}
                     </span>
                   </div>
-                  <div>
-                    <h2 className="text-xl font-bold text-green-900">
-                      {investor?.firstName} {investor?.lastName}
-                    </h2>
+               
                     <div className="flex items-center gap-2 text-green-600">
-                      <EnvelopeIcon className="w-4 h-4" />
-                      <span className="text-sm">{user?.email}</span>
+                      <UserCircleIcon className="w-4 h-4" />
+                       <h2 className="text-xl font-bold text-green-900">
+                      {investor?.firstName || "Unknown"} {investor?.lastName || "User"}
+                    </h2>
                     </div>
-                  </div>
+                  
                 </div>
 
                 {!isEditing && (
@@ -304,6 +303,7 @@ export default function InvestorProfile() {
                         : "border-transparent bg-green-50 text-green-800"
                     }`}
                   >
+                    <option value="">Select Gender</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                     <option value="other">Other</option>
@@ -321,6 +321,7 @@ export default function InvestorProfile() {
                     value={profileData.countryOfResidence}
                     onChange={handleProfileChange}
                     disabled={!isEditing}
+                    placeholder="Enter your country"
                     className={`w-full p-3 rounded-xl border-2 transition-all ${
                       isEditing
                         ? "border-green-200 focus:border-green-500 focus:ring-2 focus:ring-green-200"
@@ -340,15 +341,16 @@ export default function InvestorProfile() {
                       // Reset form data
                       if (investor) {
                         setProfileData({
-                          firstName: investor.firstName,
-                          lastName: investor.lastName,
-                          dateOfBirth: new Date(investor.dateOfBirth).toISOString().split("T")[0],
-                          gender: investor.gender,
-                          countryOfResidence: investor.countryOfResidence,
+                          firstName: investor.firstName || "",
+                          lastName: investor.lastName || "",
+                          dateOfBirth: investor.dateOfBirth ? new Date(investor.dateOfBirth).toISOString().split("T")[0] : "",
+                          gender: investor.gender || "",
+                          countryOfResidence: investor.countryOfResidence || "",
                         })
                       }
                     }}
-                    className="px-6 py-2 border-2 border-green-200 text-green-800 rounded-xl hover:bg-green-50 transition-colors"
+                    disabled={submitting}
+                    className="px-6 py-2 border-2 border-green-200 text-green-800 rounded-xl hover:bg-green-50 disabled:opacity-50 transition-colors"
                   >
                     Cancel
                   </button>
@@ -393,7 +395,7 @@ export default function InvestorProfile() {
                       <option value="">Select document type</option>
                       <option value="passport">Passport</option>
                       <option value="national_id">National ID</option>
-                      <option value="drivers_license">Driver`&apos;`s License</option>
+                      <option value="drivers_license">Driver&apos;s License</option>
                     </select>
                   </div>
 

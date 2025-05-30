@@ -19,15 +19,15 @@ import { PaymentController } from "./controllers/PaymentController.js"
 import User from "./models/User.js"
 const router = Router()
 router.post("/investment/new/:investorId", ManagedPortfolioController.createInvestment)
-router.post("/investment/:investorId", ManagedPortfolioController.getInvestment)
+router.get("/managed-portfolios/investor/:investorId", ManagedPortfolioController.getInvestment)
 router.patch('/managed-portfolios/credit/:investorId', ManagedPortfolioController.creditInvestment)
 router.get('/investors', InvestorController.getAllInvestors)
 router.patch("/investors/:id", InvestorController.updateInvestor)
 router.delete("/investors/:id", InvestorController.deleteInvestor)
 
 // New investor profile routes
-router.get("/investors/me", authenticate, InvestorController.getMyProfile)
-router.patch("/investors/me", authenticate, InvestorController.updateMyProfile)
+router.get("/investors/me/:investorId",  InvestorController.getMyProfile)
+router.patch("/investors/me/:investorId", authenticate, InvestorController.updateMyProfile)
 
 router.post("/kyc/:investorId", KycController.create)
 router.patch("/kyc/:id", KycController.update)
@@ -70,9 +70,10 @@ router.post("/auth/signup", AuthController.investorSignup)
 router.post("/auth/admin/signup", AuthController.adminSignup)
 router.post("/auth/verify-email", AuthController.verifyEmail)
 router.post(`/auth/resend-verification-token`, AuthController.resendVerificationToken)
-router.post("/auth/logout", (req, res) => {
+router.get("/auth/logout", (req, res) => {
+  
   res.clearCookie("token")
-  res.json({ message: "Logged out" })
+  return res.status(200).json({ message: "Logged out successfully" })
 })
 
 // Email routes

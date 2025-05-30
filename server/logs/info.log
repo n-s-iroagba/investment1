@@ -265,3 +265,553 @@
 2025-05-28T21:28:40.211Z [INFO]: Retrieved 0 social media records
 2025-05-28T21:28:40.214Z [INFO]: Request URL: GET /api/admin-wallets, undefined
 2025-05-28T21:28:40.516Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T21:38:15.559Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T21:38:15.611Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T21:38:15.612Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T21:38:15.623Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T21:38:15.632Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T21:38:22.376Z [INFO]: Retrieved 0 social media records
+2025-05-28T21:38:23.937Z [WARN]: CustomError - 404: Admin not found - URL: /api/auth/me
+2025-05-28T21:38:33.356Z [INFO]: Request URL: POST /api/auth/login, undefined
+2025-05-28T21:38:33.584Z [ERROR]: Error in login  UserService function: Error: login user not found
+2025-05-28T21:38:33.585Z [WARN]: CustomError - 404: login user not found - URL: /api/auth/login
+2025-05-28T21:39:25.352Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T21:39:25.359Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T21:39:25.388Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T21:39:25.389Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T21:39:25.814Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T21:39:25.836Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T21:39:25.870Z [INFO]: Retrieved 0 social media records
+2025-05-28T21:39:25.874Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T21:39:25.878Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T21:39:25.903Z [INFO]: Retrieved 0 social media records
+2025-05-28T21:39:33.450Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T21:39:33.614Z [WARN]: CustomError - 404: Admin not found - URL: /api/auth/me
+2025-05-28T21:39:40.706Z [INFO]: Request URL: POST /api/auth/admin/signup, undefined
+2025-05-28T21:39:49.663Z [INFO]: Request URL: POST /api/auth/verify-email, undefined
+2025-05-28T21:39:50.779Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T21:39:50.787Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T21:39:50.796Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T21:39:50.796Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T21:39:50.823Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T21:39:50.852Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T21:39:51.091Z [INFO]: Retrieved 0 social media records
+2025-05-28T21:39:51.278Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T21:39:51.279Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T21:39:51.334Z [INFO]: Retrieved 0 social media records
+2025-05-28T21:40:13.067Z [INFO]: Request URL: POST /api/auth/login, undefined
+2025-05-28T21:40:13.543Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T21:40:13.552Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T21:40:13.569Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T21:40:13.572Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T21:40:13.595Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T21:40:13.661Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T21:40:13.746Z [INFO]: Retrieved 0 social media records
+2025-05-28T21:40:13.756Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T21:40:13.757Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T21:40:13.771Z [INFO]: Retrieved 0 social media records
+2025-05-28T21:41:36.810Z [INFO]: Request URL: POST /api/auth/login, undefined
+2025-05-28T21:41:41.969Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T21:41:41.978Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T21:41:41.989Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T21:41:41.990Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T21:41:42.117Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T21:41:42.164Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T21:41:42.356Z [INFO]: Retrieved 0 social media records
+2025-05-28T21:41:42.359Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T21:41:42.361Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T21:41:42.366Z [INFO]: Retrieved 0 social media records
+2025-05-28T21:41:52.434Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T21:41:52.480Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T21:41:52.490Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T21:41:52.505Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T21:41:52.506Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T21:41:52.532Z [INFO]: Retrieved 0 social media records
+2025-05-28T21:43:43.527Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T21:43:45.988Z [INFO]: Request URL: POST /api/auth/login, undefined
+2025-05-28T21:43:47.459Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T21:43:47.483Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T21:43:47.529Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T21:43:47.551Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T21:43:47.554Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T21:43:47.574Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T21:43:47.605Z [INFO]: Retrieved 0 social media records
+2025-05-28T21:43:47.618Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-28T21:43:47.624Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-28T21:43:47.664Z [INFO]: Retrieved 0 social media records
+2025-05-28T21:44:00.168Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T21:44:00.395Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T21:50:16.028Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T21:50:16.053Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T21:55:49.960Z [INFO]: Request URL: POST /api//managers, undefined
+2025-05-28T22:00:27.667Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T22:00:39.841Z [INFO]: Request URL: POST /api/auth/admin/signup, undefined
+2025-05-28T22:00:39.866Z [ERROR]: Error in createInvestor UserService function: Error: user already exists with this email
+2025-05-28T22:00:39.867Z [WARN]: CustomError - 409: user already exists with this email - URL: /api/auth/admin/signup
+2025-05-28T22:00:49.340Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T22:00:49.408Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T22:01:28.975Z [INFO]: Request URL: POST /api//managers, undefined
+2025-05-28T22:01:30.186Z [INFO]: Created Manager id=0
+2025-05-28T22:02:00.335Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T22:02:00.376Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T22:03:37.950Z [INFO]: Request URL: POST /api//managers, undefined
+2025-05-28T22:03:38.976Z [INFO]: Created Manager id=0
+2025-05-28T22:03:40.729Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T22:03:40.742Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T22:15:06.205Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T22:15:06.222Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T22:15:25.028Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T22:15:25.094Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T22:16:27.834Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T22:16:27.930Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T22:23:46.924Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T22:23:47.016Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T22:28:35.307Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T22:28:35.336Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T22:33:46.459Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T22:33:46.495Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T22:39:01.958Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T22:39:02.005Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T22:41:46.219Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T22:41:46.251Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T22:43:20.829Z [INFO]: Request URL: POST /api//managers, undefined
+2025-05-28T22:43:22.655Z [INFO]: Created Manager id=0
+2025-05-28T22:43:25.128Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T22:43:25.146Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T22:44:41.188Z [INFO]: Request URL: GET /debug-uploads, undefined
+2025-05-28T22:44:42.040Z [INFO]: Request URL: GET /favicon.ico, undefined
+2025-05-28T22:58:56.336Z [INFO]: Request URL: PATCH /api//managers/2, undefined
+2025-05-28T22:58:58.828Z [INFO]: Updated Manager id=2
+2025-05-28T22:59:01.043Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T22:59:01.064Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T22:59:07.227Z [INFO]: Request URL: DELETE /api/managers/1, undefined
+2025-05-28T22:59:07.672Z [INFO]: Deleted Manager id=1
+2025-05-28T22:59:14.425Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T22:59:14.432Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T22:59:19.976Z [INFO]: Request URL: DELETE /api/managers/2, undefined
+2025-05-28T22:59:20.645Z [INFO]: Deleted Manager id=2
+2025-05-28T22:59:24.649Z [INFO]: Request URL: DELETE /api/managers/3, undefined
+2025-05-28T22:59:24.923Z [INFO]: Deleted Manager id=3
+2025-05-28T22:59:28.583Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T22:59:28.604Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T22:59:51.467Z [INFO]: Request URL: POST /api//managers, undefined
+2025-05-28T22:59:51.969Z [INFO]: Created Manager id=0
+2025-05-28T22:59:53.382Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T22:59:53.392Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T23:03:26.860Z [INFO]: Request URL: GET /test-file/manager-1748473191481.png, undefined
+2025-05-28T23:03:35.460Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T23:03:35.481Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T23:04:18.366Z [INFO]: Request URL: GET /test-file/manager-1748473191481.png, undefined
+2025-05-28T23:05:27.507Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T23:05:27.525Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T23:09:59.495Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-28T23:09:59.513Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T23:10:25.832Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T23:10:26.089Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T23:10:38.491Z [INFO]: Request URL: POST /api//admin-wallets, undefined
+2025-05-28T23:10:38.906Z [INFO]: Created AdminWallet
+2025-05-28T23:10:45.040Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T23:10:45.052Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T23:10:59.134Z [INFO]: Request URL: PATCH /api//admin-wallets/1, undefined
+2025-05-28T23:10:59.626Z [INFO]: Updated AdminWallet with id 1
+2025-05-28T23:11:04.860Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T23:11:04.870Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T23:11:32.777Z [INFO]: Request URL: DELETE /api/admin-wallets/1, undefined
+2025-05-28T23:11:33.590Z [INFO]: Deleted AdminWallet with id 1
+2025-05-28T23:11:37.265Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T23:11:37.276Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T23:11:47.653Z [INFO]: Request URL: POST /api//admin-wallets, undefined
+2025-05-28T23:11:47.927Z [INFO]: Created AdminWallet
+2025-05-28T23:11:52.599Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T23:11:52.613Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T23:22:12.816Z [INFO]: Request URL: GET /api/auth/logout, undefined
+2025-05-28T23:22:22.231Z [INFO]: Request URL: GET /api/auth/logout, undefined
+2025-05-28T23:24:35.680Z [INFO]: Request URL: GET /api/auth/logout, undefined
+2025-05-28T23:25:39.915Z [INFO]: Request URL: GET /api/auth/logout, undefined
+2025-05-28T23:26:07.858Z [INFO]: Request URL: GET /api/auth/logout, undefined
+2025-05-28T23:26:52.830Z [INFO]: Request URL: GET /api/auth/logout, undefined
+2025-05-28T23:27:19.800Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T23:27:19.818Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T23:27:24.451Z [INFO]: Request URL: GET /api/auth/logout, undefined
+2025-05-28T23:27:33.957Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T23:27:33.970Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T23:28:01.270Z [INFO]: Request URL: GET /api/auth/logout, undefined
+2025-05-28T23:28:07.614Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T23:28:07.650Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T23:28:10.016Z [INFO]: Request URL: GET /api/auth/logout, undefined
+2025-05-28T23:28:20.041Z [INFO]: Request URL: GET /api/auth/logout, undefined
+2025-05-28T23:29:14.466Z [INFO]: Request URL: GET /api/auth/logout, undefined
+2025-05-28T23:30:44.592Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T23:30:44.694Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T23:30:49.711Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T23:30:49.722Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-28T23:30:53.321Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T23:30:53.323Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T23:31:19.534Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T23:33:37.413Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T23:33:51.376Z [INFO]: Request URL: POST /api/auth/signup, undefined
+2025-05-28T23:33:51.952Z [ERROR]: Error in createInvestor UserService function: SequelizeUniqueConstraintError: Validation error
+2025-05-28T23:33:51.954Z [ERROR]: Error: Validation error - URL: /api/auth/signup - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.insert (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:308:21)
+    at async User.save (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:2490:35)
+    at async User.create (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1362:12)
+    at async UserService.createInvestor (file:///home/udorakpuenyi/tem/server/src/services/UserService.ts:19:26)
+    at async investorSignup (file:///home/udorakpuenyi/tem/server/src/controllers/AuthController.ts:9:27)
+2025-05-28T23:37:13.886Z [INFO]: Request URL: POST /api/auth/signup, undefined
+2025-05-28T23:37:14.410Z [ERROR]: Error in createInvestor UserService function: SequelizeUniqueConstraintError: Validation error
+2025-05-28T23:37:14.411Z [ERROR]: Error: Validation error - URL: /api/auth/signup - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.insert (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:308:21)
+    at async User.save (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:2490:35)
+    at async User.create (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1362:12)
+    at async UserService.createInvestor (file:///home/udorakpuenyi/tem/server/src/services/UserService.ts:19:26)
+    at async investorSignup (file:///home/udorakpuenyi/tem/server/src/controllers/AuthController.ts:9:27)
+2025-05-28T23:40:22.285Z [INFO]: Request URL: POST /api/auth/signup, undefined
+2025-05-28T23:40:23.382Z [ERROR]: Failed to create investor: Error: Missing required fields
+2025-05-28T23:40:23.384Z [ERROR]: Error in createInvestor UserService function: Error: Missing required fields
+2025-05-28T23:40:23.385Z [WARN]: CustomError - 400: Missing required fields - URL: /api/auth/signup
+2025-05-28T23:44:57.941Z [INFO]: Request URL: POST /api/auth/signup, undefined
+2025-05-28T23:44:58.337Z [ERROR]: Error in createInvestor UserService function: SequelizeUniqueConstraintError: Validation error
+2025-05-28T23:44:58.338Z [ERROR]: Error: Validation error - URL: /api/auth/signup - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.insert (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:308:21)
+    at async User.save (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:2490:35)
+    at async User.create (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1362:12)
+    at async UserService.createInvestor (file:///home/udorakpuenyi/tem/server/src/services/UserService.ts:19:26)
+    at async investorSignup (file:///home/udorakpuenyi/tem/server/src/controllers/AuthController.ts:9:27)
+2025-05-28T23:45:57.996Z [INFO]: Request URL: POST /api/auth/signup, undefined
+2025-05-28T23:46:00.416Z [INFO]: Created investor with userId 6
+2025-05-28T23:46:27.726Z [INFO]: Request URL: POST /api/auth/verify-email, undefined
+2025-05-28T23:46:29.377Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T23:46:29.386Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T23:49:27.431Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-28T23:49:27.464Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-28T23:59:43.223Z [INFO]: Request URL: GET /api/managed-portfolios/investor/0, undefined
+2025-05-29T00:00:16.493Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T00:00:51.802Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-29T00:53:44.495Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T00:53:58.815Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-29T00:59:02.585Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T00:59:04.459Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-29T01:18:53.952Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T01:18:55.333Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-29T01:21:38.493Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T01:21:38.859Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-29T01:21:38.888Z [ERROR]: Error: User is not associated to Investor! - URL: /api/managed-portfolios/investor/1 - Stack: SequelizeEagerLoadingError: User is not associated to Investor!
+    at Investor._getIncludedAssociation (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:565:13)
+    at Investor._validateIncludedElement (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:502:53)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at Investor._validateIncludedElements (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:417:39)
+    at Investor.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Investor.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async Investor.findByPk (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1221:12)
+    at async ManagedPortfolioService.getInvestorById (file:///home/udorakpuenyi/tem/server/src/services/ManagedPortfolioService.ts:41:26)
+2025-05-29T01:26:50.551Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T01:26:50.997Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-29T01:27:51.116Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T01:27:51.827Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-29T01:39:10.234Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T01:39:12.645Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-29T06:51:10.952Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T06:54:54.556Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T06:55:06.398Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T06:55:43.438Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T06:56:10.179Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T06:56:53.122Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-29T06:56:53.128Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T06:56:53.149Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-29T06:56:53.152Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-29T06:56:53.182Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-29T06:56:53.228Z [INFO]: Retrieved 0 social media records
+2025-05-29T06:56:59.855Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T06:57:16.248Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T06:57:31.552Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T06:57:40.378Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T06:57:48.774Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-29T06:57:48.797Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T06:57:48.815Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-29T06:57:48.816Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-29T06:57:48.823Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-29T06:57:49.005Z [INFO]: Retrieved 0 social media records
+2025-05-29T06:58:10.084Z [INFO]: Request URL: POST /api/auth/login, undefined
+2025-05-29T06:58:10.581Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-29T06:58:10.597Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-29T06:58:10.604Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-29T06:58:10.611Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-29T06:58:10.612Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-29T06:58:10.640Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-29T06:58:10.654Z [INFO]: Retrieved 0 social media records
+2025-05-29T06:58:10.676Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-29T06:58:10.678Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-29T06:58:10.682Z [INFO]: Retrieved 0 social media records
+2025-05-29T06:58:32.841Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-29T06:58:32.851Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-29T06:58:32.857Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-29T06:58:32.858Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-29T06:58:32.864Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T06:58:32.973Z [INFO]: Retrieved 0 social media records
+2025-05-29T06:59:01.916Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-29T06:59:02.011Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-29T06:59:13.844Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-29T06:59:13.958Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-29T06:59:25.873Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-29T06:59:25.875Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-29T06:59:25.975Z [INFO]: Retrieved 0 social media records
+2025-05-29T06:59:25.977Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-29T06:59:25.978Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-29T06:59:25.981Z [INFO]: Retrieved 0 social media records
+2025-05-29T06:59:28.878Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-29T06:59:28.891Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-29T07:00:17.570Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-29T07:00:17.766Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-29T07:00:32.487Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-29T07:00:32.580Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-29T07:02:19.723Z [INFO]: Request URL: GET /api/investors, undefined
+2025-05-29T07:02:19.898Z [INFO]: Request URL: GET /api/investors, undefined
+2025-05-29T07:02:35.839Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-29T07:02:35.959Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-29T07:02:40.458Z [INFO]: Request URL: GET /api/investors, undefined
+2025-05-29T07:02:40.475Z [INFO]: Request URL: GET /api/investors, undefined
+2025-05-29T07:03:00.953Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-29T07:03:02.213Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-29T07:04:20.640Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-29T07:04:20.683Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T07:06:07.910Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-29T07:06:07.983Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T07:07:13.538Z [INFO]: Request URL: GET /api/investors, undefined
+2025-05-29T07:07:13.544Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T22:21:34.126Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-29T22:21:34.286Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-29T22:21:35.650Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-29T22:21:35.722Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-29T22:21:35.734Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-29T22:21:35.737Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-29T22:21:35.765Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-29T22:21:35.782Z [INFO]: Retrieved 0 social media records
+2025-05-29T22:21:35.813Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-29T22:21:35.824Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-29T22:21:35.825Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-29T22:21:35.839Z [INFO]: Retrieved 0 social media records
+2025-05-29T22:21:46.997Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-29T22:21:46.998Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-29T22:21:47.106Z [INFO]: Retrieved 0 social media records
+2025-05-29T22:21:47.111Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-29T22:21:47.113Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-29T22:21:47.120Z [INFO]: Retrieved 0 social media records
+2025-05-29T22:37:40.519Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T22:37:40.571Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-29T22:37:40.575Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-29T22:37:40.617Z [INFO]: Retrieved 0 social media records
+2025-05-29T22:39:17.494Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-29T22:39:17.498Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-29T22:39:17.538Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T22:39:17.583Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-29T22:39:17.616Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-29T22:39:17.718Z [INFO]: Retrieved 0 social media records
+2025-05-29T22:39:27.469Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-29T22:39:27.496Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-29T22:46:56.668Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-29T22:48:02.531Z [INFO]: Request URL: GET /api/auth/logout, undefined
+2025-05-29T22:48:25.910Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T22:48:35.996Z [INFO]: Request URL: POST /api/auth/login, undefined
+2025-05-29T22:50:02.268Z [INFO]: Request URL: POST /api/auth/login, undefined
+2025-05-29T23:00:22.690Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T23:00:51.550Z [INFO]: Request URL: POST /api/auth/login, undefined
+2025-05-29T23:00:53.667Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-29T23:00:56.501Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-29T23:02:03.963Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T23:02:04.676Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-29T23:02:48.674Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T23:02:50.969Z [INFO]: Request URL: POST /api/auth/login, undefined
+2025-05-29T23:02:51.981Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-29T23:02:52.179Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-29T23:06:19.723Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T23:06:21.814Z [INFO]: Request URL: POST /api/auth/login, undefined
+2025-05-29T23:06:23.134Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-29T23:06:23.341Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-29T23:20:18.438Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T23:20:23.393Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-29T23:29:27.241Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T23:29:30.107Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-29T23:36:56.171Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T23:37:08.681Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-29T23:38:01.949Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T23:38:03.770Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-29T23:39:59.457Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T23:40:00.072Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-29T23:40:06.530Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-29T23:40:07.059Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-29T23:40:35.531Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T23:40:43.927Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-29T23:55:53.838Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T23:55:55.607Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-29T23:56:14.261Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-29T23:56:14.662Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-29T23:57:38.563Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-29T23:57:38.765Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-29T23:59:01.745Z [INFO]: Request URL: GET /api/managers/4, undefined
+2025-05-29T23:59:01.812Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-29T23:59:01.989Z [INFO]: Request URL: GET /api/managers/4, undefined
+2025-05-29T23:59:02.092Z [INFO]: Request URL: GET /api/admin-wallets, undefined
+2025-05-29T23:59:27.314Z [INFO]: Request URL: POST /api/investment/new/1, undefined
+2025-05-29T23:59:28.896Z [INFO]: Created ManagedPortfolio id=1
+2025-05-29T23:59:29.925Z [INFO]: Created CryptoWallet for managedPortfolioId 1
+2025-05-30T00:00:48.096Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-30T00:01:02.687Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-30T00:01:02.928Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-30T00:01:11.862Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-30T00:01:12.431Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-30T00:05:32.028Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-30T00:05:32.182Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-30T00:15:18.288Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-30T00:15:19.005Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-30T00:15:19.030Z [ERROR]: Error: VerificationFee is not associated to ManagedPortfolio! - URL: /api/managed-portfolios/investor/1 - Stack: SequelizeEagerLoadingError: VerificationFee is not associated to ManagedPortfolio!
+    at ManagedPortfolio._getIncludedAssociation (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:565:13)
+    at ManagedPortfolio._validateIncludedElement (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:502:53)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at ManagedPortfolio._validateIncludedElements (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:417:39)
+    at ManagedPortfolio.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async ManagedPortfolio.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async ManagedPortfolioService.getInvestmentByInvestorId (file:///home/udorakpuenyi/tem/server/src/services/ManagedPortfolioService.ts:39:27)
+    at async getInvestment (file:///home/udorakpuenyi/tem/server/src/controllers/ManagedPortfolioController.ts:61:31)
+2025-05-30T00:16:08.163Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-30T00:16:08.518Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-30T00:16:08.899Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-30T00:16:08.901Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-30T00:16:08.935Z [INFO]: Retrieved 0 social media records
+2025-05-30T00:16:08.940Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-30T00:16:08.941Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-30T00:16:08.956Z [INFO]: Retrieved 0 social media records
+2025-05-30T00:27:42.222Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-30T00:27:43.209Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-30T00:27:43.219Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-30T00:27:43.248Z [INFO]: Retrieved 0 social media records
+2025-05-30T00:27:43.390Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-30T00:27:43.404Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-30T00:27:43.434Z [INFO]: Retrieved 0 social media records
+2025-05-30T00:27:52.897Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-30T00:27:53.254Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-30T00:27:53.739Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-30T00:27:53.743Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-30T00:27:53.749Z [INFO]: Retrieved 0 social media records
+2025-05-30T00:27:53.843Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-30T00:27:53.847Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-30T00:27:53.859Z [INFO]: Retrieved 0 social media records
+2025-05-30T00:32:06.189Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-30T00:32:09.810Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-30T00:32:10.479Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-30T00:32:10.488Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-30T00:32:10.515Z [INFO]: Retrieved 0 social media records
+2025-05-30T00:32:10.589Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-30T00:32:10.595Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-30T00:32:10.603Z [INFO]: Retrieved 0 social media records
+2025-05-30T00:38:38.774Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-30T00:38:39.734Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-30T00:38:40.598Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-30T00:38:40.602Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-30T00:38:40.618Z [INFO]: Retrieved 0 social media records
+2025-05-30T00:38:40.706Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-30T00:38:40.709Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-30T00:38:40.715Z [INFO]: Retrieved 0 social media records
+2025-05-30T00:38:53.207Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-30T00:38:53.842Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-30T00:38:54.135Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-30T00:38:54.135Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-30T00:38:54.145Z [INFO]: Retrieved 0 social media records
+2025-05-30T00:38:54.157Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-30T00:38:54.162Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-30T00:38:54.169Z [INFO]: Retrieved 0 social media records
+2025-05-30T00:41:38.826Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-30T00:41:39.443Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-30T00:41:39.821Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-30T00:41:39.824Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-30T00:41:39.868Z [INFO]: Retrieved 0 social media records
+2025-05-30T00:41:39.882Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-30T00:41:39.885Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-30T00:41:39.987Z [INFO]: Retrieved 0 social media records
+2025-05-30T00:45:56.884Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-30T00:45:56.885Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-30T00:45:58.697Z [INFO]: Retrieved 0 social media records
+2025-05-30T00:46:09.414Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-30T00:46:10.357Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-30T00:46:10.683Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-30T00:46:10.684Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-30T00:46:10.705Z [INFO]: Retrieved 0 social media records
+2025-05-30T00:46:10.713Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-30T00:46:10.714Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-30T00:46:10.725Z [INFO]: Retrieved 0 social media records
+2025-05-30T00:49:02.393Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-30T00:49:04.806Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-30T00:49:05.424Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-30T00:49:05.425Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-30T00:49:05.460Z [INFO]: Retrieved 0 social media records
+2025-05-30T00:49:05.466Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-30T00:49:05.467Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-30T00:49:05.472Z [INFO]: Retrieved 0 social media records
+2025-05-30T01:13:08.297Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-30T01:13:19.418Z [INFO]: Request URL: GET /api/investors/me, undefined
+2025-05-30T01:13:19.703Z [ERROR]: Failed to fetch investor by id NaN: SequelizeDatabaseError: Unknown column 'NaN' in 'where clause'
+2025-05-30T01:13:19.773Z [ERROR]: Error: Unknown column 'NaN' in 'where clause' - URL: /api/investors/me - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Investor.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1140:21)
+    at async Investor.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async Investor.findByPk (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1221:12)
+    at async InvestorService.getInvestorById (file:///home/udorakpuenyi/tem/server/src/services/InvestorService.ts:44:30)
+    at async getMyProfile (file:///home/udorakpuenyi/tem/server/src/controllers/InvestorController.ts:27:30)
+2025-05-30T01:17:05.839Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-30T01:17:11.255Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-30T01:17:11.624Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-30T01:17:11.976Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-30T01:17:11.977Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-30T01:17:12.010Z [INFO]: Retrieved 0 social media records
+2025-05-30T01:17:12.027Z [INFO]: Request URL: GET /api/social-media, undefined
+2025-05-30T01:17:12.030Z [INFO]: SocialMediaService.getAllSocialMedias called
+2025-05-30T01:17:12.040Z [INFO]: Retrieved 0 social media records
+2025-05-30T01:17:16.450Z [INFO]: Request URL: GET /api/investors/me, undefined
+2025-05-30T01:17:16.481Z [ERROR]: Failed to fetch investor by id NaN: SequelizeDatabaseError: Unknown column 'NaN' in 'where clause'
+2025-05-30T01:17:16.482Z [ERROR]: Error: Unknown column 'NaN' in 'where clause' - URL: /api/investors/me - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Investor.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1140:21)
+    at async Investor.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async Investor.findByPk (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1221:12)
+    at async InvestorService.getInvestorById (file:///home/udorakpuenyi/tem/server/src/services/InvestorService.ts:44:30)
+    at async getMyProfile (file:///home/udorakpuenyi/tem/server/src/controllers/InvestorController.ts:27:30)
+2025-05-30T01:17:16.498Z [INFO]: Request URL: GET /api/investors/me, undefined
+2025-05-30T01:17:16.503Z [ERROR]: Failed to fetch investor by id NaN: SequelizeDatabaseError: Unknown column 'NaN' in 'where clause'
+2025-05-30T01:17:16.505Z [ERROR]: Error: Unknown column 'NaN' in 'where clause' - URL: /api/investors/me - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Investor.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1140:21)
+    at async Investor.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async Investor.findByPk (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1221:12)
+    at async InvestorService.getInvestorById (file:///home/udorakpuenyi/tem/server/src/services/InvestorService.ts:44:30)
+    at async getMyProfile (file:///home/udorakpuenyi/tem/server/src/controllers/InvestorController.ts:27:30)
+2025-05-30T01:19:17.632Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-30T01:19:17.854Z [INFO]: Request URL: GET /api/investors/me/undefined, undefined
+2025-05-30T01:20:49.035Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-30T01:20:49.243Z [INFO]: Request URL: GET /api/investors/me/1, undefined
+2025-05-30T01:22:15.209Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-30T01:22:15.535Z [INFO]: Request URL: GET /api/investors/me/1, undefined
+2025-05-30T01:23:14.163Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-30T01:23:14.361Z [INFO]: Request URL: GET /api/investors/me/1, undefined
+2025-05-30T01:26:04.293Z [INFO]: Request URL: GET /api/managers, undefined
+2025-05-30T01:26:04.578Z [INFO]: Request URL: GET /api/managers, undefined

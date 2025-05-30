@@ -140,8 +140,8 @@ alert('Success!!')
               {investor.firstName} {investor.lastName}
             </p>
             <p>
-              <a href={`mailto:${investor.user.email}`} className="text-emerald-600 hover:underline">
-                {investor.user.email}
+              <a href={`mailto:${'nnamdisolomon1@gmail.com'}`} className="text-emerald-600 hover:underline">
+                {'nnamdisolomon1@gmail.com'}
               </a>
             </p>
 

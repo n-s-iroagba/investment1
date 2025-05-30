@@ -103,7 +103,7 @@ console.log(params)
         InvestmentCreationDto,
         { investmentId: number | string }
       >(apiRoutes.investment.new(userId), payload);
-      router.push(`/investment/${response.investmentId}`);
+      router.push(`/investor/dashboard`);
     } catch (err) {
       console.error(err);
       setMessage("Failed to submit investment.");
@@ -245,7 +245,7 @@ console.log(params)
           </button>
           <button
             type="button"
-            onClick={() => router.push("/dashboard")}
+            onClick={() => router.push("/investor/dashboard")}
             className="flex-1 py-3 border-2 border-green-200 text-green-800 rounded-xl hover:bg-green-50 transition-all"
           >
             Cancel

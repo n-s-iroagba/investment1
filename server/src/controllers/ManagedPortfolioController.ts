@@ -83,8 +83,8 @@ static async creditInvestment (req: Request, res: Response) {
    static async getInvestment(req:Request, res:Response){
     try {
       const investorId = Number(req.params.investorId); 
-      const  investorAndInvestment = await ManagedPortfolioService.getInvestorById(investorId)
-      return res.status(200).json(investorAndInvestment)
+      const  portfolio = await ManagedPortfolioService.getInvestmentByInvestorId(investorId)
+      return res.status(200).json(portfolio)
     }catch(error){
       errorHandler(error, req, res);
     }

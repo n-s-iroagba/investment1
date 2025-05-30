@@ -86,3 +86,97 @@
 2025-05-28T21:08:58.197Z [WARN]: CustomError - 404: Admin not found - URL: /api/auth/me
 2025-05-28T21:09:13.212Z [WARN]: CustomError - 404: Admin not found - URL: /api/auth/me
 2025-05-28T21:09:29.944Z [WARN]: CustomError - 404: Admin not found - URL: /api/auth/me
+2025-05-28T21:38:23.937Z [WARN]: CustomError - 404: Admin not found - URL: /api/auth/me
+2025-05-28T21:38:33.584Z [ERROR]: Error in login  UserService function: Error: login user not found
+2025-05-28T21:38:33.585Z [WARN]: CustomError - 404: login user not found - URL: /api/auth/login
+2025-05-28T21:39:33.614Z [WARN]: CustomError - 404: Admin not found - URL: /api/auth/me
+2025-05-28T22:00:39.866Z [ERROR]: Error in createInvestor UserService function: Error: user already exists with this email
+2025-05-28T22:00:39.867Z [WARN]: CustomError - 409: user already exists with this email - URL: /api/auth/admin/signup
+2025-05-28T23:33:51.952Z [ERROR]: Error in createInvestor UserService function: SequelizeUniqueConstraintError: Validation error
+2025-05-28T23:33:51.954Z [ERROR]: Error: Validation error - URL: /api/auth/signup - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.insert (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:308:21)
+    at async User.save (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:2490:35)
+    at async User.create (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1362:12)
+    at async UserService.createInvestor (file:///home/udorakpuenyi/tem/server/src/services/UserService.ts:19:26)
+    at async investorSignup (file:///home/udorakpuenyi/tem/server/src/controllers/AuthController.ts:9:27)
+2025-05-28T23:37:14.410Z [ERROR]: Error in createInvestor UserService function: SequelizeUniqueConstraintError: Validation error
+2025-05-28T23:37:14.411Z [ERROR]: Error: Validation error - URL: /api/auth/signup - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.insert (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:308:21)
+    at async User.save (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:2490:35)
+    at async User.create (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1362:12)
+    at async UserService.createInvestor (file:///home/udorakpuenyi/tem/server/src/services/UserService.ts:19:26)
+    at async investorSignup (file:///home/udorakpuenyi/tem/server/src/controllers/AuthController.ts:9:27)
+2025-05-28T23:40:23.382Z [ERROR]: Failed to create investor: Error: Missing required fields
+2025-05-28T23:40:23.384Z [ERROR]: Error in createInvestor UserService function: Error: Missing required fields
+2025-05-28T23:40:23.385Z [WARN]: CustomError - 400: Missing required fields - URL: /api/auth/signup
+2025-05-28T23:44:58.337Z [ERROR]: Error in createInvestor UserService function: SequelizeUniqueConstraintError: Validation error
+2025-05-28T23:44:58.338Z [ERROR]: Error: Validation error - URL: /api/auth/signup - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.insert (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:308:21)
+    at async User.save (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:2490:35)
+    at async User.create (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1362:12)
+    at async UserService.createInvestor (file:///home/udorakpuenyi/tem/server/src/services/UserService.ts:19:26)
+    at async investorSignup (file:///home/udorakpuenyi/tem/server/src/controllers/AuthController.ts:9:27)
+2025-05-29T01:21:38.888Z [ERROR]: Error: User is not associated to Investor! - URL: /api/managed-portfolios/investor/1 - Stack: SequelizeEagerLoadingError: User is not associated to Investor!
+    at Investor._getIncludedAssociation (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:565:13)
+    at Investor._validateIncludedElement (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:502:53)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at Investor._validateIncludedElements (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:417:39)
+    at Investor.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Investor.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async Investor.findByPk (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1221:12)
+    at async ManagedPortfolioService.getInvestorById (file:///home/udorakpuenyi/tem/server/src/services/ManagedPortfolioService.ts:41:26)
+2025-05-30T00:15:19.030Z [ERROR]: Error: VerificationFee is not associated to ManagedPortfolio! - URL: /api/managed-portfolios/investor/1 - Stack: SequelizeEagerLoadingError: VerificationFee is not associated to ManagedPortfolio!
+    at ManagedPortfolio._getIncludedAssociation (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:565:13)
+    at ManagedPortfolio._validateIncludedElement (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:502:53)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at ManagedPortfolio._validateIncludedElements (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:417:39)
+    at ManagedPortfolio.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async ManagedPortfolio.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async ManagedPortfolioService.getInvestmentByInvestorId (file:///home/udorakpuenyi/tem/server/src/services/ManagedPortfolioService.ts:39:27)
+    at async getInvestment (file:///home/udorakpuenyi/tem/server/src/controllers/ManagedPortfolioController.ts:61:31)
+2025-05-30T01:13:19.703Z [ERROR]: Failed to fetch investor by id NaN: SequelizeDatabaseError: Unknown column 'NaN' in 'where clause'
+2025-05-30T01:13:19.773Z [ERROR]: Error: Unknown column 'NaN' in 'where clause' - URL: /api/investors/me - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Investor.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1140:21)
+    at async Investor.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async Investor.findByPk (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1221:12)
+    at async InvestorService.getInvestorById (file:///home/udorakpuenyi/tem/server/src/services/InvestorService.ts:44:30)
+    at async getMyProfile (file:///home/udorakpuenyi/tem/server/src/controllers/InvestorController.ts:27:30)
+2025-05-30T01:17:16.481Z [ERROR]: Failed to fetch investor by id NaN: SequelizeDatabaseError: Unknown column 'NaN' in 'where clause'
+2025-05-30T01:17:16.482Z [ERROR]: Error: Unknown column 'NaN' in 'where clause' - URL: /api/investors/me - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Investor.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1140:21)
+    at async Investor.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async Investor.findByPk (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1221:12)
+    at async InvestorService.getInvestorById (file:///home/udorakpuenyi/tem/server/src/services/InvestorService.ts:44:30)
+    at async getMyProfile (file:///home/udorakpuenyi/tem/server/src/controllers/InvestorController.ts:27:30)
+2025-05-30T01:17:16.503Z [ERROR]: Failed to fetch investor by id NaN: SequelizeDatabaseError: Unknown column 'NaN' in 'where clause'
+2025-05-30T01:17:16.505Z [ERROR]: Error: Unknown column 'NaN' in 'where clause' - URL: /api/investors/me - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Investor.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1140:21)
+    at async Investor.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async Investor.findByPk (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1221:12)
+    at async InvestorService.getInvestorById (file:///home/udorakpuenyi/tem/server/src/services/InvestorService.ts:44:30)
+    at async getMyProfile (file:///home/udorakpuenyi/tem/server/src/controllers/InvestorController.ts:27:30)

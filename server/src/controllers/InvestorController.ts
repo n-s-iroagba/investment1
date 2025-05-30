@@ -25,6 +25,7 @@ export default class InvestorController {
       // Assuming the investor ID is stored in req.user from authentication middleware
       const investorId = req.params.investorId
       const investor = await InvestorService.getInvestorById(Number(investorId))
+      console.log('investor',investor)
       res.status(200).json(investor)
     } catch (error) {
       errorHandler(error, req, res)

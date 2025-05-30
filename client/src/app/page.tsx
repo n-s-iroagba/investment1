@@ -40,9 +40,9 @@ export default function Page() {
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold text-green-900 mb-6">
               Welcome to{" "}
-              <span className="bg-gradient-to-r from-green-600 to-green-800 bg-clip-text text-transparent">
-                
-              </span>
+              <p className="bg-gradient-to-r from-green-600 to-green-800 bg-clip-text text-transparent">
+                Wealth Funding TradeStation Opportunities
+              </p>
             </h1>
             <p className="text-xl text-green-700 mb-8 max-w-3xl mx-auto">
               Your trusted platform for professional investment management. Connect with expert fund managers and grow
@@ -71,7 +71,7 @@ export default function Page() {
       <div className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-green-900 mb-4">Why Choose InvestPro?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-green-900 mb-4">Why Choose Us?</h2>
             <p className="text-xl text-green-700 max-w-2xl mx-auto">
               We provide the tools and expertise you need to make informed investment decisions
             </p>
