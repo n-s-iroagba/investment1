@@ -14,8 +14,8 @@ import type { SocialMedia } from "@/types/socialMedia"
 import { useRouter } from "next/navigation"
 
 const AdminDashboard = () => {
-  const { loading: authLoading, isAdmin, displayName } = useAuth()
-  console.log(displayName, isAdmin)
+
+
   const router = useRouter()
 
   const {
@@ -29,11 +29,12 @@ const AdminDashboard = () => {
     error: socialMediaError,
     loading: socialMediaLoading,
   } = useGetList<SocialMedia>(apiRoutes.socialMedia.list())
-
+  const { loading: authLoading, isAdmin, displayName } = useAuth()
+    console.log(displayName, isAdmin)
   // Redirect if not admin
   useEffect(() => {
     if (!authLoading && !isAdmin) {
-      router.push("/login")
+      
     }
   }, [authLoading, isAdmin, router])
 
