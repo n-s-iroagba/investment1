@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setLoading(true)
   
     get<LoggedInUser>(apiRoutes.auth.me())
-      .then((data: LoggedInUser) => {console.log(data); setUser(data)})
+      .then((data: LoggedInUser) => {setUser(data)})
       .catch(() => setUser(null))
       .finally(() => setLoading(false))
   }
