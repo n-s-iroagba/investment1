@@ -10,28 +10,14 @@ import {
 } from "@/components/InvestorDetailModals"
 import type { Investor } from "@/types/Investor"
 import { useRouter } from "next/navigation"
-import { get, patch, post } from "@/utils/apiClient"
+import { get, patch } from "@/utils/apiClient"
 import { apiRoutes } from "@/constants/apiRoutes"
 import PaymentList from "@/components/PaymentList"
 import { useGetSingle } from "@/hooks/useFetch"
 import AdditionWarning from "@/components/AdditionWarning"
 import { ViewReceiptModal } from "@/components/ViewReceiptModal"
-export const sendEmail = async (
-  data: { subject: string; message: string },
-  investorId?: number
-): Promise<void> => {
-  try {
-    const endpoint = investorId 
-      ? apiRoutes.email.sendToInvestor(investorId) 
-      : apiRoutes.email.send();
-    
-    await post(endpoint, { data });
-    alert('Email sent successfully!');
-  } catch (error) {
-    console.error("Email send failed:", error);
-    alert('Failed to send email. Please try again later.');
-  }
-};
+import { sendEmail } from "@/utils/common"
+
 export default function InvestorDetail() {
   const params = useParams()
   const investorId = params.id as string

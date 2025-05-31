@@ -5,10 +5,11 @@ import { Spinner } from '@/components/Spinner';
 import { apiRoutes } from '@/constants/apiRoutes';
 import { useGetList } from '@/hooks/useFetch';
 import { Investor } from '@/types/Investor';
+import { sendEmail } from '@/utils/common';
 import { ArrowRightIcon, EnvelopeIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { sendEmail } from './[id]/page';
+
 
 export default function InvestorList() {
  const router = useRouter()
