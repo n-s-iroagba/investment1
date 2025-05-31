@@ -1,8 +1,9 @@
 // models/Payment.ts
-import { DataTypes, Model, Optional } from 'sequelize';
+import { DataTypes, ForeignKey, Model, NonAttribute, Optional } from 'sequelize';
 import sequelize from '../config/database.js'; // adjust to your actual sequelize instance
 import ManagedPortfolio from './ManagedPortfolio.js';
 import VerificationFee from './VerificationFee.js';
+import Investor from './Investor.js';
 
 // 1. Define attributes
 export interface PaymentAttributes {
@@ -13,7 +14,12 @@ export interface PaymentAttributes {
    paymentType:'FEE'|'INVESTMENT';
   amount: number;
   paymentID:string;
-  isVerified:boolean  
+  isVerified:boolean
+  paymentDate:Date
+  investorId:ForeignKey<Investor['id']>
+  entityId:ForeignKey<ManagedPortfolio['id']|VerificationFee['id']>
+  investor?:NonAttribute<Investor>
+  entity?:NonAttribute<ManagedPortfolio|VerificationFee>
 }
 
 // 2. Define creation attributes (id is auto-generated)
@@ -30,8 +36,11 @@ export class Payment
   public paymentType!:'FEE'|'INVESTMENT';
   public paymentID!:string;
   public amount!: number;
+   investorId!:ForeignKey<Investor['id']>
   public isVerified!:boolean;
-
+  public   paymentDate!:Date
+   investor?:NonAttribute<Investor>
+entityId:ForeignKey<ManagedPortfolio['id']|VerificationFee['id']>
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -72,8 +81,17 @@ Payment.init(
     paymentID: {
       type: DataTypes.STRING,
       allowNull: false,
-      
+    },
+    paymentDate: {
+      type:DataTypes.DATE
+    },
+    investorId:{
+      type:DataTypes.INTEGER
+    },
+      entityId:{
+      type:DataTypes.INTEGER
     }
+  
   },
   {
     sequelize,

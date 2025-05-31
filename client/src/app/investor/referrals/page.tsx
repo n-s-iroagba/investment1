@@ -4,8 +4,9 @@ import InvestorOffCanvas from "@/components/InvestorOffCanvas"
 import { apiRoutes } from "@/constants/apiRoutes"
 import { useAuth } from "@/hooks/useAuth"
 import type { Referral } from "@/types/Referral"
+import { get } from "@/utils/apiClient"
 import { UserGroupIcon, CheckCircleIcon, ClockIcon, CurrencyDollarIcon } from "@heroicons/react/24/outline"
-import { motion } from "framer-motion"
+import { motion } from "framer-motion" 
 import { useCallback, useEffect, useState } from "react"
 
 export default function InvestorReferrals() {
@@ -33,12 +34,8 @@ export default function InvestorReferrals() {
           endpoint = apiRoutes.referral.investorReferrals(roleId)
       }
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${endpoint}`)
-      if (!response.ok) {
-        throw new Error("Failed to fetch referrals")
-      }
-
-      const data = await response.json()
+      const data = await get<Referral[]>(endpoint)
+   
       setReferrals(data)
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred")

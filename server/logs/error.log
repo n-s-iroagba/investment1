@@ -172,3 +172,14 @@
     at async Investor.findByPk (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1221:12)
     at async InvestorService.getInvestorById (file:///home/udorakpuenyi/tem/server/src/services/InvestorService.ts:44:30)
     at async getMyProfile (file:///home/udorakpuenyi/tem/server/src/controllers/InvestorController.ts:27:30)
+2025-05-30T23:47:58.082Z [ERROR]: Failed to update investor: SequelizeDatabaseError: Unknown column 'NaN' in 'where clause'
+2025-05-30T23:47:58.084Z [ERROR]: Error: Unknown column 'NaN' in 'where clause' - URL: /api/investors/me/ - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Investor.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1140:21)
+    at async Investor.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async Investor.findByPk (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1221:12)
+    at async InvestorService.updateInvestor (file:///home/udorakpuenyi/tem/server/src/services/InvestorService.ts:85:30)
+    at async updateInvestor (file:///home/udorakpuenyi/tem/server/src/controllers/InvestorController.ts:48:13)

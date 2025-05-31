@@ -39,7 +39,7 @@ export default function SocialMediaLinks() {
     <div className="space-y-4">
       <h3 className="text-lg font-semibold text-green-900 flex items-center gap-2">
         <ShareIcon className="w-6 h-6" />
-        Follow Us
+        Send Us A Message To Proceed With Your Payment
       </h3>
 
       <div className="grid gap-3">

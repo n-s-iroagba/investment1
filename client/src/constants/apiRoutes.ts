@@ -14,17 +14,6 @@ export const apiRoutes = {
   verificationFee:{
    create:(id:string|number):string=>`/verification-fees/${id}`
   },
-  payments: {
-    list: (): string => `/payments`,
-    get: (id: number | string): string => `/payments/${id}`,
-    create: (id:number): string => `/payments/${id}`,
-    unverified : (): string => `/payments/unverified`,
-
-    update: (id: number | string): string => `/payments/${id}`,
-    delete: (id: number | string): string => `/payments/${id}`,
-    verify: (id: number | string): string => `/payments/${id}/verify`,
-    unverify: (id: number | string): string => `/payments/${id}/unverify`,
-  },
   referral: {
     list: (): string => `/referrals`,
     unpaid: (): string => `/referrals/unpaid`,
@@ -44,7 +33,7 @@ export const apiRoutes = {
     update: (id: string | number): string => `/investors/${id}`,
     delete: (id: string | number): string => `/investors/${id}`,
     me: (id:string|number): string => `/investors/me/${id}`,
-    updateMe: (): string => `/investors/me/`,
+    updateMe: (id:string|number): string => `/investors/me/${id}`,
     list:():string => `/investors`,
   },
   email: {
@@ -75,5 +64,15 @@ export const apiRoutes = {
   kyc:{
     verify:(id:string|number):string => `/kyc/verify/${id}`,
     create:(id:string|number):string => `/kyc/${id}`
+  },
+    payments: {
+    create: (investorId: number | string): string => `/payments/create/${investorId}`,
+    update: (id: number | string): string => `/payments/${id}`,
+    delete: (id: number | string): string => `/payments/${id}`,
+    verify: (id: number | string): string => `/payments/verify/${id}`,
+    unverify: (id: number | string): string => `/payments/unverify/${id}`,
+    getUnverified: (): string => `/payments/unverified`,
+    getByInvestorId: (investorId: number | string): string => `/payments/investor/${investorId}`,
+    getInvestorPayments: (id: number | string): string => `/payments/investor-payments/${id}`
   }
 }

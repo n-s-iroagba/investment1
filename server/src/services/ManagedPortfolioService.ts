@@ -72,7 +72,6 @@ catch (error) {
     ],
   });
   
-  if (!portfolio) throw new CustomError(404, 'portfolio not found');
   console.log('managed portfolio', portfolio);
 
   return portfolio;

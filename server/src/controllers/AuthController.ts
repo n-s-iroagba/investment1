@@ -4,6 +4,7 @@ import { CustomError } from "../utils/error/CustomError.js";
 import { errorHandler } from "../utils/error/errorHandler.js";
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
+import logger from "../utils/logger/logger.js";
 export class AuthController {
     static async investorSignup(req: Request, res: Response) {
         try {
@@ -14,6 +15,7 @@ export class AuthController {
         }
     }
     static async adminSignup(req: Request, res: Response) {
+      logger.info('in admin sign up function')
         const { password, username, email } = req.body
         try {
             const token = await UserService.createAdmin({ password, username, email });
@@ -39,6 +41,13 @@ static async verifyEmail(req: Request, res: Response) {
         sameSite: 'lax',
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       });
+// res.cookie('token', result.loginToken, {
+//   httpOnly: true,
+//   secure: true,
+//   sameSite: 'none', // MUST be 'none' for cross-domain
+//   maxAge: 7 * 24 * 60 * 60 * 1000,
+// });
+console.log('Cookie set, response headers:', res.getHeaders());
    const role = user.role
     console.log('role is', role)
       return res.status(200).json({
@@ -75,7 +84,13 @@ static async verifyEmail(req: Request, res: Response) {
         sameSite: 'lax',
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       });
-
+// res.cookie('token', result.loginToken, {
+//   httpOnly: true,
+//   secure: true,
+//   sameSite: 'none', // MUST be 'none' for cross-domain
+//   maxAge: 7 * 24 * 60 * 60 * 1000,
+// });
+console.log('Cookie set, response headers:', res.getHeaders());
       return res.status(200).json({
         message: 'Login successful',
           role: result.user.role,

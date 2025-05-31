@@ -3,10 +3,10 @@
 import type React from "react"
 
 import { useState } from "react"
-import { XMarkIcon, EnvelopeIcon, DocumentIcon, CreditCardIcon, CheckCircleIcon } from "@heroicons/react/24/outline"
+import { XMarkIcon, EnvelopeIcon, CreditCardIcon, CheckCircleIcon } from "@heroicons/react/24/outline"
 import { Spinner } from "./Spinner"
 import toast from "react-hot-toast"
-import Image from "next/image"
+
 
 // Email Modal
 interface EmailModalProps {
@@ -119,39 +119,6 @@ export function EmailModal({ isOpen, onClose, investorEmail, investorName, onSen
             </button>
           </div>
         </form>
-      </div>
-    </div>
-  )
-}
-
-// Document Modal
-interface DocumentModalProps {
-  isOpen: boolean
-  onClose: () => void
-  documentUrl:string
-}
-
-export function DocumentModal({ isOpen, onClose, documentUrl }: DocumentModalProps) {
-  if (!isOpen) return null
-
-  return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-      <div className="bg-white p-6 rounded-2xl shadow-lg border-2 border-green-50 relative max-w-2xl w-full max-h-[80vh] overflow-y-auto">
-        <div className="flex justify-between items-start mb-4">
-          <h3 className="text-xl font-semibold text-green-900 flex items-center gap-2">
-            <DocumentIcon className="w-6 h-6" />
-          </h3>
-          <button onClick={onClose} className="p-1 text-green-600 hover:text-green-800 rounded-full hover:bg-green-50">
-            <XMarkIcon className="w-5 h-5" />
-          </button>
-        </div>
-
-      
-        <Image
-        src={documentUrl}
-        alt="Document"
-        />
-      
       </div>
     </div>
   )

@@ -101,10 +101,10 @@ const InvestorDashboard = () => {
 
   // Redirect logic
   useEffect(() => {
-    if (!authLoading && (!displayName || !roleId)) {
+    if ( (!displayName || !roleId)) {
       router.push("/login")
     }
-  }, [authLoading, displayName, roleId, router])
+  }, [authLoading, displayName,loading, roleId, router])
 
   // Chart ready state
   useEffect(() => {

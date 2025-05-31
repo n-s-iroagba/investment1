@@ -56,14 +56,19 @@ class AuthUtils {
             throw error
         }
     }
-    static generateEmailVerificationCode (): string {
-        let randomCode='123456'
-          if (process.env.NODE_ENV === 'production') {
-             randomCode = crypto.randomBytes(20).toString('hex')
+static generateEmailVerificationCode(): string {
+    let randomCode = '123456';
+    
+    if (process.env.NODE_ENV === 'production') {
+        // Generate 6 random digits as string
+        randomCode = '';
+        for (let i = 0; i < 6; i++) {
+            randomCode += Math.floor(Math.random() * 10).toString();
+        }
     }
-    return randomCode
+    
+    return randomCode;
 }
-
 static async generateLoginToken(user: User):Promise<string> {
     const payload = {
       id: user.id,

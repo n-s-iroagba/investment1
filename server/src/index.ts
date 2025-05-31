@@ -10,7 +10,7 @@ import cookieParser from 'cookie-parser';
 import { fileURLToPath } from 'url';
 
 export const app = express();
-const PORT = (process.env.NODE_ENV === 'production') ? process.env.PORT : 5000;
+const PORT = 3000;
 
 // Get __dirname equivalent for ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -40,13 +40,18 @@ if (!fs.existsSync(uploadDir)) {
 
 // CORS configuration - MOVED BEFORE STATIC MIDDLEWARE
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' ? process.env.CLIENT_URL : 'http://localhost:3000',
+  origin:  
+  // 'https://www.wealthfundingtradestationopportunities.com',
+     'http://localhost:3001',
   credentials: true,
 }));
 
 // Additional CORS headers
 app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', process.env.NODE_ENV === 'production' ? process.env.CLIENT_URL : 'http://localhost:3000')
+  res.header('Access-Control-Allow-Origin',     
+    //  'https://www.wealthfundingtradestationopportunities.com' 
+     'http://localhost:3001'
+    )
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
   res.header('Access-Control-Allow-Methods', 'POST, GET, DELETE, PATCH')
   next()

@@ -73,6 +73,9 @@ class UserService {
     static async createAdmin(data: {password:string, username:string,email:string}){
     try {
       // Create user
+
+      const users = await User.findAll()
+      console.log('USERS!',users)
       let user = await User.findOne({where:{
         email:data.email
       }}) 

@@ -5,6 +5,16 @@ import { useRouter } from "next/navigation"
 import { useAuth } from "@/hooks/useAuth"
 import { Spinner } from "@/components/Spinner"
 import { ChartBarIcon, UserGroupIcon, CurrencyDollarIcon, ShieldCheckIcon } from "@heroicons/react/24/outline"
+import { MiniChart,TickerTape } from "react-ts-tradingview-widgets";
+import HomeManagerCards from "@/components/HomeManagerCards"
+import Introduction from "@/components/Introduction"
+import { CounterVariant2 } from "@/components/Counter"
+import SecurityAssurance from "@/components/SecurityAssurance"
+import Steps from "@/components/Steps"
+import ReferAndEarn from "@/components/ReferAndEarn"
+import Contact from "@/components/Contact"
+import PopupToast from "@/components/PopupToast"
+import Testimonial from "@/components/Testimonial"
 
 export default function Page() {
   const { isAdmin, roleId ,loading } = useAuth()
@@ -34,6 +44,7 @@ export default function Page() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100">
+      <PopupToast/>
       {/* Hero Section */}
       <div className="relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
@@ -66,6 +77,13 @@ export default function Page() {
           </div>
         </div>
       </div>
+ <TickerTape colorTheme="light" />
+ <Introduction/>
+ <CounterVariant2/>
+ <HomeManagerCards/>
+ <SecurityAssurance/>
+<Testimonial/>
+
 
       {/* Features Section */}
       <div className="py-24 bg-white">
@@ -114,7 +132,12 @@ export default function Page() {
           </div>
         </div>
       </div>
-
+<div className="px-4">
+   <Steps/>
+ <ReferAndEarn/>
+ <Contact/>
+      <MiniChart colorTheme="light" width="100%"></MiniChart>
+    </div>
       {/* CTA Section */}
       <div className="py-24 bg-green-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

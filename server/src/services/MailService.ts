@@ -28,37 +28,49 @@ class MailService {
     debug: true, // Enable debug output
   })
 
-  private static setupHandlebars() {
-    const templateDir = path.join(__dirname, "..", "templates");
-  const templatePath = path.join(templateDir, "emailVerification.hbs");
-  const source = fs.readFileSync(templatePath, "utf8");
-
-    this.transporter.use(
-      "compile",
-      hbs({
-        viewEngine: {
-          extname: ".hbs",
-          partialsDir: templateDir,
-          defaultLayout: false, // 👈 Important!
-        },
-        viewPath: templateDir,
-        extName: ".hbs",
-      }) as any,
-    )
-  }
 
   public static async sendEmailVerificationMail(user: User, name: string) {
-    this.setupHandlebars()
-
+  
     const mailOptions = {
       from: EMAIL_USER,
       to: user.email,
       subject: "Email Verification",
-      template: "emailVerification", // Template file (without .hbs extension)
-      context: {
-        name: name,
-        code: user.emailVerificationCode,
-      },
+      html:`<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Email Verification</title>
+  </head>
+  <body style="font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0;">
+    <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td align="center" bgcolor="#f4f4f4" style="padding: 40px 0;">
+          <!-- Company Logo -->
+          <img src="https://yourcompany.com/logo.png" alt="Company Logo" width="150" style="display: block;" />
+        </td>
+      </tr>
+      <tr>
+        <td bgcolor="#ffffff" style="padding: 40px 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); max-width: 600px; margin: auto;">
+          <h1 style="color: #333;">Hello ${name},</h1>
+          <p style="font-size: 16px; color: #555;">
+            To verify your email address, please use the verification code below:
+          </p>
+          <p style="font-size: 32px; font-weight: bold; color: #2a9d8f; text-align: center; letter-spacing: 4px; margin: 30px 0;">
+            ${user.emailVerificationCode}
+          </p>
+          <p style="font-size: 14px; color: #777;">
+            If you did not request this verification, you can safely ignore this message.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#f4f4f4" style="padding: 30px 0; font-size: 12px; color: #aaa;">
+          &copy; {{year}} Your Company. All rights reserved.
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>`
     }
 
     try {
@@ -69,16 +81,53 @@ class MailService {
     }
   }
   public static async resendEmailVerificationMail(user: User) {
-    this.setupHandlebars()
+
 
     const mailOptions = {
       from: EMAIL_USER,
       to: user.email,
       subject: "New Email Verification code",
       template: "resendEmailVerification", // Template file (without .hbs extension)
-      context: {
-        code: user.emailVerificationCode,
-      },
+       html:`<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>New Email Verification Code</title>
+  </head>
+  <body style="font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0;">
+    <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td align="center" bgcolor="#f4f4f4" style="padding: 40px 0;">
+          <!-- Company Logo -->
+          <img src="https://yourcompany.com/logo.png" alt="Company Logo" width="150" style="display: block;" />
+        </td>
+      </tr>
+      <tr>
+        <td bgcolor="#ffffff" style="padding: 40px 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); max-width: 600px; margin: auto;">
+          <h1 style="color: #333;">Hello,</h1>
+           <p style="font-size: 14px; color: #777;">
+            You requested a new code for email verification.
+          </p>
+          <p style="font-size: 16px; color: #555;">
+            To verify your email address, please use the verification code below:
+          </p>
+          <p style="font-size: 32px; font-weight: bold; color: #2a9d8f; text-align: center; letter-spacing: 4px; margin: 30px 0;">
+            ${user.email}
+          </p>
+          <p style="font-size: 14px; color: #777;">
+            If you did not request this verification, you can safely ignore this message.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td align="center" bgcolor="#f4f4f4" style="padding: 30px 0; font-size: 12px; color: #aaa;">
+          &copy; 2025 GreatFundingTradeStationOpportunities. All rights reserved.
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
+`
     }
 
     try {
@@ -90,7 +139,7 @@ class MailService {
   }
 
   static async sendForgotPasswordMail(user: User, token: string) {
-    const resetUrl = `${process.env.CLIENT_URL ?? "http://localhost:3000/auth"}/reset-password/${token}`
+    const resetUrl = `https://www.wealthfundingtradestationopportunities.com/reset-password/${token}`
 
     const mailOptions = {
       from: `"Support Team" <${process.env.SMTP_FROM}>`,

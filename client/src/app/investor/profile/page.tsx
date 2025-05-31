@@ -105,7 +105,7 @@ export default function InvestorProfile() {
         dateOfBirth: profileData.dateOfBirth ? new Date(profileData.dateOfBirth) : undefined,
       }
 
-      const updatedInvestor = await patch<typeof updateData, Investor>(apiRoutes.investor.updateMe(), updateData)
+      const updatedInvestor = await patch<typeof updateData, Investor>(apiRoutes.investor.updateMe(roleId), updateData)
 
       setInvestor(updatedInvestor)
       setIsEditing(false)

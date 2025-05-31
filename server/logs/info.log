@@ -817,3 +817,75 @@
 2025-05-30T01:26:04.578Z [INFO]: Request URL: GET /api/managers, undefined
 2025-05-30T02:23:12.163Z [INFO]: Request URL: GET /api/auth/me, undefined
 2025-05-30T02:23:59.320Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-30T23:06:16.655Z [INFO]: Request URL: GET /investor/referrals, undefined
+2025-05-30T23:06:16.865Z [INFO]: Request URL: GET /.well-known/appspecific/com.chrome.devtools.json, undefined
+2025-05-30T23:06:27.109Z [INFO]: Request URL: GET /investor/signup, undefined
+2025-05-30T23:06:27.433Z [INFO]: Request URL: GET /.well-known/appspecific/com.chrome.devtools.json, undefined
+2025-05-30T23:11:31.425Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-30T23:11:32.016Z [WARN]: CustomError - 404: Investor not found - URL: /api/auth/me
+2025-05-30T23:11:50.444Z [INFO]: Request URL: POST /api/auth/signup, undefined
+2025-05-30T23:11:51.599Z [INFO]: Created investor with userId 1
+2025-05-30T23:12:22.721Z [INFO]: Request URL: POST /api/auth/verify-email, undefined
+2025-05-30T23:12:57.796Z [INFO]: Request URL: POST /api/auth/login, undefined
+2025-05-30T23:13:53.965Z [INFO]: Request URL: POST /api/auth/login, undefined
+2025-05-30T23:15:54.996Z [INFO]: Request URL: POST /api/auth/login, undefined
+2025-05-30T23:16:21.638Z [INFO]: Request URL: POST /api/auth/login, undefined
+2025-05-30T23:20:28.417Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-30T23:24:58.573Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-30T23:25:33.915Z [INFO]: Request URL: POST /api/auth/login, undefined
+2025-05-30T23:25:36.486Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-30T23:25:37.855Z [WARN]: CustomError - 404: portfolio not found - URL: /api/managed-portfolios/investor/1
+2025-05-30T23:25:37.861Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-30T23:25:37.930Z [WARN]: CustomError - 404: portfolio not found - URL: /api/managed-portfolios/investor/1
+2025-05-30T23:26:45.633Z [INFO]: Request URL: POST /api/auth/login, undefined
+2025-05-30T23:26:46.661Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-30T23:26:46.724Z [WARN]: CustomError - 404: portfolio not found - URL: /api/managed-portfolios/investor/1
+2025-05-30T23:26:46.737Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-30T23:26:46.754Z [WARN]: CustomError - 404: portfolio not found - URL: /api/managed-portfolios/investor/1
+2025-05-30T23:42:12.903Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-30T23:42:14.672Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-30T23:42:14.777Z [WARN]: CustomError - 404: portfolio not found - URL: /api/managed-portfolios/investor/1
+2025-05-30T23:42:25.438Z [INFO]: Request URL: POST /api/auth/login, undefined
+2025-05-30T23:42:25.790Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-30T23:42:25.797Z [WARN]: CustomError - 404: portfolio not found - URL: /api/managed-portfolios/investor/1
+2025-05-30T23:42:25.815Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-30T23:42:25.825Z [WARN]: CustomError - 404: portfolio not found - URL: /api/managed-portfolios/investor/1
+2025-05-30T23:47:03.927Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-30T23:47:08.712Z [INFO]: Request URL: POST /api/auth/login, undefined
+2025-05-30T23:47:09.127Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-30T23:47:09.161Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-30T23:47:19.979Z [INFO]: Request URL: POST /api/auth/login, undefined
+2025-05-30T23:47:20.374Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-30T23:47:20.404Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-30T23:47:47.026Z [INFO]: Request URL: GET /api/investors/me/1, undefined
+2025-05-30T23:47:47.097Z [INFO]: Request URL: GET /api/investors/me/1, undefined
+2025-05-30T23:47:58.047Z [INFO]: Request URL: PATCH /api/investors/me/, undefined
+2025-05-30T23:47:58.082Z [ERROR]: Failed to update investor: SequelizeDatabaseError: Unknown column 'NaN' in 'where clause'
+2025-05-30T23:47:58.084Z [ERROR]: Error: Unknown column 'NaN' in 'where clause' - URL: /api/investors/me/ - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Investor.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1140:21)
+    at async Investor.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async Investor.findByPk (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1221:12)
+    at async InvestorService.updateInvestor (file:///home/udorakpuenyi/tem/server/src/services/InvestorService.ts:85:30)
+    at async updateInvestor (file:///home/udorakpuenyi/tem/server/src/controllers/InvestorController.ts:48:13)
+2025-05-30T23:48:14.752Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-30T23:48:14.891Z [INFO]: Request URL: GET /api/investors/me/1, undefined
+2025-05-30T23:50:22.347Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-30T23:50:22.588Z [INFO]: Request URL: GET /api/investors/me/1, undefined
+2025-05-30T23:51:12.794Z [INFO]: Request URL: GET /api/investors/me/1, undefined
+2025-05-30T23:51:21.591Z [INFO]: Request URL: PATCH /api/investors/me/1, undefined
+2025-05-30T23:51:22.859Z [INFO]: Updated investor with id 1
+2025-05-31T00:00:12.261Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-31T00:02:02.120Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-31T00:04:22.291Z [INFO]: Request URL: GET /api/investors/1/referrals, undefined
+2025-05-31T00:04:22.299Z [INFO]: ReferralController.getInvestorReferrals called for investorId=1
+2025-05-31T00:04:22.300Z [INFO]: ReferralService.getReferralsByInvestorId called for investorId=1
+2025-05-31T00:04:22.605Z [INFO]: Retrieved 0 referrals for investorId=1
+2025-05-31T00:04:42.072Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-31T00:04:42.258Z [INFO]: Request URL: GET /api/managed-portfolios/investor/1, undefined
+2025-05-31T00:04:50.559Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-31T00:19:42.550Z [INFO]: Request URL: GET /api/auth/me, undefined
+2025-05-31T00:20:14.191Z [INFO]: Request URL: GET /api/auth/me, undefined

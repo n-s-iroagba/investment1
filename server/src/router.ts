@@ -17,6 +17,7 @@ import { CustomError } from "./utils/error/CustomError.js"
 import { errorHandler } from "./utils/error/errorHandler.js"
 import { PaymentController } from "./controllers/PaymentController.js"
 import User from "./models/User.js"
+import ReferralController from "./controllers/ReferralController.js"
 const router = Router()
 router.post("/investment/new/:investorId", ManagedPortfolioController.createInvestment)
 router.get("/managed-portfolios/investor/:investorId", ManagedPortfolioController.getInvestment)
@@ -24,6 +25,10 @@ router.patch('/managed-portfolios/credit/:investorId', ManagedPortfolioControlle
 router.get('/investors', InvestorController.getAllInvestors)
 router.patch("/investors/:id", InvestorController.updateInvestor)
 router.delete("/investors/:id", InvestorController.deleteInvestor)
+
+router.get('/investors/:investorId/referrals',ReferralController.getInvestorReferrals)
+router.get('/investors/:investorId/referrals/settled',ReferralController.getInvestorSettledReferrals)
+router.get('/investors/:investorId/referrals/unsettled', ReferralController.getInvestorUnsettledReferrals)
 
 // New investor profile routes
 router.get("/investors/me/:investorId",  InvestorController.getMyProfile)
