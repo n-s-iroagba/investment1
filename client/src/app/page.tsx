@@ -17,19 +17,10 @@ import PopupToast from "@/components/PopupToast"
 import Testimonial from "@/components/Testimonial"
 
 export default function Page() {
-  const { isAdmin, roleId ,loading } = useAuth()
-  const router = useRouter()
+  const { loading } = useAuth()
 
-  useEffect(() => {
-    if (!loading) {
-      // Redirect authenticated users to their respective dashboards
-      if (isAdmin) {
-        router.push("/admin/dashboard")
-      } else if (roleId && !isAdmin) {
-        router.push("/investor/dashboard")
-      }
-    }
-  }, [isAdmin, loading, roleId, router])
+
+
 
   if (loading) {
     return (
