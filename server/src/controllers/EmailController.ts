@@ -1,26 +1,30 @@
 import type { Request, Response } from "express"
 import MailService from "../services/MailService.js"
-import { InvestorService } from "../services/InvestorService.js"
+
 import { errorHandler } from "../utils/error/errorHandler.js"
 import User from "../models/User.js"
+import Investor from "../models/Investor.js"
 
 export default class EmailController {
   static async sendEmailToInvestor(req: Request, res: Response) {
     try {
+      const investorId = req.params.investorId
+      const { subject, message, } = req.body
 
-      const { subject, message, email } = req.body
+    
+    const user = await User.findOne({
+      include: [{
+        model: Investor,
+        where: { id: investorId }
+      }]
+    })
 
-      // Get investor details
-      const investor = await User.findOne({where:{
-        email
-      }})
-
-      if (!investor) {
+      if (!user) {
         return res.status(404).json({ error: "Investor not found" })
       }
 
       // Send email using MailService
-      await MailService.sendCustomEmail(investor.email, subject, message,  "Admin Team")
+      await MailService.sendCustomEmail(user.email, subject, message, 'Investment Team')
 
       res.status(200).json({
         success: true,
@@ -34,10 +38,11 @@ export default class EmailController {
 
   static async sendGeneralEmail(req: Request, res: Response) {
     try {
-      const { to, subject, message, senderName } = req.body
-
-      await MailService.sendCustomEmail(to, subject, message, senderName || "Admin Team")
-
+      const {  subject, message } = req.body
+      const users = await User.findAll({where:{role:'INVESTOR'}})
+      for (const  user of users){
+            await MailService.sendCustomEmail(user.email, subject, message, 'Investment Team')   
+      }
       res.status(200).json({
         success: true,
         message: "Email sent successfully",

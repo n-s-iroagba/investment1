@@ -7,6 +7,7 @@ import { ManagedPortfolioService } from "../services/ManagedPortfolioService.js"
 import { errorHandler } from "../utils/error/errorHandler.js";
 import {  CustomError } from "../utils/error/CustomError.js";
 import { resolveSoa } from "dns";
+import ManagedPortfolio from "../models/ManagedPortfolio.js";
 
 
 type InvestmentCreationDto = {
@@ -22,11 +23,21 @@ type InvestmentCreationDto = {
 
 class ManagedPortfolioController {
 
-static async creditInvestment (req: Request, res: Response) {
+static async creditAmountDeposited (req: Request, res: Response) {
   try {
-    const investorId = req.params.investorId;
+    const portfolioId = req.params.portfolioId;
     const amount = req.body.amount;
-    await ManagedPortfolioService.creditInvestment(investorId, amount)
+    await ManagedPortfolioService.creditAmountDeposited(portfolioId, amount)
+  }catch(error) {
+    errorHandler(error, req, res)
+  }
+}
+
+static async creditEarnings (req: Request, res: Response) {
+  try {
+    const portfolioId = req.params.portfolioId;
+    const amount = req.body.amount;
+    await ManagedPortfolioService.creditEarnings(portfolioId, amount)
   }catch(error) {
     errorHandler(error, req, res)
   }
@@ -37,7 +48,20 @@ static async creditInvestment (req: Request, res: Response) {
       const investorId = Number(req.params.investorId);
       console.log(req.body)
       const { amount, depositMeans, managerId, wallet }: InvestmentCreationDto = req.body;
+      const preexistingPortfolio= await ManagedPortfolio.findOne({where:{investorId}})
+      if (preexistingPortfolio) {
+        if (!preexistingPortfolio.amountDeposited){
+          preexistingPortfolio.destroy()
+        }else{
+          if(preexistingPortfolio.amountDeposited<amount){
+            preexistingPortfolio.managerId = Number(managerId)
+          }
+          preexistingPortfolio.amount+=amount
+          preexistingPortfolio.save()
+        return res.status(201).json({ newInvestmentId: preexistingPortfolio.id });
 
+        }
+      }
       // Basic validation
       if (!amount || typeof amount !== "number") {
         throw new CustomError(400, "Missing or invalid 'amount'");

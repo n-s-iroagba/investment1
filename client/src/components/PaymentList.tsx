@@ -2,15 +2,16 @@
 
 import { CheckCircleIcon, XCircleIcon, ClockIcon, CurrencyDollarIcon } from "@heroicons/react/24/outline"
 import { Payment } from "@/types/Payment"
+import { apiRoutes } from "@/constants/apiRoutes"
+import { patch } from "@/utils/apiClient"
 
 
 interface PaymentListProps {
   payments: Payment[]
-  onVerifyPayment?:(id:number)=>Promise<void>
   isAdmin?:boolean
 }
 
-export default function PaymentList({ payments, onVerifyPayment, isAdmin }: PaymentListProps) {
+export default function PaymentList({ payments,  isAdmin }: PaymentListProps) {
 
 
 
@@ -36,7 +37,24 @@ export default function PaymentList({ payments, onVerifyPayment, isAdmin }: Paym
     }
   }
 
+  const handleVerifyPayment = async (payment:Payment) => {
 
+    try {
+    
+     
+
+      if (payment?.isVerified) {
+        await patch(apiRoutes.payments.unverify(payment.id), {})
+      } else {
+        await patch(apiRoutes.payments.verify(payment.id), {})
+      }
+
+      window.location.reload()
+    } catch (error) {
+      console.error("Error verifying payment:", error)
+      alert("Error updating payment status")
+    }
+  }
   return (
     <div className="space-y-4">
       <h3 className="text-lg font-semibold text-green-900 flex items-center gap-2">
@@ -65,7 +83,7 @@ export default function PaymentList({ payments, onVerifyPayment, isAdmin }: Paym
                     {payment.isVerified?'verified':'unverified'}
               </span>
             </div>
-            {isAdmin && onVerifyPayment && <button onClick={()=>onVerifyPayment(payment.id)}>{payment.isVerified?'Unverify payment':'Verify Payment'}</button>}
+            {isAdmin && <button onClick={()=>handleVerifyPayment(payment)}>{payment.isVerified?'Unverify payment':'Verify Payment'}</button>}
           </div>
         ))}
       </div>

@@ -39,7 +39,8 @@ export class ManagedPortfolio extends Model<
   declare manager?: NonAttribute<Manager>;
   declare cryptoWallet?: NonAttribute<CryptoWallet>;
   declare payments?: NonAttribute<Payment[]>;
-
+  
+  readonly declare  createdAt: Date;
   // Mixins
   declare getInvestor: BelongsToGetAssociationMixin<Investor>;
   declare setInvestor: BelongsToSetAssociationMixin<Investor, number>;
@@ -90,6 +91,9 @@ ManagedPortfolio.init(
     managerId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+    },
+    createdAt: {
+      type:DataTypes.DATE
     }
   },
   {
@@ -119,9 +123,9 @@ Manager.hasMany(ManagedPortfolio, {
   as: 'managedPortfolios',
 });
 
-Investor.hasMany(ManagedPortfolio, {
+Investor.hasOne(ManagedPortfolio, {
   foreignKey: 'investorId',
-  as: 'managedPortfolios',
+  as: 'managedPortfolio',
 });
 
 export default ManagedPortfolio;

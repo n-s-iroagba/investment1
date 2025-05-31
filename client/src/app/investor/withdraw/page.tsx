@@ -1,9 +1,8 @@
 "use client"
-
 import InvestorOffCanvas from "@/components/InvestorOffCanvas"
 import { apiRoutes } from "@/constants/apiRoutes"
 import { useAuth } from "@/hooks/useAuth"
-import { get } from "@/utils/apiClient"
+import { useGetList, useGetSingle } from "@/hooks/useFetch"
 import { 
   BanknotesIcon, 
   ClockIcon, 
@@ -14,43 +13,10 @@ import {
   ShieldCheckIcon
 } from "@heroicons/react/24/outline"
 import { motion } from "framer-motion" 
-import { useCallback, useEffect, useState } from "react"
+import { ManagedPortfolio } from "@/types/managedPortfolio"
+import { VerificationFee } from "@/types/VerificationFee"
 
-// Types based on your models
-interface Manager {
-  id: number
-  lastName: string
-  firstName: string
-  image: string
-  minimumInvestmentAmount: number
-  percentageYield: number
-  duration: number // duration in days
-  qualification: string
-}
 
-interface ManagedPortfolio {
-  id: number
-  amount: number
-  earnings?: number
-  amountDeposited?: number
-  lastDepositDate?: Date | null
-  paymentStatus?: 'COMPLETE_PAYMENT' | 'INCOMPLETE_PAYMENT' | 'NOT_PAID'
-  investorId: number
-  managerId: number
-  manager?: Manager
-  createdAt: Date
-  updatedAt: Date
-}
-
-interface VerificationFee {
-  id: number
-  name: string
-  amount: number
-  isPaid?: boolean
-  investorId: number
-  createdAt: Date
-  updatedAt: Date
-}
 
 interface WithdrawalStatus {
   canWithdraw: boolean
@@ -61,41 +27,10 @@ interface WithdrawalStatus {
 }
 
 export default function InvestorWithdraw() {
-  const [investments, setInvestments] = useState<ManagedPortfolio[]>([])
-  const [verificationFees, setVerificationFees] = useState<VerificationFee[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const [activeTab, setActiveTab] = useState<"all" | "mature" | "pending">("all")
-
   const { roleId } = useAuth()
 
-  const fetchInvestments = useCallback(async () => {
-    try {
-      setLoading(true)
-      setError(null)
-
-      // Fetch investments
-      const investmentsData = await get<ManagedPortfolio[]>(
-        apiRoutes.investments.investorInvestments(roleId)
-      )
-      
-      // Fetch verification fees
-      const verificationData = await get<VerificationFee[]>(
-        apiRoutes.verificationFees.investorFees(roleId)
-      )
-
-      setInvestments(investmentsData)
-      setVerificationFees(verificationData)
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "An error occurred")
-    } finally {
-      setLoading(false)
-    }
-  }, [roleId])
-
-  useEffect(() => {
-    fetchInvestments()
-  }, [fetchInvestments])
+  const {data: verificationFees, loading: feeLoading, error: feeError} = useGetList<VerificationFee>(apiRoutes.verificationFee.investorUpaid(roleId))
+  const {data: investment, loading: investLoading, error: investError} = useGetSingle<ManagedPortfolio>(apiRoutes.investment.getInvestment(roleId))
 
   const calculateWithdrawalStatus = (investment: ManagedPortfolio): WithdrawalStatus => {
     const now = new Date()
@@ -112,7 +47,7 @@ export default function InvestorWithdraw() {
     const totalEarnings = principalAmount + (principalAmount * yieldPercentage / 100)
     
     // Check if verification fees are required and unpaid
-    const unpaidFees = verificationFees.filter(fee => !fee.isPaid)
+    const unpaidFees = verificationFees?.filter(fee => !fee.isPaid) || []
     const requiresVerification = isMatured && unpaidFees.length > 0
 
     return {
@@ -139,37 +74,13 @@ export default function InvestorWithdraw() {
     }).format(amount)
   }
 
-  const getFilteredInvestments = () => {
-    return investments.filter(investment => {
-      const status = calculateWithdrawalStatus(investment)
-      switch (activeTab) {
-        case "mature":
-          return status.canWithdraw || status.requiresVerification
-        case "pending":
-          return status.daysLeft > 0
-        default:
-          return true
-      }
-    })
-  }
-
-  const getTotalInvestments = () => investments.length
-  const getMatureInvestments = () => investments.filter(inv => {
-    const status = calculateWithdrawalStatus(inv)
-    return status.canWithdraw || status.requiresVerification
-  }).length
-  const getPendingInvestments = () => investments.filter(inv => {
-    const status = calculateWithdrawalStatus(inv)
-    return status.daysLeft > 0
-  }).length
-
   const getTotalUnpaidFees = () => {
     return verificationFees
-      .filter(fee => !fee.isPaid)
-      .reduce((total, fee) => total + fee.amount, 0)
+      ?.filter(fee => !fee.isPaid)
+      .reduce((total, fee) => total + fee.amount, 0) || 0
   }
 
-  if (loading) {
+  if (feeLoading || investLoading) {
     return (
       <InvestorOffCanvas>
         <div className="min-h-screen bg-white p-4 md:p-8">
@@ -183,21 +94,14 @@ export default function InvestorWithdraw() {
     )
   }
 
-  if (error) {
+  if (feeError || investError) {
     return (
       <InvestorOffCanvas>
         <div className="min-h-screen bg-white p-4 md:p-8">
           <div className="max-w-4xl mx-auto">
             <div className="min-h-[400px] flex items-center justify-center bg-red-50 rounded-2xl border-2 border-red-100">
               <div className="text-center space-y-4">
-                <div className="text-red-600 text-lg font-medium">Error loading investments</div>
-                <p className="text-red-500">{error}</p>
-                <button
-                  onClick={fetchInvestments}
-                  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
-                >
-                  Try Again
-                </button>
+                <div className="text-red-600 text-lg font-medium">Error loading investment</div>
               </div>
             </div>
           </div>
@@ -206,7 +110,40 @@ export default function InvestorWithdraw() {
     )
   }
 
-  const filteredInvestments = getFilteredInvestments()
+  // No investment found
+  if (!investment) {
+    return (
+      <InvestorOffCanvas>
+        <div className="min-h-screen bg-white p-4 md:p-8">
+          <div className="max-w-4xl mx-auto space-y-6">
+            {/* Header */}
+            <header className="px-2">
+              <h1 className="text-2xl md:text-3xl font-bold text-green-900 flex items-center gap-3">
+                <BanknotesIcon className="w-8 h-8 text-green-600" />
+                Withdraw Investment
+              </h1>
+              <p className="text-sm md:text-base text-green-600 mt-1">
+                Manage your investment withdrawal and earnings
+              </p>
+            </header>
+
+            <div className="text-center py-12 bg-gray-50 rounded-2xl">
+              <BanknotesIcon className="mx-auto h-12 w-12 text-gray-400" />
+              <h3 className="mt-4 text-lg font-medium text-gray-900">No investment found</h3>
+              <p className="mt-2 text-gray-500">
+                You haven&apos;t made any investments yet
+              </p>
+              <button className="mt-4 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+                Start Investing
+              </button>
+            </div>
+          </div>
+        </div>
+      </InvestorOffCanvas>
+    )
+  }
+
+  const status = calculateWithdrawalStatus(investment)
 
   return (
     <InvestorOffCanvas>
@@ -216,10 +153,10 @@ export default function InvestorWithdraw() {
           <header className="px-2">
             <h1 className="text-2xl md:text-3xl font-bold text-green-900 flex items-center gap-3">
               <BanknotesIcon className="w-8 h-8 text-green-600" />
-              Withdraw Investments
+              Withdraw Investment
             </h1>
             <p className="text-sm md:text-base text-green-600 mt-1">
-              Manage your investment withdrawals and earnings
+              Manage your investment withdrawal and earnings
             </p>
           </header>
 
@@ -231,8 +168,8 @@ export default function InvestorWithdraw() {
                   <CurrencyDollarIcon className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="text-sm text-green-600">Total Investments</p>
-                  <p className="text-2xl font-semibold text-green-900">{getTotalInvestments()}</p>
+                  <p className="text-sm text-green-600">Investment Amount</p>
+                  <p className="text-2xl font-semibold text-green-900">{formatCurrency(investment.amount)}</p>
                 </div>
               </div>
             </div>
@@ -243,8 +180,8 @@ export default function InvestorWithdraw() {
                   <CheckCircleIcon className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="text-sm text-green-600">Ready to Withdraw</p>
-                  <p className="text-2xl font-semibold text-green-900">{getMatureInvestments()}</p>
+                  <p className="text-sm text-green-600">Expected Returns</p>
+                  <p className="text-2xl font-semibold text-green-900">{formatCurrency(status.totalEarnings)}</p>
                 </div>
               </div>
             </div>
@@ -255,8 +192,8 @@ export default function InvestorWithdraw() {
                   <ClockIcon className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="text-sm text-green-600">Still Maturing</p>
-                  <p className="text-2xl font-semibold text-green-900">{getPendingInvestments()}</p>
+                  <p className="text-sm text-green-600">Days Left</p>
+                  <p className="text-2xl font-semibold text-green-900">{status.daysLeft}</p>
                 </div>
               </div>
             </div>
@@ -274,155 +211,100 @@ export default function InvestorWithdraw() {
             </div>
           </div>
 
-          {/* Tabs */}
+          {/* Investment Details Card */}
           <div className="bg-white rounded-2xl shadow-sm border-2 border-green-50">
-            <div className="border-b border-green-100">
-              <nav className="flex space-x-8 px-6">
-                {[
-                  { key: "all", label: "All Investments", count: getTotalInvestments() },
-                  { key: "mature", label: "Ready to Withdraw", count: getMatureInvestments() },
-                  { key: "pending", label: "Still Maturing", count: getPendingInvestments() },
-                ].map((tab) => (
-                  <button
-                    key={tab.key}
-                    onClick={() => setActiveTab(tab.key as typeof activeTab)}
-                    className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
-                      activeTab === tab.key
-                        ? "border-green-600 text-green-600"
-                        : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-                    }`}
-                  >
-                    {tab.label} ({tab.count})
-                  </button>
-                ))}
-              </nav>
-            </div>
-
-            {/* Investments List */}
             <div className="p-6">
-              {investments.length === 0 ? (
-                <div className="text-center py-12">
-                  <BanknotesIcon className="mx-auto h-12 w-12 text-gray-400" />
-                  <h3 className="mt-4 text-lg font-medium text-gray-900">No investments found</h3>
-                  <p className="mt-2 text-gray-500">
-                    Start investing to see your portfolio here
-                  </p>
-                  <button className="mt-4 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
-                    Start Investing
-                  </button>
-                </div>
-              ) : filteredInvestments.length === 0 ? (
-                <div className="text-center py-12">
-                  <ClockIcon className="mx-auto h-12 w-12 text-gray-400" />
-                  <h3 className="mt-4 text-lg font-medium text-gray-900">
-                    {activeTab === "mature" 
-                      ? "No mature investments" 
-                      : activeTab === "pending" 
-                      ? "No pending investments"
-                      : "No investments in this category"}
-                  </h3>
-                  <p className="mt-2 text-gray-500">
-                    {activeTab === "mature" 
-                      ? "Mature investments ready for withdrawal will appear here" 
-                      : activeTab === "pending"
-                      ? "Investments still maturing will appear here"
-                      : "Investments matching this filter will appear here"}
-                  </p>
-                </div>
-              ) : (
-                <div className="space-y-4">
-                  {filteredInvestments.map((investment, index) => {
-                    const status = calculateWithdrawalStatus(investment)
-                    return (
-                      <motion.div
-                        key={investment.id}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.3, delay: index * 0.1 }}
-                        className="bg-gray-50 rounded-xl p-6 hover:bg-gray-100 transition-colors"
+              <h3 className="text-lg font-semibold text-gray-900 mb-6">Investment Details</h3>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="bg-gray-50 rounded-xl p-6 hover:bg-gray-100 transition-colors"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-4">
+                    <div
+                      className={`p-3 rounded-lg ${
+                        status.canWithdraw
+                          ? "bg-green-100 text-green-600"
+                          : status.requiresVerification
+                          ? "bg-orange-100 text-orange-600"
+                          : "bg-blue-100 text-blue-600"
+                      }`}
+                    >
+                      {status.canWithdraw ? (
+                        <CheckCircleIcon className="w-6 h-6" />
+                      ) : status.requiresVerification ? (
+                        <ExclamationTriangleIcon className="w-6 h-6" />
+                      ) : (
+                        <ClockIcon className="w-6 h-6" />
+                      )}
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-gray-900">
+                        {investment.manager?.firstName} {investment.manager?.lastName}
+                      </h4>
+                      <p className="text-sm text-gray-500">
+                        {investment.manager?.qualification}
+                      </p>
+                      <div className="flex items-center gap-2 text-xs text-gray-400 mt-1">
+                        <CalendarDaysIcon className="w-4 h-4" />
+                        <span>Invested on {formatDate(investment.createdAt)}</span>
+                        <span>•</span>
+                        <span>Matures on {formatDate(status.maturityDate)}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-xs text-gray-400 mt-1">
+                        <span>Duration: {investment.manager?.duration} days</span>
+                        <span>•</span>
+                        <span>Yield: {investment.manager?.percentageYield}%</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-right space-y-2">
+                    <div className="flex items-center gap-1 text-lg font-semibold text-gray-900">
+                      <CurrencyDollarIcon className="w-5 h-5 text-green-600" />
+                      {formatCurrency(investment.amount)}
+                    </div>
+                    <div className="text-sm text-green-600">
+                      Expected: {formatCurrency(status.totalEarnings)}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span
+                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                          status.canWithdraw
+                            ? "bg-green-100 text-green-800"
+                            : status.requiresVerification
+                            ? "bg-orange-100 text-orange-800"
+                            : "bg-blue-100 text-blue-800"
+                        }`}
                       >
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-4">
-                            <div
-                              className={`p-3 rounded-lg ${
-                                status.canWithdraw
-                                  ? "bg-green-100 text-green-600"
-                                  : status.requiresVerification
-                                  ? "bg-orange-100 text-orange-600"
-                                  : "bg-blue-100 text-blue-600"
-                              }`}
-                            >
-                              {status.canWithdraw ? (
-                                <CheckCircleIcon className="w-6 h-6" />
-                              ) : status.requiresVerification ? (
-                                <ExclamationTriangleIcon className="w-6 h-6" />
-                              ) : (
-                                <ClockIcon className="w-6 h-6" />
-                              )}
-                            </div>
-                            <div>
-                              <h4 className="font-medium text-gray-900">
-                                {investment.manager?.firstName} {investment.manager?.lastName}
-                              </h4>
-                              <p className="text-sm text-gray-500">
-                                {investment.manager?.qualification}
-                              </p>
-                              <div className="flex items-center gap-2 text-xs text-gray-400 mt-1">
-                                <CalendarDaysIcon className="w-4 h-4" />
-                                <span>Invested on {formatDate(investment.createdAt)}</span>
-                                <span>•</span>
-                                <span>Matures on {formatDate(status.maturityDate)}</span>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="text-right space-y-2">
-                            <div className="flex items-center gap-1 text-lg font-semibold text-gray-900">
-                              <CurrencyDollarIcon className="w-5 h-5 text-green-600" />
-                              {formatCurrency(investment.amount)}
-                            </div>
-                            <div className="text-sm text-green-600">
-                              Expected: {formatCurrency(status.totalEarnings)}
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <span
-                                className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                                  status.canWithdraw
-                                    ? "bg-green-100 text-green-800"
-                                    : status.requiresVerification
-                                    ? "bg-orange-100 text-orange-800"
-                                    : "bg-blue-100 text-blue-800"
-                                }`}
-                              >
-                                {status.canWithdraw
-                                  ? "Ready to Withdraw"
-                                  : status.requiresVerification
-                                  ? "Pay Verification Fee"
-                                  : `${status.daysLeft} days left`}
-                              </span>
-                              {(status.canWithdraw || status.requiresVerification) && (
-                                <button
-                                  className={`px-3 py-1 text-xs font-medium rounded-lg transition-colors ${
-                                    status.canWithdraw
-                                      ? "bg-green-600 text-white hover:bg-green-700"
-                                      : "bg-orange-600 text-white hover:bg-orange-700"
-                                  }`}
-                                >
-                                  {status.canWithdraw ? "Withdraw" : "Pay Fee"}
-                                </button>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      </motion.div>
-                    )
-                  })}
+                        {status.canWithdraw
+                          ? "Ready to Withdraw"
+                          : status.requiresVerification
+                          ? "Pay Verification Fee"
+                          : `${status.daysLeft} days left`}
+                      </span>
+                      {(status.canWithdraw || status.requiresVerification) && (
+                        <button
+                          className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                            status.canWithdraw
+                              ? "bg-green-600 text-white hover:bg-green-700"
+                              : "bg-orange-600 text-white hover:bg-orange-700"
+                          }`}
+                        >
+                          {status.canWithdraw ? "Withdraw Now" : "Pay Fee"}
+                        </button>
+                      )}
+                    </div>
+                  </div>
                 </div>
-              )}
+              </motion.div>
             </div>
           </div>
 
           {/* Verification Fees Section */}
-          {verificationFees.some(fee => !fee.isPaid) && (
+          {verificationFees && verificationFees.some(fee => !fee.isPaid) && (
             <div className="bg-orange-50 rounded-2xl border-2 border-orange-100 p-6">
               <div className="flex items-center gap-3 mb-4">
                 <ExclamationTriangleIcon className="w-6 h-6 text-orange-600" />

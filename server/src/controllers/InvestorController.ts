@@ -1,6 +1,10 @@
 import type { Request, Response } from "express"
 import { InvestorService } from "../services/InvestorService.js"
 import { errorHandler } from "../utils/error/errorHandler.js"
+import Investor from "../models/Investor.js"
+import ManagedPortfolio from "../models/ManagedPortfolio.js"
+import User from "../models/User.js"
+import Kyc from "../models/Kyc.js"
 
 export default class InvestorController {
   static async getInvestorProfile(req: Request, res: Response) {
@@ -42,11 +46,26 @@ export default class InvestorController {
     }
   }
 
-  static async updateInvestor(req: Request, res: Response) {
+  static async getInvestor(req: Request, res: Response) {
     try {
       const investorId = req.params.investorId
-      await InvestorService.updateInvestor(Number(investorId), req.body)
-      res.status(200).end()
+      const investor = await Investor.findByPk(investorId,{
+        include: [
+          {
+            model: ManagedPortfolio,
+            as: 'managedPortfolio',
+          },
+          {
+            model: Kyc,
+            as: 'kyc',
+          },
+          {
+            model:User,
+            as: 'user',
+          }
+        ]
+      })
+      res.status(200).json(investor)
     } catch (error) {
       errorHandler(error, req, res)
     }

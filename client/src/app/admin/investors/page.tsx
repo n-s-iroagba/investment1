@@ -1,16 +1,20 @@
 "use client";
 import ErrorComponent from '@/components/ErrorComponent';
+import { EmailModal } from '@/components/InvestorDetailModals';
 import { Spinner } from '@/components/Spinner';
 import { apiRoutes } from '@/constants/apiRoutes';
 import { useGetList } from '@/hooks/useFetch';
 import { Investor } from '@/types/Investor';
-import { ArrowRightIcon, UserCircleIcon } from '@heroicons/react/24/outline';
+import { ArrowRightIcon, EnvelopeIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { sendEmail } from './[id]/page';
 
 export default function InvestorList() {
  const router = useRouter()
+ const [showModal,setShowModal] = useState(false)
   const {data:investors, error, loading}= useGetList<Investor>(apiRoutes.investor.list())
-
+  
   // Skeleton loading state
 
   if (loading) {
@@ -38,8 +42,16 @@ export default function InvestorList() {
       </div>
     );
   }
+  
   return (
       <div className="space-y-6">
+     <button
+  onClick={() => setShowModal(true)}
+  className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-medium rounded-lg hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-md hover:shadow-lg"
+>
+  <EnvelopeIcon className="w-5 h-5" />
+  <span>Send Mail To All Investors</span>
+</button>
       {/* Desktop Table */}
       <div className="hidden md:block overflow-hidden rounded-2xl border-2 border-green-100 shadow-sm">
         <table className="w-full border-collapse">
@@ -90,7 +102,7 @@ export default function InvestorList() {
           </tbody>
         </table>
       </div>
-
+    <EmailModal isOpen={showModal} onClose={()=>setShowModal(false)} investorName={'All investors'} investorEmail={'All investors'} onSend={sendEmail}/>
       {/* Mobile Grid */}
       <div className="md:hidden space-y-4">
         {investors.map((investor) => (

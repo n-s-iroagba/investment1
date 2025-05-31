@@ -3,6 +3,7 @@ import { KycService } from '../services/KycService.js';
 import { CustomError } from '../utils/error/CustomError.js';
 import logger from '../utils/logger/logger.js';
 import { errorHandler } from '../utils/error/errorHandler.js';
+import Kyc from '../models/Kyc.js';
 
 class KycController {
   static async create(req: Request, res: Response) {
@@ -19,7 +20,13 @@ class KycController {
     }
   }
 
-
+static async getUnverified(req: Request, res: Response) {
+  try{
+    return await Kyc.findAll({where:{isVerified:false}})
+   } catch (error) {
+        errorHandler(error, req, res)
+    }
+}
 
   static async verify (req:Request,res:Response){
     try {

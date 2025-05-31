@@ -40,21 +40,35 @@ export class ManagedPortfolioService {
       throw error;
     }
   }
-static async creditInvestment(id:string, amount:number){
+static async creditAmountDeposited(id:string, amount:number){
   try{
-  const portfolio = await ManagedPortfolio.findOne({where:{investorId:id}})
+  const portfolio = await ManagedPortfolio.findByPk(id)
   if(!portfolio){
     throw new CustomError(404, 'Portfolio not found')
   }
   portfolio.amountDeposited? portfolio.amountDeposited += amount : portfolio.amountDeposited = amount
+  
   await portfolio.save()
 }
 catch (error) {
-      logger.error(`Failed to credit ManagedPortfolio: ${error}`);
+      logger.error(`Failed to credit amount deposited ManagedPortfolio: ${error}`);
       throw error;
     }
   }
-
+static async creditEarnings(id:string, amount:number){
+  try{
+  const portfolio = await ManagedPortfolio.findByPk(id)
+  if(!portfolio){
+    throw new CustomError(404, 'Portfolio not found')
+  }
+  portfolio.earnings? portfolio.earnings += amount : portfolio.earnings = amount
+  await portfolio.save()
+}
+catch (error) {
+      logger.error(`Failed to credit earnings for ManagedPortfolio: ${error}`);
+      throw error;
+    }
+  }
   static async getInvestmentByInvestorId(
   investorId: number
 ): Promise<ManagedPortfolio | null> {
@@ -65,67 +79,15 @@ catch (error) {
         model: Manager,
         as: 'manager',
       },
-      // {
-      //   model: VerificationFee,
-      //   as: 'verificationFees',
-      // },
+      {
+        model:Payment,
+        as:'payments'
+      }
     ],
+
   });
-  
-  console.log('managed portfolio', portfolio);
+
 
   return portfolio;
 };
-
-  // Update by id - must include amount and managerId
-  static async updatePortfolio(id: number, data: ManagedPortfolioInput) {
-    const { amount, managerId } = data;
-
-    if (amount == null || managerId == null) {
-      throw new CustomError(400, 'amount and managerId are required for update');
-    }
-
-    const portfolio = await ManagedPortfolio.findByPk(id);
-    if (!portfolio) {
-      throw new CustomError(404, `ManagedPortfolio with id ${id} not found`);
-    }
-
-    try {
-      // Update all passed fields
-      portfolio.amount = amount;
-      portfolio.managerId = managerId;
-
-      if (data.earnings !== undefined) portfolio.earnings = data.earnings;
-      if (data.amountDeposited !== undefined) portfolio.amountDeposited = data.amountDeposited;
-      if (data.lastDepositDate !== undefined) portfolio.lastDepositDate = data.lastDepositDate;
-      if (data.investorId !== undefined) portfolio.investorId = data.investorId;
-
-      await portfolio.save();
-
-      logger.info(`Updated ManagedPortfolio id=${id}`);
-      return portfolio;
-    } catch (error) {
-      logger.error(`Failed to update ManagedPortfolio: ${error}`);
-      throw error;
-    }
-  }
-
-      static async uploadProofOfPayment(id: number, payload:PaymentCreationDto) {
-    const managedPortfolio = await ManagedPortfolio.findByPk(id);
-    if (!managedPortfolio) {
-      throw new CustomError(404, `ManagedPortfolio with id ${id} not found`);
-    }
-    const data:PaymentCreationAttributes ={...payload,paymentType:'INVESTMENT',date:new Date(),isVerified:false}
-    try{
-    const payment = await Payment.create(data);
-    const payments = managedPortfolio.payments??[]
-    payments.push(payment)
-    managedPortfolio.setPayments(payments)
-    await managedPortfolio.save()
-    return managedPortfolio;
-    }catch(error){
-       logger.error(`Failed to upload managed portfolio proof of payment: ${error}`);
-      throw error;
-    }
-  }
 }

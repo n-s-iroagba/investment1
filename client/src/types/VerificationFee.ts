@@ -24,3 +24,15 @@ export type UploadVerificationFeeProofOfPaymentDto={
 export type ApproveVerificationFee ={
     isPaid:boolean
 }
+
+
+export interface VerificationFeeItem {
+  id: number;
+  name: string;
+  amount: number;
+  isPaid: boolean;
+  investorId: number;
+  investorName: string;
+  createdAt: Date;
+  updatedAt: Date;
+}

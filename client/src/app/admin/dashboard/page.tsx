@@ -6,17 +6,21 @@ import { apiRoutes } from "@/constants/apiRoutes"
 import { useGetList } from "@/hooks/useFetch"
 import { useAuth } from "@/hooks/useAuth"
 import type { AdminWallet } from "@/types/adminWallet"
-import { type ReactNode } from "react"
+import { useEffect, type ReactNode } from "react"
 import { Spinner } from "@/components/Spinner"
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline"
 import type { Manager } from "@/types/manager"
 import type { SocialMedia } from "@/types/socialMedia"
+import { useRouter } from "next/navigation"
+
+import { Payment } from "@/types/Payment"
+import { Kyc } from "@/types/Kyc"
 
 
 const AdminDashboard = () => {
   const { loading: authLoading, isAdmin, displayName } = useAuth()
   console.log(displayName, isAdmin)
- 
+  const router = useRouter()
 
   const {
     data: wallets,
@@ -24,18 +28,20 @@ const AdminDashboard = () => {
     loading: walletLoading,
   } = useGetList<AdminWallet>(apiRoutes.adminWallet.list())
   const { data: managers, error: managerError, loading: managerLoading } = useGetList<Manager>(apiRoutes.manager.list())
+  const { data: kyc, error: kycError, loading: verificationLoading } = useGetList<Kyc>(apiRoutes.kyc.unverified())
+  const { data: payments, error: paymentError, loading: paymentLoading } = useGetList<Payment>(apiRoutes.payments.getUnverified())
   const {
     data: socialmedias,
     error: socialMediaError,
     loading: socialMediaLoading,
   } = useGetList<SocialMedia>(apiRoutes.socialMedia.list())
 
-  // Redirect if not admin
-  // useEffect(() => {
-  //   if (!authLoading && !isAdmin) {
-  //     router.push("/login")
-  //   }
-  // }, [authLoading, isAdmin, router])
+
+  useEffect(() => {
+    if (!authLoading && !isAdmin) {
+      router.push("/login")
+    }
+  }, [authLoading, isAdmin, router])
 
   const todos: ReactNode[] = []
 
@@ -68,6 +74,28 @@ const AdminDashboard = () => {
     )
   }
 
+
+  if (!kyc.length) {
+    todos.push(
+      <TodoAlert
+        key="kyc-alert"
+        message="You have some kyc to verify"
+        link="/admin/kyc"
+      />,
+    )
+  }
+
+
+  if (!payments.length) {
+    todos.push(
+      <TodoAlert
+        key="Pending-payment"
+        message="You do not have any social media links, add social media to start managing transactions"
+        link="/admin/unverified-payments"
+      />,
+    )
+  }
+
   if (authLoading) {
     return (
       <div className="flex justify-center items-center h-screen px-4">
@@ -94,11 +122,11 @@ const AdminDashboard = () => {
         </div>
 
         {/* Loading/Error States */}
-        {walletLoading || managerLoading || socialMediaLoading ? (
+        {walletLoading || managerLoading || socialMediaLoading || verificationLoading || paymentLoading  ? (
           <div className="flex justify-center items-center h-32">
             <Spinner className="w-8 h-8 text-green-600" />
           </div>
-        ) : walletError || managerError || socialMediaError ? (
+        ) : walletError || managerError || socialMediaError || paymentError || kycError ? (
           <div className="p-3 sm:p-4 bg-red-50 rounded-lg border border-red-200 text-red-700 text-sm sm:text-base">
             Error loading information
           </div>

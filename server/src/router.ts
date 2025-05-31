@@ -21,9 +21,13 @@ import ReferralController from "./controllers/ReferralController.js"
 const router = Router()
 router.post("/investment/new/:investorId", ManagedPortfolioController.createInvestment)
 router.get("/managed-portfolios/investor/:investorId", ManagedPortfolioController.getInvestment)
-router.patch('/managed-portfolios/credit/:investorId', ManagedPortfolioController.creditInvestment)
+router.patch('/managed-portfolios/credit-amount-deposited/:portfolioId', ManagedPortfolioController.creditAmountDeposited)
+router.patch('/managed-portfolios/credit-earnings/:portfolioId', ManagedPortfolioController.creditEarnings)
+
 router.get('/investors', InvestorController.getAllInvestors)
-router.patch("/investors/:id", InvestorController.updateInvestor)
+
+router.get('/get-investor/:investorId', InvestorController.getInvestor)
+
 router.delete("/investors/:id", InvestorController.deleteInvestor)
 
 router.get('/investors/:investorId/referrals',ReferralController.getInvestorReferrals)
@@ -37,9 +41,8 @@ router.patch("/investors/me/:investorId", authenticate, InvestorController.updat
 router.post("/kyc/:investorId", KycController.create)
 router.patch("/kyc/:id", KycController.update)
 router.get("/kyc/verify/:id", KycController.verify)
-//
-router.get('/payments/unverified', PaymentController.getUnverifiedPayments)
-// Managers routes
+router.get('/kyc/unverified',KycController.getUnverified)
+
 router.get("/managers", ManagerController.getAllManagers)
 router.get("/managers/:id", ManagerController.getManagerById)
 router.post("/managers", upload.single("image"), ManagerController.createManager)
@@ -61,12 +64,36 @@ router.patch("/social-media/:id", upload.single("logo"), SocialMediaController.u
 router.delete("/social-media/:id", SocialMediaController.delete)
 
 // Verification Fees routes
-router.post("/verification-fees/:id", VerificationFeeController.uploadProofOfPayment)
-router.post("/verification-fees", VerificationFeeController.create)
+
+router.post("/verification-fees/:investorId", VerificationFeeController.create)
 router.patch("/verification-fees/:id", VerificationFeeController.update)
 router.delete("/verification-fees/:id", VerificationFeeController.delete)
+router.get('/verification-fees/unpaid/:investorId',VerificationFeeController.getUnpaidVerificationFees)
 
-router.post('/payments/:entityId',upload.single('file'),PaymentController.createPayment)
+
+
+router.post("/create/:investorId",upload.single('file'), PaymentController.createPayment)
+
+// Update a payment
+router.put("/:id", PaymentController.updatePayment)
+
+// Verify a payment
+router.patch("/verify/:id", PaymentController.verifyPayment)
+
+// Unverify a payment
+router.patch("/unverify/:id", PaymentController.unverifyPayment)
+
+// Get all unverified payments
+router.get("/unverified", PaymentController.getUnverifiedPayments)
+
+// Get all payments for a specific investor
+router.get("/investor/:investorId", PaymentController.getPaymentsByInvestorId)
+
+// Get investor payments (alternate route)
+router.get("/investor-payments/:id", PaymentController.getInvestorPayments)
+
+// Delete a payment
+router.delete("/:id", PaymentController.deletePayment)
 // Auth routes
 router.post("/auth/forgot-password", AuthController.forgotPassword)
 router.post("/auth/reset-password", AuthController.resetPassword)
@@ -83,7 +110,7 @@ router.get("/auth/logout", (req, res) => {
 
 // Email routes
 router.post("/email/send", EmailController.sendGeneralEmail)
-router.post("/email/send-to-investor", EmailController.sendEmailToInvestor)
+router.post("/email/send-to-investor/:.investorId", EmailController.sendEmailToInvestor)
 
 async function getInvestorById(id: string): Promise<Investor | null> {
   // Replace with real DB query

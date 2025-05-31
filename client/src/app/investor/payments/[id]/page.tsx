@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState} from "react"
 import { useParams } from "next/navigation"
 
 import { 
@@ -53,11 +53,11 @@ export default function PaymentDetailsPage() {
   
   const [showUploadModal, setShowUploadModal] = useState(false)
   const [showViewModal, setShowViewModal] = useState(false)
-  const [showVerifyModal, setShowVerifyModal] = useState(false)
+
   const [selectedReceiptUrl, setSelectedReceiptUrl] = useState("")
-  const [selectedPaymentId, setSelectedPaymentId] = useState<number | null>(null)
+
   const [selectedPayment, setSelectedPayment] = useState<Payment | null>(null)
-  const [isAdmin, setIsAdmin] = useState(false)
+ 
 const {roleId} = useAuth()
   // Fetch managed portfolio data
   const { data: portfolio, loading: portfolioLoading, error: portfolioError } = useGetSingle<ManagedPortfolio>(
@@ -69,13 +69,6 @@ const {roleId} = useAuth()
     apiRoutes.payments.getInvestorPayments(roleId)
   )
 
-  // Check if user is admin (you'll need to implement this based on your auth system)
-  useEffect(() => {
-    // Replace with your actual auth check
-    const userRole = localStorage.getItem('userRole') || 'INVESTOR'
-    setIsAdmin(userRole === 'ADMIN')
-  }, [])
-
   const handleViewReceipt = (receiptUrl: string) => {
     setSelectedReceiptUrl(receiptUrl)
     setShowViewModal(true)
@@ -86,10 +79,6 @@ const {roleId} = useAuth()
     setShowUploadModal(true)
   }
 
-  const handleVerifyPayment = (paymentId: number) => {
-    setSelectedPaymentId(paymentId)
-    setShowVerifyModal(true)
-  }
 
   const handleDeletePayment = async (paymentId: number) => {
     if (!confirm('Are you sure you want to delete this payment? This action cannot be undone.')) {
@@ -119,9 +108,9 @@ const {roleId} = useAuth()
   const handleModalClose = () => {
     setShowUploadModal(false)
     setShowViewModal(false)
-    setShowVerifyModal(false)
+
     setSelectedPayment(null)
-    setSelectedPaymentId(null)
+
     setSelectedReceiptUrl("")
      window.location.reload()   
   }
@@ -216,11 +205,11 @@ const {roleId} = useAuth()
                 <PaymentItem
                   key={payment.id}
                   payment={payment}
-                  isAdmin={isAdmin}
+                  isAdmin={false}
                   onViewReceipt={handleViewReceipt}
                   onUpdatePayment={handleUpdatePayment}
                   onDeletePayment={handleDeletePayment}
-                  onVerifyPayment={handleVerifyPayment}
+                  
                 />
               ))}
             </div>
@@ -249,11 +238,7 @@ const {roleId} = useAuth()
         receiptUrl={selectedReceiptUrl}
       />
 
-      <VerifyPaymentModal
-        isOpen={showVerifyModal}
-        onClose={handleModalClose}
-        paymentId={selectedPaymentId || 0}
-      />
+ 
     </div>
   )
-}/
+}

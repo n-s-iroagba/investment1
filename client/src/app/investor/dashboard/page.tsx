@@ -1,7 +1,6 @@
 "use client"
 
 import InvestorOffCanvas from "@/components/InvestorOffCanvas"
-import PaymentList from "@/components/PaymentList"
 import SocialMediaLinks from "@/components/SocialMediaLinks"
 import { UploadProofModal } from "@/components/UploadProofModal"
 import { useAuth } from "@/hooks/useAuth" 
@@ -425,15 +424,15 @@ const InvestorDashboard = () => {
                   </button>
                 </div>
               ) : (
-                <div className="space-y-4">
-                  <h4 className="text-base font-semibold text-green-900 flex items-center gap-2">
-                    <WalletIcon className="w-4 h-4 text-green-600 flex-shrink-0" />
-                    Payment History
-                  </h4>
-                  <div className="bg-white rounded-xl border border-green-100 overflow-hidden shadow-sm">
-                    <PaymentList payments={portfolio.payments ?? []} />
-                  </div>
-                </div>
+                <button
+      onClick={() => router.push(`/investor/payments/${roleId}`)}
+      className="flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold rounded-xl hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl group"
+    >
+      <div className="p-2 bg-white/20 rounded-full group-hover:bg-white/30 transition-all">
+        <CurrencyDollarIcon className="w-6 h-6 text-white" />
+      </div>
+      <span className="text-lg">View My Payments</span>
+    </button>
               )}
             </div>
           </div>

@@ -29,7 +29,7 @@ interface PaymentItemProps {
   onViewReceipt: (receiptUrl: string) => void
   onUpdatePayment: (payment: Payment) => void
   onDeletePayment: (paymentId: number) => void
-  onVerifyPayment: (paymentId: number) => void
+
 }
 
 export function PaymentItem({
@@ -38,7 +38,7 @@ export function PaymentItem({
   onViewReceipt,
   onUpdatePayment,
   onDeletePayment,
-  onVerifyPayment
+
 }: PaymentItemProps) {
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -160,16 +160,7 @@ export function PaymentItem({
             </button>
           )}
 
-          {/* Verify Payment Button - Admin only for unverified payments */}
-          {!payment.isVerified && isAdmin && (
-            <button
-              onClick={() => onVerifyPayment(payment.id)}
-              className="flex items-center gap-2 px-3 py-2 bg-green-600 text-white border border-green-600 rounded-lg hover:bg-green-700 transition-all text-sm"
-            >
-              <CheckCircleIcon className="w-4 h-4" />
-              Verify Payment
-            </button>
-          )}
+      
         </div>
       </div>
 

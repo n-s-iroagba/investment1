@@ -9,6 +9,7 @@ import { AdminWallet } from "@/types/adminWallet";
 import { post } from "@/utils/apiClient";
 import WAValidator from "multicoin-address-validator";
 import { CurrencyDollarIcon, WalletIcon, BanknotesIcon, ArrowPathIcon, UserCircleIcon } from '@heroicons/react/24/outline';
+import { useAuth } from "@/hooks/useAuth";
 type InvestmentCreationDto = {
   amount: number;
   depositMeans: string;
@@ -34,7 +35,7 @@ const NewInvestmentForm: React.FC = () => {
   const params = useParams();
 console.log(params)
   const router = useRouter();
-  const userId = 1;
+  const {roleId} = useAuth()
   const rawManagerId = params.managerId;
 
 
@@ -102,8 +103,8 @@ console.log(params)
        await post<
         InvestmentCreationDto,
         { investmentId: number | string }
-      >(apiRoutes.investment.new(userId), payload);
-      router.push(`/investor/dashboard`);
+      >(apiRoutes.investment.new(roleId), payload);
+      router.push(`/investor/payments/${roleId}`);
     } catch (err) {
       console.error(err);
       setMessage("Failed to submit investment.");

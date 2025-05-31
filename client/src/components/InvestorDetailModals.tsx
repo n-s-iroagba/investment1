@@ -12,12 +12,13 @@ import toast from "react-hot-toast"
 interface EmailModalProps {
   isOpen: boolean
   onClose: () => void
-  investorEmail: string
+  investorId?: number
   investorName: string
-  onSend: (email:string, mail:{subject: string, message: string}) => Promise<void>
+  investorEmail: string
+  onSend: ( mail:{subject: string, message: string},investorId?:number,) => Promise<void>
 }
 
-export function EmailModal({ isOpen, onClose, investorEmail, investorName, onSend }: EmailModalProps) {
+export function EmailModal({ isOpen, onClose, investorName,investorEmail,investorId, onSend }: EmailModalProps) {
   const [subject, setSubject] = useState("")
   const [message, setMessage] = useState("")
   const [isSending, setIsSending] = useState(false)
@@ -33,7 +34,7 @@ export function EmailModal({ isOpen, onClose, investorEmail, investorName, onSen
 
     setIsSending(true)
     try {
-      await onSend(investorEmail ,{subject, message})
+      await onSend({subject, message},investorId)
       toast.success("Email sent successfully!")
       onClose()
       setSubject("")
@@ -129,11 +130,12 @@ interface CreditModalProps {
   isOpen: boolean
   onClose: () => void
   investorId: string | number
-  currentBalance: number
-  onCredit: (investorId: string | number,amount: number,) => Promise<void>
+  amountDeposited: number
+  earnings:number;
+  onCredit: (investorId: string | number,amount: number,) => Promise<void> 
 }
 
-export function CreditModal({ isOpen, onClose, investorId, currentBalance, onCredit }: CreditModalProps) {
+export function CreditModal({ isOpen, onClose, investorId, amountDeposited, earnings, onCredit }: CreditModalProps) {
   const [amount, setAmount] = useState("")
   const [isProcessing, setIsProcessing] = useState(false)
 
@@ -183,7 +185,13 @@ export function CreditModal({ isOpen, onClose, investorId, currentBalance, onCre
 
         <div className="mb-4 p-3 bg-green-50 rounded-lg">
           <p className="text-sm text-green-700">
-            <span className="font-medium">Current Balance:</span> ${currentBalance.toLocaleString()}
+            <span className="font-medium">Intended Amount:</span> ${amountDeposited.toLocaleString()}
+          </p>
+          <p className="text-sm text-green-700">
+            <span className="font-medium">Earnings:</span> ${earnings.toLocaleString()}
+          </p>
+          <p className="text-sm text-green-700">
+            <span className="font-medium">Current Balance:</span> ${(amountDeposited+earnings).toLocaleString()}
           </p>
         </div>
 

@@ -3,4 +3,5 @@ export type Kyc = {
    type: string;
    image: string;
    isVerified: boolean
+   investorId:number
 }

@@ -7,7 +7,8 @@ export type  ManagedPortfolio ={
  earnings?: number;
    amountDeposited?: number;
 
- payments: Payment[]
+ payments?: Payment[]
  manager:Manager
  cryptoWallet:CryptoWallet
+ createdAt:Date
 }

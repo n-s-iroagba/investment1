@@ -11,8 +11,12 @@ export const apiRoutes = {
     me: (): string => `/auth/me`,
   },
 
+
   verificationFee:{
-   create:(id:string|number):string=>`/verification-fees/${id}`
+   create:(id:string|number):string=>`/verification-fees/${id}`,
+  update:(id:string|number):string=>`/verification-fees/${id}`,
+  delete:(id:string|number):string=>`/verification-fees/${id}`,
+  investorUpaid:(id:string|number):string=>`/verification-fees/unpaid/:/${id}`,
   },
   referral: {
     list: (): string => `/referrals`,
@@ -26,11 +30,12 @@ export const apiRoutes = {
   investment: {
     new: (id: string | number): string => `/investment/new/${id}`,
     getInvestment: (investorId: string | number): string => `/managed-portfolios/investor/${investorId}`,
-    creditInvestment: (investorId: string | number): string => `/managed-portfolios/credit/${investorId}`
+    creditInvestmentEarnings: (portfolioId: string | number): string => `/managed-portfolios/credit-earnings/${portfolioId}`,
+    creditAmountDeposited: (portfolioId: string | number): string => `/managed-portfolios/credit-amount-deposited/${portfolioId}`
   },
   investor: {
-    profile: (id: string | number): string => `/investors/${id}`,
-    update: (id: string | number): string => `/investors/${id}`,
+   
+    getInvestor:(id:number):string => `/get-investor/${id}`,
     delete: (id: string | number): string => `/investors/${id}`,
     me: (id:string|number): string => `/investors/me/${id}`,
     updateMe: (id:string|number): string => `/investors/me/${id}`,
@@ -38,7 +43,7 @@ export const apiRoutes = {
   },
   email: {
     send: (): string => `/email/send`,
-    sendToInvestor: (): string => `/email/send-to-investor}`,
+    sendToInvestor: (investorId:string|number): string => `/email/send-to-investor/${investorId}`,
   },
   adminWallet: {
     list: (): string => `/admin-wallets`,
@@ -63,7 +68,8 @@ export const apiRoutes = {
   },
   kyc:{
     verify:(id:string|number):string => `/kyc/verify/${id}`,
-    create:(id:string|number):string => `/kyc/${id}`
+    create:(id:string|number):string => `/kyc/${id}`,
+    unverified:():string => `/kyc/unverified`
   },
     payments: {
     create: (investorId: number | string): string => `/payments/create/${investorId}`,
