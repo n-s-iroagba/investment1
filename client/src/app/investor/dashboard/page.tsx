@@ -41,7 +41,7 @@ function getDaysSinceOldestPayment(portfolio: ManagedPortfolio | null): number {
   if (allPayments.length === 0) return 1
 
   const currentDate = new Date()
-  const oldestPaymentDate = new Date(Math.min(...allPayments.map((p: Payment) => new Date(p.date).getTime())))
+  const oldestPaymentDate = new Date(Math.min(...allPayments.map((p: Payment) => new Date(p.paymentDate).getTime())))
   const timeDiff = currentDate.getTime() - oldestPaymentDate.getTime()
   const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24)) + 1
 
