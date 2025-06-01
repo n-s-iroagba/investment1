@@ -13,6 +13,7 @@ import type { Manager } from "@/types/manager"
 import type { SocialMedia } from "@/types/socialMedia"
 import { Payment } from "@/types/Payment"
 import { Kyc } from "@/types/Kyc"
+import AdminOffCanvas from "@/components/AdminOffCanvas"
 
 
 const AdminDashboard = () => {
