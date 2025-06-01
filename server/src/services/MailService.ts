@@ -9,7 +9,7 @@ import fs from "fs"
 dotenv.config()
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const { EMAIL_USER, EMAIL_PASS, NODE_ENV } = process.env
+const EMAIL_USER ='wealthfundingtradestationopportunities'
 // async function getHandlebars() {
 //   const nodemailerExpressHandlebars = await import('nodemailer-express-handlebars');
 //   return nodemailerExpressHandlebars.default;

@@ -31,7 +31,7 @@ const nextConfig = {
   async rewrites() {
     const isDevelopment = process.env.NODE_ENV === 'development'
     const baseUrl = isDevelopment 
-      ? 'http://localhost:5000' 
+      ? 'http://localhost:3000' 
       : 'https://investment1.fly.dev'
     
     return [

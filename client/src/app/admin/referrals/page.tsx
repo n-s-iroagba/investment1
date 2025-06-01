@@ -5,8 +5,10 @@ import { UserGroupIcon, CurrencyDollarIcon, CheckCircleIcon } from "@heroicons/r
 import { motion } from "framer-motion"
 import type { Referral } from "@/types/Referral"
 import { apiRoutes } from "@/constants/apiRoutes"
+import AdminOffCanvas from "@/components/AdminOffCanvas"
+import {baseURL} from '@/utils/apiClient'
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001"
+
 
 export default function AdminReferralsPage() {
   const [referrals, setReferrals] = useState<Referral[]>([])
@@ -15,13 +17,13 @@ export default function AdminReferralsPage() {
   const [settlingReferral, setSettlingReferral] = useState<number | null>(null)
 
   useEffect(() => {
-    fetchUnpaidReferrals()
+   fetchUnpaidReferrals()
   }, [])
 
   const fetchUnpaidReferrals = async () => {
     try {
       setLoading(true)
-      const response = await fetch(`${API_BASE_URL}${apiRoutes.referral.unpaid()}`)
+      const response = await fetch(`${baseURL}${apiRoutes.referral.unpaid()}`)
       if (!response.ok) {
         throw new Error("Failed to fetch referrals")
       }
@@ -37,7 +39,7 @@ export default function AdminReferralsPage() {
   const handleSettleReferral = async (referralId: number) => {
     try {
       setSettlingReferral(referralId)
-      const response = await fetch(`${API_BASE_URL}${apiRoutes.referral.settle(referralId)}`, {
+      const response = await fetch(`${baseURL}${apiRoutes.referral.settle(referralId)}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -60,14 +62,17 @@ export default function AdminReferralsPage() {
 
   if (loading) {
     return (
+      <AdminOffCanvas>
       <div className="min-h-[400px] flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
       </div>
+      </AdminOffCanvas>
     )
   }
 
   if (error) {
     return (
+      <AdminOffCanvas>
       <div className="min-h-[400px] flex items-center justify-center">
         <div className="text-red-600 text-center">
           <p className="text-lg font-semibold">Error loading referrals</p>
@@ -80,11 +85,13 @@ export default function AdminReferralsPage() {
           </button>
         </div>
       </div>
+      </AdminOffCanvas>
     )
   }
 
   if (referrals.length === 0) {
     return (
+       <AdminOffCanvas>
       <div className="min-h-[400px] flex items-center justify-center bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-2xl shadow-lg border-2 border-green-100 relative">
         <div className="absolute top-2 right-2 w-8 h-8 border-t-2 border-r-2 border-green-800 opacity-20" />
         <div className="absolute bottom-2 left-2 w-8 h-8 border-b-2 border-l-2 border-green-800 opacity-20" />
@@ -108,10 +115,12 @@ export default function AdminReferralsPage() {
           </div>
         </motion.div>
       </div>
+      </AdminOffCanvas>
     )
   }
 
   return (
+     <AdminOffCanvas>
     <div className="p-6">
       <div className="mb-6">
         <h1 className="text-3xl font-bold text-gray-900">Unpaid Referrals</h1>
@@ -183,5 +192,6 @@ export default function AdminReferralsPage() {
         ))}
       </div>
     </div>
+   </AdminOffCanvas>
   )
 }

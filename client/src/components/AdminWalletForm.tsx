@@ -70,7 +70,9 @@ export default function AdminWalletForm({ existingWallet,onClose }: AdminWalletF
       console.error("Submission error:", error)
       toast.error("An error occurred. Please try again.")
     } finally {
+
       setIsSubmitting(false)
+      window.location.reload()
     }
   }
 

@@ -10,8 +10,9 @@ interface SocialMediaCardProps {
   onDelete: () => void
 }
 
-export const SocialMediaCard = ({ socialMedia, onEdit, onDelete }: SocialMediaCardProps) => (
-  <div className="bg-white p-4 rounded-2xl shadow-sm border-2 border-green-50 hover:border-green-100 transition-all relative group">
+export const SocialMediaCard = ({ socialMedia, onEdit, onDelete }: SocialMediaCardProps) => {
+  alert(socialMedia.logo)
+  return<div className="bg-white p-4 rounded-2xl shadow-sm border-2 border-green-50 hover:border-green-100 transition-all relative group">
     {/* Decorative Corner Borders */}
     <div className="absolute top-2 right-2 w-8 h-8 border-t-2 border-r-2 border-green-800 opacity-20" />
     <div className="absolute bottom-2 left-2 w-8 h-8 border-b-2 border-l-2 border-green-800 opacity-20" />
@@ -20,7 +21,7 @@ export const SocialMediaCard = ({ socialMedia, onEdit, onDelete }: SocialMediaCa
       <div className="flex items-center gap-4 flex-1">
         <div className="p-2 bg-green-100 rounded-lg">
           <Image
-            src={socialMedia.logo || "/placeholder.svg"}
+            src={`${socialMedia.logo}` || "/placeholder.svg"}
             alt={`${socialMedia.name} logo`}
             width={32}
             height={32}
@@ -60,4 +61,4 @@ export const SocialMediaCard = ({ socialMedia, onEdit, onDelete }: SocialMediaCa
       </div>
     </div>
   </div>
-)
+}

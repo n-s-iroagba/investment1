@@ -1,6 +1,6 @@
 export type Payment = {
    id: number;
-  date: Date;
+  paymentDate: Date;
   receipt: string;
   depositType: string;
    paymentType:'FEE'|'INVESTMENT';

@@ -5,7 +5,7 @@ dotenv.config(); // Load environment variables
 
 const sequelize =
 //  (process.env.NODE_ENV === 'production') 
-//
+
 //       dialect: 'mysql',
 //       pool: {
 //         max: 5,

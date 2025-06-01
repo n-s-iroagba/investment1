@@ -9,19 +9,7 @@ import {
   ExclamationCircleIcon,
   BanknotesIcon 
 } from "@heroicons/react/24/outline"
-
-interface Payment {
-  id: number
-  paymentType: 'INVESTMENT' | 'FEE'
-  amount: number
-  paymentID: string
-  depositType: string
-  receipt?: string
-  paymentDate: string
-  isVerified: boolean
-  investorId: number
-  entityId: number
-}
+import { Payment } from "@/types/Payment"
 
 interface PaymentItemProps {
   payment: Payment
@@ -113,7 +101,7 @@ export function PaymentItem({
 
             <div>
               <p className="text-green-600 font-medium">Date</p>
-              <p className="text-green-900">{formatDate(payment.paymentDate)}</p>
+              <p className="text-green-900">{formatDate (new Date(payment.paymentDate).toLocaleTimeString())}</p>
             </div>
 
             <div>

@@ -15,19 +15,10 @@ import { Spinner } from "@/components/Spinner"
 import { ViewReceiptModal } from "@/components/ViewReceiptModal"
 import { apiRoutes } from "@/constants/apiRoutes"
 import { get } from "http"
+import AdminOffCanvas from "@/components/AdminOffCanvas"
+import { Payment } from "@/types/Payment"
 
-interface Payment {
-  id: number
-  paymentType: 'INVESTMENT' | 'FEE'
-  amount: number
-  paymentID: string
-  depositType: string
-  receipt?: string
-  paymentDate: string
-  isVerified: boolean
-  investorId: number
-  entityId: number
-}
+
 
 
 
@@ -44,6 +35,7 @@ export default function PaymentDetailsPage() {
   const { data: payments, loading: paymentsLoading, error: paymentsError } = useGetList<Payment>(
     apiRoutes.payments.getUnverified()
   )
+  console.log(payments)
 
 
 
@@ -102,6 +94,7 @@ export default function PaymentDetailsPage() {
 
 
   return (
+    <AdminOffCanvas>
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 p-4">
       <div className="max-w-4xl mx-auto space-y-6">
 
@@ -153,5 +146,6 @@ export default function PaymentDetailsPage() {
 
      
     </div>
+    </AdminOffCanvas>
   )
 }

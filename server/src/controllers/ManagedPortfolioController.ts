@@ -28,6 +28,7 @@ static async creditAmountDeposited (req: Request, res: Response) {
     const portfolioId = req.params.portfolioId;
     const amount = req.body.amount;
     await ManagedPortfolioService.creditAmountDeposited(portfolioId, amount)
+return res.status(200).json({ message: "Amount deposited successfully" });
   }catch(error) {
     errorHandler(error, req, res)
   }
@@ -38,6 +39,7 @@ static async creditEarnings (req: Request, res: Response) {
     const portfolioId = req.params.portfolioId;
     const amount = req.body.amount;
     await ManagedPortfolioService.creditEarnings(portfolioId, amount)
+    return res.status(200).json({ message: "Earnings credited successfully" });
   }catch(error) {
     errorHandler(error, req, res)
   }

@@ -30,11 +30,11 @@ export default function AdminManagerCard({ manager, onEdit, onDelete }: ManagerC
       <div className="flex flex-col md:flex-row gap-6 items-start">
         {/* Image Container */}
         <div className="w-full md:w-32 h-32 relative group/image">
-          <div className="p-1 rounded-full border-2 border-green-100 bg-white">
+          <div className="p-1 rounded-full border-2 border-green-100 bg-white flex justify-center">
             <Image
               src={`${manager.image}` || "/placeholder.svg"}
               alt={`${manager.firstName} ${manager.lastName}`}
-              className="rounded-full object-cover"
+              className="rounded-full object-fit"
               width={128}
               height={128}
             />

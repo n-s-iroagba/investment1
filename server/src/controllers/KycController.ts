@@ -14,7 +14,7 @@ class KycController {
       const image = req.file?.path || ''; // assuming multer is used and path is stored as string
 
       const kyc = await KycService.createKyc({ type, image, number, investorId });
-      res.status(201).json(kyc);
+     return res.status(201).json(kyc);
     } catch (error) {
         errorHandler(error, req, res)
     }
@@ -22,7 +22,8 @@ class KycController {
 
 static async getUnverified(req: Request, res: Response) {
   try{
-    return await Kyc.findAll({where:{isVerified:false}})
+    const kycs =await Kyc.findAll({where:{isVerified:false}})
+    return res.status(200).json(kycs)
    } catch (error) {
         errorHandler(error, req, res)
     }
@@ -32,7 +33,7 @@ static async getUnverified(req: Request, res: Response) {
     try {
       const { id } = req.params;
       const kyc = await KycService.verifyKyc(Number(id));
-      res.status(200).json(kyc);
+     return res.status(200).json(kyc);
       } catch (error) {
         errorHandler(error, req, res)
         }
@@ -46,7 +47,7 @@ static async getUnverified(req: Request, res: Response) {
       const image = req.file?.path || '';
 
       const updatedKyc = await KycService.updateKyc(Number(id), { type, image, number, investorId });
-      res.status(200).json(updatedKyc);
+     return res.status(200).json(updatedKyc);
     } catch (error) {
         errorHandler(error, req, res)
       

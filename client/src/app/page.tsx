@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect } from "react"
+// import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/hooks/useAuth"
 import { Spinner } from "@/components/Spinner"
@@ -17,19 +17,19 @@ import PopupToast from "@/components/PopupToast"
 import Testimonial from "@/components/Testimonial"
 
 export default function Page() {
-  const { isAdmin, roleId ,loading } = useAuth()
+  const { loading } = useAuth()
   const router = useRouter()
 
-  useEffect(() => {
-    if (!loading) {
-      // Redirect authenticated users to their respective dashboards
-      if (isAdmin) {
-        router.push("/admin/dashboard")
-      } else if (roleId && !isAdmin) {
-        router.push("/investor/dashboard")
-      }
-    }
-  }, [isAdmin, loading, roleId, router])
+  // useEffect(() => {
+  //   if (!loading) {
+  //     // Redirect authenticated users to their respective dashboards
+  //     if (isAdmin) {
+  //       router.push("/admin/dashboard")
+  //     } else if (roleId && !isAdmin) {
+  //       router.push("/investor/dashboard")
+  //     }
+  //   }
+  // }, [isAdmin, loading, roleId, router])
 
   if (loading) {
     return (

@@ -10,11 +10,13 @@ class SocialMediaController {
     try {
       const { name, link } = req.body;
 
-      // Save relative path string if file exists
-      const logo = req.file ?. path
-      if(!logo){
-        throw new CustomError(403,'no logo path')
-      }
+        const file = req.file
+             if(!file){
+        throw  new CustomError(403,'no file in request body')
+    }
+         const logo = `/uploads/${file.filename}`;
+    
+     
 
       const newSocialMedia = await SocialMediaService.createSocialMedia({ name, link, logo });
       res.status(201).json(newSocialMedia);

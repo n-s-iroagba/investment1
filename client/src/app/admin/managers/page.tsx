@@ -22,14 +22,18 @@ export default function ManagerCrudPage() {
 
   if (loading) {
     return (
+      <AdminOffCanvas>
       <div className="flex justify-center py-12">
         <Spinner className="w-10 h-10 text-green-600" />
       </div>
+      </AdminOffCanvas>
     );
   }
 
   if (error) {
-    return <ErrorComponent message={error || "Failed to load managers"} />;
+    return<AdminOffCanvas>
+     <ErrorComponent message={error || "Failed to load managers"} />;
+     </AdminOffCanvas>
   }
 
 

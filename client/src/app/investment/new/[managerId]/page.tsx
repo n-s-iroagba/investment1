@@ -7,6 +7,7 @@ import { Manager } from "@/types/manager";
 import { apiRoutes } from "@/constants/apiRoutes";
 import { AdminWallet } from "@/types/adminWallet";
 import { post } from "@/utils/apiClient";
+import InvestorOffCanvas from '@/components/InvestorOffCanvas'
 import WAValidator from "multicoin-address-validator";
 import { CurrencyDollarIcon, WalletIcon, BanknotesIcon, ArrowPathIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 import { useAuth } from "@/hooks/useAuth";
@@ -88,7 +89,7 @@ console.log(params)
       setMessage("Invalid wallet address");
       return;
     }
-      if (selectedWallet) alert ('hi')
+   
 
     const payload: InvestmentCreationDto = {
       amount,
@@ -114,6 +115,7 @@ console.log(params)
   };
 
   return (
+    <InvestorOffCanvas>
     <div className="bg-white p-6 rounded-2xl shadow-sm border-2 border-green-50 relative max-w-2xl mx-auto">
       {/* Decorative Corner Borders */}
       <div className="absolute top-2 right-2 w-8 h-8 border-t-2 border-r-2 border-green-800 opacity-20" />
@@ -254,6 +256,7 @@ console.log(params)
         </div>
       </form>
     </div>
+    </InvestorOffCanvas>
   );
 };
 

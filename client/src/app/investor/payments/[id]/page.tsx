@@ -11,7 +11,7 @@ import {
 } from "@heroicons/react/24/outline"
 import toast from "react-hot-toast"
 import { useAuth } from "@/hooks/useAuth"
-import { useGetList, useGetSingle } from "@/hooks/useFetch"
+import { useGetSingle } from "@/hooks/useFetch"
 import { CryptoWalletDisplay } from "@/components/CryptoWalletDisplay"
 import { PaymentItem } from "@/components/PaymentItem"
 import SocialMediaLinks from "@/components/SocialMediaLinks"
@@ -19,32 +19,16 @@ import { Spinner } from "@/components/Spinner"
 import { UploadProofModal } from "@/components/UploadProofModal"
 import { ViewReceiptModal } from "@/components/ViewReceiptModal"
 import { apiRoutes } from "@/constants/apiRoutes"
+import InvestorOffCanvas from "@/components/InvestorOffCanvas"
+import { Payment } from "@/types/Payment"
+import { CryptoWallet } from "@/types/CryptoWallet"
 
-interface Payment {
-  id: number
-  paymentType: 'INVESTMENT' | 'FEE'
-  amount: number
-  paymentID: string
-  depositType: string
-  receipt?: string
-  paymentDate: string
-  isVerified: boolean
-  investorId: number
-  entityId: number
-}
-
-interface CryptoWallet {
-  id: number
-  currency: string
-  address: string
-  depositAddress: string
-  managedPortfolioId: number
-}
 
 interface ManagedPortfolio {
   id: number
   investorId: number
   cryptoWallet?: CryptoWallet
+  payments?:Payment[]
 }
 
 export default function PaymentDetailsPage() {
@@ -64,10 +48,7 @@ const {roleId} = useAuth()
     apiRoutes.investment.getInvestment(roleId)
   )
 
-  // Fetch payments for this investor
-  const { data: payments, loading: paymentsLoading, error: paymentsError } = useGetList<Payment>(
-    apiRoutes.payments.getInvestorPayments(roleId)
-  )
+ 
 
   const handleViewReceipt = (receiptUrl: string) => {
     setSelectedReceiptUrl(receiptUrl)
@@ -117,6 +98,7 @@ const {roleId} = useAuth()
 
   if (portfolioLoading) {
     return (
+
       <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center">
         <Spinner className="w-8 h-8" />
       </div>
@@ -125,6 +107,7 @@ const {roleId} = useAuth()
 
   if (portfolioError) {
     return (
+      
       <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center p-4">
         <div className="bg-white rounded-2xl shadow-lg p-8 text-center">
           <p className="text-red-600">Error loading portfolio details</p>
@@ -133,11 +116,12 @@ const {roleId} = useAuth()
     )
   }
 
-  const portfolioPayments = payments?.filter(payment => 
-    payment.paymentType === 'INVESTMENT' && payment.entityId === portfolioId
+  const portfolioPayments = portfolio?.payments?.filter(payment => 
+    payment.paymentType === 'INVESTMENT' 
   ) || []
 
   return (
+    <InvestorOffCanvas>
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 p-4">
       <div className="max-w-4xl mx-auto space-y-6">
         {/* Header */}
@@ -148,7 +132,7 @@ const {roleId} = useAuth()
             </div>
             <div>
               <h1 className="text-2xl font-bold text-green-900">Payment Details</h1>
-              <p className="text-green-600">Portfolio ID: {portfolioId}</p>
+              <p className="text-green-600">Portfolio ID: {(portfolio?.id||0) + 30000}</p>
             </div>
           </div>
         </div>
@@ -185,15 +169,7 @@ const {roleId} = useAuth()
             <h2 className="text-xl font-semibold text-green-900">My Payments</h2>
           </div>
 
-          {paymentsLoading ? (
-            <div className="flex justify-center py-8">
-              <Spinner className="w-6 h-6" />
-            </div>
-          ) : paymentsError ? (
-            <div className="text-center py-8">
-              <p className="text-red-600">Error loading payments</p>
-            </div>
-          ) : portfolioPayments.length === 0 ? (
+       { portfolioPayments.length === 0 ? (
             <div className="text-center py-8">
               <ClockIcon className="w-12 h-12 text-green-300 mx-auto mb-4" />
               <p className="text-green-600">No payments found for this portfolio</p>
@@ -240,5 +216,6 @@ const {roleId} = useAuth()
 
  
     </div>
+    </InvestorOffCanvas>
   )
 }

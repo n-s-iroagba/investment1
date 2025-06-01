@@ -16,7 +16,7 @@ export const apiRoutes = {
    create:(id:string|number):string=>`/verification-fees/${id}`,
   update:(id:string|number):string=>`/verification-fees/${id}`,
   delete:(id:string|number):string=>`/verification-fees/${id}`,
-  investorUpaid:(id:string|number):string=>`/verification-fees/unpaid/:/${id}`,
+  investorUpaid:(id:string|number):string=>`/verification-fees/unpaid/${id}`,
   },
   referral: {
     list: (): string => `/referrals`,

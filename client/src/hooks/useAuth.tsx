@@ -37,20 +37,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const fetchUser = useCallback(async () => {
     if (!mounted) return
-    
-    console.log('🔍 Fetching user data...')
+
     setLoading(true)
     
     try {
       const data = await get<LoggedInUser>(apiRoutes.auth.me())
-      console.log('✅ User data fetched:', data)
+   
       setUser(data)
     } catch (error) {
       console.error('❌ Failed to fetch user:', error)
       setUser(null)
     } finally {
       setLoading(false)
-      console.log('🏁 Auth loading complete')
+  
     }
   },[mounted])
 

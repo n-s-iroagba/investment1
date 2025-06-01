@@ -44,9 +44,9 @@ export default function AdminOffcanvas({ children }: AdminOffcanvasProps) {
     }
   }
 
-  const logout= ()=>{
+  const logout= async ()=>{
     try{
-    get(apiRoutes.auth.logout())
+   await  get(apiRoutes.auth.logout())
    
     router.push('/login')
     }
@@ -93,6 +93,7 @@ export default function AdminOffcanvas({ children }: AdminOffcanvasProps) {
               { href: "/admin/social-media", text: "Social Media Links", icon: LinkIcon },
               { href: "/admin/referrals", text: "Referrals", icon: ShareIcon },
               { href: "/admin/mock-withdrawal", text: "Mock Withdrawal", icon: CurrencyDollarIcon },
+                { href: "/admin/unverified-payments", text: "Unverified Payments", icon: CurrencyDollarIcon },
             ].map((item, index) => (
               <Link
                 key={index}

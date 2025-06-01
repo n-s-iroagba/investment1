@@ -7,14 +7,9 @@ import {
   CheckCircleIcon 
 } from "@heroicons/react/24/outline"
 import toast from "react-hot-toast"
+import { CryptoWallet } from "@/types/CryptoWallet"
 
-interface CryptoWallet {
-  id: number
-  currency: string
-  address: string
-  depositAddress: string
-  managedPortfolioId: number
-}
+
 
 interface CryptoWalletDisplayProps {
   wallet: CryptoWallet

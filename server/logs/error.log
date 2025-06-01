@@ -183,3 +183,79 @@
     at async Investor.findByPk (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1221:12)
     at async InvestorService.updateInvestor (file:///home/udorakpuenyi/tem/server/src/services/InvestorService.ts:85:30)
     at async updateInvestor (file:///home/udorakpuenyi/tem/server/src/controllers/InvestorController.ts:48:13)
+2025-06-01T14:17:11.641Z [ERROR]: Error in createInvestor UserService function: Error: user already exists with this email
+2025-06-01T14:26:57.726Z [ERROR]: Error in login  UserService function: Error: login user not found
+2025-06-01T14:32:07.220Z [ERROR]: Error: Unknown column 'payments.paymentDate' in 'field list' - URL: /api/managed-portfolios/investor/1 - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async ManagedPortfolio.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1140:21)
+    at async ManagedPortfolio.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async ManagedPortfolioService.getInvestmentByInvestorId (file:///home/udorakpuenyi/tem/server/src/services/ManagedPortfolioService.ts:52:27)
+    at async getInvestment (file:///home/udorakpuenyi/tem/server/src/controllers/ManagedPortfolioController.ts:86:31)
+2025-06-01T14:32:07.275Z [ERROR]: Error: Unknown column 'payments.paymentDate' in 'field list' - URL: /api/managed-portfolios/investor/1 - Stack: Error
+    at Query.run (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/query.js:52:25)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async ManagedPortfolio.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1140:21)
+    at async ManagedPortfolio.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async ManagedPortfolioService.getInvestmentByInvestorId (file:///home/udorakpuenyi/tem/server/src/services/ManagedPortfolioService.ts:52:27)
+    at async getInvestment (file:///home/udorakpuenyi/tem/server/src/controllers/ManagedPortfolioController.ts:86:31)
+2025-06-01T14:44:13.883Z [ERROR]: Error in createInvestor UserService function: Error: user already exists with this email
+2025-06-01T16:00:32.581Z [ERROR]: Failed to delete AdminWallet: Error: AdminWallet not found
+2025-06-01T17:33:43.337Z [ERROR]: Error: User is not associated to Investor! - URL: /api/get-investor/1 - Stack: SequelizeEagerLoadingError: User is not associated to Investor!
+    at Investor._getIncludedAssociation (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:565:13)
+    at Investor._validateIncludedElement (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:502:53)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at Investor._validateIncludedElements (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:417:39)
+    at Investor.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Investor.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async Investor.findByPk (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1221:12)
+    at async getInvestor (file:///home/udorakpuenyi/tem/server/src/controllers/InvestorController.ts:52:30)
+2025-06-01T17:33:43.495Z [ERROR]: Error: User is not associated to Investor! - URL: /api/get-investor/1 - Stack: SequelizeEagerLoadingError: User is not associated to Investor!
+    at Investor._getIncludedAssociation (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:565:13)
+    at Investor._validateIncludedElement (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:502:53)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at Investor._validateIncludedElements (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:417:39)
+    at Investor.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Investor.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async Investor.findByPk (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1221:12)
+    at async getInvestor (file:///home/udorakpuenyi/tem/server/src/controllers/InvestorController.ts:52:30)
+2025-06-01T19:08:56.562Z [ERROR]: Error: Investor is not associated to User! - URL: /api/email/send-to-investor/1 - Stack: SequelizeEagerLoadingError: Investor is not associated to User!
+    at User._getIncludedAssociation (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:565:13)
+    at User._validateIncludedElement (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:502:53)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:417:39)
+    at User.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async User.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async sendEmailToInvestor (file:///home/udorakpuenyi/tem/server/src/controllers/EmailController.ts:10:26)
+2025-06-01T19:11:15.355Z [ERROR]: Error: Investor is associated to User using an alias. You must use the 'as' keyword to specify the alias within your include statement. - URL: /api/email/send-to-investor/1 - Stack: SequelizeEagerLoadingError: Investor is associated to User using an alias. You must use the 'as' keyword to specify the alias within your include statement.
+    at User._getIncludedAssociation (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:576:13)
+    at User._validateIncludedElement (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:502:53)
+    at /home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:417:39)
+    at User.findAll (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async User.findOne (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/model.js:1240:12)
+    at async sendEmailToInvestor (file:///home/udorakpuenyi/tem/server/src/controllers/EmailController.ts:10:26)
+2025-06-01T19:15:08.305Z [ERROR]: Error: Cannot read properties of undefined (reading 'replace') - URL: /api/email/send-to-investor/1 - Stack: TypeError: Cannot read properties of undefined (reading 'replace')
+    at MailService.sendCustomEmail (file:///home/udorakpuenyi/tem/server/src/services/MailService.ts:155:23)
+    at sendEmailToInvestor (file:///home/udorakpuenyi/tem/server/src/controllers/EmailController.ts:21:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-06-01T19:18:10.237Z [ERROR]: Error: Cannot read properties of undefined (reading 'replace') - URL: /api/email/send-to-investor/1 - Stack: TypeError: Cannot read properties of undefined (reading 'replace')
+    at MailService.sendCustomEmail (file:///home/udorakpuenyi/tem/server/src/services/MailService.ts:155:23)
+    at sendEmailToInvestor (file:///home/udorakpuenyi/tem/server/src/controllers/EmailController.ts:21:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-06-01T19:22:11.305Z [ERROR]: Error: Cannot read properties of undefined (reading 'replace') - URL: /api/email/send-to-investor/1 - Stack: TypeError: Cannot read properties of undefined (reading 'replace')
+    at MailService.sendCustomEmail (file:///home/udorakpuenyi/tem/server/src/services/MailService.ts:155:23)
+    at sendEmailToInvestor (file:///home/udorakpuenyi/tem/server/src/controllers/EmailController.ts:22:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)

@@ -185,7 +185,7 @@ export function CreditModal({ isOpen, onClose, investorId, amountDeposited, earn
 
         <div className="mb-4 p-3 bg-green-50 rounded-lg">
           <p className="text-sm text-green-700">
-            <span className="font-medium">Intended Amount:</span> ${amountDeposited.toLocaleString()}
+            <span className="font-medium">Amount Deposited:</span> ${amountDeposited.toLocaleString()}
           </p>
           <p className="text-sm text-green-700">
             <span className="font-medium">Earnings:</span> ${earnings.toLocaleString()}

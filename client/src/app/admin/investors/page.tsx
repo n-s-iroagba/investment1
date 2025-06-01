@@ -1,14 +1,16 @@
 "use client";
+import AdminOffCanvas from '@/components/AdminOffCanvas';
 import ErrorComponent from '@/components/ErrorComponent';
 import { EmailModal } from '@/components/InvestorDetailModals';
 import { Spinner } from '@/components/Spinner';
 import { apiRoutes } from '@/constants/apiRoutes';
 import { useGetList } from '@/hooks/useFetch';
 import { Investor } from '@/types/Investor';
+import { sendEmail } from '@/utils/common';
 import { ArrowRightIcon, EnvelopeIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { sendEmail } from './[id]/page';
+
 
 export default function InvestorList() {
  const router = useRouter()
@@ -19,9 +21,11 @@ export default function InvestorList() {
 
   if (loading) {
     return (
+      <AdminOffCanvas>
       <div className="flex justify-center py-12">
         <Spinner className="w-10 h-10 text-green-600" />
       </div>
+      </AdminOffCanvas>
     );
   }
 
@@ -31,6 +35,7 @@ export default function InvestorList() {
 
   if (!investors || investors.length === 0) {
     return (
+      <AdminOffCanvas>
       <div className="bg-green-50 p-8 rounded-2xl border-2 border-green-100 text-center max-w-md mx-auto">
         <div className="flex justify-center mb-4">
           <UserCircleIcon className="w-12 h-12 text-green-600" />
@@ -40,10 +45,12 @@ export default function InvestorList() {
           New investors will appear here once they register
         </p>
       </div>
+      </AdminOffCanvas>
     );
   }
   
   return (
+    <AdminOffCanvas>
       <div className="space-y-6">
      <button
   onClick={() => setShowModal(true)}
@@ -140,5 +147,6 @@ export default function InvestorList() {
         ))}
       </div>
     </div>
+    </AdminOffCanvas>
   );
 }

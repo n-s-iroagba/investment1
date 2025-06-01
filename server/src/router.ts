@@ -56,6 +56,7 @@ router.post("/admin-wallets", AdminWalletController.createAdminWallet)
 router.patch("/admin-wallets/:id", AdminWalletController.updateAdminWallet)
 router.delete("/admin-wallets/:id", AdminWalletController.deleteAdminWallet)
 
+router.get('/referrals/unpaid', ReferralController.getUnpaidReferrals)
 // Social Media routes
 router.get("/social-media", SocialMediaController.getAll)
 router.get("/social-media/:id", SocialMediaController.getById)
@@ -75,19 +76,19 @@ router.get('/verification-fees/unpaid/:investorId',VerificationFeeController.get
 router.post("/create/:investorId",upload.single('file'), PaymentController.createPayment)
 
 // Update a payment
-router.put("/:id", PaymentController.updatePayment)
+router.put("/payments/:id", PaymentController.updatePayment)
 
 // Verify a payment
-router.patch("/verify/:id", PaymentController.verifyPayment)
+router.patch("/payments/verify/:id", PaymentController.verifyPayment)
 
 // Unverify a payment
-router.patch("/unverify/:id", PaymentController.unverifyPayment)
+router.patch("/payments/unverify/:id", PaymentController.unverifyPayment)
 
 // Get all unverified payments
-router.get("/unverified", PaymentController.getUnverifiedPayments)
+router.get("/payments/unverified", PaymentController.getUnverifiedPayments)
 
 // Get all payments for a specific investor
-router.get("/investor/:investorId", PaymentController.getPaymentsByInvestorId)
+router.get("/payments/investor/:investorId", PaymentController.getPaymentsByInvestorId)
 
 // Get investor payments (alternate route)
 router.get("/investor-payments/:id", PaymentController.getInvestorPayments)
@@ -110,7 +111,7 @@ router.get("/auth/logout", (req, res) => {
 
 // Email routes
 router.post("/email/send", EmailController.sendGeneralEmail)
-router.post("/email/send-to-investor/:.investorId", EmailController.sendEmailToInvestor)
+router.post("/email/send-to-investor/:investorId", EmailController.sendEmailToInvestor)
 
 async function getInvestorById(id: string): Promise<Investor | null> {
   // Replace with real DB query

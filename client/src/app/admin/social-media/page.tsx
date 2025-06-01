@@ -9,6 +9,7 @@ import { Spinner } from '@/components/Spinner';
 import { PlusIcon } from '@heroicons/react/24/outline';
 import ErrorComponent from '@/components/ErrorComponent'; // Use the ErrorComponent we created earlier
 import AdminOffcanvas from '@/components/AdminOffCanvas';
+import AdminOffCanvas from '@/components/AdminOffCanvas';
 
 export default function SocialMediaPage() {
   const { data: socialMedias, loading, error } = useGetList<SocialMedia>('social-media');
@@ -18,14 +19,19 @@ export default function SocialMediaPage() {
 
   if (loading) {
     return (
+      <AdminOffCanvas>
       <div className="flex justify-center items-center h-64">
         <Spinner className="w-10 h-10 text-green-600" />
       </div>
+      </AdminOffCanvas>
     );
   }
 
   if (error) {
-    return <ErrorComponent message={error || "Failed to load social media accounts"} />;
+    return <AdminOffCanvas>
+    
+    <ErrorComponent message={error || "Failed to load social media accounts"} />;
+    </AdminOffCanvas>
   }
 
   return (

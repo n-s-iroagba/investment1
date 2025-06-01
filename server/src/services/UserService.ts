@@ -144,6 +144,7 @@ class UserService {
       if(!user){
         throw new CustomError(404,'login user not found')
       }
+      console.log(user)
       if (!comparePassword(data.password,user.password)){
         throw new CustomError(409,'wrong credentials')
       }

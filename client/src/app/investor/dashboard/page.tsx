@@ -3,7 +3,7 @@
 import InvestorOffCanvas from "@/components/InvestorOffCanvas"
 import SocialMediaLinks from "@/components/SocialMediaLinks"
 import { UploadProofModal } from "@/components/UploadProofModal"
-import { useAuth } from "@/hooks/useAuth" 
+import { useAuth } from "@/hooks/useAuth"
 import type { ManagedPortfolio } from "@/types/managedPortfolio"
 import type { Payment } from "@/types/Payment"
 import { useState, useEffect } from "react"
@@ -24,7 +24,7 @@ import { useGetSingle } from "@/hooks/useFetch"
 import { apiRoutes } from "@/constants/apiRoutes"
 
 // Dynamically import Chart component to avoid SSR issues
-const Chart = dynamic(() => import("react-apexcharts"), { 
+const Chart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
   loading: () => (
     <div className="flex items-center justify-center h-60">
@@ -35,9 +35,9 @@ const Chart = dynamic(() => import("react-apexcharts"), {
 
 function getDaysSinceOldestPayment(portfolio: ManagedPortfolio | null): number {
   if (!portfolio?.manager) return 0
-  
+
   const allPayments = portfolio.payments?.filter((payment) => payment?.isVerified === true) || []
-  
+
   if (allPayments.length === 0) return 1
 
   const currentDate = new Date()
@@ -50,13 +50,13 @@ function getDaysSinceOldestPayment(portfolio: ManagedPortfolio | null): number {
   }
   return daysDiff >= 0 ? daysDiff : 1
 }
- 
+
 const InvestorDashboard = () => {
-  const { loading: authLoading, displayName, roleId } = useAuth()
+  const { loading: authLoading, displayName, roleId,refetch } = useAuth()
   const router = useRouter()
-  
+
   const shouldFetchPortfolio = !authLoading && roleId && roleId !== 0 && roleId !== null && roleId !== undefined
-  
+
   const { data: portfolio, loading, error } = useGetSingle<ManagedPortfolio>(
     shouldFetchPortfolio ? apiRoutes.investment.getInvestment(roleId) : null
   )
@@ -74,7 +74,7 @@ const InvestorDashboard = () => {
   // Copy to clipboard function with proper browser detection
   const copyToClipboard = async (text: string) => {
     if (!isMounted || typeof window === 'undefined') return
-    
+
     try {
       if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(text)
@@ -100,10 +100,10 @@ const InvestorDashboard = () => {
 
   // Redirect logic
   useEffect(() => {
-    if ( (!displayName || !roleId)) {
-      router.push("/login")
+    if ((!displayName || !roleId)) {
+       refetch()
     }
-  }, [authLoading, displayName,loading, roleId, router])
+  }, [displayName, refetch, roleId])
 
   // Chart ready state
   useEffect(() => {
@@ -140,8 +140,8 @@ const InvestorDashboard = () => {
               </div>
               <h3 className="text-red-900 font-medium text-lg mb-2">Something went wrong</h3>
               <p className="text-sm text-red-600 mb-6 leading-relaxed">{error || 'Please try again later'}</p>
-              <button 
-                onClick={() => isMounted && window.location.reload()} 
+              <button
+                onClick={() => isMounted && window.location.reload()}
                 className="w-full px-6 py-3 bg-red-600 text-white rounded-xl text-sm font-medium hover:bg-red-700 active:bg-red-800 transition-colors touch-manipulation"
               >
                 Try Again
@@ -171,7 +171,7 @@ const InvestorDashboard = () => {
                 Start growing your wealth today
               </p>
             </header>
-            
+
             {/* Centered content */}
             <div className="flex-1 flex items-center justify-center">
               <div className="bg-white p-8 rounded-2xl shadow-sm border border-green-100 text-center w-full">
@@ -182,7 +182,7 @@ const InvestorDashboard = () => {
                 <p className="text-sm text-green-600 mb-8 leading-relaxed px-4">
                   Plant your first investment seed and watch it grow into a thriving portfolio
                 </p>
-                <button 
+                <button
                   className="w-full inline-flex items-center justify-center px-6 py-4 text-base font-medium rounded-xl text-white bg-green-700 hover:bg-green-800 active:bg-green-900 transition-all duration-200 shadow-lg touch-manipulation"
                   onClick={() => router.push('/investor/manager-list')}
                 >
@@ -236,7 +236,7 @@ const InvestorDashboard = () => {
     },
     xaxis: {
       categories: Array.from({ length: Math.min(days, 15) }, (_, i) => `D${i + 1}`),
-      labels: { 
+      labels: {
         style: { colors: "#64748b", fontSize: '10px', fontWeight: 500 },
         rotate: 0,
         hideOverlappingLabels: true,
@@ -288,7 +288,7 @@ const InvestorDashboard = () => {
       <InvestorOffCanvas>
         <div className="min-h-screen bg-gray-50">
           <div className="max-w-md mx-auto px-4 py-6">
-            
+
             {/* Fixed Header */}
             <header className="text-center mb-6 bg-white p-6 rounded-2xl shadow-sm border border-green-100">
               <h1 className="text-xl font-bold text-green-900 leading-tight mb-1">
@@ -358,11 +358,11 @@ const InvestorDashboard = () => {
                 </h3>
                 <div className="w-full h-60 flex items-center justify-center">
                   {isChartReady && isMounted ? (
-                    <Chart 
-                      options={chartOptions} 
-                      series={chartSeries} 
-                      type="area" 
-                      height={240} 
+                    <Chart
+                      options={chartOptions}
+                      series={chartSeries}
+                      type="area"
+                      height={240}
                       width="100%"
                     />
                   ) : (
@@ -390,7 +390,7 @@ const InvestorDashboard = () => {
                       </h3>
                       <div className="space-y-3 text-sm">
                         <div className="bg-white p-3 rounded-lg border border-green-100">
-                          <span className="font-medium text-green-800">Currency:</span> 
+                          <span className="font-medium text-green-800">Currency:</span>
                           <span className="ml-2 text-green-700 font-semibold">
                             {portfolio.cryptoWallet?.currency ?? 'N/A'}
                           </span>
@@ -425,14 +425,14 @@ const InvestorDashboard = () => {
                 </div>
               ) : (
                 <button
-      onClick={() => router.push(`/investor/payments/${roleId}`)}
-      className="flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold rounded-xl hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl group"
-    >
-      <div className="p-2 bg-white/20 rounded-full group-hover:bg-white/30 transition-all">
-        <CurrencyDollarIcon className="w-6 h-6 text-white" />
-      </div>
-      <span className="text-lg">View My Payments</span>
-    </button>
+                  onClick={() => router.push(`/investor/payments/${roleId}`)}
+                  className="flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold rounded-xl hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl group"
+                >
+                  <div className="p-2 bg-white/20 rounded-full group-hover:bg-white/30 transition-all">
+                    <CurrencyDollarIcon className="w-6 h-6 text-white" />
+                  </div>
+                  <span className="text-lg">View My Payments</span>
+                </button>
               )}
             </div>
           </div>

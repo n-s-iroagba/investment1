@@ -11,16 +11,14 @@ import { Spinner } from "@/components/Spinner"
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline"
 import type { Manager } from "@/types/manager"
 import type { SocialMedia } from "@/types/socialMedia"
-import { useRouter } from "next/navigation"
-
 import { Payment } from "@/types/Payment"
 import { Kyc } from "@/types/Kyc"
 
 
 const AdminDashboard = () => {
-  const { loading: authLoading, isAdmin, displayName } = useAuth()
+  const { loading: authLoading, isAdmin, displayName,refetch } = useAuth()
   console.log(displayName, isAdmin)
-  const router = useRouter()
+
 
   const {
     data: wallets,
@@ -28,7 +26,7 @@ const AdminDashboard = () => {
     loading: walletLoading,
   } = useGetList<AdminWallet>(apiRoutes.adminWallet.list())
   const { data: managers, error: managerError, loading: managerLoading } = useGetList<Manager>(apiRoutes.manager.list())
-  const { data: kyc, error: kycError, loading: verificationLoading } = useGetList<Kyc>(apiRoutes.kyc.unverified())
+  const { data: kyc, error: kycError, loading: kycLoading } = useGetList<Kyc>(apiRoutes.kyc.unverified())
   const { data: payments, error: paymentError, loading: paymentLoading } = useGetList<Payment>(apiRoutes.payments.getUnverified())
   const {
     data: socialmedias,
@@ -39,9 +37,9 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     if (!authLoading && !isAdmin) {
-      router.push("/login")
+    refetch()
     }
-  }, [authLoading, isAdmin, router])
+  }, [authLoading, isAdmin, refetch])
 
   const todos: ReactNode[] = []
 
@@ -75,7 +73,7 @@ const AdminDashboard = () => {
   }
 
 
-  if (!kyc.length) {
+  if (kyc.length) {
     todos.push(
       <TodoAlert
         key="kyc-alert"
@@ -86,7 +84,7 @@ const AdminDashboard = () => {
   }
 
 
-  if (!payments.length) {
+  if (payments.length) {
     todos.push(
       <TodoAlert
         key="Pending-payment"
@@ -98,9 +96,11 @@ const AdminDashboard = () => {
 
   if (authLoading) {
     return (
+      <AdminOffCanvas>
       <div className="flex justify-center items-center h-screen px-4">
         <Spinner className="w-8 h-8 text-green-600" />
       </div>
+      </AdminOffCanvas>
     )
   }
 
@@ -122,7 +122,7 @@ const AdminDashboard = () => {
         </div>
 
         {/* Loading/Error States */}
-        {walletLoading || managerLoading || socialMediaLoading || verificationLoading || paymentLoading  ? (
+        {walletLoading || managerLoading || socialMediaLoading||paymentLoading||kycLoading   ? (
           <div className="flex justify-center items-center h-32">
             <Spinner className="w-8 h-8 text-green-600" />
           </div>

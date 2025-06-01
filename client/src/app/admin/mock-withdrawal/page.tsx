@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowDownTrayIcon, CheckCircleIcon, CurrencyDollarIcon, UserCircleIcon } from '@heroicons/react/24/outline';
+import AdminOffCanvas from '@/components/AdminOffCanvas';
 
 export default function WithdrawalForm() {
   const [amount, setAmount] = useState('');
@@ -24,6 +25,7 @@ export default function WithdrawalForm() {
   };
 
   return (
+    <AdminOffCanvas>
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 p-4 flex items-center justify-center">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -38,8 +40,8 @@ export default function WithdrawalForm() {
           <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
             <ArrowDownTrayIcon className="w-8 h-8 text-green-700 animate-bounce" />
           </div>
-          <h1 className="text-3xl font-bold text-green-900 mb-2">Withdraw Funds</h1>
-          <p className="text-green-600">Secure & Fast Withdrawals</p>
+          <h1 className="text-3xl font-bold text-green-900 mb-2">Create A Withdrawal Screenshot</h1>
+       
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -146,5 +148,6 @@ export default function WithdrawalForm() {
         </AnimatePresence>
       </motion.div>
     </div>
+    </AdminOffCanvas>
   );
 }

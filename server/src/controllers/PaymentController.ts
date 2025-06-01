@@ -9,11 +9,7 @@ class PaymentController {
   static async getUnverifiedPayments(req: Request, res: Response) {
     try {
       const payments = await PaymentService.getUnverifiedPayments()
-      res.status(200).json({
-        success: true,
-        message: 'Unverified payments retrieved successfully',
-        data: payments
-      })
+     return res.status(200).json( payments)
     } catch (error) {
       errorHandler(error, req, res)
     }
@@ -30,7 +26,7 @@ class PaymentController {
 
       const payment = await PaymentService.unverifyPayment(paymentId)
 
-      res.status(200).json({
+     return res.status(200).json({
         success: true,
         message: 'Payment unverified successfully',
         data: payment
@@ -84,7 +80,7 @@ class PaymentController {
 
       const payment = await PaymentService.createPayment(paymentData)
 
-      res.status(201).json({
+     return res.status(201).json({
         success: true,
         message: 'Payment created successfully',
         data: payment
@@ -127,7 +123,7 @@ class PaymentController {
 
       const payment = await PaymentService.updatePayment(paymentId, updateData)
 
-      res.status(200).json({
+     return res.status(200).json({
         success: true,
         message: 'Payment updated successfully',
         data: payment
@@ -148,7 +144,7 @@ class PaymentController {
 
       const payment = await PaymentService.verifyPayment(paymentId)
 
-      res.status(200).json({
+     return res.status(200).json({
         success: true,
         message: 'Payment verified successfully',
         data: payment
@@ -168,11 +164,7 @@ class PaymentController {
 
       const payments = await PaymentService.getInvestorPayments(investorId)
 
-      res.status(200).json({
-        success: true,
-        message: 'Investor payments retrieved successfully',
-        data: payments
-      })
+     return res.status(200).json(payments)
     } catch (error) {
       errorHandler(error, req, res)
     }
@@ -189,11 +181,7 @@ class PaymentController {
 
       const payments = await PaymentService.getInvestorPayments(id)
 
-      res.status(200).json({
-        success: true,
-        message: 'Payments retrieved successfully',
-        data: payments
-      })
+     return res.status(200).json(payments)
     } catch (error) {
       errorHandler(error, req, res)
     }
@@ -213,7 +201,7 @@ class PaymentController {
 
       await PaymentService.deletePayment(paymentId)
 
-      res.status(200).json({
+     return res.status(200).json({
         success: true,
         message: 'Payment deleted successfully'
       })

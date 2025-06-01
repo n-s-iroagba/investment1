@@ -16,14 +16,12 @@ import { motion } from "framer-motion"
 import { ManagedPortfolio } from "@/types/managedPortfolio"
 import { VerificationFee } from "@/types/VerificationFee"
 
-
-
 interface WithdrawalStatus {
   canWithdraw: boolean
   daysLeft?: number
   requiresVerification: boolean
   maturityDate: Date
-  totalEarnings: number
+  totalEarnings: number 
 }
 
 export default function InvestorWithdraw() {
@@ -83,10 +81,10 @@ export default function InvestorWithdraw() {
   if (feeLoading || investLoading) {
     return (
       <InvestorOffCanvas>
-        <div className="min-h-screen bg-white p-4 md:p-8">
+        <div className="min-h-screen bg-white p-3 sm:p-4 md:p-8">
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center justify-center min-h-[400px]">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
+              <div className="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-b-2 border-green-600"></div>
             </div>
           </div>
         </div>
@@ -97,11 +95,11 @@ export default function InvestorWithdraw() {
   if (feeError || investError) {
     return (
       <InvestorOffCanvas>
-        <div className="min-h-screen bg-white p-4 md:p-8">
+        <div className="min-h-screen bg-white p-3 sm:p-4 md:p-8">
           <div className="max-w-4xl mx-auto">
-            <div className="min-h-[400px] flex items-center justify-center bg-red-50 rounded-2xl border-2 border-red-100">
-              <div className="text-center space-y-4">
-                <div className="text-red-600 text-lg font-medium">Error loading investment</div>
+            <div className="min-h-[400px] flex items-center justify-center bg-red-50 rounded-xl sm:rounded-2xl border border-red-100 sm:border-2">
+              <div className="text-center space-y-3 sm:space-y-4 p-4">
+                <div className="text-red-600 text-base sm:text-lg font-medium">Error loading investment</div>
               </div>
             </div>
           </div>
@@ -114,26 +112,26 @@ export default function InvestorWithdraw() {
   if (!investment) {
     return (
       <InvestorOffCanvas>
-        <div className="min-h-screen bg-white p-4 md:p-8">
-          <div className="max-w-4xl mx-auto space-y-6">
+        <div className="min-h-screen bg-white p-3 sm:p-4 md:p-8">
+          <div className="max-w-4xl mx-auto space-y-4 sm:space-y-6">
             {/* Header */}
-            <header className="px-2">
-              <h1 className="text-2xl md:text-3xl font-bold text-green-900 flex items-center gap-3">
-                <BanknotesIcon className="w-8 h-8 text-green-600" />
-                Withdraw Investment
+            <header className="px-1 sm:px-2">
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-green-900 flex items-center gap-2 sm:gap-3">
+                <BanknotesIcon className="w-6 h-6 sm:w-8 sm:h-8 text-green-600 flex-shrink-0" />
+                <span className="leading-tight">Withdraw Investment</span>
               </h1>
               <p className="text-sm md:text-base text-green-600 mt-1">
                 Manage your investment withdrawal and earnings
               </p>
             </header>
 
-            <div className="text-center py-12 bg-gray-50 rounded-2xl">
-              <BanknotesIcon className="mx-auto h-12 w-12 text-gray-400" />
-              <h3 className="mt-4 text-lg font-medium text-gray-900">No investment found</h3>
-              <p className="mt-2 text-gray-500">
+            <div className="text-center py-8 sm:py-12 bg-gray-50 rounded-xl sm:rounded-2xl">
+              <BanknotesIcon className="mx-auto h-10 w-10 sm:h-12 sm:w-12 text-gray-400" />
+              <h3 className="mt-3 sm:mt-4 text-base sm:text-lg font-medium text-gray-900">No investment found</h3>
+              <p className="mt-2 text-sm sm:text-base text-gray-500 px-4">
                 You haven&apos;t made any investments yet
               </p>
-              <button className="mt-4 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+              <button className="mt-4 px-4 sm:px-6 py-2 bg-green-600 text-white text-sm sm:text-base rounded-lg hover:bg-green-700 transition-colors">
                 Start Investing
               </button>
             </div>
@@ -147,85 +145,86 @@ export default function InvestorWithdraw() {
 
   return (
     <InvestorOffCanvas>
-      <div className="min-h-screen bg-white p-4 md:p-8">
-        <div className="max-w-4xl mx-auto space-y-6">
+      <div className="min-h-screen bg-white p-3 sm:p-4 md:p-8">
+        <div className="max-w-4xl mx-auto space-y-4 sm:space-y-6">
           {/* Header */}
-          <header className="px-2">
-            <h1 className="text-2xl md:text-3xl font-bold text-green-900 flex items-center gap-3">
-              <BanknotesIcon className="w-8 h-8 text-green-600" />
-              Withdraw Investment
+          <header className="px-1 sm:px-2">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-green-900 flex items-center gap-2 sm:gap-3">
+              <BanknotesIcon className="w-6 h-6 sm:w-8 sm:h-8 text-green-600 flex-shrink-0" />
+              <span className="leading-tight">Withdraw Investment</span>
             </h1>
             <p className="text-sm md:text-base text-green-600 mt-1">
               Manage your investment withdrawal and earnings
             </p>
           </header>
 
-          {/* Stats Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="bg-white p-6 rounded-2xl shadow-sm border-2 border-green-50 hover:border-green-100 transition-all">
-              <div className="flex items-center gap-4">
-                <div className="p-3 rounded-xl bg-blue-100 text-blue-700">
-                  <CurrencyDollarIcon className="w-6 h-6" />
+          {/* Stats Cards - Mobile Optimized */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            <div className="bg-white p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-sm border border-green-50 sm:border-2 hover:border-green-100 transition-all">
+              <div className="flex items-center gap-3 sm:gap-4">
+                <div className="p-2.5 sm:p-3 rounded-lg sm:rounded-xl bg-blue-100 text-blue-700 flex-shrink-0">
+                  <CurrencyDollarIcon className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
-                <div>
-                  <p className="text-sm text-green-600">Investment Amount</p>
-                  <p className="text-2xl font-semibold text-green-900">{formatCurrency(investment.amount)}</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white p-6 rounded-2xl shadow-sm border-2 border-green-50 hover:border-green-100 transition-all">
-              <div className="flex items-center gap-4">
-                <div className="p-3 rounded-xl bg-green-100 text-green-700">
-                  <CheckCircleIcon className="w-6 h-6" />
-                </div>
-                <div>
-                  <p className="text-sm text-green-600">Expected Returns</p>
-                  <p className="text-2xl font-semibold text-green-900">{formatCurrency(status.totalEarnings)}</p>
+                <div className="min-w-0 flex-1">
+                  <p className="text-xs sm:text-sm text-green-600 truncate">Investment Amount</p>
+                  <p className="text-lg sm:text-2xl font-semibold text-green-900 truncate">{formatCurrency(investment.amount)}</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl shadow-sm border-2 border-green-50 hover:border-green-100 transition-all">
-              <div className="flex items-center gap-4">
-                <div className="p-3 rounded-xl bg-yellow-100 text-yellow-700">
-                  <ClockIcon className="w-6 h-6" />
+            <div className="bg-white p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-sm border border-green-50 sm:border-2 hover:border-green-100 transition-all">
+              <div className="flex items-center gap-3 sm:gap-4">
+                <div className="p-2.5 sm:p-3 rounded-lg sm:rounded-xl bg-green-100 text-green-700 flex-shrink-0">
+                  <CheckCircleIcon className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
-                <div>
-                  <p className="text-sm text-green-600">Days Left</p>
-                  <p className="text-2xl font-semibold text-green-900">{status.daysLeft}</p>
+                <div className="min-w-0 flex-1">
+                  <p className="text-xs sm:text-sm text-green-600 truncate">Expected Returns</p>
+                  <p className="text-lg sm:text-2xl font-semibold text-green-900 truncate">{formatCurrency(status.totalEarnings)}</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl shadow-sm border-2 border-red-50 hover:border-red-100 transition-all">
-              <div className="flex items-center gap-4">
-                <div className="p-3 rounded-xl bg-red-100 text-red-700">
-                  <ShieldCheckIcon className="w-6 h-6" />
+            <div className="bg-white p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-sm border border-green-50 sm:border-2 hover:border-green-100 transition-all">
+              <div className="flex items-center gap-3 sm:gap-4">
+                <div className="p-2.5 sm:p-3 rounded-lg sm:rounded-xl bg-yellow-100 text-yellow-700 flex-shrink-0">
+                  <ClockIcon className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
-                <div>
-                  <p className="text-sm text-green-600">Verification Fees</p>
-                  <p className="text-2xl font-semibold text-green-900">{formatCurrency(getTotalUnpaidFees())}</p>
+                <div className="min-w-0 flex-1">
+                  <p className="text-xs sm:text-sm text-green-600 truncate">Days Left</p>
+                  <p className="text-lg sm:text-2xl font-semibold text-green-900">{status.daysLeft}</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-sm border border-red-50 sm:border-2 hover:border-red-100 transition-all">
+              <div className="flex items-center gap-3 sm:gap-4">
+                <div className="p-2.5 sm:p-3 rounded-lg sm:rounded-xl bg-red-100 text-red-700 flex-shrink-0">
+                  <ShieldCheckIcon className="w-5 h-5 sm:w-6 sm:h-6" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="text-xs sm:text-sm text-green-600 truncate">Verification Fees</p>
+                  <p className="text-lg sm:text-2xl font-semibold text-green-900 truncate">{formatCurrency(getTotalUnpaidFees())}</p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Investment Details Card */}
-          <div className="bg-white rounded-2xl shadow-sm border-2 border-green-50">
-            <div className="p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-6">Investment Details</h3>
+          {/* Investment Details Card - Mobile Optimized */}
+          <div className="bg-white rounded-xl sm:rounded-2xl shadow-sm border border-green-50 sm:border-2">
+            <div className="p-4 sm:p-6">
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4 sm:mb-6">Investment Details</h3>
               
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
-                className="bg-gray-50 rounded-xl p-6 hover:bg-gray-100 transition-colors"
+                className="bg-gray-50 rounded-lg sm:rounded-xl p-4 sm:p-6 hover:bg-gray-100 transition-colors"
               >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
+                <div className="space-y-4">
+                  {/* Manager Info */}
+                  <div className="flex items-start gap-3 sm:gap-4">
                     <div
-                      className={`p-3 rounded-lg ${
+                      className={`p-2.5 sm:p-3 rounded-lg flex-shrink-0 ${
                         status.canWithdraw
                           ? "bg-green-100 text-green-600"
                           : status.requiresVerification
@@ -234,44 +233,54 @@ export default function InvestorWithdraw() {
                       }`}
                     >
                       {status.canWithdraw ? (
-                        <CheckCircleIcon className="w-6 h-6" />
+                        <CheckCircleIcon className="w-5 h-5 sm:w-6 sm:h-6" />
                       ) : status.requiresVerification ? (
-                        <ExclamationTriangleIcon className="w-6 h-6" />
+                        <ExclamationTriangleIcon className="w-5 h-5 sm:w-6 sm:h-6" />
                       ) : (
-                        <ClockIcon className="w-6 h-6" />
+                        <ClockIcon className="w-5 h-5 sm:w-6 sm:h-6" />
                       )}
                     </div>
-                    <div>
-                      <h4 className="font-medium text-gray-900">
+                    <div className="min-w-0 flex-1">
+                      <h4 className="font-medium text-gray-900 text-sm sm:text-base truncate">
                         {investment.manager?.firstName} {investment.manager?.lastName}
                       </h4>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-xs sm:text-sm text-gray-500 truncate">
                         {investment.manager?.qualification}
                       </p>
-                      <div className="flex items-center gap-2 text-xs text-gray-400 mt-1">
-                        <CalendarDaysIcon className="w-4 h-4" />
-                        <span>Invested on {formatDate(investment.createdAt)}</span>
-                        <span>•</span>
-                        <span>Matures on {formatDate(status.maturityDate)}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-xs text-gray-400 mt-1">
-                        <span>Duration: {investment.manager?.duration} days</span>
-                        <span>•</span>
-                        <span>Yield: {investment.manager?.percentageYield}%</span>
-                      </div>
                     </div>
                   </div>
-                  <div className="text-right space-y-2">
-                    <div className="flex items-center gap-1 text-lg font-semibold text-gray-900">
-                      <CurrencyDollarIcon className="w-5 h-5 text-green-600" />
-                      {formatCurrency(investment.amount)}
+
+                  {/* Investment Info */}
+                  <div className="space-y-2">
+                    <div className="flex flex-wrap items-center gap-1 sm:gap-2 text-xs text-gray-400">
+                      <CalendarDaysIcon className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                      <span className="truncate">Invested on {formatDate(investment.createdAt)}</span>
                     </div>
-                    <div className="text-sm text-green-600">
-                      Expected: {formatCurrency(status.totalEarnings)}
+                    <div className="flex flex-wrap items-center gap-1 sm:gap-2 text-xs text-gray-400">
+                      <span className="truncate">Matures on {formatDate(status.maturityDate)}</span>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex flex-wrap items-center gap-1 sm:gap-2 text-xs text-gray-400">
+                      <span>Duration: {investment.manager?.duration} days</span>
+                      <span>•</span>
+                      <span>Yield: {investment.manager?.percentageYield}%</span>
+                    </div>
+                  </div>
+
+                  {/* Amount and Actions */}
+                  <div className="pt-3 sm:pt-4 border-t border-gray-200 space-y-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-1 sm:gap-2">
+                        <CurrencyDollarIcon className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 flex-shrink-0" />
+                        <span className="text-base sm:text-lg font-semibold text-gray-900">{formatCurrency(investment.amount)}</span>
+                      </div>
+                      <div className="text-xs sm:text-sm text-green-600 text-right">
+                        Expected: {formatCurrency(status.totalEarnings)}
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
                       <span
-                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                        className={`inline-flex items-center justify-center px-2.5 py-1.5 sm:py-0.5 rounded-full text-xs font-medium flex-shrink-0 ${
                           status.canWithdraw
                             ? "bg-green-100 text-green-800"
                             : status.requiresVerification
@@ -287,7 +296,7 @@ export default function InvestorWithdraw() {
                       </span>
                       {(status.canWithdraw || status.requiresVerification) && (
                         <button
-                          className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                          className={`px-4 py-2 text-xs sm:text-sm font-medium rounded-lg transition-colors w-full sm:w-auto ${
                             status.canWithdraw
                               ? "bg-green-600 text-white hover:bg-green-700"
                               : "bg-orange-600 text-white hover:bg-orange-700"
@@ -303,33 +312,35 @@ export default function InvestorWithdraw() {
             </div>
           </div>
 
-          {/* Verification Fees Section */}
+          {/* Verification Fees Section - Mobile Optimized */}
           {verificationFees && verificationFees.some(fee => !fee.isPaid) && (
-            <div className="bg-orange-50 rounded-2xl border-2 border-orange-100 p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <ExclamationTriangleIcon className="w-6 h-6 text-orange-600" />
-                <h3 className="text-lg font-semibold text-orange-900">
+            <div className="bg-orange-50 rounded-xl sm:rounded-2xl border border-orange-100 sm:border-2 p-4 sm:p-6">
+              <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                <ExclamationTriangleIcon className="w-5 h-5 sm:w-6 sm:h-6 text-orange-600 flex-shrink-0" />
+                <h3 className="text-base sm:text-lg font-semibold text-orange-900">
                   Verification Fees Required
                 </h3>
               </div>
-              <div className="space-y-3">
+              <div className="space-y-2 sm:space-y-3">
                 {verificationFees
                   .filter(fee => !fee.isPaid)
                   .map(fee => (
-                    <div key={fee.id} className="flex items-center justify-between bg-white rounded-lg p-4">
-                      <div>
-                        <h4 className="font-medium text-gray-900">{fee.name}</h4>
-                        <p className="text-sm text-gray-500">
-                          Required for withdrawal verification
-                        </p>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-lg font-semibold text-orange-900">
-                          {formatCurrency(fee.amount)}
+                    <div key={fee.id} className="bg-white rounded-lg p-3 sm:p-4">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                        <div className="min-w-0 flex-1">
+                          <h4 className="font-medium text-gray-900 text-sm sm:text-base truncate">{fee.name}</h4>
+                          <p className="text-xs sm:text-sm text-gray-500">
+                            Required for withdrawal verification
+                          </p>
                         </div>
-                        <button className="mt-1 px-3 py-1 bg-orange-600 text-white text-sm rounded-lg hover:bg-orange-700 transition-colors">
-                          Pay Now
-                        </button>
+                        <div className="flex items-center justify-between sm:flex-col sm:text-right gap-3 sm:gap-1">
+                          <div className="text-base sm:text-lg font-semibold text-orange-900">
+                            {formatCurrency(fee.amount)}
+                          </div>
+                          <button className="px-3 py-1.5 sm:py-1 bg-orange-600 text-white text-xs sm:text-sm rounded-lg hover:bg-orange-700 transition-colors whitespace-nowrap">
+                            Pay Now
+                          </button>
+                        </div>
                       </div>
                     </div>
                   ))}

@@ -9,20 +9,24 @@ export default class EmailController {
   static async sendEmailToInvestor(req: Request, res: Response) {
     try {
       const investorId = req.params.investorId
-      const { subject, message, } = req.body
+      const { subject, message, } = req.body.data
+      console.log(req.body)
 
     
-    const user = await User.findOne({
-      include: [{
-        model: Investor,
-        where: { id: investorId }
-      }]
-    })
+    const investor = await Investor.findByPk(investorId)
 
-      if (!user) {
+
+      if (!investor) {
         return res.status(404).json({ error: "Investor not found" })
       }
 
+     const user = await User.findOne({where:{
+      id:investor.userId
+     }})
+
+      if (!user) {
+        return res.status(404).json({ error: "user not found" })
+      }
       // Send email using MailService
       await MailService.sendCustomEmail(user.email, subject, message, 'Investment Team')
 

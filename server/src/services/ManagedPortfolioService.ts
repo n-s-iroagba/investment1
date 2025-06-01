@@ -1,4 +1,5 @@
 import Admin from '../models/Admin.js';
+import CryptoWallet from '../models/CryptoWallet.js';
 import Investor from '../models/Investor.js';
 import Kyc from '../models/Kyc.js';
 import ManagedPortfolio from '../models/ManagedPortfolio.js';
@@ -72,6 +73,7 @@ catch (error) {
   static async getInvestmentByInvestorId(
   investorId: number
 ): Promise<ManagedPortfolio | null> {
+  console.log('in portfolio service')
   const portfolio = await ManagedPortfolio.findOne({
     where: { investorId },
     include: [
@@ -82,11 +84,15 @@ catch (error) {
       {
         model:Payment,
         as:'payments'
+      },
+        {
+        model:CryptoWallet,
+        as:'cryptoWallet'
       }
     ],
 
   });
-
+console.log(portfolio)
 
   return portfolio;
 };

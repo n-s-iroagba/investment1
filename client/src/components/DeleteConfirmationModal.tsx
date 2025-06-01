@@ -32,8 +32,10 @@ export function DeleteConfirmationModal({ id, onClose, type, message }: DeleteMo
       if (!endpoint) throw new Error("Invalid deletion type")
 
       await remove(endpoint)
+     
+      window.location.reload()
       onClose()
-      // Consider adding a success toast here
+     
     } catch (err) {
       console.error("Deletion failed:", err)
       setError("Failed to delete. Please try again.")

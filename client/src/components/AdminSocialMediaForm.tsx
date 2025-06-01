@@ -74,8 +74,8 @@ export default function SocialMediaForm({ existingSocialMedia,onClose }: SocialM
         console.error("Server error:", errorData)
         throw new Error(errorData.message || "Failed to submit form")
       }
+      window.location.reload()
 
-      toast.success(existingSocialMedia ? "Social media updated successfully!" : "Social media created successfully!")
 
       if (!existingSocialMedia) {
         setFormData({ name: "", link: "", logo: "" })

@@ -32,14 +32,14 @@ export class Investor extends Model<
   // Foreign keys
   declare userId: ForeignKey<User['id']>;
 
-
   // Associations (non-DB attributes)
   declare user?: NonAttribute<User>;
   declare admin?: NonAttribute<Admin>;
   declare kyc?: NonAttribute<Kyc>;
   declare managedPortfolio?: NonAttribute<ManagedPortfolio>;
-
   declare referrals?: NonAttribute<Referral[]>;
+  declare referrer?: NonAttribute<Investor>;
+  declare referredInvestors?: NonAttribute<Investor[]>;
 }
 
 Investor.init(
@@ -89,6 +89,18 @@ Investor.init(
     timestamps: true,
   }
 );
+
+// Define associations
+Investor.belongsTo(User, {
+  foreignKey: 'userId',
+  as: 'user',
+});
+
+User.hasMany(Investor,{
+  foreignKey:'userId',
+  as:'investors'
+})
+
 
 
 

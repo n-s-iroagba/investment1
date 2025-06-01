@@ -1,5 +1,5 @@
 const urls = {
-  dev: 'http://localhost:3000',
+  dev: 'http://localhost:3001',
   staging: 'https://staging.example.com',
   prod: 'https://example.com',
 } as const;

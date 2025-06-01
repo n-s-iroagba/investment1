@@ -10,28 +10,15 @@ import {
 } from "@/components/InvestorDetailModals"
 import type { Investor } from "@/types/Investor"
 import { useRouter } from "next/navigation"
-import { get, patch, post } from "@/utils/apiClient"
+import { get, patch } from "@/utils/apiClient"
 import { apiRoutes } from "@/constants/apiRoutes"
 import PaymentList from "@/components/PaymentList"
 import { useGetSingle } from "@/hooks/useFetch"
 import AdditionWarning from "@/components/AdditionWarning"
 import { ViewReceiptModal } from "@/components/ViewReceiptModal"
-export const sendEmail = async (
-  data: { subject: string; message: string },
-  investorId?: number
-): Promise<void> => {
-  try {
-    const endpoint = investorId 
-      ? apiRoutes.email.sendToInvestor(investorId) 
-      : apiRoutes.email.send();
-    
-    await post(endpoint, { data });
-    alert('Email sent successfully!');
-  } catch (error) {
-    console.error("Email send failed:", error);
-    alert('Failed to send email. Please try again later.');
-  }
-};
+import { sendEmail } from "@/utils/common"
+import AdminOffcanvas from "@/components/AdminOffCanvas"
+
 export default function InvestorDetail() {
   const params = useParams()
   const investorId = params.id as string
@@ -47,6 +34,7 @@ export default function InvestorDetail() {
     try {
       await patch(apiRoutes.investment.creditInvestmentEarnings(portfolioId), { amount })
       alert('Success!!')
+      window.location.reload()
     } catch (error) {
       alert('Sorry an error occured, contact Developer to fix it')
       console.error("Error crediting portfolio:", error)
@@ -59,8 +47,9 @@ export default function InvestorDetail() {
 
   const creditAmountDeposited = async (portfolioId: number | string, amount: number) => {
     try {
-      await patch(apiRoutes.investment.creditInvestmentEarnings(portfolioId), { amount })
+      await patch(apiRoutes.investment.creditAmountDeposited(portfolioId), { amount })
       alert('Success!!')
+      window.location.reload()
     } catch (error) {
       alert('Sorry an error occured, contact Developer to fix it')
       console.error("Error crediting portfolio:", error)
@@ -118,6 +107,7 @@ export default function InvestorDetail() {
 
 
   return (
+    <AdminOffcanvas>
     <div className="space-y-8">
       {/* Back Navigation */}
       <button onClick={() => onBack()} className="flex items-center text-emerald-600 hover:text-emerald-700 mb-6">
@@ -178,7 +168,7 @@ export default function InvestorDetail() {
               >
                 View Document
               </button>
-              {investor.kyc !== undefined && !investor.kyc.isVerified && (
+              {investor?.kyc !== null && investor?.kyc !== undefined && !investor?.kyc.isVerified && (
                 <button
                   onClick={() => handleVerifyKyc(investor.kyc?.id ?? 0)}
                   className="w-full bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-md text-sm"
@@ -191,56 +181,69 @@ export default function InvestorDetail() {
         </div>
       </details>
 
-      <details className="group bg-white rounded-lg shadow-sm border border-emerald-100">
-        <summary className="list-none p-4 cursor-pointer">
-          <div className="flex justify-between items-center">
-            <h3 className="text-lg font-semibold text-emerald-900">Managed Portfolios</h3>
+<details className="group bg-white rounded-lg shadow-sm border border-emerald-100">
+  <summary className="list-none p-3 sm:p-4 cursor-pointer">
+    <div className="flex justify-between items-center">
+      <h3 className="text-base sm:text-lg font-semibold text-emerald-900">Managed Portfolios</h3>
+    </div>
+  </summary>
+  <div className="p-3 sm:p-4 space-y-4 sm:space-y-6">
+    {investor.managedPortfolio && (
+      <div key={investor.managedPortfolio.id} className="border p-3 sm:p-4 rounded-md bg-gray-50 space-y-4">
+        
+        {/* Portfolio Stats Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+          <div className="bg-white p-3 rounded-md">
+            <p className="text-xs sm:text-sm text-gray-600">Intended Amount</p>
+            <p className="font-semibold text-sm sm:text-base">${investor.managedPortfolio.amount}</p>
           </div>
-        </summary>
-        <div className="p-4 space-y-6">
-          {investor.managedPortfolio &&
-
-            <div key={investor.managedPortfolio.id} className="border p-4 rounded-md bg-gray-50 space-y-4">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div>
-                  <p className="text-sm text-gray-600">Intended Amount</p>
-                  <p className="font-semibold">${investor.managedPortfolio.amount}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-600">Amount Deposited</p>
-                  <p className="font-semibold">${investor.managedPortfolio.amountDeposited || 0}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-600">Earnings</p>
-                  <p className="font-semibold">${investor.managedPortfolio.earnings || 0}</p>
-                </div>
-                <div>
-                  <button
-                    onClick={() => {setShowCreditModal(true);setCreditType('earnings')}}
-                    className="bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1 rounded-md text-sm"
-                  >
-                    Credit Earnings
-                  </button>
-                   <button
-                    onClick={() => {setShowCreditModal(true);setCreditType('amount-deposited')}}
-                    className="bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1 rounded-md text-sm"
-                  >
-                    Credit Amount
-                  </button>
-                 <AdditionWarning amountDeposited={investor.managedPortfolio.amountDeposited??null} intendedAmount={investor.managedPortfolio.earnings??0}/>
-                </div>
-              </div>
-
-              {investor.managedPortfolio.payments && investor.managedPortfolio.payments.length > 0 && (
-                <div>
-                  <h4 className="font-medium mb-2">Payments</h4>
-                  <PaymentList payments={investor.managedPortfolio.payments} isAdmin={true} />
-                </div>
-              )}
-            </div>
-          }
+          <div className="bg-white p-3 rounded-md">
+            <p className="text-xs sm:text-sm text-gray-600">Amount Deposited</p>
+            <p className="font-semibold text-sm sm:text-base">${investor.managedPortfolio.amountDeposited || 0}</p>
+          </div>
+          <div className="bg-white p-3 rounded-md">
+            <p className="text-xs sm:text-sm text-gray-600">Earnings</p>
+            <p className="font-semibold text-sm sm:text-base">${investor.managedPortfolio.earnings || 0}</p>
+          </div>
         </div>
-      </details>
+
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+          <button
+            onClick={() => {setShowCreditModal(true);setCreditType('earnings')}}
+            className="bg-emerald-500 hover:bg-emerald-600 text-white px-3 sm:px-4 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors flex-1 sm:flex-none"
+          >
+            Credit Earnings
+          </button>
+          <button
+            onClick={() => {setShowCreditModal(true);setCreditType('amount-deposited')}}
+            className="bg-emerald-500 hover:bg-emerald-600 text-white px-3 sm:px-4 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors flex-1 sm:flex-none"
+          >
+            Credit Amount
+          </button>
+        </div>
+
+        {/* Warning Component */}
+        <div className="mt-3">
+          <AdditionWarning 
+            amountDeposited={investor.managedPortfolio.amountDeposited ?? null} 
+            intendedAmount={investor.managedPortfolio.amount}
+          />
+        </div>
+
+        {/* Payments Section */}
+        {investor.managedPortfolio.payments && investor.managedPortfolio.payments.length > 0 && (
+          <div className="mt-4 sm:mt-6">
+            <h4 className="font-medium mb-2 sm:mb-3 text-sm sm:text-base">Payments</h4>
+            <div className="overflow-x-auto">
+              <PaymentList payments={investor.managedPortfolio.payments} isAdmin={true} />
+            </div>
+          </div>
+        )}
+      </div>
+    )}
+  </div>
+</details>
 
       {/* Verification Fee Section */}
       <details className="group bg-white rounded-lg shadow-sm border border-emerald-100">
@@ -300,16 +303,17 @@ export default function InvestorDetail() {
 
       <ViewReceiptModal
         isOpen={!!selectedDocument}
-        onClose={() => setSelectedDocument(null)} receiptUrl={selectedDocument||""}    
+        onClose={() => setSelectedDocument(null)} receiptUrl={selectedDocument||""}     
       />
 
       <CreditModal isOpen={showCreditModal}
        onClose={() => setShowCreditModal(false)} 
-       investorId={""} 
+       investorId={investor.id} 
        amountDeposited={(investor.managedPortfolio?.amountDeposited ?? 0)} earnings={(investor.managedPortfolio?.earnings ?? 0)}
         onCredit={creditType==='earnings'?creditEarnings: creditType==='amount-deposited'?creditAmountDeposited: voidCredit}/>
 
       <VerificationFeeCreationtModal isOpen={showCreateFeeModal} onClose={() => setShowCreateFeeModal(false)} investorId={investor.id} onCreateFee={createVerificationFee} />
     </div>
+    </AdminOffcanvas>
   )
 }
