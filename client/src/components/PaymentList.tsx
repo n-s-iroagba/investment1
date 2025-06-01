@@ -75,7 +75,7 @@ export default function PaymentList({ payments,  isAdmin }: PaymentListProps) {
                   <p className="font-semibold text-green-900">
                     Amount {payment.amount.toLocaleString()}
                   </p>
-                  <p className="text-sm text-green-700">{new Date(payment.date).toLocaleDateString()}</p>
+                  <p className="text-sm text-green-700">{new Date(payment.paymentDate).toLocaleDateString()}</p>
                 </div>
               </div>
 
