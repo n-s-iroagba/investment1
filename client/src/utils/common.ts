@@ -17,8 +17,9 @@ export const sendEmail = async (
   try {
     const endpoint = investorId 
       ? apiRoutes.email.sendToInvestor(investorId) 
-      : apiRoutes.email.send();
-    console.log(data)
+      : apiRoutes.email.send()
+    
+
     await post(endpoint, { data });
     alert('Email sent successfully!');
   } catch (error) {

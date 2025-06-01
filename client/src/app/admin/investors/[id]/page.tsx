@@ -17,7 +17,9 @@ import { useGetSingle } from "@/hooks/useFetch"
 import AdditionWarning from "@/components/AdditionWarning"
 import { ViewReceiptModal } from "@/components/ViewReceiptModal"
 import { sendEmail } from "@/utils/common"
+
 import AdminOffcanvas from "@/components/AdminOffCanvas"
+
 
 export default function InvestorDetail() {
   const params = useParams()
