@@ -21,14 +21,7 @@ const Information: React.FC<InformationProps> = ({ head, text, icon: Icon }) => 
   );
 };
 
-const GetStartedButton: React.FC = () => {
-  return (
-    <button className="group relative px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold rounded-full shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 overflow-hidden">
-      <span className="relative z-10">Get Started Today</span>
-      <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-green-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-    </button>
-  );
-};
+
 
 const Steps: React.FC = () => {
   return (
@@ -97,9 +90,7 @@ const Steps: React.FC = () => {
         </div>
 
         {/* CTA Button */}
-        <div className="flex justify-center">
-          <GetStartedButton />
-        </div>
+      
       </div>
     </div>
   );

@@ -1,5 +1,7 @@
 import React from "react";
-import { QuestionMarkCircleIcon, SparklesIcon, TrophyIcon, ShieldCheckIcon } from "@heroicons/react/24/outline";
+import { QuestionMarkCircleIcon, 
+  SparklesIcon, 
+  TrophyIcon, ShieldCheckIcon } from "@heroicons/react/24/outline";
 
 const whoWeAre = "We are a team of experienced financial professionals dedicated to making investing accessible, secure, and profitable for everyone. With over a decade of combined experience in financial markets, we've helped thousands of investors achieve their financial goals through smart, strategic investment solutions.";
 
@@ -76,28 +78,13 @@ const Introduction: React.FC = () => {
             </div>
 
             {/* Call to Action */}
-            <div className="text-center lg:text-left pt-2 sm:pt-4">
-              <button className="inline-flex items-center px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold rounded-full hover:from-green-700 hover:to-emerald-700 transform hover:scale-[1.03] transition-all duration-300 shadow-lg hover:shadow-xl text-sm sm:text-base">
+            {/* <div className="text-center lg:text-left pt-2 sm:pt-4">
+              <button on
+               className="inline-flex items-center px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold rounded-full hover:from-green-700 hover:to-emerald-700 transform hover:scale-[1.03] transition-all duration-300 shadow-lg hover:shadow-xl text-sm sm:text-base">
                 <span>Start Investing Today</span>
                 <SparklesIcon className="w-4 sm:w-5 h-4 sm:h-5 ml-2" />
               </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Stats Section */}
-        <div className="mt-12 sm:mt-16 lg:mt-20 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-          <div className="text-center p-4 sm:p-6 bg-white rounded-2xl shadow-lg border border-green-100 hover:shadow-xl transition-shadow duration-300">
-            <div className="text-2xl sm:text-3xl font-bold text-green-600 mb-1 sm:mb-2">10K+</div>
-            <div className="text-sm sm:text-base text-gray-600">Happy Investors</div>
-          </div>
-          <div className="text-center p-4 sm:p-6 bg-white rounded-2xl shadow-lg border border-green-100 hover:shadow-xl transition-shadow duration-300">
-            <div className="text-2xl sm:text-3xl font-bold text-emerald-600 mb-1 sm:mb-2">$50M+</div>
-            <div className="text-sm sm:text-base text-gray-600">Assets Managed</div>
-          </div>
-          <div className="text-center p-4 sm:p-6 bg-white rounded-2xl shadow-lg border border-green-100 hover:shadow-xl transition-shadow duration-300">
-            <div className="text-2xl sm:text-3xl font-bold text-teal-600 mb-1 sm:mb-2">98%</div>
-            <div className="text-sm sm:text-base text-gray-600">Success Rate</div>
+            </div> */}
           </div>
         </div>
       </div>

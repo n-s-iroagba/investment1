@@ -126,12 +126,7 @@ const SecurityAssurance: React.FC = () => {
             </div>
 
             {/* Call to Action */}
-            <div className="text-center pt-8">
-              <button className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold rounded-full hover:from-green-700 hover:to-emerald-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
-                <ShieldCheckIcon className="w-5 h-5 mr-2" />
-                <span>Learn More About Security</span>
-              </button>
-            </div>
+        
           </div>
         </div>
 

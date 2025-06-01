@@ -2,7 +2,7 @@ import React from 'react';
 import { EnvelopeIcon, MapPinIcon } from '@heroicons/react/24/outline';
 
 // Constants
-const companySupportEmail = "support@yourcompany.com";
+const companySupportEmail = "wealthfundingtradestation@gmail.com";
 
 interface ContactCardProps {
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
@@ -120,9 +120,7 @@ const Contact: React.FC = () => {
             <p className="text-green-100 mb-6 text-lg">
               Don&apos;t hesitate to reach out. We&apos;re here to help you achieve your financial goals.
             </p>
-            <button className="bg-white text-green-600 font-bold px-8 py-4 rounded-full hover:bg-green-50 transform hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl">
-              Contact Us Today
-            </button>
+          
           </div>
         </div>
       </div>

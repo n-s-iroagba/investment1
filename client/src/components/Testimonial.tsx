@@ -246,7 +246,7 @@ const Testimonial: React.FC = () => {
             <div className="text-gray-600">Average Rating</div>
           </div>
           <div className="text-center p-6 bg-white rounded-2xl shadow-lg border border-green-100">
-            <div className="text-3xl font-bold text-emerald-600 mb-2">10,000+</div>
+            <div className="text-3xl font-bold text-emerald-600 mb-2">60,000+</div>
             <div className="text-gray-600">Happy Clients</div>
           </div>
           <div className="text-center p-6 bg-white rounded-2xl shadow-lg border border-green-100">
