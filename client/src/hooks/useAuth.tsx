@@ -1,4 +1,5 @@
 "use client"
+import {useCallback} from 'react'
 import { get } from "@/utils/apiClient"
 import { apiRoutes } from "@/constants/apiRoutes"
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react"
@@ -11,7 +12,7 @@ interface AuthContextValue {
   roleId: number 
   displayName: string
   user: LoggedInUser | null
-  // refetch: () => Promise<void>
+  refetch: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextValue>({
@@ -21,18 +22,14 @@ const AuthContext = createContext<AuthContextValue>({
   roleId: 0,
   displayName: "",
   user: null,
-  // refetch: async () => {},
+  refetch: async () => {},
 })
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<LoggedInUser | null>(null)
   const [loading, setLoading] = useState(true)
 
-
-  // Run fetchUser only once on mount
-  useEffect(() => {
-
-  const fetchUser = async () => {
+  const fetchUser = useCallback(async () => {
     setLoading(true)
     
     try {
@@ -44,9 +41,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     } finally {
       setLoading(false)
     }
-  }
+  }, []) // Remove mounted dependency
+
+  // Run fetchUser only once on mount
+  useEffect(() => {
     fetchUser()
-  }, [])
+  }, [fetchUser])
 
   const isAdmin = user?.isAdmin ?? null
   const isInvestor = !user?.isAdmin
@@ -64,7 +64,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         roleId,
         displayName,
         user,
-        // refetch: ()=>{},
+        refetch: fetchUser,
       }}
     >
       {children}

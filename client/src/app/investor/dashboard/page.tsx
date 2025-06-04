@@ -6,7 +6,7 @@ import { UploadProofModal } from "@/components/UploadProofModal"
 import { useAuth } from "@/hooks/useAuth"
 import type { ManagedPortfolio } from "@/types/managedPortfolio"
 import type { Payment } from "@/types/Payment"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
 import dynamic from "next/dynamic"
 import {
@@ -52,7 +52,7 @@ function getDaysSinceOldestPayment(portfolio: ManagedPortfolio | null): number {
 }
 
 const InvestorDashboard = () => {
-  const { loading: authLoading, displayName, roleId,  } = useAuth()
+  const { loading: authLoading, displayName, roleId, refetch } = useAuth()
   const router = useRouter()
 
   const shouldFetchPortfolio = !authLoading && roleId && roleId !== 0 && roleId !== null && roleId !== undefined
@@ -95,11 +95,27 @@ const InvestorDashboard = () => {
     }
   }
 
-  useEffect(() => {
-    if ((!displayName || !roleId)) {
+const hasRefetched = useRef(false)
 
-    }
-  }, [displayName, roleId])
+useEffect(() => {
+  // Wait until auth finishes loading
+  if (!authLoading  && !hasRefetched.current) {
+    const timeout = setTimeout(() => {
+      // Mark that we've refetched once
+      hasRefetched.current = true
+
+      // Call refetch, then check again
+      refetch().then(() => {
+        // After refetch, if still not admin and not loading, redirect
+        if (!authLoading ) {
+          router.push("/login")
+        }
+      })
+    }, 100)
+
+    return () => clearTimeout(timeout)
+  }
+}, [authLoading, refetch, router])
 
   useEffect(() => {
     if (portfolio && isMounted) {
@@ -188,63 +204,73 @@ const InvestorDashboard = () => {
   const safeAmountDeposited = portfolio.amountDeposited ?? 0
 
   // Responsive chart options
-  const chartOptions = {
-    chart: {
-      height: '100%',
-      toolbar: { show: false },
-      foreColor: "#1a4d2b",
-      fontFamily: 'system-ui, sans-serif',
-      animations: { enabled: true }
+const chartOptions = {
+  chart: {
+    height: '100%',
+    toolbar: { show: false },
+    foreColor: "#1a4d2b",
+    fontFamily: 'system-ui, sans-serif',
+    animations: { enabled: true }
+  },
+  colors: ["#16a34a"],
+  fill: {
+    type: "gradient",
+    gradient: {
+      shade: 'light',
+      type: 'vertical',
+      gradientToColors: ['#22c55e'],
+      stops: [0, 100]
     },
-    colors: ["#16a34a"],
-    fill: {
-      type: "gradient",
-      gradient: {
-        shade: 'light',
-        type: 'vertical',
-        gradientToColors: ['#22c55e'],
-        stops: [0, 100]
-      },
+  },
+  dataLabels: { enabled: false },
+  stroke: { curve: 'smooth' as const, width: 3 },
+  xaxis: {
+    categories: Array.from({ length: Math.max(Math.min(days, 15), 2) }, (_, i) => `D${i}`),
+    labels: { style: { colors: "#64748b", fontSize: '10px' } },
+    axisBorder: { show: false },
+    axisTicks: { show: false }
+  },
+  yaxis: {
+    labels: {
+      style: { colors: "#64748b", fontSize: '10px' },
+      formatter: (value: number) => `$${Math.round(value)}`,
     },
-    dataLabels: { enabled: false },
-    stroke: { curve: 'smooth' as const, width: 3 },
-    xaxis: {
-      categories: Array.from({ length: Math.min(days, 15) }, (_, i) => `D${i + 1}`),
-      labels: { style: { colors: "#64748b", fontSize: '10px' } },
-      axisBorder: { show: false },
-      axisTicks: { show: false }
-    },
-    yaxis: {
-      labels: {
-        style: { colors: "#64748b", fontSize: '10px' },
-        formatter: (value: number) => `$${Math.round(value)}`,
-      },
-      min: safeAmountDeposited * 0.98,
-    },
-    grid: {
-      borderColor: "#e2e8f0",
-      strokeDashArray: 2,
-      yaxis: { lines: { show: true } },
-      padding: { left: 20, right: 15 }
-    },
-    tooltip: {
-      theme: 'light',
-      y: { formatter: (value: number) => `$${value.toFixed(2)}` }
-    },
-    responsive: [{
-      breakpoint: 768,
-      options: { chart: { height: 300 } }
-    }]
-  }
+    min: safeAmountDeposited * 0.98,
+    // Ensure chart shows even with single data point
+    forceNiceScale: true,
+  },
+  grid: {
+    borderColor: "#e2e8f0",
+    strokeDashArray: 2,
+    yaxis: { lines: { show: true } },
+    padding: { left: 20, right: 15 }
+  },
+  tooltip: {
+    theme: 'light',
+    y: { formatter: (value: number) => `$${value.toFixed(2)}` }
+  },
+  // Fix for single data point
+  noData: {
+    text: "Loading chart...",
+    align: "center" as const,
+    verticalAlign: 'middle' as const,
+  },
+  responsive: [{
+    breakpoint: 768,
+    options: { chart: { height: 300 } }
+  }]
+}
 
-  const chartSeries = [
-    {
-      name: "Portfolio Value",
-      data: Array.from(
-        { length: Math.min(days, 15) },
-        (_, i) => Number((safeAmountDeposited * (1 + (safePercentageYield / 100 / 365) * i)).toFixed(2))),
-    },
-  ]
+// Ensure we have at least 2 data points for the chart
+const chartDataPoints = Math.max(Math.min(days, 15), 2);
+const chartSeries = [
+  {
+    name: "Portfolio Value",
+    data: Array.from(
+      { length: chartDataPoints },
+      (_, i) => Number((safeAmountDeposited * (1 + (safePercentageYield / 100 / 365) * i)).toFixed(2))),
+  },
+]
 
   return (
     <>
