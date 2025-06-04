@@ -28,7 +28,7 @@ const HomeManagerCards: React.FC = () => {
     <div className="w-16 h-1 bg-blue-500 rounded-full mt-4"></div>
   </div>
   
-  <div className="grid gap-6 sm:gap-8 lg:gap-10 grid-cols-[repeat(auto-fit,_minmax(280px,_1fr))]">
+  <div className="grid gap-6 sm:gap-8 lg:gap-10 sm:grid-cols-12 grid-cols-6">
     {managers.map((manager) => (
       <ManagerCard key={manager.id} manager={manager} />
     ))}
