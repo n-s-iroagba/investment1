@@ -52,7 +52,7 @@ function getDaysSinceOldestPayment(portfolio: ManagedPortfolio | null): number {
 }
 
 const InvestorDashboard = () => {
-  const { loading: authLoading, displayName, roleId, refetch } = useAuth()
+  const { loading: authLoading, displayName, roleId,  } = useAuth()
   const router = useRouter()
 
   const shouldFetchPortfolio = !authLoading && roleId && roleId !== 0 && roleId !== null && roleId !== undefined
@@ -97,9 +97,9 @@ const InvestorDashboard = () => {
 
   useEffect(() => {
     if ((!displayName || !roleId)) {
-       refetch()
+
     }
-  }, [displayName, refetch, roleId])
+  }, [displayName, roleId])
 
   useEffect(() => {
     if (portfolio && isMounted) {
