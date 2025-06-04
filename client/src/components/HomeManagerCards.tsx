@@ -20,23 +20,21 @@ const HomeManagerCards: React.FC = () => {
   }
 
   return (
-    <div className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      <div className="flex flex-col items-center mb-12">
-        <h2 className="text-center text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-900 px-2">
-          Our Investment Managers
-        </h2>
-        <div className="w-16 h-1 bg-blue-500 rounded-full mt-4"></div>
-      </div>
-      
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 lg:gap-10">
-        {managers.map((manager) => (
-          <ManagerCard 
-            key={manager.id} 
-            manager={manager}
-          />
-        ))}
-      </div>
-    </div>
+<div className="py-12 px-4 sm:px-6 lg:px-8 max-w-full mx-auto">
+  <div className="flex flex-col items-center mb-12">
+    <h2 className="text-center text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-900 px-2">
+      Our Investment Managers
+    </h2>
+    <div className="w-16 h-1 bg-blue-500 rounded-full mt-4"></div>
+  </div>
+  
+  <div className="grid gap-6 sm:gap-8 lg:gap-10 grid-cols-[repeat(auto-fit,_minmax(280px,_1fr))]">
+    {managers.map((manager) => (
+      <ManagerCard key={manager.id} manager={manager} />
+    ))}
+  </div>
+</div>
+
   );
 };
 

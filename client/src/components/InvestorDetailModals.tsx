@@ -145,7 +145,7 @@ export function CreditModal({ isOpen, onClose, portfolioId, amountDeposited, ear
     e.preventDefault()
     const creditAmount = Number.parseFloat(amount)
 
-    if (!creditAmount || creditAmount <= 0) {
+    if (!creditAmount) {
       toast.error("Please enter a valid amount")
       return
     }

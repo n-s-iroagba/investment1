@@ -189,7 +189,7 @@ console.log(params)
             } focus:border-blue-500 focus:ring-2 focus:ring-blue-200`}
           />
           <p className="text-sm text-blue-600 mt-1">
-            Minimum: ${manager.minimumInvestmentAmount}
+            Minimum: ${manager.minimumInvestmentAmount?manager.minimumInvestmentAmount:'Any Amount'}
           </p>
         </div>
 

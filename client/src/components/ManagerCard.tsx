@@ -18,7 +18,7 @@ interface ManagerCardProps {
 
 export default function ManagerCard({ manager, showInvestButton = true }: ManagerCardProps) {
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-blue-200 transition-all duration-300 overflow-hidden group">
+    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-blue-200 transition-all duration-300 overflow-hidden group ">
       {/* Mobile Layout - Vertical card */}
       <div className="block lg:hidden">
         <div className="p-6 text-center">
