@@ -2,7 +2,7 @@ export type Manager = {
   id: number
   lastName: string
   firstName: string
-  image: string | File
+  image:Blob|string;
   minimumInvestmentAmount: number
   percentageYield: number
   duration: number

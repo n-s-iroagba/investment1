@@ -26,7 +26,7 @@ const ManagerForm: React.FC<ManagerFormProps> = ({ patch, existingManager }) => 
     id: 0,
     firstName: "",
     lastName: "",
-    image: "",
+    image:'',
     duration: 0,
     qualification: "",
     minimumInvestmentAmount: 0,

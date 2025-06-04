@@ -16,7 +16,18 @@ interface ManagerCardProps {
 }
 
 export default function ManagerCard({ manager, showInvestButton = true }: ManagerCardProps) {
+    let imageUrl = '';
+
+  // Check if 'image' is a Buffer before converting to Blob
+  const image = manager.image 
+  if (image && image && Array.isArray(image)) {
+    const blob = new Blob([new Uint8Array(image)], { type: 'image/jpeg' });
+    imageUrl = URL.createObjectURL(blob);
+  } else {
+    console.error("Invalid image data format.");
+  }
   return (
+
     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-blue-200 transition-all duration-300 overflow-hidden group ">
       {/* Mobile Layout - Vertical card */}
       <div className="block ">
@@ -37,7 +48,7 @@ export default function ManagerCard({ manager, showInvestButton = true }: Manage
           <div className="w-24 h-24 mx-auto mb-4 relative">
             <div className="p-1 rounded-full border-2 border-blue-100 bg-white w-full h-full">
               <Image
-                src={(manager.image as string) || "/placeholder.svg"}
+                src={imageUrl}
                 alt={`${manager.firstName} ${manager.lastName}`}
                 className="rounded-full object-cover w-full h-full"
                 width={96}

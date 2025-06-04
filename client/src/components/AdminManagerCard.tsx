@@ -20,7 +20,16 @@ interface ManagerCardProps {
 }
 
 export default function AdminManagerCard({ manager, onEdit, onDelete }: ManagerCardProps) {
-  console.log(manager.image)
+     let imageUrl = '';
+
+  // Check if 'image' is a Buffer before converting to Blob
+  const image = manager.image 
+  if (image && image && Array.isArray(image)) {
+    const blob = new Blob([new Uint8Array(image)], { type: 'image/jpeg' });
+    imageUrl = URL.createObjectURL(blob);
+  } else {
+    console.error("Invalid image data format.");
+  }
   return (
     <div className="bg-white p-6 rounded-2xl shadow-sm border-2 border-blue-50 hover:border-blue-100 transition-all relative group">
       {/* Decorative Corner Borders */}
@@ -32,7 +41,7 @@ export default function AdminManagerCard({ manager, onEdit, onDelete }: ManagerC
         <div className="w-full md:w-32 h-32 relative group/image">
           <div className="p-1 rounded-full border-2 border-blue-100 bg-white flex justify-center">
             <Image
-              src={`${manager.image}` || "/placeholder.svg"}
+              src={imageUrl}
               alt={`${manager.firstName} ${manager.lastName}`}
               className="rounded-full object-fit"
               width={128}
