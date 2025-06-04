@@ -6,7 +6,7 @@ import { apiRoutes } from "@/constants/apiRoutes"
 import { useGetList } from "@/hooks/useFetch"
 import { useAuth } from "@/hooks/useAuth"
 import type { AdminWallet } from "@/types/adminWallet"
-import {  useEffect, useRef, type ReactNode } from "react"
+import {  useEffect,  type ReactNode } from "react"
 import { Spinner } from "@/components/Spinner"
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline"
 import type { Manager } from "@/types/manager"
@@ -18,7 +18,7 @@ import { useRouter } from "next/navigation"
 
 
 const AdminDashboard = () => {
-  const { loading: authLoading, isAdmin, displayName,refetch } = useAuth()
+  const { loading: authLoading, isAdmin, displayName } = useAuth()
   console.log(displayName, isAdmin)
 
 
@@ -40,27 +40,18 @@ const AdminDashboard = () => {
 
 
 const router = useRouter()
-const hasRefetched = useRef(false)
+
 
 useEffect(() => {
-  // Wait until auth finishes loading
-  if (!authLoading && !isAdmin && !hasRefetched.current) {
-    const timeout = setTimeout(() => {
-      // Mark that we've refetched once
-      hasRefetched.current = true
 
-      // Call refetch, then check again
-      refetch().then(() => {
-           window.location.reload()
         if (!authLoading && !isAdmin) {
-          router.push("/login")
+          
+          window.location.reload()
         }
-      })
-    }, 100)
+    
+    
 
-    return () => clearTimeout(timeout)
-  }
-}, [authLoading, isAdmin, refetch, router])
+}, [authLoading, isAdmin,  router])
 
 
   const todos: ReactNode[] = []
