@@ -98,7 +98,7 @@ const InvestorDashboard = () => {
 
 useEffect(() => {
   // Wait until auth finishes loading
-  if (!authLoading&&displayName) {
+  if (!authLoading&&!displayName) {
        window.location.reload()
   }
 }, [authLoading,displayName,  router])
