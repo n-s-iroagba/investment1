@@ -11,8 +11,8 @@ interface AuthContextValue {
   isInvestor: boolean
   roleId: number 
   displayName: string
-  user: LoggedInUser | null // Added user to context
-  refetch: () => Promise<void> // Added refetch function
+  user: LoggedInUser | null
+  refetch: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextValue>({
@@ -28,43 +28,32 @@ const AuthContext = createContext<AuthContextValue>({
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<LoggedInUser | null>(null)
   const [loading, setLoading] = useState(true)
-  const [mounted, setMounted] = useState(false)
-
-  // Ensure component is mounted before running effects
-  useEffect(() => {
-    setMounted(true)
-  }, [])
 
   const fetchUser = useCallback(async () => {
-    if (!mounted) return
-
     setLoading(true)
     
     try {
       const data = await get<LoggedInUser>(apiRoutes.auth.me())
-   
       setUser(data)
     } catch (error) {
       console.error('❌ Failed to fetch user:', error)
       setUser(null)
     } finally {
       setLoading(false)
-  
     }
-  },[mounted])
+  }, []) // Remove mounted dependency
 
+  // Run fetchUser only once on mount
   useEffect(() => {
-    if (mounted) {
-      fetchUser()
-    }
-  }, [fetchUser, mounted])
+    fetchUser()
+  }, [fetchUser])
 
   const isAdmin = user?.isAdmin ?? null
   const isInvestor = !user?.isAdmin
   const roleId = user?.roleId ?? 0
   const displayName = user?.displayName ?? ''
 
-  console.log('🔄 Auth state:', { loading, isAdmin, isInvestor, roleId, displayName, mounted })
+  console.log('🔄 Auth state:', { loading, isAdmin, isInvestor, roleId, displayName })
 
   return (
     <AuthContext.Provider
