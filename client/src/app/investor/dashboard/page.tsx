@@ -95,22 +95,19 @@ const InvestorDashboard = () => {
     }
   }
 
-const hasRefetched = useRef(false)
+const hasRefetched = useRef(0)
 
 useEffect(() => {
   // Wait until auth finishes loading
-  if (!authLoading  && !hasRefetched.current) {
+  if (!authLoading  && hasRefetched.current ==0) {
     const timeout = setTimeout(() => {
       // Mark that we've refetched once
-      hasRefetched.current = true
+      hasRefetched.current +=1
 
-      // Call refetch, then check again
-      refetch().then(() => {
-          window.location.reload()
-        if (!authLoading ) {
-          router.push("/login")
-        }
-      })
+       window.location.reload()
+       if(hasRefetched.current ==2){
+        router.push('/login')
+       }
     }, 100)
 
     return () => clearTimeout(timeout)
