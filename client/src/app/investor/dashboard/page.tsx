@@ -96,12 +96,6 @@ const InvestorDashboard = () => {
   }
 
 
-useEffect(() => {
-  // Wait until auth finishes loading
-  if (!authLoading) {
-       window.location.reload()
-  }
-}, [authLoading,  router])
 
   useEffect(() => {
     if (portfolio && isMounted) {
