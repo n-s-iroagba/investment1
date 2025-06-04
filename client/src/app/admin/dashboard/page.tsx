@@ -6,7 +6,7 @@ import { apiRoutes } from "@/constants/apiRoutes"
 import { useGetList } from "@/hooks/useFetch"
 import { useAuth } from "@/hooks/useAuth"
 import type { AdminWallet } from "@/types/adminWallet"
-import { useEffect, type ReactNode } from "react"
+import {  type ReactNode } from "react"
 import { Spinner } from "@/components/Spinner"
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline"
 import type { Manager } from "@/types/manager"
@@ -17,7 +17,7 @@ import AdminOffCanvas from "@/components/AdminOffCanvas"
 
 
 const AdminDashboard = () => {
-  const { loading: authLoading, isAdmin, displayName,refetch } = useAuth()
+  const { loading: authLoading, isAdmin, displayName } = useAuth()
   console.log(displayName, isAdmin)
 
 
@@ -36,11 +36,11 @@ const AdminDashboard = () => {
   } = useGetList<SocialMedia>(apiRoutes.socialMedia.list())
 
 
-  useEffect(() => {
-    if (!authLoading && !isAdmin) {
-    refetch()
-    }
-  }, [authLoading, isAdmin, refetch])
+  // useEffect(() => {
+  //   if (!authLoading && !isAdmin) {
+  //   return nu
+  //   }
+  // }, [authLoading, isAdmin, refetch])
 
   const todos: ReactNode[] = []
 
