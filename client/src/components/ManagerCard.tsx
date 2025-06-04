@@ -23,7 +23,7 @@ export default function ManagerCard({ manager, showInvestButton = true }: Manage
       <div className="block lg:hidden">
         <div className="p-6 text-center">
           {/* Status Indicator */}
-          <div className="flex justify-between items-start mb-4">
+          <div className="flex-col align-center mb-4">
             <div className="flex items-center gap-1">
               <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
               <span className="text-xs text-blue-600 font-medium">Available</span>
