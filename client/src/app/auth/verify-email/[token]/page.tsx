@@ -1,6 +1,6 @@
 "use client";
 import { apiRoutes } from "@/constants/apiRoutes";
-import { post } from "@/utils/apiClient";
+import { post,setAuthToken } from "@/utils/apiClient";
 import { useParams, useRouter } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
 import { CheckCircleIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
@@ -69,8 +69,8 @@ const VerifyEmail = () => {
     const verificationCode = code.join("");
     setSubmitting(true)
     try {
-      const response =await post<EmailVerificationDto, {role:string}>(apiRoutes.auth.verifyEmail(), { code: verificationCode, token })
-      console.log(response)
+      const response =await post<EmailVerificationDto, {role:string,token:string}>(apiRoutes.auth.verifyEmail(), { code: verificationCode, token })
+    setAuthToken(response.token);
       if (response.role === 'INVESTOR'){
         router.push('/investor/dashboard');
       }else if (response.role === 'ADMIN'){

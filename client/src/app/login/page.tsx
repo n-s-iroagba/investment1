@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { post } from '@/utils/apiClient';
+import { post,setAuthToken } from '@/utils/apiClient';
 import { apiRoutes } from '@/constants/apiRoutes';
 import { UserCircleIcon, EnvelopeIcon, LockClosedIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
 
@@ -46,8 +46,9 @@ export default function LoginPage() {
     
       };
 
-      const response = await post<typeof payload, {role:'ADMIN'|'INVESTOR',verificationToken?:string}>(apiRoutes.auth.login(), payload);
+      const response = await post<typeof payload, {role:'ADMIN'|'INVESTOR',verificationToken?:string,token?:string}>(apiRoutes.auth.login(), payload);
       console.log('response is',response)
+      if(response.token) setAuthToken(response.token)
       if(response.verificationToken){
         alert('email is not verified')
          router.push(`/auth/verify-email/${response.verificationToken}`);

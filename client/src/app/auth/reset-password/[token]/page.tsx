@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { post } from '@/utils/apiClient';
+import { post,setAuthToken } from '@/utils/apiClient';
 import { apiRoutes } from '@/constants/apiRoutes';
 import { UserCircleIcon,  LockClosedIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
 
@@ -36,6 +36,7 @@ type VerificationResponse = {
 
 interface RoleResponse {
   role: 'ADMIN' | 'INVESTOR';
+  token:string
 }
 
 type AuthResponse = VerificationResponse | RoleResponse;
@@ -69,10 +70,12 @@ try {
     payload
   );
 
+
   if (isVerificationResponse(response)) {
     alert('Email is not verified');
     router.push(`/auth/verify-email/${response.verificationToken}`);
   } else if (isRoleResponse(response)) {
+     setAuthToken(response.token);
     if (response.role === 'ADMIN') {
       router.push('/admin/dashboard');
     } else if (response.role === 'INVESTOR') {

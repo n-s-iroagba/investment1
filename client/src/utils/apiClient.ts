@@ -11,6 +11,33 @@ export const baseURL: string = (() => {
   }
 })()
 
+// Token management
+let authToken: string | null = null;
+
+export const setAuthToken = (token: string | null) => {
+  authToken = token;
+  if (typeof window !== 'undefined') {
+    if (token) {
+      sessionStorage.setItem('authToken', token);
+    } else {
+      sessionStorage.removeItem('authToken');
+    }
+  }
+};
+
+export const getAuthToken = (): string | null => {
+  if (authToken) return authToken;
+  
+  if (typeof window !== 'undefined') {
+    authToken = sessionStorage.getItem('authToken');
+  }
+  return authToken;
+};
+
+export const clearAuthToken = () => {
+  setAuthToken(null);
+};
+
 // Create Axios instance
 const apiClient: AxiosInstance = axios.create({
   baseURL,
@@ -18,8 +45,38 @@ const apiClient: AxiosInstance = axios.create({
     "Content-Type": "application/json",
     Accept: "application/json",
   },
-  withCredentials: true, // ✅ This goes here
+  withCredentials: true, // Keep for cookie fallback
 });
+
+// Add request interceptor to include Authorization header
+apiClient.interceptors.request.use(
+  (config) => {
+    const token = getAuthToken();
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// Add response interceptor to handle authentication errors
+apiClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      // Token expired or invalid, clear it
+      clearAuthToken();
+      // Optionally redirect to login
+      if (typeof window !== 'undefined') {
+        window.location.href = '/login';
+      }
+    }
+    return Promise.reject(error);
+  }
+);
 
 // Generic response wrapper
 type ApiResponse<T> = Promise<T>
