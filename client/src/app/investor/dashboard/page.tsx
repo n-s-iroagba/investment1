@@ -106,7 +106,7 @@ useEffect(() => {
 
       // Call refetch, then check again
       refetch().then(() => {
-        // After refetch, if still not admin and not loading, redirect
+          window.location.reload()
         if (!authLoading ) {
           router.push("/login")
         }

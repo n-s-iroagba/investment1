@@ -6,7 +6,7 @@ import { apiRoutes } from "@/constants/apiRoutes"
 import { useGetList } from "@/hooks/useFetch"
 import { useAuth } from "@/hooks/useAuth"
 import type { AdminWallet } from "@/types/adminWallet"
-import {  type ReactNode } from "react"
+import {  useEffect, useRef, type ReactNode } from "react"
 import { Spinner } from "@/components/Spinner"
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline"
 import type { Manager } from "@/types/manager"
@@ -14,10 +14,11 @@ import type { SocialMedia } from "@/types/socialMedia"
 import { Payment } from "@/types/Payment"
 import { Kyc } from "@/types/Kyc"
 import AdminOffCanvas from "@/components/AdminOffCanvas"
+import { useRouter } from "next/navigation"
 
 
 const AdminDashboard = () => {
-  const { loading: authLoading, isAdmin, displayName } = useAuth()
+  const { loading: authLoading, isAdmin, displayName,refetch } = useAuth()
   console.log(displayName, isAdmin)
 
 
@@ -36,11 +37,31 @@ const AdminDashboard = () => {
   } = useGetList<SocialMedia>(apiRoutes.socialMedia.list())
 
 
-  // useEffect(() => {
-  //   if (!authLoading && !isAdmin) {
-  //   return nu
-  //   }
-  // }, [authLoading, isAdmin, refetch])
+
+
+const router = useRouter()
+const hasRefetched = useRef(false)
+
+useEffect(() => {
+  // Wait until auth finishes loading
+  if (!authLoading && !isAdmin && !hasRefetched.current) {
+    const timeout = setTimeout(() => {
+      // Mark that we've refetched once
+      hasRefetched.current = true
+
+      // Call refetch, then check again
+      refetch().then(() => {
+           window.location.reload()
+        if (!authLoading && !isAdmin) {
+          router.push("/login")
+        }
+      })
+    }, 100)
+
+    return () => clearTimeout(timeout)
+  }
+}, [authLoading, isAdmin, refetch, router])
+
 
   const todos: ReactNode[] = []
 
