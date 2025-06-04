@@ -52,7 +52,7 @@ function getDaysSinceOldestPayment(portfolio: ManagedPortfolio | null): number {
 }
 
 const InvestorDashboard = () => {
-  const { loading: authLoading, displayName, roleId, refetch } = useAuth()
+  const { loading: authLoading, displayName, roleId } = useAuth()
   const router = useRouter()
 
   const shouldFetchPortfolio = !authLoading && roleId && roleId !== 0 && roleId !== null && roleId !== undefined
@@ -100,19 +100,20 @@ const hasRefetched = useRef(0)
 useEffect(() => {
   // Wait until auth finishes loading
   if (!authLoading  && hasRefetched.current ==0) {
-    const timeout = setTimeout(() => {
+
       // Mark that we've refetched once
       hasRefetched.current +=1
 
        window.location.reload()
-       if(hasRefetched.current ==2){
-        router.push('/login')
-       }
-    }, 100)
+      if(hasRefetched.current ==2){
+         router.push('/login')
+      }
 
-    return () => clearTimeout(timeout)
+ 
+
+
   }
-}, [authLoading, refetch, router])
+}, [authLoading,  router])
 
   useEffect(() => {
     if (portfolio && isMounted) {
