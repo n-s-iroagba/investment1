@@ -37,7 +37,7 @@ export default function SocialMediaLinks() {
 
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-semibold text-green-900 flex items-center gap-2">
+      <h3 className="text-lg font-semibold text-blue-900 flex items-center gap-2">
         <ShareIcon className="w-6 h-6" />
         Send Us A Message To Proceed With Your Payment
       </h3>
@@ -49,11 +49,11 @@ export default function SocialMediaLinks() {
             href={link.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 p-3 bg-white border-2 border-green-100 rounded-lg hover:border-green-200 hover:bg-green-50 transition-all group"
+            className="flex items-center gap-3 p-3 bg-white border-2 border-blue-100 rounded-lg hover:border-blue-200 hover:bg-blue-50 transition-all group"
           >
             <div className="w-8 h-8 relative">
               <Image
-                src={link.logo || "/placeholder.svg"}
+                src={link.logo}
                 alt={`${link.name} logo`}
                 width={32}
                 height={32}
@@ -62,11 +62,11 @@ export default function SocialMediaLinks() {
             </div>
 
             <div className="flex-1">
-              <p className="font-medium text-green-900">{link.name}</p>
-              <p className="text-sm text-green-700 truncate">{link.link}</p>
+              <p className="font-medium text-blue-900">{link.name}</p>
+              <p className="text-sm text-blue-700 truncate">{link.link}</p>
             </div>
 
-            <ArrowTopRightOnSquareIcon className="w-4 h-4 text-green-600 group-hover:text-green-800 transition-colors" />
+            <ArrowTopRightOnSquareIcon className="w-4 h-4 text-blue-600 group-hover:text-blue-800 transition-colors" />
           </a>
         ))}
       </div>

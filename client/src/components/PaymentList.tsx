@@ -18,7 +18,7 @@ export default function PaymentList({ payments,  isAdmin }: PaymentListProps) {
   const getStatusIcon = (status: Payment["isVerified"]) => {
     switch (status) {
       case true:
-        return <CheckCircleIcon className="w-5 h-5 text-green-600" />
+        return <CheckCircleIcon className="w-5 h-5 text-blue-600" />
       case false:
         return <XCircleIcon className="w-5 h-5 text-red-600" />
       default:
@@ -29,7 +29,7 @@ export default function PaymentList({ payments,  isAdmin }: PaymentListProps) {
   const getStatusColor = (status: Payment["isVerified"]) => {
     switch (status) {
       case true:
-        return "bg-green-100 text-green-800 border-green-200"
+        return "bg-blue-100 text-blue-800 border-blue-200"
       case false:
         return "bg-red-100 text-red-800 border-red-200"
       default:
@@ -57,7 +57,7 @@ export default function PaymentList({ payments,  isAdmin }: PaymentListProps) {
   }
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-semibold text-green-900 flex items-center gap-2">
+      <h3 className="text-lg font-semibold text-blue-900 flex items-center gap-2">
         <CurrencyDollarIcon className="w-6 h-6" />
         Payment History
       </h3>
@@ -66,16 +66,16 @@ export default function PaymentList({ payments,  isAdmin }: PaymentListProps) {
         {payments.map((payment) => (
           <div
             key={payment.id}
-            className="bg-white p-4 rounded-lg border-2 border-green-100 hover:border-green-200 transition-colors"
+            className="bg-white p-4 rounded-lg border-2 border-blue-100 hover:border-blue-200 transition-colors"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 {getStatusIcon(payment.isVerified)}
                 <div>
-                  <p className="font-semibold text-green-900">
+                  <p className="font-semibold text-blue-900">
                     Amount {payment.amount.toLocaleString()}
                   </p>
-                  <p className="text-sm text-green-700">{new Date(payment.paymentDate).toLocaleDateString()}</p>
+                  <p className="text-sm text-blue-700">{new Date(payment.paymentDate).toLocaleDateString()}</p>
                 </div>
               </div>
 

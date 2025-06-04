@@ -23,12 +23,12 @@ import { Spinner } from "@/components/Spinner"
 import { useGetSingle } from "@/hooks/useFetch"
 import { apiRoutes } from "@/constants/apiRoutes"
 
-// Dynamically import Chart component to avoid SSR issues
+// Dynamically import Chart component
 const Chart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
   loading: () => (
     <div className="flex items-center justify-center h-60">
-      <Spinner className="w-6 h-6 text-green-600" />
+      <Spinner className="w-6 h-6 text-blue-600" />
     </div>
   )
 })
@@ -48,11 +48,11 @@ function getDaysSinceOldestPayment(portfolio: ManagedPortfolio | null): number {
   if (portfolio.manager.duration && daysDiff > portfolio.manager.duration) {
     return portfolio.manager.duration
   }
-  return daysDiff >= 0 ? daysDiff : 1
+  return daysDiff >= 0 ? daysDiff : 2
 }
 
 const InvestorDashboard = () => {
-  const { loading: authLoading, displayName, roleId,refetch } = useAuth()
+  const { loading: authLoading, displayName, roleId, refetch } = useAuth()
   const router = useRouter()
 
   const shouldFetchPortfolio = !authLoading && roleId && roleId !== 0 && roleId !== null && roleId !== undefined
@@ -66,12 +66,10 @@ const InvestorDashboard = () => {
   const [isChartReady, setIsChartReady] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
 
-  // Ensure component is mounted before accessing browser APIs
   useEffect(() => {
     setIsMounted(true)
   }, [])
 
-  // Copy to clipboard function with proper browser detection
   const copyToClipboard = async (text: string) => {
     if (!isMounted || typeof window === 'undefined') return
 
@@ -79,7 +77,6 @@ const InvestorDashboard = () => {
       if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(text)
       } else {
-        // Fallback for older browsers or non-secure contexts
         const textArea = document.createElement('textarea')
         textArea.value = text
         textArea.style.position = 'fixed'
@@ -98,14 +95,12 @@ const InvestorDashboard = () => {
     }
   }
 
-  // Redirect logic
   useEffect(() => {
     if ((!displayName || !roleId)) {
        refetch()
     }
   }, [displayName, refetch, roleId])
 
-  // Chart ready state
   useEffect(() => {
     if (portfolio && isMounted) {
       const timer = setTimeout(() => setIsChartReady(true), 100)
@@ -113,36 +108,33 @@ const InvestorDashboard = () => {
     }
   }, [portfolio, isMounted])
 
-  // Loading state with fixed layout
   if (authLoading || (shouldFetchPortfolio && loading)) {
     return (
       <InvestorOffCanvas>
         <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-          <div className="text-center bg-white p-8 rounded-2xl shadow-sm border border-green-100 max-w-sm w-full">
-            <Spinner className="w-8 h-8 text-green-600 mx-auto mb-4" />
-            <p className="text-green-700 font-medium">Loading your portfolio...</p>
-            <p className="text-green-600 text-sm mt-2">Please wait a moment</p>
+          <div className="text-center bg-white p-8 rounded-2xl shadow-sm border border-blue-100 w-full max-w-md">
+            <Spinner className="w-8 h-8 text-blue-600 mx-auto mb-4" />
+            <p className="text-blue-700 font-medium">Loading your portfolio...</p>
           </div>
         </div>
       </InvestorOffCanvas>
     )
   }
 
-  // Error state with fixed layout
   if (error) {
     return (
       <InvestorOffCanvas>
         <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-          <div className="text-center max-w-sm w-full">
+          <div className="text-center w-full max-w-md">
             <div className="bg-red-50 p-8 rounded-2xl border border-red-100 shadow-sm">
               <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-red-600 text-xl">!</span>
               </div>
               <h3 className="text-red-900 font-medium text-lg mb-2">Something went wrong</h3>
-              <p className="text-sm text-red-600 mb-6 leading-relaxed">{error || 'Please try again later'}</p>
+              <p className="text-sm text-red-600 mb-6">{error || 'Please try again later'}</p>
               <button
                 onClick={() => isMounted && window.location.reload()}
-                className="w-full px-6 py-3 bg-red-600 text-white rounded-xl text-sm font-medium hover:bg-red-700 active:bg-red-800 transition-colors touch-manipulation"
+                className="w-full px-6 py-3 bg-red-600 text-white rounded-xl text-sm font-medium hover:bg-red-700"
               >
                 Try Again
               </button>
@@ -153,40 +145,34 @@ const InvestorDashboard = () => {
     )
   }
 
-  // No portfolio state
   if (!portfolio || !portfolio.manager) {
     return (
       <InvestorOffCanvas>
         <div className="min-h-screen bg-gray-50 flex flex-col">
-          <div className="flex-1 max-w-sm mx-auto px-4 py-8 flex flex-col">
-            {/* Fixed header */}
-            <header className="text-center mb-8 flex-shrink-0">
-              <h1 className="text-2xl font-bold text-green-900 leading-tight mb-2">
+          <div className="flex-1 max-w-md mx-auto px-4 py-8 flex flex-col">
+            <header className="text-center mb-8">
+              <h1 className="text-2xl font-bold text-blue-900 mb-2">
                 Welcome back,
               </h1>
-              <p className="text-xl text-green-700 font-semibold mb-4">
+              <p className="text-xl text-blue-700 font-semibold mb-4">
                 {displayName || 'User'} 🌱
-              </p>
-              <p className="text-sm text-green-600">
-                Start growing your wealth today
               </p>
             </header>
 
-            {/* Centered content */}
             <div className="flex-1 flex items-center justify-center">
-              <div className="bg-white p-8 rounded-2xl shadow-sm border border-green-100 text-center w-full">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <SparklesIcon className="w-8 h-8 text-green-600" />
+              <div className="bg-white p-8 rounded-2xl shadow-sm border border-blue-100 text-center w-full">
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <SparklesIcon className="w-8 h-8 text-blue-600" />
                 </div>
-                <h3 className="text-xl font-semibold text-green-900 mb-3">No active portfolio</h3>
-                <p className="text-sm text-green-600 mb-8 leading-relaxed px-4">
-                  Plant your first investment seed and watch it grow into a thriving portfolio
+                <h3 className="text-xl font-semibold text-blue-900 mb-3">No active portfolio</h3>
+                <p className="text-sm text-blue-600 mb-8">
+                  Plant your first investment seed and watch it grow
                 </p>
                 <button
-                  className="w-full inline-flex items-center justify-center px-6 py-4 text-base font-medium rounded-xl text-white bg-green-700 hover:bg-green-800 active:bg-green-900 transition-all duration-200 shadow-lg touch-manipulation"
+                  className="w-full flex items-center justify-center px-6 py-4 text-base font-medium rounded-xl text-white bg-blue-700 hover:bg-blue-800"
                   onClick={() => router.push('/investor/manager-list')}
                 >
-                  <CurrencyDollarIcon className="w-5 h-5 mr-2 flex-shrink-0" />
+                  <CurrencyDollarIcon className="w-5 h-5 mr-2" />
                   Create New Portfolio
                 </button>
               </div>
@@ -201,19 +187,14 @@ const InvestorDashboard = () => {
   const safePercentageYield = portfolio.manager?.percentageYield ?? 1
   const safeAmountDeposited = portfolio.amountDeposited ?? 0
 
-  // Mobile-optimized chart options with fixed dimensions
+  // Responsive chart options
   const chartOptions = {
     chart: {
-      height: 240,
+      height: '100%',
       toolbar: { show: false },
       foreColor: "#1a4d2b",
-      fontFamily: 'system-ui, -apple-system, sans-serif',
-      background: 'transparent',
-      animations: {
-        enabled: true,
-        easing: 'easeinout',
-        speed: 800,
-      }
+      fontFamily: 'system-ui, sans-serif',
+      animations: { enabled: true }
     },
     colors: ["#16a34a"],
     fill: {
@@ -221,33 +202,21 @@ const InvestorDashboard = () => {
       gradient: {
         shade: 'light',
         type: 'vertical',
-        shadeIntensity: 0.25,
         gradientToColors: ['#22c55e'],
-        inverseColors: false,
-        opacityFrom: 0.5,
-        opacityTo: 0.1,
         stops: [0, 100]
       },
     },
     dataLabels: { enabled: false },
-    stroke: {
-      curve: 'smooth' as const,
-      width: 3,
-    },
+    stroke: { curve: 'smooth' as const, width: 3 },
     xaxis: {
       categories: Array.from({ length: Math.min(days, 15) }, (_, i) => `D${i + 1}`),
-      labels: {
-        style: { colors: "#64748b", fontSize: '10px', fontWeight: 500 },
-        rotate: 0,
-        hideOverlappingLabels: true,
-      },
+      labels: { style: { colors: "#64748b", fontSize: '10px' } },
       axisBorder: { show: false },
-      axisTicks: { show: false },
-      tooltip: { enabled: false }
+      axisTicks: { show: false }
     },
     yaxis: {
       labels: {
-        style: { colors: "#64748b", fontSize: '10px', fontWeight: 500 },
+        style: { colors: "#64748b", fontSize: '10px' },
         formatter: (value: number) => `$${Math.round(value)}`,
       },
       min: safeAmountDeposited * 0.98,
@@ -255,21 +224,16 @@ const InvestorDashboard = () => {
     grid: {
       borderColor: "#e2e8f0",
       strokeDashArray: 2,
-      xaxis: { lines: { show: false } },
       yaxis: { lines: { show: true } },
-      padding: { left: 20, right: 15, top: 10, bottom: 10 }
+      padding: { left: 20, right: 15 }
     },
     tooltip: {
       theme: 'light',
-      style: { fontSize: '12px' },
       y: { formatter: (value: number) => `$${value.toFixed(2)}` }
     },
     responsive: [{
-      breakpoint: 480,
-      options: {
-        chart: { height: 220 },
-        grid: { padding: { left: 15, right: 10 } }
-      }
+      breakpoint: 768,
+      options: { chart: { height: 300 } }
     }]
   }
 
@@ -278,8 +242,7 @@ const InvestorDashboard = () => {
       name: "Portfolio Value",
       data: Array.from(
         { length: Math.min(days, 15) },
-        (_, i) => Number((safeAmountDeposited * (1 + (safePercentageYield / 100 / 365) * i)).toFixed(2)),
-      ),
+        (_, i) => Number((safeAmountDeposited * (1 + (safePercentageYield / 100 / 365) * i)).toFixed(2))),
     },
   ]
 
@@ -287,29 +250,27 @@ const InvestorDashboard = () => {
     <>
       <InvestorOffCanvas>
         <div className="min-h-screen bg-gray-50">
-          <div className="max-w-md mx-auto px-4 py-6">
-
-            {/* Fixed Header */}
-            <header className="text-center mb-6 bg-white p-6 rounded-2xl shadow-sm border border-green-100">
-              <h1 className="text-xl font-bold text-green-900 leading-tight mb-1">
+          {/* Responsive container */}
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            
+            {/* Header with responsive sizing */}
+            <header className="text-center mb-6 bg-white p-6 rounded-2xl shadow-sm border border-blue-100">
+              <h1 className="text-xl md:text-2xl font-bold text-blue-900 mb-1">
                 Welcome back,
               </h1>
-              <p className="text-lg text-green-700 font-semibold mb-2">
+              <p className="text-lg md:text-xl text-blue-700 font-semibold">
                 {displayName || 'User'} 🌱
-              </p>
-              <p className="text-sm text-green-600">
-                Your green investment journey
               </p>
             </header>
 
-            {/* Metrics Grid - Fixed heights */}
-            <div className="grid grid-cols-2 gap-3 mb-6">
+            {/* Grid with responsive columns */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
               {[
                 {
                   icon: WalletIcon,
                   title: "Total Value",
                   value: `$${((portfolio.earnings ?? 0) + (portfolio.amountDeposited ?? 0)).toLocaleString()}`,
-                  color: "bg-green-100 text-green-700",
+                  color: "bg-blue-100 text-blue-700",
                 },
                 {
                   icon: ArrowTrendingUpIcon,
@@ -332,83 +293,83 @@ const InvestorDashboard = () => {
               ].map((metric, index) => (
                 <div
                   key={index}
-                  className="bg-white p-4 rounded-xl shadow-sm border border-green-100 h-24 flex flex-col justify-between"
+                  className="bg-white p-4 rounded-xl shadow-sm border border-blue-100 h-24 flex flex-col justify-between"
                 >
                   <div className="flex items-center gap-2">
-                    <div className={`p-1.5 rounded-lg ${metric.color} flex-shrink-0`}>
+                    <div className={`p-1.5 rounded-lg ${metric.color}`}>
                       <metric.icon className="w-4 h-4" />
                     </div>
-                    <p className="text-xs text-gray-600 font-medium truncate flex-1">
+                    <p className="text-xs text-gray-600 font-medium truncate">
                       {metric.title}
                     </p>
                   </div>
-                  <p className="text-sm font-bold text-gray-900 truncate mt-1">
+                  <p className="text-sm font-bold text-gray-900 truncate">
                     {metric.value}
                   </p>
                 </div>
               ))}
             </div>
 
-            {/* Chart Container - Fixed dimensions */}
+            {/* Responsive chart container */}
             {days > 0 && (
-              <div className="bg-white p-4 rounded-xl shadow-sm border border-green-100 mb-6">
-                <h3 className="text-base font-semibold text-green-900 mb-4 flex items-center gap-2">
-                  <ArrowTrendingUpIcon className="w-4 h-4 text-green-600 flex-shrink-0" />
+              <div className="bg-white p-4 rounded-xl shadow-sm border border-blue-100 mb-6">
+                <h3 className="text-base font-semibold text-blue-900 mb-4 flex items-center gap-2">
+                  <ArrowTrendingUpIcon className="w-4 h-4 text-blue-600" />
                   Portfolio Growth
                 </h3>
-                <div className="w-full h-60 flex items-center justify-center">
+                <div className="w-full h-60 sm:h-80">
                   {isChartReady && isMounted ? (
                     <Chart
                       options={chartOptions}
                       series={chartSeries}
                       type="area"
-                      height={240}
+                      height="100%"
                       width="100%"
                     />
                   ) : (
                     <div className="flex items-center justify-center h-full">
-                      <Spinner className="w-6 h-6 text-green-600" />
+                      <Spinner className="w-6 h-6 text-blue-600" />
                     </div>
                   )}
                 </div>
               </div>
             )}
 
-            {/* Payment Section */}
+            {/* Payment Section - Responsive layout */}
             <div className="space-y-4 pb-6">
-              {!portfolio.amountDeposited ? (
+              {portfolio.amountDeposited !== portfolio.amount? (
                 <div className="space-y-4">
                   {!portfolio.cryptoWallet ? (
-                    <div className="bg-white p-6 rounded-xl shadow-sm border border-green-100 text-center">
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-blue-100">
                       <SocialMediaLinks />
                     </div>
                   ) : (
-                    <div className="bg-green-50 p-4 rounded-xl border border-green-200">
-                      <h3 className="font-semibold text-green-900 flex items-center gap-2 text-sm mb-4">
-                        <CurrencyDollarIcon className="w-4 h-4 text-green-600 flex-shrink-0" />
+                    <div className="bg-blue-50 p-4 rounded-xl border border-blue-200">
+                      <h3 className="font-semibold text-blue-900 flex items-center gap-2 text-sm mb-4">
+                        <CurrencyDollarIcon className="w-4 h-4 text-blue-600" />
                         Crypto Payment Instructions
                       </h3>
-                      <div className="space-y-3 text-sm">
-                        <div className="bg-white p-3 rounded-lg border border-green-100">
-                          <span className="font-medium text-green-800">Currency:</span>
-                          <span className="ml-2 text-green-700 font-semibold">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                        <div className="bg-white p-3 rounded-lg border border-blue-100">
+                          <span className="font-medium text-blue-800">Currency:</span>
+                          <span className="ml-2 text-blue-700 font-semibold">
                             {portfolio.cryptoWallet?.currency ?? 'N/A'}
                           </span>
                         </div>
-                        <div className="bg-white p-3 rounded-lg border border-green-100">
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="font-medium text-green-800">Wallet Address:</span>
+                        <div className="bg-white p-3 rounded-lg border border-blue-100">
+                          <div className="flex justify-between items-center mb-2">
+                            <span className="font-medium text-blue-800">Wallet Address:</span>
                             <button
                               onClick={() => copyToClipboard(portfolio.cryptoWallet?.address ?? '')}
-                              className="flex items-center gap-1 px-3 py-1.5 bg-green-100 hover:bg-green-200 active:bg-green-300 rounded-lg transition-colors touch-manipulation"
+                              className="flex items-center gap-1 px-3 py-1.5 bg-blue-100 hover:bg-blue-200 rounded-lg"
                             >
-                              <ClipboardDocumentIcon className="w-3 h-3 text-green-600" />
-                              <span className="text-xs text-green-700 font-medium">
+                              <ClipboardDocumentIcon className="w-3 h-3 text-blue-600" />
+                              <span className="text-xs text-blue-700 font-medium">
                                 {copiedAddress ? 'Copied!' : 'Copy'}
                               </span>
                             </button>
                           </div>
-                          <div className="font-mono text-xs break-all text-green-600 bg-green-25 p-3 rounded border leading-relaxed">
+                          <div className="font-mono text-xs break-all text-blue-600 bg-blue-25 p-3 rounded border">
                             {portfolio.cryptoWallet?.address ?? 'Address not available'}
                           </div>
                         </div>
@@ -417,18 +378,18 @@ const InvestorDashboard = () => {
                   )}
                   <button
                     onClick={() => setShowPaymentProofModal(true)}
-                    className="w-full bg-green-700 text-white px-6 py-4 rounded-xl hover:bg-green-800 active:bg-green-900 transition-all duration-200 flex items-center justify-center gap-2 shadow-lg font-medium touch-manipulation"
+                    className="w-75 bg-blue-700 text-white px-6 py-4 rounded-xl hover:bg-blue-800 flex items-center justify-center gap-2 font-medium"
                   >
-                    <ArrowUpOnSquareIcon className="w-5 h-5 flex-shrink-0" />
+                    <ArrowUpOnSquareIcon className="w-5 h-5" />
                     Upload Payment Proof
                   </button>
                 </div>
               ) : (
                 <button
                   onClick={() => router.push(`/investor/payments/${roleId}`)}
-                  className="flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold rounded-xl hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl group"
+                  className="w-75 flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-emerald-600 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-emerald-700"
                 >
-                  <div className="p-2 bg-white/20 rounded-full group-hover:bg-white/30 transition-all">
+                  <div className="p-2 bg-white/20 rounded-full">
                     <CurrencyDollarIcon className="w-6 h-6 text-white" />
                   </div>
                   <span className="text-lg">View My Payments</span>

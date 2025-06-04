@@ -77,7 +77,7 @@ export default function InvestorReferrals() {
         <div className="min-h-screen bg-white p-4 md:p-8">
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center justify-center min-h-[400px]">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
             </div>
           </div>
         </div>
@@ -114,55 +114,55 @@ export default function InvestorReferrals() {
         <div className="max-w-4xl mx-auto space-y-6">
           {/* Header */}
           <header className="px-2">
-            <h1 className="text-2xl md:text-3xl font-bold text-green-900 flex items-center gap-3">
-              <UserGroupIcon className="w-8 h-8 text-green-600" />
+            <h1 className="text-2xl md:text-3xl font-bold text-blue-900 flex items-center gap-3">
+              <UserGroupIcon className="w-8 h-8 text-blue-600" />
               My Referrals
             </h1>
-            <p className="text-sm md:text-base text-green-600 mt-1">Track your referral earnings and status</p>
+            <p className="text-sm md:text-base text-blue-600 mt-1">Track your referral earnings and status</p>
           </header>
 
           {/* Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-white p-6 rounded-2xl shadow-sm border-2 border-green-50 hover:border-green-100 transition-all">
+            <div className="bg-white p-6 rounded-2xl shadow-sm border-2 border-blue-50 hover:border-blue-100 transition-all">
               <div className="flex items-center gap-4">
-                <div className="p-3 rounded-xl bg-green-100 text-green-700">
+                <div className="p-3 rounded-xl bg-blue-100 text-blue-700">
                   <UserGroupIcon className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="text-sm text-green-600">Total Referrals</p>
-                  <p className="text-2xl font-semibold text-green-900">{referrals.length}</p>
+                  <p className="text-sm text-blue-600">Total Referrals</p>
+                  <p className="text-2xl font-semibold text-blue-900">{referrals.length}</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl shadow-sm border-2 border-green-50 hover:border-green-100 transition-all">
+            <div className="bg-white p-6 rounded-2xl shadow-sm border-2 border-blue-50 hover:border-blue-100 transition-all">
               <div className="flex items-center gap-4">
                 <div className="p-3 rounded-xl bg-emerald-100 text-emerald-700">
                   <CheckCircleIcon className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="text-sm text-green-600">Total Earned</p>
-                  <p className="text-2xl font-semibold text-green-900">{formatCurrency(getTotalEarnings())}</p>
+                  <p className="text-sm text-blue-600">Total Earned</p>
+                  <p className="text-2xl font-semibold text-blue-900">{formatCurrency(getTotalEarnings())}</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl shadow-sm border-2 border-green-50 hover:border-green-100 transition-all">
+            <div className="bg-white p-6 rounded-2xl shadow-sm border-2 border-blue-50 hover:border-blue-100 transition-all">
               <div className="flex items-center gap-4">
                 <div className="p-3 rounded-xl bg-yellow-100 text-yellow-700">
                   <ClockIcon className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="text-sm text-green-600">Pending</p>
-                  <p className="text-2xl font-semibold text-green-900">{formatCurrency(getPendingEarnings())}</p>
+                  <p className="text-sm text-blue-600">Pending</p>
+                  <p className="text-2xl font-semibold text-blue-900">{formatCurrency(getPendingEarnings())}</p>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Tabs */}
-          <div className="bg-white rounded-2xl shadow-sm border-2 border-green-50">
-            <div className="border-b border-green-100">
+          <div className="bg-white rounded-2xl shadow-sm border-2 border-blue-50">
+            <div className="border-b border-blue-100">
               <nav className="flex space-x-8 px-6">
                 {[
                   { key: "all", label: "All Referrals", count: referrals.length },
@@ -174,7 +174,7 @@ export default function InvestorReferrals() {
                     onClick={() => setActiveTab(tab.key as typeof activeTab)}
                     className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                       activeTab === tab.key
-                        ? "border-green-600 text-green-600"
+                        ? "border-blue-600 text-blue-600"
                         : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
                     }`}
                   >
@@ -218,7 +218,7 @@ export default function InvestorReferrals() {
                         <div className="flex items-center space-x-4">
                           <div
                             className={`p-2 rounded-lg ${
-                              referral.settled ? "bg-green-100 text-green-600" : "bg-yellow-100 text-yellow-600"
+                              referral.settled ? "bg-blue-100 text-blue-600" : "bg-yellow-100 text-yellow-600"
                             }`}
                           >
                             {referral.settled ? (
@@ -237,12 +237,12 @@ export default function InvestorReferrals() {
                         </div>
                         <div className="text-right">
                           <div className="flex items-center gap-1 text-lg font-semibold text-gray-900">
-                            <CurrencyDollarIcon className="w-5 h-5 text-green-600" />
+                            <CurrencyDollarIcon className="w-5 h-5 text-blue-600" />
                             {formatCurrency(referral.amount)}
                           </div>
                           <span
                             className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                              referral.settled ? "bg-green-100 text-green-800" : "bg-yellow-100 text-yellow-800"
+                              referral.settled ? "bg-blue-100 text-blue-800" : "bg-yellow-100 text-yellow-800"
                             }`}
                           >
                             {referral.settled ? "Settled" : "Pending"}

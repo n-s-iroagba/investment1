@@ -99,19 +99,19 @@ export default function SocialMediaForm({ existingSocialMedia,onClose }: SocialM
   }
 
   return (
-    <div className="bg-white p-6 rounded-2xl shadow-sm border-2 border-green-50 relative overflow-hidden">
+    <div className="bg-white p-6 rounded-2xl shadow-sm border-2 border-blue-50 relative overflow-hidden">
       {/* Decorative Corner Borders */}
-      <div className="absolute top-2 right-2 w-8 h-8 border-t-2 border-r-2 border-green-800 opacity-20" />
-      <div className="absolute bottom-2 left-2 w-8 h-8 border-b-2 border-l-2 border-green-800 opacity-20" />
+      <div className="absolute top-2 right-2 w-8 h-8 border-t-2 border-r-2 border-blue-800 opacity-20" />
+      <div className="absolute bottom-2 left-2 w-8 h-8 border-b-2 border-l-2 border-blue-800 opacity-20" />
 
-      <h2 className="text-xl font-semibold text-green-900 mb-6 flex items-center gap-2">
-        <HashtagIcon className="w-6 h-6 text-green-700" />
+      <h2 className="text-xl font-semibold text-blue-900 mb-6 flex items-center gap-2">
+        <HashtagIcon className="w-6 h-6 text-blue-700" />
         {existingSocialMedia ? "Edit Social Link" : "Add New Social Link"}
       </h2>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label className="block text-sm font-medium text-green-700 mb-2 flex items-center gap-1">
+          <label className="block text-sm font-medium text-blue-700 mb-2 flex items-center gap-1">
             <HashtagIcon className="w-4 h-4" />
             Platform Name
           </label>
@@ -120,15 +120,15 @@ export default function SocialMediaForm({ existingSocialMedia,onClose }: SocialM
             value={formData.name}
             onChange={handleInputChange}
             className={`mt-1 block w-full rounded-xl border-2 ${
-              errors.name ? "border-red-300" : "border-green-100"
-            } p-3 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all`}
+              errors.name ? "border-red-300" : "border-blue-100"
+            } p-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all`}
             placeholder="Facebook, Twitter, Instagram..."
           />
           {errors.name && <p className="text-red-600 text-sm mt-2 ml-1">{errors.name}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-green-700 mb-2 flex items-center gap-1">
+          <label className="block text-sm font-medium text-blue-700 mb-2 flex items-center gap-1">
             <LinkIcon className="w-4 h-4" />
             Profile URL
           </label>
@@ -137,15 +137,15 @@ export default function SocialMediaForm({ existingSocialMedia,onClose }: SocialM
             value={formData.link}
             onChange={handleInputChange}
             className={`mt-1 block w-full rounded-xl border-2 ${
-              errors.link ? "border-red-300" : "border-green-100"
-            } p-3 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all`}
+              errors.link ? "border-red-300" : "border-blue-100"
+            } p-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all`}
             placeholder="https://example.com/profile"
           />
           {errors.link && <p className="text-red-600 text-sm mt-2 ml-1">{errors.link}</p>}
         </div>
 
         <div className="flex-1">
-          <label className="block text-sm font-medium text-green-700 mb-2 flex items-center gap-1">
+          <label className="block text-sm font-medium text-blue-700 mb-2 flex items-center gap-1">
             <PhotoIcon className="w-4 h-4" />
             Logo
           </label>
@@ -153,12 +153,12 @@ export default function SocialMediaForm({ existingSocialMedia,onClose }: SocialM
             type="file"
             accept="image/*"
             onChange={handleFileChange}
-            className={`block w-full text-sm text-green-700 file:mr-4 file:py-2 file:px-4
-                  file:rounded-lg file:border-2 file:border-green-200
+            className={`block w-full text-sm text-blue-700 file:mr-4 file:py-2 file:px-4
+                  file:rounded-lg file:border-2 file:border-blue-200
                   file:text-sm file:font-semibold
-                  file:bg-green-50 file:text-green-700
-                  hover:file:bg-green-100 transition-all
-                  ${errors.logo ? "border-red-300" : "border-green-100"}`}
+                  file:bg-blue-50 file:text-blue-700
+                  hover:file:bg-blue-100 transition-all
+                  ${errors.logo ? "border-red-300" : "border-blue-100"}`}
           />
           {errors.logo && <p className="text-red-600 text-sm mt-2 ml-1">{errors.logo}</p>}
         </div>
@@ -167,14 +167,14 @@ export default function SocialMediaForm({ existingSocialMedia,onClose }: SocialM
           <button
             type="button"
             onClick={handleCancel}
-            className="px-6 py-2 border-2 border-green-200 text-green-800 rounded-xl hover:bg-green-50 transition-all"
+            className="px-6 py-2 border-2 border-blue-200 text-blue-800 rounded-xl hover:bg-blue-50 transition-all"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={isSubmitting}
-            className="px-8 py-2 bg-green-700 text-white rounded-xl hover:bg-green-800 disabled:opacity-50 transition-all flex items-center gap-2"
+            className="px-8 py-2 bg-blue-700 text-white rounded-xl hover:bg-blue-800 disabled:opacity-50 transition-all flex items-center gap-2"
           >
             {isSubmitting ? (
               <>

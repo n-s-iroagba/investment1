@@ -79,7 +79,7 @@ const PopupToast: React.FC = () => {
   const getIcon = (type: string) => {
     switch (type) {
       case 'success':
-        return <TrendingUp className="w-5 h-5 text-green-400" />;
+        return <TrendingUp className="w-5 h-5 text-blue-400" />;
       case 'profit':
         return <DollarSign className="w-5 h-5 text-yellow-400" />;
       case 'opportunity':
@@ -87,14 +87,14 @@ const PopupToast: React.FC = () => {
       case 'achievement':
         return <TrendingUp className="w-5 h-5 text-purple-400" />;
       default:
-        return <DollarSign className="w-5 h-5 text-green-400" />;
+        return <DollarSign className="w-5 h-5 text-blue-400" />;
     }
   };
 
   const getGradient = (type: string) => {
     switch (type) {
       case 'success':
-        return 'from-green-500 to-emerald-600';
+        return 'from-blue-500 to-emerald-600';
       case 'profit':
         return 'from-yellow-500 to-orange-500';
       case 'opportunity':
@@ -102,7 +102,7 @@ const PopupToast: React.FC = () => {
       case 'achievement':
         return 'from-purple-500 to-pink-500';
       default:
-        return 'from-green-500 to-emerald-600';
+        return 'from-blue-500 to-emerald-600';
     }
   };
 
@@ -135,11 +135,11 @@ const PopupToast: React.FC = () => {
                   {getIcon(currentMessage.type)}
                 </div>
                 <div className="flex items-center space-x-1">
-                  <span className="text-lg font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
+                  <span className="text-lg font-bold bg-gradient-to-r from-blue-600 to-blue-600 bg-clip-text text-transparent">
                     $$$$$
                   </span>
                   <div className="flex space-x-1">
-                    <div className="w-1 h-1 bg-green-400 rounded-full animate-pulse"></div>
+                    <div className="w-1 h-1 bg-blue-400 rounded-full animate-pulse"></div>
                     <div className="w-1 h-1 bg-blue-400 rounded-full animate-pulse delay-75"></div>
                     <div className="w-1 h-1 bg-purple-400 rounded-full animate-pulse delay-150"></div>
                   </div>
@@ -180,7 +180,7 @@ const PopupToast: React.FC = () => {
             <div className="absolute inset-0 pointer-events-none overflow-hidden">
               <div className="absolute top-2 left-4 w-1 h-1 bg-yellow-400 rounded-full animate-bounce opacity-60"></div>
               <div className="absolute top-6 right-8 w-1 h-1 bg-blue-400 rounded-full animate-bounce opacity-40 delay-300"></div>
-              <div className="absolute bottom-4 left-8 w-1 h-1 bg-green-400 rounded-full animate-bounce opacity-50 delay-700"></div>
+              <div className="absolute bottom-4 left-8 w-1 h-1 bg-blue-400 rounded-full animate-bounce opacity-50 delay-700"></div>
             </div>
           </div>
         </div>

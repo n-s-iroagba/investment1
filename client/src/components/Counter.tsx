@@ -129,7 +129,7 @@ export const CounterVariant2: React.FC = () => {
       <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-2">
           {/* Client Count Column */}
-          <div className="py-12 px-8 text-center bg-gradient-to-br from-green-100 to-green-600 text-white">
+          <div className="py-12 px-8 text-center bg-gradient-to-br from-blue-100 to-blue-600 text-white">
             <div className="transform hover:scale-105 transition-transform duration-300">
               <h2 className="text-5xl md:text-6xl font-extrabold mb-3 tracking-tight">
                 {clientCount < 60000 
@@ -144,7 +144,7 @@ export const CounterVariant2: React.FC = () => {
           </div>
 
           {/* Asset Count Column */}
-          <div className="py-12 px-8 text-center bg-gradient-to-br from-green-7000 to-green-900 text-white">
+          <div className="py-12 px-8 text-center bg-gradient-to-br from-blue-7000 to-blue-900 text-white">
             <div className="transform hover:scale-105 transition-transform duration-300">
               <h2 className="text-5xl md:text-6xl font-extrabold mb-3 tracking-tight">
                 ${assetCount < 300000000 

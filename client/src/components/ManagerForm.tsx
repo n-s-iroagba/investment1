@@ -109,20 +109,20 @@ const ManagerForm: React.FC<ManagerFormProps> = ({ patch, existingManager }) => 
   }
 
   return (
-    <div className="bg-white p-6 rounded-2xl shadow-sm border-2 border-green-50 relative max-w-2xl mx-auto">
+    <div className="bg-white p-6 rounded-2xl shadow-sm border-2 border-blue-50 relative max-w-2xl mx-auto">
       {/* Decorative Corner Borders */}
-      <div className="absolute top-2 right-2 w-8 h-8 border-t-2 border-r-2 border-green-800 opacity-20" />
-      <div className="absolute bottom-2 left-2 w-8 h-8 border-b-2 border-l-2 border-green-800 opacity-20" />
+      <div className="absolute top-2 right-2 w-8 h-8 border-t-2 border-r-2 border-blue-800 opacity-20" />
+      <div className="absolute bottom-2 left-2 w-8 h-8 border-b-2 border-l-2 border-blue-800 opacity-20" />
 
-      <h2 className="text-2xl font-bold text-green-900 mb-6 flex items-center gap-2">
-        <IdentificationIcon className="w-6 h-6 text-green-700" />
+      <h2 className="text-2xl font-bold text-blue-900 mb-6 flex items-center gap-2">
+        <IdentificationIcon className="w-6 h-6 text-blue-700" />
         {patch ? "Edit Manager" : "Create New Manager"}
       </h2>
 
       <form className="space-y-4" onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-green-700 mb-2 flex items-center gap-1">
+            <label className="block text-sm font-medium text-blue-700 mb-2 flex items-center gap-1">
               <UserCircleIcon className="w-4 h-4" />
               First Name
             </label>
@@ -132,13 +132,13 @@ const ManagerForm: React.FC<ManagerFormProps> = ({ patch, existingManager }) => 
               value={managerData.firstName}
               onChange={handleChange}
               className={`w-full p-3 rounded-xl border-2 ${
-                validated && !managerData.firstName ? "border-red-300" : "border-green-100"
-              } focus:border-green-500 focus:ring-2 focus:ring-green-200`}
+                validated && !managerData.firstName ? "border-red-300" : "border-blue-100"
+              } focus:border-blue-500 focus:ring-2 focus:ring-blue-200`}
               required={!patch}
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-green-700 mb-2 flex items-center gap-1">
+            <label className="block text-sm font-medium text-blue-700 mb-2 flex items-center gap-1">
               <UserCircleIcon className="w-4 h-4" />
               Last Name
             </label>
@@ -148,15 +148,15 @@ const ManagerForm: React.FC<ManagerFormProps> = ({ patch, existingManager }) => 
               value={managerData.lastName}
               onChange={handleChange}
               className={`w-full p-3 rounded-xl border-2 ${
-                validated && !managerData.lastName ? "border-red-300" : "border-green-100"
-              } focus:border-green-500 focus:ring-2 focus:ring-green-200`}
+                validated && !managerData.lastName ? "border-red-300" : "border-blue-100"
+              } focus:border-blue-500 focus:ring-2 focus:ring-blue-200`}
               required={!patch}
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-green-700 mb-2 flex items-center gap-1">
+          <label className="block text-sm font-medium text-blue-700 mb-2 flex items-center gap-1">
             <AcademicCapIcon className="w-4 h-4" />
             Qualification
           </label>
@@ -166,15 +166,15 @@ const ManagerForm: React.FC<ManagerFormProps> = ({ patch, existingManager }) => 
             value={managerData.qualification}
             onChange={handleChange}
             className={`w-full p-3 rounded-xl border-2 ${
-              validated && !managerData.qualification ? "border-red-300" : "border-green-100"
-            } focus:border-green-500 focus:ring-2 focus:ring-green-200`}
+              validated && !managerData.qualification ? "border-red-300" : "border-blue-100"
+            } focus:border-blue-500 focus:ring-2 focus:ring-blue-200`}
             required={!patch}
           />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-green-700 mb-2 flex items-center gap-1">
+            <label className="block text-sm font-medium text-blue-700 mb-2 flex items-center gap-1">
               <ChartBarIcon className="w-4 h-4" />
               Percentage Yield
             </label>
@@ -184,13 +184,13 @@ const ManagerForm: React.FC<ManagerFormProps> = ({ patch, existingManager }) => 
               value={managerData.percentageYield}
               onChange={handleChange}
               className={`w-full p-3 rounded-xl border-2 ${
-                validated && !managerData.percentageYield ? "border-red-300" : "border-green-100"
-              } focus:border-green-500 focus:ring-2 focus:ring-green-200`}
+                validated && !managerData.percentageYield ? "border-red-300" : "border-blue-100"
+              } focus:border-blue-500 focus:ring-2 focus:ring-blue-200`}
            required
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-green-700 mb-2 flex items-center gap-1">
+            <label className="block text-sm font-medium text-blue-700 mb-2 flex items-center gap-1">
               <CalendarIcon className="w-4 h-4" />
               Duration (days)
             </label>
@@ -200,15 +200,15 @@ const ManagerForm: React.FC<ManagerFormProps> = ({ patch, existingManager }) => 
               value={managerData.duration}
               onChange={handleChange}
               className={`w-full p-3 rounded-xl border-2 ${
-                validated && !managerData.duration ? "border-red-300" : "border-green-100"
-              } focus:border-green-500 focus:ring-2 focus:ring-green-200`}
+                validated && !managerData.duration ? "border-red-300" : "border-blue-100"
+              } focus:border-blue-500 focus:ring-2 focus:ring-blue-200`}
               required
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-green-700 mb-2 flex items-center gap-1">
+          <label className="block text-sm font-medium text-blue-700 mb-2 flex items-center gap-1">
             <CurrencyDollarIcon className="w-4 h-4" />
             Minimum Investment
           </label>
@@ -218,14 +218,14 @@ const ManagerForm: React.FC<ManagerFormProps> = ({ patch, existingManager }) => 
             value={managerData.minimumInvestmentAmount}
             onChange={handleChange}
             className={`w-full p-3 rounded-xl border-2 ${
-              validated && !managerData.minimumInvestmentAmount ? "border-red-300" : "border-green-100"
-            } focus:border-green-500 focus:ring-2 focus:ring-green-200`}
+              validated && !managerData.minimumInvestmentAmount ? "border-red-300" : "border-blue-100"
+            } focus:border-blue-500 focus:ring-2 focus:ring-blue-200`}
      
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-green-700 mb-2 flex items-center gap-1">
+          <label className="block text-sm font-medium text-blue-700 mb-2 flex items-center gap-1">
             <PhotoIcon className="w-4 h-4" />
             Manager Picture
           </label>
@@ -234,10 +234,10 @@ const ManagerForm: React.FC<ManagerFormProps> = ({ patch, existingManager }) => 
               type="file"
               name="image"
               onChange={handleFileChange}
-              className={`block w-full text-sm text-green-700 file:mr-4 file:py-2 file:px-4
-                file:rounded-lg file:border-2 ${validated && !files ? "file:border-red-300" : "file:border-green-200"}
-                file:text-sm file:font-semibold file:bg-green-50 file:text-green-700
-                hover:file:bg-green-100 transition-all`}
+              className={`block w-full text-sm text-blue-700 file:mr-4 file:py-2 file:px-4
+                file:rounded-lg file:border-2 ${validated && !files ? "file:border-red-300" : "file:border-blue-200"}
+                file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700
+                hover:file:bg-blue-100 transition-all`}
               accept="image/*"
             />
           </div>
@@ -251,7 +251,7 @@ const ManagerForm: React.FC<ManagerFormProps> = ({ patch, existingManager }) => 
           <button
             type="submit"
             disabled={submitting}
-            className="px-8 py-3 bg-green-700 text-white rounded-xl hover:bg-green-800 disabled:opacity-50 transition-all flex-1 flex items-center justify-center gap-2"
+            className="px-8 py-3 bg-blue-700 text-white rounded-xl hover:bg-blue-800 disabled:opacity-50 transition-all flex-1 flex items-center justify-center gap-2"
           >
             {submitting ? (
               <>

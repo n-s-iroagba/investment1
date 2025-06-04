@@ -117,17 +117,17 @@ const TestimonialCarousel: React.FC<TestimonialProps> = ({ testimonials }) => {
     <div className="relative max-w-4xl mx-auto">
       {/* Main testimonial card */}
       <div 
-        className="bg-white rounded-3xl shadow-2xl border border-green-100 p-8 md:p-12 relative overflow-hidden"
+        className="bg-white rounded-3xl shadow-2xl border border-blue-100 p-8 md:p-12 relative overflow-hidden"
         onMouseEnter={() => setIsAutoPlaying(false)}
         onMouseLeave={() => setIsAutoPlaying(true)}
       >
         {/* Background decorative elements */}
-        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-100 to-emerald-100 rounded-full -translate-y-16 translate-x-16 opacity-50"></div>
+        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-100 to-emerald-100 rounded-full -translate-y-16 translate-x-16 opacity-50"></div>
         <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-emerald-100 to-teal-100 rounded-full translate-y-12 -translate-x-12 opacity-50"></div>
         
         {/* Quote icon */}
         <div className="absolute top-6 left-6 opacity-10">
-          <QuoteIcon className="w-16 h-16 text-green-600" />
+          <QuoteIcon className="w-16 h-16 text-blue-600" />
         </div>
 
         <div className="relative z-10 text-center space-y-6">
@@ -144,7 +144,7 @@ const TestimonialCarousel: React.FC<TestimonialProps> = ({ testimonials }) => {
           {/* User info */}
           <div className="flex flex-col items-center space-y-4 pt-6">
             <div className="relative">
-              <div className="absolute -inset-1 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full blur opacity-30"></div>
+              <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 to-emerald-500 rounded-full blur opacity-30"></div>
           <Image 
             src={images[currentIndex%images.length]}
             alt="Security" 
@@ -157,7 +157,7 @@ const TestimonialCarousel: React.FC<TestimonialProps> = ({ testimonials }) => {
               <h4 className="text-xl font-bold text-gray-900">
                 {currentTestimonial.name}
               </h4>
-              <p className="text-green-600 font-medium">Verified Investor</p>
+              <p className="text-blue-600 font-medium">Verified Investor</p>
             </div>
           </div>
         </div>
@@ -165,16 +165,16 @@ const TestimonialCarousel: React.FC<TestimonialProps> = ({ testimonials }) => {
         {/* Navigation arrows */}
         <button
           onClick={goToPrevious}
-          className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-white rounded-full shadow-lg border border-gray-200 hover:border-green-300 hover:bg-green-50 transition-all duration-300 group"
+          className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-white rounded-full shadow-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-300 group"
         >
-          <ChevronLeftIcon className="w-6 h-6 text-gray-600 group-hover:text-green-600" />
+          <ChevronLeftIcon className="w-6 h-6 text-gray-600 group-hover:text-blue-600" />
         </button>
         
         <button
           onClick={goToNext}
-          className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-white rounded-full shadow-lg border border-gray-200 hover:border-green-300 hover:bg-green-50 transition-all duration-300 group"
+          className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-white rounded-full shadow-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-300 group"
         >
-          <ChevronRightIcon className="w-6 h-6 text-gray-600 group-hover:text-green-600" />
+          <ChevronRightIcon className="w-6 h-6 text-gray-600 group-hover:text-blue-600" />
         </button>
       </div>
 
@@ -186,7 +186,7 @@ const TestimonialCarousel: React.FC<TestimonialProps> = ({ testimonials }) => {
             onClick={() => goToSlide(index)}
             className={`w-3 h-3 rounded-full transition-all duration-300 ${
               index === currentIndex
-                ? 'bg-gradient-to-r from-green-500 to-emerald-500 w-8'
+                ? 'bg-gradient-to-r from-blue-500 to-emerald-500 w-8'
                 : 'bg-gray-300 hover:bg-gray-400'
             }`}
           />
@@ -196,7 +196,7 @@ const TestimonialCarousel: React.FC<TestimonialProps> = ({ testimonials }) => {
       {/* Progress bar */}
       <div className="mt-4 w-full bg-gray-200 rounded-full h-1 overflow-hidden">
         <div 
-          className="h-full bg-gradient-to-r from-green-500 to-emerald-500 rounded-full transition-all duration-100 ease-linear"
+          className="h-full bg-gradient-to-r from-blue-500 to-emerald-500 rounded-full transition-all duration-100 ease-linear"
           style={{
             width: `${((currentIndex + 1) / testimonials.length) * 100}%`
           }}
@@ -208,10 +208,10 @@ const TestimonialCarousel: React.FC<TestimonialProps> = ({ testimonials }) => {
 
 const Testimonial: React.FC = () => {
   return (
-    <div className="relative py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 via-green-50 to-emerald-50 overflow-hidden">
+    <div className="relative py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 via-blue-50 to-emerald-50 overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-green-200 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse"></div>
+        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse"></div>
         <div className="absolute bottom-20 right-10 w-72 h-72 bg-emerald-200 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse animation-delay-2000"></div>
       </div>
 
@@ -220,12 +220,12 @@ const Testimonial: React.FC = () => {
         <div className="text-center mb-12">
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
             What our{" "}
-            <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">
               clients
             </span>{" "}
             say
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-green-500 to-emerald-500 mx-auto rounded-full mb-6"></div>
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-emerald-500 mx-auto rounded-full mb-6"></div>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Don&apos;t just take our word for it. Here&apos;s what our satisfied clients have to say about their investment experience.
           </p>
@@ -236,20 +236,20 @@ const Testimonial: React.FC = () => {
 
         {/* Stats section */}
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="text-center p-6 bg-white rounded-2xl shadow-lg border border-green-100">
+          <div className="text-center p-6 bg-white rounded-2xl shadow-lg border border-blue-100">
             <div className="flex justify-center mb-3">
               {Array.from({ length: 5 }, (_, i) => (
                 <StarIcon key={i} className="w-6 h-6 text-yellow-400" />
               ))}
             </div>
-            <div className="text-3xl font-bold text-green-600 mb-2">4.9/5</div>
+            <div className="text-3xl font-bold text-blue-600 mb-2">4.9/5</div>
             <div className="text-gray-600">Average Rating</div>
           </div>
-          <div className="text-center p-6 bg-white rounded-2xl shadow-lg border border-green-100">
+          <div className="text-center p-6 bg-white rounded-2xl shadow-lg border border-blue-100">
             <div className="text-3xl font-bold text-emerald-600 mb-2">60,000+</div>
             <div className="text-gray-600">Happy Clients</div>
           </div>
-          <div className="text-center p-6 bg-white rounded-2xl shadow-lg border border-green-100">
+          <div className="text-center p-6 bg-white rounded-2xl shadow-lg border border-blue-100">
             <div className="text-3xl font-bold text-teal-600 mb-2">98%</div>
             <div className="text-gray-600">Satisfaction Rate</div>
           </div>

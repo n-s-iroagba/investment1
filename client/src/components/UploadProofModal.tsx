@@ -162,23 +162,23 @@ export function UploadProofModal({
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-      <div className="bg-white p-6 rounded-2xl shadow-lg border-2 border-green-50 relative max-w-md w-full max-h-[90vh] overflow-y-auto">
+      <div className="bg-white p-6 rounded-2xl shadow-lg border-2 border-blue-50 relative max-w-md w-full max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div className="flex justify-between items-start mb-4">
-          <h3 className="text-xl font-semibold text-green-900">
+          <h3 className="text-xl font-semibold text-blue-900">
             {isUpdateMode ? 'Update Payment Proof' : title}
           </h3>
           <button
             onClick={handleClose}
             disabled={isUploading}
-            className="p-1 text-green-600 hover:text-green-800 rounded-full hover:bg-green-50 disabled:opacity-50"
+            className="p-1 text-blue-600 hover:text-blue-800 rounded-full hover:bg-blue-50 disabled:opacity-50"
             aria-label="Close"
           >
             <XMarkIcon className="w-5 h-5" />
           </button>
         </div>
 
-        <p className="text-green-700 mb-6 text-sm">
+        <p className="text-blue-700 mb-6 text-sm">
           {isUpdateMode ? 'Update your payment information and receipt.' : description}
         </p>
 
@@ -186,7 +186,7 @@ export function UploadProofModal({
         <div className="space-y-4">
           {/* Amount Field */}
           <div>
-            <label className="block text-sm font-medium text-green-700 mb-2 flex items-center gap-1">
+            <label className="block text-sm font-medium text-blue-700 mb-2 flex items-center gap-1">
               <BanknotesIcon className="w-4 h-4" />
               Amount in USD *
             </label>
@@ -196,7 +196,7 @@ export function UploadProofModal({
               step="0.01"
               value={amount}
               onChange={(e) => setAmount(Number(e.target.value))}
-              className="w-full p-3 rounded-xl border-2 border-green-100 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all"
+              className="w-full p-3 rounded-xl border-2 border-blue-100 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
               placeholder="0.00"
               required
             />
@@ -204,7 +204,7 @@ export function UploadProofModal({
 
           {/* Payment ID Field */}
           <div>
-            <label className="block text-sm font-medium text-green-700 mb-2 flex items-center gap-1">
+            <label className="block text-sm font-medium text-blue-700 mb-2 flex items-center gap-1">
               <CreditCardIcon className="w-4 h-4" />
               Payment ID *
             </label>
@@ -212,25 +212,25 @@ export function UploadProofModal({
               type="text"
               value={paymentID}
               onChange={(e) => setPaymentID(e.target.value)}
-              className="w-full p-3 rounded-xl border-2 border-green-100 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all"
+              className="w-full p-3 rounded-xl border-2 border-blue-100 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
               placeholder="e.g., TXN123456789, BANK_REF_001"
               required
             />
-            <p className="text-xs text-green-600 mt-1">
+            <p className="text-xs text-blue-600 mt-1">
               Enter the transaction ID or reference number from your payment
             </p>
           </div>
 
           {/* Deposit Type Field */}
           <div>
-            <label className="block text-sm font-medium text-green-700 mb-2 flex items-center gap-1">
+            <label className="block text-sm font-medium text-blue-700 mb-2 flex items-center gap-1">
               <UserCircleIcon className="w-4 h-4" />
               Deposit Type *
             </label>
             <select
               value={depositType}
               onChange={(e) => setDepositType(e.target.value)}
-              className="w-full p-3 rounded-xl border-2 border-green-100 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all"
+              className="w-full p-3 rounded-xl border-2 border-blue-100 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
               required
             >
               <option value="BANK">Bank Transfer</option>
@@ -244,24 +244,24 @@ export function UploadProofModal({
 
           {/* File Upload Area */}
           <div>
-            <label className="block text-sm font-medium text-green-700 mb-2">
+            <label className="block text-sm font-medium text-blue-700 mb-2">
               Payment Receipt {!isUpdateMode && '*'}
             </label>
             <div
               className={`border-2 border-dashed rounded-lg p-6 text-center transition-colors ${
-                dragActive ? "border-green-400 bg-green-50" : "border-green-200 hover:border-green-300"
+                dragActive ? "border-blue-400 bg-blue-50" : "border-blue-200 hover:border-blue-300"
               }`}
               onDragEnter={handleDrag}
               onDragLeave={handleDrag}
               onDragOver={handleDrag}
               onDrop={handleDrop}
             >
-              <CloudArrowUpIcon className="w-12 h-12 text-green-400 mx-auto mb-4" />
+              <CloudArrowUpIcon className="w-12 h-12 text-blue-400 mx-auto mb-4" />
 
               {selectedFile ? (
                 <div className="space-y-2">
-                  <p className="text-green-900 font-medium">{selectedFile.name}</p>
-                  <p className="text-green-600 text-sm">{(selectedFile.size / 1024 / 1024).toFixed(2)} MB</p>
+                  <p className="text-blue-900 font-medium">{selectedFile.name}</p>
+                  <p className="text-blue-600 text-sm">{(selectedFile.size / 1024 / 1024).toFixed(2)} MB</p>
                   <button
                     type="button"
                     onClick={() => setSelectedFile(null)}
@@ -273,13 +273,13 @@ export function UploadProofModal({
               ) : (
                 <div className="space-y-2">
                   {isUpdateMode && existingPayment?.receipt && (
-                    <p className="text-green-700 text-sm mb-2">
+                    <p className="text-blue-700 text-sm mb-2">
                       📎 Current receipt uploaded
                     </p>
                   )}
-                  <p className="text-green-700">
+                  <p className="text-blue-700">
                     Drag and drop your receipt here, or{" "}
-                    <label className="text-green-600 hover:text-green-800 cursor-pointer underline">
+                    <label className="text-blue-600 hover:text-blue-800 cursor-pointer underline">
                       browse
                       <input
                         type="file"
@@ -289,9 +289,9 @@ export function UploadProofModal({
                       />
                     </label>
                   </p>
-                  <p className="text-green-500 text-sm">PNG, JPG, GIF, PDF up to 10MB</p>
+                  <p className="text-blue-500 text-sm">PNG, JPG, GIF, PDF up to 10MB</p>
                   {isUpdateMode && (
-                    <p className="text-green-600 text-xs">
+                    <p className="text-blue-600 text-xs">
                       Leave empty to keep current receipt
                     </p>
                   )}
@@ -306,14 +306,14 @@ export function UploadProofModal({
           <button
             onClick={handleClose}
             disabled={isUploading}
-            className="px-5 py-2 border-2 border-green-200 text-green-800 rounded-xl hover:bg-green-50 disabled:opacity-50 transition-all"
+            className="px-5 py-2 border-2 border-blue-200 text-blue-800 rounded-xl hover:bg-blue-50 disabled:opacity-50 transition-all"
           >
             Cancel
           </button>
           <button
             onClick={handleSubmit}
             disabled={(!selectedFile && !isUpdateMode) || isUploading || !paymentID.trim() || !amount}
-            className="px-5 py-2 bg-green-600 text-white rounded-xl hover:bg-green-700 disabled:bg-green-400 disabled:cursor-not-allowed transition-all flex items-center gap-2"
+            className="px-5 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed transition-all flex items-center gap-2"
           >
             {isUploading ? (
               <>

@@ -148,8 +148,8 @@ export default function InvestorProfile() {
       <InvestorOffCanvas>
         <div className="min-h-screen bg-white flex items-center justify-center">
           <div className="text-center">
-            <Spinner className="w-8 h-8 text-green-600 mx-auto mb-4" />
-            <p className="text-green-700">Loading your profile...</p>
+            <Spinner className="w-8 h-8 text-blue-600 mx-auto mb-4" />
+            <p className="text-blue-700">Loading your profile...</p>
           </div>
         </div>
       </InvestorOffCanvas>
@@ -170,7 +170,7 @@ export default function InvestorProfile() {
             <p className="text-red-600 mb-4">{error}</p>
             <button
               onClick={fetchProfile}
-              className="px-6 py-2 bg-green-700 text-white rounded-xl hover:bg-green-800 transition-colors"
+              className="px-6 py-2 bg-blue-700 text-white rounded-xl hover:bg-blue-800 transition-colors"
             >
               Try Again
             </button>
@@ -186,35 +186,35 @@ export default function InvestorProfile() {
         <div className="max-w-4xl mx-auto space-y-6">
           {/* Header */}
           <header className="px-2">
-            <h1 className="text-2xl md:text-3xl font-bold text-green-900 flex items-center gap-3">
-              <UserCircleIcon className="w-8 h-8 text-green-700" />
+            <h1 className="text-2xl md:text-3xl font-bold text-blue-900 flex items-center gap-3">
+              <UserCircleIcon className="w-8 h-8 text-blue-700" />
               My Profile
             </h1>
-            <p className="text-sm md:text-base text-green-600 mt-1">
+            <p className="text-sm md:text-base text-blue-600 mt-1">
               Manage your personal information and verification status
             </p>
           </header>
 
           {/* Profile Section */}
-          <div className="bg-white rounded-2xl shadow-sm border-2 border-green-50 p-6 space-y-8 relative overflow-hidden">
+          <div className="bg-white rounded-2xl shadow-sm border-2 border-blue-50 p-6 space-y-8 relative overflow-hidden">
             {/* Decorative Elements */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-50 to-transparent rounded-full -translate-y-16 translate-x-16" />
-            <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-green-50 to-transparent rounded-full translate-y-12 -translate-x-12" />
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-50 to-transparent rounded-full -translate-y-16 translate-x-16" />
+            <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-blue-50 to-transparent rounded-full translate-y-12 -translate-x-12" />
 
             {/* Profile Header */}
             <div className="relative">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-green-600 to-green-700 rounded-2xl flex items-center justify-center">
+                  <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl flex items-center justify-center">
                     <span className="text-2xl font-bold text-white">
                       {investor?.firstName?.[0] || "U"}
                       {investor?.lastName?.[0] || ""}
                     </span>
                   </div>
                
-                    <div className="flex items-center gap-2 text-green-600">
+                    <div className="flex items-center gap-2 text-blue-600">
                       <UserCircleIcon className="w-4 h-4" />
-                       <h2 className="text-xl font-bold text-green-900">
+                       <h2 className="text-xl font-bold text-blue-900">
                       {investor?.firstName || "Unknown"} {investor?.lastName || "User"}
                     </h2>
                     </div>
@@ -224,7 +224,7 @@ export default function InvestorProfile() {
                 {!isEditing && (
                   <button
                     onClick={() => setIsEditing(true)}
-                    className="p-3 text-green-700 hover:bg-green-50 rounded-xl transition-colors"
+                    className="p-3 text-blue-700 hover:bg-blue-50 rounded-xl transition-colors"
                   >
                     <PencilSquareIcon className="w-5 h-5" />
                   </button>
@@ -234,7 +234,7 @@ export default function InvestorProfile() {
               {/* Profile Form */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-green-700 flex items-center gap-2">
+                  <label className="block text-sm font-medium text-blue-700 flex items-center gap-2">
                     <IdentificationIcon className="w-4 h-4" />
                     First Name
                   </label>
@@ -246,14 +246,14 @@ export default function InvestorProfile() {
                     disabled={!isEditing}
                     className={`w-full p-3 rounded-xl border-2 transition-all ${
                       isEditing
-                        ? "border-green-200 focus:border-green-500 focus:ring-2 focus:ring-green-200"
-                        : "border-transparent bg-green-50 text-green-800"
+                        ? "border-blue-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                        : "border-transparent bg-blue-50 text-blue-800"
                     }`}
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-green-700 flex items-center gap-2">
+                  <label className="block text-sm font-medium text-blue-700 flex items-center gap-2">
                     <IdentificationIcon className="w-4 h-4" />
                     Last Name
                   </label>
@@ -265,14 +265,14 @@ export default function InvestorProfile() {
                     disabled={!isEditing}
                     className={`w-full p-3 rounded-xl border-2 transition-all ${
                       isEditing
-                        ? "border-green-200 focus:border-green-500 focus:ring-2 focus:ring-green-200"
-                        : "border-transparent bg-green-50 text-green-800"
+                        ? "border-blue-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                        : "border-transparent bg-blue-50 text-blue-800"
                     }`}
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-green-700 flex items-center gap-2">
+                  <label className="block text-sm font-medium text-blue-700 flex items-center gap-2">
                     <CalendarIcon className="w-4 h-4" />
                     Date of Birth
                   </label>
@@ -284,14 +284,14 @@ export default function InvestorProfile() {
                     disabled={!isEditing}
                     className={`w-full p-3 rounded-xl border-2 transition-all ${
                       isEditing
-                        ? "border-green-200 focus:border-green-500 focus:ring-2 focus:ring-green-200"
-                        : "border-transparent bg-green-50 text-green-800"
+                        ? "border-blue-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                        : "border-transparent bg-blue-50 text-blue-800"
                     }`}
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-green-700">Gender</label>
+                  <label className="block text-sm font-medium text-blue-700">Gender</label>
                   <select
                     name="gender"
                     value={profileData.gender}
@@ -299,8 +299,8 @@ export default function InvestorProfile() {
                     disabled={!isEditing}
                     className={`w-full p-3 rounded-xl border-2 transition-all ${
                       isEditing
-                        ? "border-green-200 focus:border-green-500 focus:ring-2 focus:ring-green-200"
-                        : "border-transparent bg-green-50 text-green-800"
+                        ? "border-blue-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                        : "border-transparent bg-blue-50 text-blue-800"
                     }`}
                   >
                     <option value="">Select Gender</option>
@@ -311,7 +311,7 @@ export default function InvestorProfile() {
                 </div>
 
                 <div className="space-y-2 md:col-span-2">
-                  <label className="block text-sm font-medium text-green-700 flex items-center gap-2">
+                  <label className="block text-sm font-medium text-blue-700 flex items-center gap-2">
                     <GlobeAltIcon className="w-4 h-4" />
                     Country of Residence
                   </label>
@@ -324,8 +324,8 @@ export default function InvestorProfile() {
                     placeholder="Enter your country"
                     className={`w-full p-3 rounded-xl border-2 transition-all ${
                       isEditing
-                        ? "border-green-200 focus:border-green-500 focus:ring-2 focus:ring-green-200"
-                        : "border-transparent bg-green-50 text-green-800"
+                        ? "border-blue-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                        : "border-transparent bg-blue-50 text-blue-800"
                     }`}
                   />
                 </div>
@@ -333,7 +333,7 @@ export default function InvestorProfile() {
 
               {/* Action Buttons */}
               {isEditing && (
-                <div className="flex gap-4 justify-end mt-6 pt-6 border-t border-green-100">
+                <div className="flex gap-4 justify-end mt-6 pt-6 border-t border-blue-100">
                   <button
                     onClick={() => {
                       setIsEditing(false)
@@ -350,14 +350,14 @@ export default function InvestorProfile() {
                       }
                     }}
                     disabled={submitting}
-                    className="px-6 py-2 border-2 border-green-200 text-green-800 rounded-xl hover:bg-green-50 disabled:opacity-50 transition-colors"
+                    className="px-6 py-2 border-2 border-blue-200 text-blue-800 rounded-xl hover:bg-blue-50 disabled:opacity-50 transition-colors"
                   >
                     Cancel
                   </button>
                   <button
                     onClick={submitProfileUpdate}
                     disabled={submitting}
-                    className="px-6 py-2 bg-green-700 text-white rounded-xl hover:bg-green-800 disabled:bg-green-400 transition-colors flex items-center gap-2"
+                    className="px-6 py-2 bg-blue-700 text-white rounded-xl hover:bg-blue-800 disabled:bg-blue-400 transition-colors flex items-center gap-2"
                   >
                     {submitting && <ArrowPathIcon className="w-4 h-4 animate-spin" />}
                     Save Changes
@@ -368,9 +368,9 @@ export default function InvestorProfile() {
           </div>
 
           {/* KYC Section */}
-          <div className="bg-white rounded-2xl shadow-sm border-2 border-green-50 p-6 space-y-6">
-            <h3 className="text-xl font-semibold text-green-900 flex items-center gap-2">
-              <DocumentArrowUpIcon className="w-6 h-6 text-green-700" />
+          <div className="bg-white rounded-2xl shadow-sm border-2 border-blue-50 p-6 space-y-6">
+            <h3 className="text-xl font-semibold text-blue-900 flex items-center gap-2">
+              <DocumentArrowUpIcon className="w-6 h-6 text-blue-700" />
               KYC Verification
             </h3>
 
@@ -385,12 +385,12 @@ export default function InvestorProfile() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <label className="block text-sm font-medium text-green-700">Document Type</label>
+                    <label className="block text-sm font-medium text-blue-700">Document Type</label>
                     <select
                       name="type"
                       value={kycData.type}
                       onChange={handleKycChange}
-                      className="w-full p-3 rounded-xl border-2 border-green-200 focus:border-green-500 focus:ring-2 focus:ring-green-200"
+                      className="w-full p-3 rounded-xl border-2 border-blue-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                     >
                       <option value="">Select document type</option>
                       <option value="passport">Passport</option>
@@ -400,45 +400,45 @@ export default function InvestorProfile() {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="block text-sm font-medium text-green-700">Document Number</label>
+                    <label className="block text-sm font-medium text-blue-700">Document Number</label>
                     <input
                       type="text"
                       name="number"
                       value={kycData.number}
                       onChange={handleKycChange}
                       placeholder="Enter document number"
-                      className="w-full p-3 rounded-xl border-2 border-green-200 focus:border-green-500 focus:ring-2 focus:ring-green-200"
+                      className="w-full p-3 rounded-xl border-2 border-blue-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                     />
                   </div>
 
                   <div className="space-y-2 md:col-span-2">
-                    <label className="block text-sm font-medium text-green-700">Upload Document</label>
+                    <label className="block text-sm font-medium text-blue-700">Upload Document</label>
                     <input
                       type="file"
                       name="image"
                       onChange={handleKycChange}
                       accept="image/*,.pdf"
-                      className="block w-full text-sm text-green-700 file:mr-4 file:py-3 file:px-4 file:rounded-xl file:border-2 file:border-green-200 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100 transition-colors"
+                      className="block w-full text-sm text-blue-700 file:mr-4 file:py-3 file:px-4 file:rounded-xl file:border-2 file:border-blue-200 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-colors"
                     />
-                    <p className="text-xs text-green-600">Accepted formats: JPG, PNG, PDF (Max 5MB)</p>
+                    <p className="text-xs text-blue-600">Accepted formats: JPG, PNG, PDF (Max 5MB)</p>
                   </div>
                 </div>
 
                 <button
                   onClick={submitKyc}
                   disabled={submitting || !kycData.type || !kycData.number || !kycData.image}
-                  className="w-full py-3 bg-green-700 text-white rounded-xl hover:bg-green-800 disabled:bg-green-400 transition-colors flex items-center justify-center gap-2"
+                  className="w-full py-3 bg-blue-700 text-white rounded-xl hover:bg-blue-800 disabled:bg-blue-400 transition-colors flex items-center justify-center gap-2"
                 >
                   {submitting && <ArrowPathIcon className="w-4 h-4 animate-spin" />}
                   Submit KYC Verification
                 </button>
               </div>
             ) : (
-              <div className="p-6 bg-green-50 rounded-xl border-2 border-green-100">
+              <div className="p-6 bg-blue-50 rounded-xl border-2 border-blue-100">
                 <div className="flex items-center gap-4">
                   <div className="flex-shrink-0">
                     {investor.kyc.isVerified ? (
-                      <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center">
+                      <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
                         <CheckCircleIcon className="w-6 h-6 text-white" />
                       </div>
                     ) : (
@@ -448,18 +448,18 @@ export default function InvestorProfile() {
                     )}
                   </div>
                   <div className="flex-1">
-                    <h4 className="font-semibold text-green-900 text-lg">
+                    <h4 className="font-semibold text-blue-900 text-lg">
                       {investor.kyc.type.replace("_", " ").toUpperCase()} 
                     </h4>
                     <p
                       className={`text-sm font-medium ${
-                        investor.kyc.isVerified ? "text-green-600" : "text-yellow-600"
+                        investor.kyc.isVerified ? "text-blue-600" : "text-yellow-600"
                       }`}
                     >
                       {investor.kyc.isVerified ? "✓ Verified" : "⏳ Verification Pending"}
                     </p>
                     {!investor.kyc.isVerified && (
-                      <p className="text-xs text-green-600 mt-1">
+                      <p className="text-xs text-blue-600 mt-1">
                         Your documents are being reviewed. This usually takes 1-3 business days.
                       </p>
                     )}

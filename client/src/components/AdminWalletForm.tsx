@@ -85,19 +85,19 @@ export default function AdminWalletForm({ existingWallet,onClose }: AdminWalletF
   }
 
   return (
-    <div className="bg-white p-6 rounded-2xl shadow-sm border-2 border-green-50 relative overflow-hidden">
+    <div className="bg-white p-6 rounded-2xl shadow-sm border-2 border-blue-50 relative overflow-hidden">
       {/* Decorative Corner Borders */}
-      <div className="absolute top-2 right-2 w-8 h-8 border-t-2 border-r-2 border-green-800 opacity-20" />
-      <div className="absolute bottom-2 left-2 w-8 h-8 border-b-2 border-l-2 border-green-800 opacity-20" />
+      <div className="absolute top-2 right-2 w-8 h-8 border-t-2 border-r-2 border-blue-800 opacity-20" />
+      <div className="absolute bottom-2 left-2 w-8 h-8 border-b-2 border-l-2 border-blue-800 opacity-20" />
 
-      <h2 className="text-xl font-semibold text-green-900 mb-6 flex items-center gap-2">
-        <WalletIcon className="w-6 h-6 text-green-700" />
+      <h2 className="text-xl font-semibold text-blue-900 mb-6 flex items-center gap-2">
+        <WalletIcon className="w-6 h-6 text-blue-700" />
         {existingWallet ? "Edit Wallet" : "Add New Wallet"}
       </h2>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label className="block text-sm font-medium text-green-700 mb-2 flex items-center gap-1">
+          <label className="block text-sm font-medium text-blue-700 mb-2 flex items-center gap-1">
             <CurrencyDollarIcon className="w-4 h-4" />
             Currency
           </label>
@@ -106,8 +106,8 @@ export default function AdminWalletForm({ existingWallet,onClose }: AdminWalletF
             value={formData.currency}
             onChange={handleInputChange}
             className={`mt-1 block w-full rounded-xl border-2 ${
-              errors.currency ? "border-red-300" : "border-green-100"
-            } p-3 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all`}
+              errors.currency ? "border-red-300" : "border-blue-100"
+            } p-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all`}
           >
             <option value="">Select Currency</option>
             <option value="BTC">Bitcoin (BTC)</option>
@@ -120,7 +120,7 @@ export default function AdminWalletForm({ existingWallet,onClose }: AdminWalletF
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-green-700 mb-2 flex items-center gap-1">
+          <label className="block text-sm font-medium text-blue-700 mb-2 flex items-center gap-1">
             <WalletIcon className="w-4 h-4" />
             Wallet Address
           </label>
@@ -129,8 +129,8 @@ export default function AdminWalletForm({ existingWallet,onClose }: AdminWalletF
             value={formData.address}
             onChange={handleInputChange}
             className={`mt-1 block w-full rounded-xl border-2 ${
-              errors.address ? "border-red-300" : "border-green-100"
-            } p-3 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all font-mono text-sm`}
+              errors.address ? "border-red-300" : "border-blue-100"
+            } p-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all font-mono text-sm`}
             placeholder="Enter wallet address..."
           />
           {errors.address && <p className="text-red-600 text-sm mt-2 ml-1">{errors.address}</p>}
@@ -140,14 +140,14 @@ export default function AdminWalletForm({ existingWallet,onClose }: AdminWalletF
           <button
             type="button"
             onClick={handleCancel}
-            className="px-6 py-2 border-2 border-green-200 text-green-800 rounded-xl hover:bg-green-50 transition-all"
+            className="px-6 py-2 border-2 border-blue-200 text-blue-800 rounded-xl hover:bg-blue-50 transition-all"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={isSubmitting}
-            className="px-8 py-2 bg-green-700 text-white rounded-xl hover:bg-green-800 disabled:opacity-50 transition-all flex items-center gap-2"
+            className="px-8 py-2 bg-blue-700 text-white rounded-xl hover:bg-blue-800 disabled:opacity-50 transition-all flex items-center gap-2"
           >
             {isSubmitting ? (
               <>

@@ -21,7 +21,7 @@ export default function SocialMediaPage() {
     return (
       <AdminOffCanvas>
       <div className="flex justify-center items-center h-64">
-        <Spinner className="w-10 h-10 text-green-600" />
+        <Spinner className="w-10 h-10 text-blue-600" />
       </div>
       </AdminOffCanvas>
     );
@@ -36,19 +36,19 @@ export default function SocialMediaPage() {
 
   return (
     <AdminOffcanvas>
-    <div className="bg-green-50 min-h-screen p-4">
+    <div className="bg-blue-50 min-h-screen p-4">
       <div className="max-w-4xl mx-auto">
         {/* Header with decorative elements */}
-        <div className="bg-white rounded-2xl shadow-sm border-2 border-green-100 p-6 mb-6 relative">
+        <div className="bg-white rounded-2xl shadow-sm border-2 border-blue-100 p-6 mb-6 relative">
           {/* Decorative Corner Borders */}
-          <div className="absolute top-2 right-2 w-8 h-8 border-t-2 border-r-2 border-green-800 opacity-20" />
-          <div className="absolute bottom-2 left-2 w-8 h-8 border-b-2 border-l-2 border-green-800 opacity-20" />
+          <div className="absolute top-2 right-2 w-8 h-8 border-t-2 border-r-2 border-blue-800 opacity-20" />
+          <div className="absolute bottom-2 left-2 w-8 h-8 border-b-2 border-l-2 border-blue-800 opacity-20" />
 
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <h1 className="text-2xl font-bold text-green-900">Social Media Accounts</h1>
+            <h1 className="text-2xl font-bold text-blue-900">Social Media Accounts</h1>
             <button
               onClick={() => setCreateItem(true)}
-              className="flex items-center gap-2 px-5 py-2.5 bg-green-700 text-white rounded-xl hover:bg-green-800 transition-colors"
+              className="flex items-center gap-2 px-5 py-2.5 bg-blue-700 text-white rounded-xl hover:bg-blue-800 transition-colors"
             >
               <PlusIcon className="w-5 h-5" />
               <span>Add New Account</span>
@@ -59,13 +59,13 @@ export default function SocialMediaPage() {
         {/* Forms */}
         <div className="space-y-6 mb-8">
           {createItem && (
-            <div className="bg-white rounded-2xl shadow-sm border-2 border-green-100 overflow-hidden">
+            <div className="bg-white rounded-2xl shadow-sm border-2 border-blue-100 overflow-hidden">
               <SocialMediaForm onClose={() => setCreateItem(false)} />
             </div>
           )}
 
           {itemToUpdate && (
-            <div className="bg-white rounded-2xl shadow-sm border-2 border-green-100 overflow-hidden">
+            <div className="bg-white rounded-2xl shadow-sm border-2 border-blue-100 overflow-hidden">
               <SocialMediaForm 
                 existingSocialMedia={itemToUpdate}
                 onClose={() => setItemToUpdate(null)}
@@ -80,7 +80,7 @@ export default function SocialMediaPage() {
             {socialMedias.map((socialMedia) => (
               <div 
                 key={socialMedia.id}
-                className="bg-white rounded-2xl shadow-sm border-2 border-green-100 hover:border-green-200 transition-colors"
+                className="bg-white rounded-2xl shadow-sm border-2 border-blue-100 hover:border-blue-200 transition-colors"
               >
                 <SocialMediaCard
                   socialMedia={socialMedia}
@@ -91,18 +91,18 @@ export default function SocialMediaPage() {
             ))}
           </div>
         ) : (
-          <div className="bg-white rounded-2xl shadow-sm border-2 border-green-100 p-8 text-center">
+          <div className="bg-white rounded-2xl shadow-sm border-2 border-blue-100 p-8 text-center">
             <div className="max-w-md mx-auto">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <PlusIcon className="w-8 h-8 text-green-700" />
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <PlusIcon className="w-8 h-8 text-blue-700" />
               </div>
-              <h3 className="text-lg font-semibold text-green-900 mb-2">No Social Media Accounts</h3>
-              <p className="text-green-600 mb-4">
+              <h3 className="text-lg font-semibold text-blue-900 mb-2">No Social Media Accounts</h3>
+              <p className="text-blue-600 mb-4">
                 Add your first social media account to start connecting with your audience
               </p>
               <button
                 onClick={() => setCreateItem(true)}
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-green-700 text-white rounded-xl hover:bg-green-800 transition-colors"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-700 text-white rounded-xl hover:bg-blue-800 transition-colors"
               >
                 <PlusIcon className="w-5 h-5" />
                 Add Account

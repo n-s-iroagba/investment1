@@ -10,7 +10,7 @@ import {
 } from "@/components/InvestorDetailModals"
 import type { Investor } from "@/types/Investor"
 import { useRouter } from "next/navigation"
-import { get, patch } from "@/utils/apiClient"
+import { get, patch, post } from "@/utils/apiClient"
 import { apiRoutes } from "@/constants/apiRoutes"
 import PaymentList from "@/components/PaymentList"
 import { useGetSingle } from "@/hooks/useFetch"
@@ -19,6 +19,7 @@ import { ViewReceiptModal } from "@/components/ViewReceiptModal"
 import { sendEmail } from "@/utils/common"
 
 import AdminOffcanvas from "@/components/AdminOffCanvas"
+import AdminOffCanvas from "@/components/AdminOffCanvas"
 
 
 export default function InvestorDetail() {
@@ -31,7 +32,7 @@ export default function InvestorDetail() {
   const [creditType, setCreditType]= useState<'earnings'|'amount-deposited'|''>('')
   const router = useRouter()
   const { data: investor, loading, error } = useGetSingle<Investor>(apiRoutes.investor.getInvestor(Number(investorId)))
-
+ 
   const creditEarnings = async (portfolioId: number | string, amount: number) => {
     try {
       await patch(apiRoutes.investment.creditInvestmentEarnings(portfolioId), { amount })
@@ -60,8 +61,9 @@ export default function InvestorDetail() {
 
   const createVerificationFee = async (investorId: number | string, amount: number, name: string) => {
     try {
-      await patch(apiRoutes.verificationFee.create(investorId), { amount, name })
+      await post(apiRoutes.verificationFee.create(investorId), { amount, name })
       alert('Success!!')
+      window.location.reload()
     } catch (error) {
       alert('Sorry an error occured, contact Developer to fix it')
       console.error("Error crediting portfolio:", error)
@@ -73,14 +75,17 @@ export default function InvestorDetail() {
 
   if (loading) {
     return (
+      <AdminOffCanvas>
       <div className="flex items-center justify-center min-h-screen">
         <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-emerald-500"></div>
       </div>
+      </AdminOffCanvas>
     )
   }
 
   if (error || !investor) {
     return (
+      <AdminOffCanvas>
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
           <p className="text-red-600 mb-4">{error || "Investor not found"}</p>
@@ -92,6 +97,7 @@ export default function InvestorDetail() {
           </button>
         </div>
       </div>
+      </AdminOffCanvas>
     )
   }
   const onBack = () => {
@@ -308,11 +314,11 @@ export default function InvestorDetail() {
         onClose={() => setSelectedDocument(null)} receiptUrl={selectedDocument||""}     
       />
 
-      <CreditModal isOpen={showCreditModal}
+     {investor.managedPortfolio && <CreditModal isOpen={showCreditModal}
        onClose={() => setShowCreditModal(false)} 
-       investorId={investor.id} 
+       portfolioId={investor.managedPortfolio.id} 
        amountDeposited={(investor.managedPortfolio?.amountDeposited ?? 0)} earnings={(investor.managedPortfolio?.earnings ?? 0)}
-        onCredit={creditType==='earnings'?creditEarnings: creditType==='amount-deposited'?creditAmountDeposited: voidCredit}/>
+        onCredit={creditType==='earnings'?creditEarnings: creditType==='amount-deposited'?creditAmountDeposited: voidCredit}/>}
 
       <VerificationFeeCreationtModal isOpen={showCreateFeeModal} onClose={() => setShowCreateFeeModal(false)} investorId={investor.id} onCreateFee={createVerificationFee} />
     </div>

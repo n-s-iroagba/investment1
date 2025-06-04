@@ -64,7 +64,7 @@ export default function AdminReferralsPage() {
     return (
       <AdminOffCanvas>
       <div className="min-h-[400px] flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
       </AdminOffCanvas>
     )
@@ -79,7 +79,7 @@ export default function AdminReferralsPage() {
           <p className="text-sm">{error}</p>
           <button
             onClick={fetchUnpaidReferrals}
-            className="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
           >
             Retry
           </button>
@@ -92,9 +92,9 @@ export default function AdminReferralsPage() {
   if (referrals.length === 0) {
     return (
        <AdminOffCanvas>
-      <div className="min-h-[400px] flex items-center justify-center bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-2xl shadow-lg border-2 border-green-100 relative">
-        <div className="absolute top-2 right-2 w-8 h-8 border-t-2 border-r-2 border-green-800 opacity-20" />
-        <div className="absolute bottom-2 left-2 w-8 h-8 border-b-2 border-l-2 border-green-800 opacity-20" />
+      <div className="min-h-[400px] flex items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl shadow-lg border-2 border-blue-100 relative">
+        <div className="absolute top-2 right-2 w-8 h-8 border-t-2 border-r-2 border-blue-800 opacity-20" />
+        <div className="absolute bottom-2 left-2 w-8 h-8 border-b-2 border-l-2 border-blue-800 opacity-20" />
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -103,15 +103,15 @@ export default function AdminReferralsPage() {
           className="text-center space-y-4"
         >
           <div className="inline-flex items-center justify-center relative">
-            <div className="absolute inset-0 w-full h-full bg-green-100 rounded-full opacity-30 animate-pulse" />
-            <div className="p-4 bg-green-100 rounded-2xl border-2 border-green-200">
-              <UserGroupIcon className="w-12 h-12 text-green-700" />
+            <div className="absolute inset-0 w-full h-full bg-blue-100 rounded-full opacity-30 animate-pulse" />
+            <div className="p-4 bg-blue-100 rounded-2xl border-2 border-blue-200">
+              <UserGroupIcon className="w-12 h-12 text-blue-700" />
             </div>
           </div>
 
           <div className="space-y-2">
-            <h3 className="text-2xl font-bold text-green-900">No Unpaid Referrals</h3>
-            <p className="text-green-700">All referrals have been settled</p>
+            <h3 className="text-2xl font-bold text-blue-900">No Unpaid Referrals</h3>
+            <p className="text-blue-700">All referrals have been settled</p>
           </div>
         </motion.div>
       </div>
@@ -138,8 +138,8 @@ export default function AdminReferralsPage() {
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
-                <div className="p-3 bg-green-100 rounded-full">
-                  <CurrencyDollarIcon className="w-6 h-6 text-green-600" />
+                <div className="p-3 bg-blue-100 rounded-full">
+                  <CurrencyDollarIcon className="w-6 h-6 text-blue-600" />
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900">Referral #{referral.id}</h3>
@@ -165,14 +165,14 @@ export default function AdminReferralsPage() {
 
               <div className="flex items-center space-x-4">
                 <div className="text-right">
-                  <p className="text-2xl font-bold text-green-600">${referral.amount.toFixed(2)}</p>
+                  <p className="text-2xl font-bold text-blue-600">${referral.amount.toFixed(2)}</p>
                   <p className="text-sm text-gray-500">Referral Amount</p>
                 </div>
 
                 <button
                   onClick={() => handleSettleReferral(referral.id)}
                   disabled={settlingReferral === referral.id}
-                  className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
                   {settlingReferral === referral.id ? (
                     <>

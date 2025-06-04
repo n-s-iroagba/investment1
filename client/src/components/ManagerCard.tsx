@@ -18,25 +18,25 @@ interface ManagerCardProps {
 
 export default function ManagerCard({ manager, showInvestButton = true }: ManagerCardProps) {
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-green-200 transition-all duration-300 overflow-hidden group">
+    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-blue-200 transition-all duration-300 overflow-hidden group">
       {/* Mobile Layout - Vertical card */}
       <div className="block lg:hidden">
         <div className="p-6 text-center">
           {/* Status Indicator */}
           <div className="flex justify-between items-start mb-4">
             <div className="flex items-center gap-1">
-              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-              <span className="text-xs text-green-600 font-medium">Available</span>
+              <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
+              <span className="text-xs text-blue-600 font-medium">Available</span>
             </div>
             <div className="text-right">
-              <div className="text-2xl font-bold text-green-900">{manager.percentageYield}%</div>
+              <div className="text-2xl font-bold text-blue-900">{manager.percentageYield}%</div>
               <div className="text-xs text-gray-500">Annual Yield</div>
             </div>
           </div>
 
           {/* Manager Image */}
           <div className="w-24 h-24 mx-auto mb-4 relative">
-            <div className="p-1 rounded-full border-2 border-green-100 bg-white w-full h-full">
+            <div className="p-1 rounded-full border-2 border-blue-100 bg-white w-full h-full">
               <Image
                 src={(manager.image as string) || "/placeholder.svg"}
                 alt={`${manager.firstName} ${manager.lastName}`}
@@ -64,7 +64,7 @@ export default function ManagerCard({ manager, showInvestButton = true }: Manage
               <div className="flex items-center justify-center gap-1 mb-1">
                 <CalendarIcon className="w-4 h-4 text-gray-500" />
               </div>
-              <div className="text-sm font-semibold text-gray-900">{manager.duration}m</div>
+              <div className="text-sm font-semibold text-gray-900">{manager.duration} days</div>
               <div className="text-xs text-gray-500">Duration</div>
             </div>
             <div className="bg-gray-50 p-3 rounded-lg">
@@ -72,7 +72,7 @@ export default function ManagerCard({ manager, showInvestButton = true }: Manage
                 <CurrencyDollarIcon className="w-4 h-4 text-gray-500" />
               </div>
               <div className="text-sm font-semibold text-gray-900">
-                {manager.minimumInvestmentAmount > 0 ? `$${manager.minimumInvestmentAmount.toLocaleString()}` : "Any"}
+                {manager.minimumInvestmentAmount > 0 ? `$${manager.minimumInvestmentAmount.toLocaleString()}` : "Any Amount"}
               </div>
               <div className="text-xs text-gray-500">Min. Investment</div>
             </div>
@@ -82,7 +82,7 @@ export default function ManagerCard({ manager, showInvestButton = true }: Manage
           {showInvestButton && (
             <Link
               href={`/investment/new/${manager.id}`}
-              className="w-full bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-2 font-medium"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-2 font-medium"
             >
               Invest Now
               <ArrowRightIcon className="w-4 h-4" />
@@ -98,7 +98,7 @@ export default function ManagerCard({ manager, showInvestButton = true }: Manage
           <div className="flex items-center flex-1 min-w-0">
             {/* Manager Image */}
             <div className="w-16 h-16 flex-shrink-0 mr-4">
-              <div className="p-1 rounded-full border-2 border-green-100 bg-white w-full h-full">
+              <div className="p-1 rounded-full border-2 border-blue-100 bg-white w-full h-full">
                 <Image
                   src={(manager.image as string) || "/placeholder.svg"}
                   alt={`${manager.firstName} ${manager.lastName}`}
@@ -116,8 +116,8 @@ export default function ManagerCard({ manager, showInvestButton = true }: Manage
                   {manager.firstName} {manager.lastName}
                 </h3>
                 <div className="flex items-center gap-1 flex-shrink-0">
-                  <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                  <span className="text-xs text-green-600 font-medium">Available</span>
+                  <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
+                  <span className="text-xs text-blue-600 font-medium">Available</span>
                 </div>
               </div>
               <p className="text-sm text-gray-600 flex items-center gap-1 truncate">
@@ -131,10 +131,10 @@ export default function ManagerCard({ manager, showInvestButton = true }: Manage
           <div className="flex items-center gap-8 mx-8">
             <div className="text-center">
               <div className="flex items-center justify-center gap-1 mb-1">
-                <ChartBarIcon className="w-4 h-4 text-green-600" />
+                <ChartBarIcon className="w-4 h-4 text-blue-600" />
                 <span className="text-xs font-medium text-gray-500">Yield</span>
               </div>
-              <div className="text-xl font-bold text-green-600">{manager.percentageYield}%</div>
+              <div className="text-xl font-bold text-blue-600">{manager.percentageYield}%</div>
             </div>
 
             <div className="text-center">
@@ -161,7 +161,7 @@ export default function ManagerCard({ manager, showInvestButton = true }: Manage
             <div className="flex-shrink-0">
               <Link
                 href={`/investment/new/${manager.id}`}
-                className="bg-green-600 hover:bg-green-700 text-white py-2 px-6 rounded-xl transition-colors flex items-center gap-2 font-medium whitespace-nowrap"
+                className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-xl transition-colors flex items-center gap-2 font-medium whitespace-nowrap"
               >
                 Invest Now
                 <ArrowRightIcon className="w-4 h-4" />

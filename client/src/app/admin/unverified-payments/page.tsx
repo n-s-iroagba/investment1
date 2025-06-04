@@ -95,13 +95,13 @@ export default function PaymentDetailsPage() {
 
   return (
     <AdminOffCanvas>
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 p-4">
       <div className="max-w-4xl mx-auto space-y-6">
 
-        <div className="bg-white rounded-2xl shadow-lg border-2 border-green-100 p-6">
+        <div className="bg-white rounded-2xl shadow-lg border-2 border-blue-100 p-6">
           <div className="flex items-center gap-2 mb-6">
-            <CreditCardIcon className="w-6 h-6 text-green-700" />
-            <h2 className="text-xl font-semibold text-green-900">My Payments</h2>
+            <CreditCardIcon className="w-6 h-6 text-blue-700" />
+            <h2 className="text-xl font-semibold text-blue-900">My Payments</h2>
           </div>
 
           {paymentsLoading ? (
@@ -114,9 +114,9 @@ export default function PaymentDetailsPage() {
             </div>
           ) : payments.length === 0 ? (
             <div className="text-center py-8">
-              <ClockIcon className="w-12 h-12 text-green-300 mx-auto mb-4" />
-              <p className="text-green-600">No payments found for this portfolio</p>
-              <p className="text-green-500 text-sm mt-1">Upload your first payment proof to get started</p>
+              <ClockIcon className="w-12 h-12 text-blue-300 mx-auto mb-4" />
+              <p className="text-blue-600">No unverified payments yet.</p>
+              <p className="text-blue-500 text-sm mt-1">Unverified payments will appear here once the client uploads their screenshot</p>
             </div>
           ) : (
             <div className="space-y-4">

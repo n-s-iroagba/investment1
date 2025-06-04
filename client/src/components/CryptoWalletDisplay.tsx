@@ -35,25 +35,25 @@ export function CryptoWalletDisplay({ wallet }: CryptoWalletDisplayProps) {
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-2 mb-4">
-        <CurrencyDollarIcon className="w-6 h-6 text-green-700" />
-        <h3 className="text-lg font-semibold text-green-900">
+        <CurrencyDollarIcon className="w-6 h-6 text-blue-700" />
+        <h3 className="text-lg font-semibold text-blue-900">
           Send Your Payment To This Wallet
         </h3>
       </div>
 
-      <div className="bg-green-50 border-2 border-green-200 rounded-xl p-6 space-y-4">
+      <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-6 space-y-4">
         {/* Currency */}
         <div>
-          <label className="block text-sm font-medium text-green-700 mb-1">
+          <label className="block text-sm font-medium text-blue-700 mb-1">
             Currency
           </label>
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center">
+            <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
               <span className="text-white font-bold text-sm">
                 {wallet.currency.substring(0, 2).toUpperCase()}
               </span>
             </div>
-            <span className="font-semibold text-green-900 text-lg">
+            <span className="font-semibold text-blue-900 text-lg">
               {wallet.currency.toUpperCase()}
             </span>
           </div>
@@ -61,13 +61,13 @@ export function CryptoWalletDisplay({ wallet }: CryptoWalletDisplayProps) {
 
         {/* Deposit Address */}
         <div>
-          <label className="block text-sm font-medium text-green-700 mb-2">
+          <label className="block text-sm font-medium text-blue-700 mb-2">
             Deposit Address
           </label>
-          <div className="bg-white border-2 border-green-100 rounded-lg p-4">
+          <div className="bg-white border-2 border-blue-100 rounded-lg p-4">
             <div className="flex items-center justify-between gap-3">
               <div className="flex-1 min-w-0">
-                <p className="font-mono text-sm text-green-900 break-all">
+                <p className="font-mono text-sm text-blue-900 break-all">
                   {wallet.depositAddress}
                 </p>
               </div>
@@ -75,8 +75,8 @@ export function CryptoWalletDisplay({ wallet }: CryptoWalletDisplayProps) {
                 onClick={handleCopyAddress}
                 className={`flex-shrink-0 p-2 rounded-lg transition-all ${
                   copied 
-                    ? "bg-green-100 text-green-700" 
-                    : "bg-green-50 hover:bg-green-100 text-green-600 hover:text-green-700"
+                    ? "bg-blue-100 text-blue-700" 
+                    : "bg-blue-50 hover:bg-blue-100 text-blue-600 hover:text-blue-700"
                 }`}
                 title="Copy address"
               >
@@ -88,7 +88,7 @@ export function CryptoWalletDisplay({ wallet }: CryptoWalletDisplayProps) {
               </button>
             </div>
           </div>
-          <p className="text-xs text-green-600 mt-2">
+          <p className="text-xs text-blue-600 mt-2">
             Click the copy button to copy the wallet address
           </p>
         </div>

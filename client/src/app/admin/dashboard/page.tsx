@@ -99,7 +99,7 @@ const AdminDashboard = () => {
     return (
       <AdminOffCanvas>
       <div className="flex justify-center items-center h-screen px-4">
-        <Spinner className="w-8 h-8 text-green-600" />
+        <Spinner className="w-8 h-8 text-blue-600" />
       </div>
       </AdminOffCanvas>
     )
@@ -115,17 +115,17 @@ const AdminDashboard = () => {
       <div className="w-full">
         {/* Header - Responsive text sizing */}
         <div className="mb-4 sm:mb-6">
-          <h2 className="text-xl sm:text-2xl font-bold text-green-900 mb-2 flex items-center gap-2 flex-wrap">
-            <ExclamationTriangleIcon className="w-5 h-5 sm:w-6 sm:h-6 text-green-600 flex-shrink-0" />
+          <h2 className="text-xl sm:text-2xl font-bold text-blue-900 mb-2 flex items-center gap-2 flex-wrap">
+            <ExclamationTriangleIcon className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 flex-shrink-0" />
             <span className="break-words">Welcome back, {displayName}!</span>
           </h2>
-          <h3 className="text-base sm:text-lg font-semibold text-green-700">Admin Tasks</h3>
+          <h3 className="text-base sm:text-lg font-semibold text-blue-700">Admin Tasks</h3>
         </div>
 
         {/* Loading/Error States */}
         {walletLoading || managerLoading || socialMediaLoading||paymentLoading||kycLoading   ? (
           <div className="flex justify-center items-center h-32">
-            <Spinner className="w-8 h-8 text-green-600" />
+            <Spinner className="w-8 h-8 text-blue-600" />
           </div>
         ) : walletError || managerError || socialMediaError || paymentError || kycError ? (
           <div className="p-3 sm:p-4 bg-red-50 rounded-lg border border-red-200 text-red-700 text-sm sm:text-base">
@@ -143,8 +143,8 @@ const AdminDashboard = () => {
                 ))}
               </div>
             ) : (
-              <div className="p-4 sm:p-6 bg-green-50 rounded-lg sm:rounded-xl border border-green-200 text-center">
-                <p className="text-green-700 font-medium text-sm sm:text-base">
+              <div className="p-4 sm:p-6 bg-blue-50 rounded-lg sm:rounded-xl border border-blue-200 text-center">
+                <p className="text-blue-700 font-medium text-sm sm:text-base">
                   🎉 All caught up! No pending tasks
                 </p>
               </div>

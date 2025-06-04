@@ -99,7 +99,7 @@ const {roleId} = useAuth()
   if (portfolioLoading) {
     return (
 
-      <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center">
         <Spinner className="w-8 h-8" />
       </div>
     )
@@ -108,7 +108,7 @@ const {roleId} = useAuth()
   if (portfolioError) {
     return (
       
-      <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center p-4">
         <div className="bg-white rounded-2xl shadow-lg p-8 text-center">
           <p className="text-red-600">Error loading portfolio details</p>
         </div>
@@ -122,23 +122,23 @@ const {roleId} = useAuth()
 
   return (
     <InvestorOffCanvas>
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 p-4">
       <div className="max-w-4xl mx-auto space-y-6">
         {/* Header */}
-        <div className="bg-white rounded-2xl shadow-lg border-2 border-green-100 p-6">
+        <div className="bg-white rounded-2xl shadow-lg border-2 border-blue-100 p-6">
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-              <BanknotesIcon className="w-6 h-6 text-green-700" />
+            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+              <BanknotesIcon className="w-6 h-6 text-blue-700" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-green-900">Payment Details</h1>
-              <p className="text-green-600">Portfolio ID: {(portfolio?.id||0) + 30000}</p>
+              <h1 className="text-2xl font-bold text-blue-900">Payment Details</h1>
+              <p className="text-blue-600">Portfolio ID: {(portfolio?.id||0) + 30000}</p>
             </div>
           </div>
         </div>
 
         {/* Crypto Wallet or Social Media Links */}
-        <div className="bg-white rounded-2xl shadow-lg border-2 border-green-100 p-6">
+        <div className="bg-white rounded-2xl shadow-lg border-2 border-blue-100 p-6">
           {portfolio?.cryptoWallet ? (
             <CryptoWalletDisplay wallet={portfolio.cryptoWallet} />
           ) : (
@@ -147,33 +147,33 @@ const {roleId} = useAuth()
         </div>
 
         {/* Upload Payment Proof Button */}
-        <div className="bg-white rounded-2xl shadow-lg border-2 border-green-100 p-6">
+        <div className="bg-white rounded-2xl shadow-lg border-2 border-blue-100 p-6">
           <div className="text-center">
             <button
               onClick={() => setShowUploadModal(true)}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-all shadow-lg hover:shadow-xl"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl"
             >
               <PlusIcon className="w-5 h-5" />
               Upload Payment Proof
             </button>
-            <p className="text-green-600 text-sm mt-2">
+            <p className="text-blue-600 text-sm mt-2">
               Upload your payment receipt to get your investment verified
             </p>
           </div>
         </div>
 
         {/* My Payments Section */}
-        <div className="bg-white rounded-2xl shadow-lg border-2 border-green-100 p-6">
+        <div className="bg-white rounded-2xl shadow-lg border-2 border-blue-100 p-6">
           <div className="flex items-center gap-2 mb-6">
-            <CreditCardIcon className="w-6 h-6 text-green-700" />
-            <h2 className="text-xl font-semibold text-green-900">My Payments</h2>
+            <CreditCardIcon className="w-6 h-6 text-blue-700" />
+            <h2 className="text-xl font-semibold text-blue-900">My Payments</h2>
           </div>
 
        { portfolioPayments.length === 0 ? (
             <div className="text-center py-8">
-              <ClockIcon className="w-12 h-12 text-green-300 mx-auto mb-4" />
-              <p className="text-green-600">No payments found for this portfolio</p>
-              <p className="text-green-500 text-sm mt-1">Upload your first payment proof to get started</p>
+              <ClockIcon className="w-12 h-12 text-blue-300 mx-auto mb-4" />
+              <p className="text-blue-600">No payments found for this portfolio</p>
+              <p className="text-blue-500 text-sm mt-1">Upload your first payment proof to get started</p>
             </div>
           ) : (
             <div className="space-y-4">

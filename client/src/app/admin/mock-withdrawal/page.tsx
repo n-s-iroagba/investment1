@@ -26,27 +26,27 @@ export default function WithdrawalForm() {
 
   return (
     <AdminOffCanvas>
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 p-4 flex items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 p-4 flex items-center justify-center">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-white rounded-2xl shadow-xl border-2 border-green-100 p-8 max-w-md w-full relative overflow-hidden"
+        className="bg-white rounded-2xl shadow-xl border-2 border-blue-100 p-8 max-w-md w-full relative overflow-hidden"
       >
         {/* Decorative Elements */}
-        <div className="absolute top-0 right-0 w-24 h-24 bg-green-100/30 rounded-full -translate-y-1/2 translate-x-1/2" />
-        <div className="absolute bottom-0 left-0 w-24 h-24 bg-green-100/30 rounded-full translate-y-1/2 -translate-x-1/2" />
+        <div className="absolute top-0 right-0 w-24 h-24 bg-blue-100/30 rounded-full -translate-y-1/2 translate-x-1/2" />
+        <div className="absolute bottom-0 left-0 w-24 h-24 bg-blue-100/30 rounded-full translate-y-1/2 -translate-x-1/2" />
 
         <div className="text-center mb-8">
-          <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
-            <ArrowDownTrayIcon className="w-8 h-8 text-green-700 animate-bounce" />
+          <div className="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+            <ArrowDownTrayIcon className="w-8 h-8 text-blue-700 animate-bounce" />
           </div>
-          <h1 className="text-3xl font-bold text-green-900 mb-2">Create A Withdrawal Screenshot</h1>
+          <h1 className="text-3xl font-bold text-blue-900 mb-2">Create A Withdrawal Screenshot</h1>
        
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-green-700 mb-2 flex items-center gap-2">
+            <label className="block text-sm font-medium text-blue-700 mb-2 flex items-center gap-2">
               <UserCircleIcon className="w-5 h-5" />
               Account Name
             </label>
@@ -54,13 +54,13 @@ export default function WithdrawalForm() {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full p-3 rounded-xl border-2 border-green-100 focus:border-green-500 focus:ring-2 focus:ring-green-200 placeholder-green-300"
+              className="w-full p-3 rounded-xl border-2 border-blue-100 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 placeholder-blue-300"
               placeholder="John Doe"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-green-700 mb-2 flex items-center gap-2">
+            <label className="block text-sm font-medium text-blue-700 mb-2 flex items-center gap-2">
               <CurrencyDollarIcon className="w-5 h-5" />
               Withdrawal Amount
             </label>
@@ -68,7 +68,7 @@ export default function WithdrawalForm() {
               type="number"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              className="w-full p-3 rounded-xl border-2 border-green-100 focus:border-green-500 focus:ring-2 focus:ring-green-200 placeholder-green-300"
+              className="w-full p-3 rounded-xl border-2 border-blue-100 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 placeholder-blue-300"
               placeholder="500.00"
             />
           </div>
@@ -79,7 +79,7 @@ export default function WithdrawalForm() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             type="submit"
-            className="w-full py-4 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-xl font-semibold hover:from-green-700 hover:to-green-800 transition-all"
+            className="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-blue-800 transition-all"
           >
             Process Withdrawal
           </motion.button>
@@ -120,14 +120,14 @@ export default function WithdrawalForm() {
                       animate={{ pathLength: 1 }}
                       transition={{ duration: 0.5 }}
                     />
-                    <CheckCircleIcon className="w-16 h-16 text-green-600 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                    <CheckCircleIcon className="w-16 h-16 text-blue-600 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
                   </svg>
                 </div>
 
-                <h2 className="text-2xl font-bold text-green-900 mb-2">
+                <h2 className="text-2xl font-bold text-blue-900 mb-2">
                   Withdrawal Successful!
                 </h2>
-                <p className="text-green-600 mb-4">
+                <p className="text-blue-600 mb-4">
                   <span className="font-semibold">{name}</span>, your withdrawal of{" "}
                   <span className="font-semibold">${amount}</span> is being processed.
                 </p>
@@ -138,7 +138,7 @@ export default function WithdrawalForm() {
                     setAmount('');
                     setName('');
                   }}
-                  className="px-6 py-2 bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition-colors"
+                  className="px-6 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-colors"
                 >
                   Close
                 </button>

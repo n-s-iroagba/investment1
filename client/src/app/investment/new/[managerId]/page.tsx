@@ -56,9 +56,34 @@ console.log(params)
     error: walletsError,
   } = useGetList<AdminWallet>(apiRoutes.adminWallet.list());
 
-  if (managerLoading || walletsLoading) return <p>Loading...</p>;
-  if (managerError || walletsError) return <p>Error loading data</p>;
-  if (!manager) return <p>No manager found</p>;
+  if (managerLoading || walletsLoading) 
+      return (
+        <InvestorOffCanvas>
+          <div className="flex items-center justify-center py-12">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+              <p className="text-gray-600">Loading...</p>
+            </div>
+          </div>
+        </InvestorOffCanvas>
+      );
+    
+  if (managerError || walletsError)  return (
+      
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center p-4">
+        <div className="bg-white rounded-2xl shadow-lg p-8 text-center">
+          <p className="text-red-600">Error loading new investment details</p>
+        </div>
+      </div>
+    )
+  if (!manager) return  
+      
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center p-4">
+        <div className="bg-white rounded-2xl shadow-lg p-8 text-center">
+          <p className="text-red-600">Error loading chosen manager</p>
+        </div>
+      </div>
+  
 
   if (!managerId) return <div>No managerId</div>;
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -116,17 +141,17 @@ console.log(params)
 
   return (
     <InvestorOffCanvas>
-    <div className="bg-white p-6 rounded-2xl shadow-sm border-2 border-green-50 relative max-w-2xl mx-auto">
+    <div className="bg-white p-6 rounded-2xl shadow-sm border-2 border-blue-50 relative max-w-2xl mx-auto">
       {/* Decorative Corner Borders */}
-      <div className="absolute top-2 right-2 w-8 h-8 border-t-2 border-r-2 border-green-800 opacity-20" />
-      <div className="absolute bottom-2 left-2 w-8 h-8 border-b-2 border-l-2 border-green-800 opacity-20" />
+      <div className="absolute top-2 right-2 w-8 h-8 border-t-2 border-r-2 border-blue-800 opacity-20" />
+      <div className="absolute bottom-2 left-2 w-8 h-8 border-b-2 border-l-2 border-blue-800 opacity-20" />
 
       <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold text-green-900 flex items-center justify-center gap-2">
-          <CurrencyDollarIcon className="w-8 h-8 text-green-700" />
+        <h2 className="text-2xl font-bold text-blue-900 flex items-center justify-center gap-2">
+          <CurrencyDollarIcon className="w-8 h-8 text-blue-700" />
           Create Managed Portfolio
         </h2>
-        <p className="text-green-600 mt-2">Start your investment journey with {manager?.firstName}</p>
+        <p className="text-blue-600 mt-2">Start your investment journey with {manager?.firstName}</p>
       </div>
 
       {message && (
@@ -138,20 +163,20 @@ console.log(params)
       <form className="space-y-6" onSubmit={submitInvestment} noValidate>
         {/* Manager Input */}
         <div className="space-y-1">
-          <label className="block text-sm font-medium text-green-700 flex items-center gap-1">
+          <label className="block text-sm font-medium text-blue-700 flex items-center gap-1">
             <UserCircleIcon className="w-4 h-4" />
             Investment Manager
           </label>
           <input
             value={`${manager?.firstName} ${manager?.lastName}`}
             readOnly
-            className="w-full p-3 rounded-xl border-2 border-green-100 bg-green-50 focus:border-green-500 focus:ring-2 focus:ring-green-200"
+            className="w-full p-3 rounded-xl border-2 border-blue-100 bg-blue-50 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
           />
         </div>
 
         {/* Amount Input */}
         <div className="space-y-1">
-          <label className="block text-sm font-medium text-green-700 flex items-center gap-1">
+          <label className="block text-sm font-medium text-blue-700 flex items-center gap-1">
             <BanknotesIcon className="w-4 h-4" />
             Investment Amount (USD)
           </label>
@@ -160,24 +185,24 @@ console.log(params)
             value={amount}
             onChange={handleAmountChange}
             className={`w-full p-3 rounded-xl border-2 ${
-              message.includes('Minimum') ? 'border-red-300' : 'border-green-100'
-            } focus:border-green-500 focus:ring-2 focus:ring-green-200`}
+              message.includes('Minimum') ? 'border-red-300' : 'border-blue-100'
+            } focus:border-blue-500 focus:ring-2 focus:ring-blue-200`}
           />
-          <p className="text-sm text-green-600 mt-1">
+          <p className="text-sm text-blue-600 mt-1">
             Minimum: ${manager.minimumInvestmentAmount}
           </p>
         </div>
 
         {/* Deposit Means */}
         <div className="space-y-1">
-          <label className="block text-sm font-medium text-green-700 flex items-center gap-1">
+          <label className="block text-sm font-medium text-blue-700 flex items-center gap-1">
             <WalletIcon className="w-4 h-4" />
             Deposit Method
           </label>
           <select
             value={depositMeans}
             onChange={(e) => setDepositMeans(e.target.value)}
-            className="w-full p-3 rounded-xl border-2 border-green-100 focus:border-green-500 focus:ring-2 focus:ring-green-200"
+            className="w-full p-3 rounded-xl border-2 border-blue-100 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
           >
             <option value="">Select deposit method</option>
             <option value="CRYPTO">Crypto Currency</option>
@@ -189,7 +214,7 @@ console.log(params)
 {depositMeans === "CRYPTO" && (
   <div className="space-y-4">
     <div className="space-y-1">
-      <label className="block text-sm font-medium text-green-700">
+      <label className="block text-sm font-medium text-blue-700">
         Select Currency
       </label>
       <select
@@ -200,7 +225,7 @@ console.log(params)
             setSelectedWallet({ id: wallet.id, currency: wallet.currency });
           }
         }}
-        className="w-full p-3 rounded-xl border-2 border-green-100 focus:border-green-500 focus:ring-2 focus:ring-green-200"
+        className="w-full p-3 rounded-xl border-2 border-blue-100 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
       >
         <option value="">Select currency</option>
         {wallets.map((wallet) => (
@@ -212,15 +237,15 @@ console.log(params)
     </div>
 
     <div className="space-y-1">
-      <label className="block text-sm font-medium text-green-700">
+      <label className="block text-sm font-medium text-blue-700">
         Wallet Address
       </label>
       <input
         value={address}
         onChange={handleAddressChange}
         className={`w-full p-3 rounded-xl border-2 ${
-          !walletVerified ? 'border-red-300' : 'border-green-100'
-        } focus:border-green-500 focus:ring-2 focus:ring-green-200`}
+          !walletVerified ? 'border-red-300' : 'border-blue-100'
+        } focus:border-blue-500 focus:ring-2 focus:ring-blue-200`}
       />
       {!walletVerified && (
         <p className="text-red-600 text-sm mt-1">Invalid wallet address</p>
@@ -235,7 +260,7 @@ console.log(params)
           <button
             type="submit"
             disabled={submitting}
-            className="flex-1 py-3 bg-green-700 text-white rounded-xl hover:bg-green-800 disabled:bg-green-400 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
+            className="flex-1 py-3 bg-blue-700 text-white rounded-xl hover:bg-blue-800 disabled:bg-blue-400 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
           >
             {submitting ? (
               <>
@@ -249,7 +274,7 @@ console.log(params)
           <button
             type="button"
             onClick={() => router.push("/investor/dashboard")}
-            className="flex-1 py-3 border-2 border-green-200 text-green-800 rounded-xl hover:bg-green-50 transition-all"
+            className="flex-1 py-3 border-2 border-blue-200 text-blue-800 rounded-xl hover:bg-blue-50 transition-all"
           >
             Cancel
           </button>

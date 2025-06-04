@@ -33,29 +33,29 @@ export default function Page() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-green-100">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100">
         <div className="text-center">
           <Spinner className="w-12 h-12 mx-auto mb-4" />
-          <p className="text-green-700">Loading...</p>
+          <p className="text-blue-700">Loading...</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
       <PopupToast/>
       {/* Hero Section */}
       <div className="relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-green-900 mb-6">
+            <h1 className="text-4xl md:text-6xl font-bold text-blue-900 mb-6">
               Welcome to{" "}
-              <p className="bg-gradient-to-r from-green-600 to-green-800 bg-clip-text text-transparent">
+              <p className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
                 Wealth Funding TradeStation Opportunities
               </p>
             </h1>
-            <p className="text-xl text-green-700 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl text-blue-700 mb-8 max-w-3xl mx-auto">
               Your trusted platform for professional investment management. Connect with expert fund managers and grow
               your wealth with confidence.
             </p>
@@ -63,13 +63,13 @@ export default function Page() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
                 onClick={() => router.push("/investor/signup")}
-                className="px-8 py-4 bg-green-700 text-white rounded-xl hover:bg-green-800 transition-colors font-semibold text-lg"
+                className="px-8 py-4 bg-blue-700 text-white rounded-xl hover:bg-blue-800 transition-colors font-semibold text-lg"
               >
                 Start Investing
               </button>
               <button
                 onClick={() => router.push("/login")}
-                className="px-8 py-4 border-2 border-green-700 text-green-700 rounded-xl hover:bg-green-700 hover:text-white transition-colors font-semibold text-lg"
+                className="px-8 py-4 border-2 border-blue-700 text-blue-700 rounded-xl hover:bg-blue-700 hover:text-white transition-colors font-semibold text-lg"
               >
                 Sign In
               </button>
@@ -89,8 +89,8 @@ export default function Page() {
       <div className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-green-900 mb-4">Why Choose Us?</h2>
-            <p className="text-xl text-green-700 max-w-2xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4">Why Choose Us?</h2>
+            <p className="text-xl text-blue-700 max-w-2xl mx-auto">
               We provide the tools and expertise you need to make informed investment decisions
             </p>
           </div>
@@ -120,13 +120,13 @@ export default function Page() {
             ].map((feature, index) => (
               <div
                 key={index}
-                className="text-center p-6 rounded-2xl border-2 border-green-100 hover:border-green-200 transition-colors"
+                className="text-center p-6 rounded-2xl border-2 border-blue-100 hover:border-blue-200 transition-colors"
               >
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <feature.icon className="w-8 h-8 text-green-700" />
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <feature.icon className="w-8 h-8 text-blue-700" />
                 </div>
-                <h3 className="text-xl font-semibold text-green-900 mb-2">{feature.title}</h3>
-                <p className="text-green-700">{feature.description}</p>
+                <h3 className="text-xl font-semibold text-blue-900 mb-2">{feature.title}</h3>
+                <p className="text-blue-700">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -139,15 +139,15 @@ export default function Page() {
       <MiniChart colorTheme="light" width="100%"></MiniChart>
     </div>
       {/* CTA Section */}
-      <div className="py-24 bg-green-900">
+      <div className="py-24 bg-blue-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Start Your Investment Journey?</h2>
-          <p className="text-xl text-green-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
             Join thousands of investors who trust InvestPro with their financial future
           </p>
           <button
             onClick={() => router.push("/investor/signup")}
-            className="px-8 py-4 bg-white text-green-900 rounded-xl hover:bg-green-50 transition-colors font-semibold text-lg"
+            className="px-8 py-4 bg-white text-blue-900 rounded-xl hover:bg-blue-50 transition-colors font-semibold text-lg"
           >
             Get Started Today
           </button>

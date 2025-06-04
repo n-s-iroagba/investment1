@@ -14,7 +14,7 @@ const ManagerList = () => {
       <InvestorOffCanvas>
         <div className="flex items-center justify-center py-12">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto mb-4"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
             <p className="text-gray-600">Loading managers...</p>
           </div>
         </div>
@@ -81,9 +81,9 @@ const ManagerList = () => {
 
         {/* Mobile Header */}
         <div className="block lg:hidden mb-6">
-          <div className="bg-gradient-to-r from-green-50 to-green-100 rounded-xl p-4">
-            <h2 className="text-xl font-bold text-green-900 mb-1">Investment Managers</h2>
-            <p className="text-sm text-green-700">{data.length} manager{data.length !== 1 ? 's' : ''} available</p>
+          <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-4">
+            <h2 className="text-xl font-bold text-blue-900 mb-1">Investment Managers</h2>
+            <p className="text-sm text-blue-700">{data.length} manager{data.length !== 1 ? 's' : ''} available</p>
           </div>
         </div>
 
