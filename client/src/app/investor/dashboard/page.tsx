@@ -6,7 +6,7 @@ import { UploadProofModal } from "@/components/UploadProofModal"
 import { useAuth } from "@/hooks/useAuth"
 import type { ManagedPortfolio } from "@/types/managedPortfolio"
 import type { Payment } from "@/types/Payment"
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import dynamic from "next/dynamic"
 import {
@@ -95,23 +95,11 @@ const InvestorDashboard = () => {
     }
   }
 
-const hasRefetched = useRef(0)
 
 useEffect(() => {
   // Wait until auth finishes loading
-  if (!authLoading  && hasRefetched.current ==0) {
-
-      // Mark that we've refetched once
-      hasRefetched.current +=1
-
+  if (!authLoading) {
        window.location.reload()
-      if(hasRefetched.current ==2){
-         router.push('/login')
-      }
-
- 
-
-
   }
 }, [authLoading,  router])
 
