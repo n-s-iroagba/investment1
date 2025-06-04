@@ -15,6 +15,7 @@ import {
 import { motion } from "framer-motion" 
 import { ManagedPortfolio } from "@/types/managedPortfolio"
 import { VerificationFee } from "@/types/VerificationFee"
+import { useRouter } from "next/navigation"
 
 interface WithdrawalStatus {
   canWithdraw: boolean
@@ -26,6 +27,7 @@ interface WithdrawalStatus {
 
 export default function InvestorWithdraw() {
   const { roleId } = useAuth()
+  const router = useRouter()
 
   const {data: verificationFees, loading: feeLoading, error: feeError} = useGetList<VerificationFee>(apiRoutes.verificationFee.investorUpaid(roleId))
   const {data: investment, loading: investLoading, error: investError} = useGetSingle<ManagedPortfolio>(apiRoutes.investment.getInvestment(roleId))
@@ -337,7 +339,9 @@ export default function InvestorWithdraw() {
                           <div className="text-base sm:text-lg font-semibold text-orange-900">
                             {formatCurrency(fee.amount)}
                           </div>
-                          <button className="px-3 py-1.5 sm:py-1 bg-orange-600 text-white text-xs sm:text-sm rounded-lg hover:bg-orange-700 transition-colors whitespace-nowrap">
+                          <button className="px-3 py-1.5 sm:py-1 bg-orange-600 text-white text-xs sm:text-sm rounded-lg hover:bg-orange-700 transition-colors whitespace-nowrap"
+                          onClick={()=>router.push(`/investor/payments/${roleId}`)}
+                          >
                             Pay Now
                           </button>
                         </div>

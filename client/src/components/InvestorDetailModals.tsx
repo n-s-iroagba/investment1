@@ -200,8 +200,8 @@ export function CreditModal({ isOpen, onClose, portfolioId, amountDeposited, ear
             <label className="block text-sm font-medium text-blue-700 mb-2">Credit Amount ($)</label>
             <input
               type="number"
-              step="0.01"
-              min="0"
+         
+       
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
               className="w-full p-3 border-2 border-blue-100 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
@@ -313,8 +313,7 @@ export function VerificationFeeCreationtModal({
             <label className="block text-sm font-medium text-blue-700 mb-2">Fee Amount ($)</label>
             <input
               type="number"
-              step="0.01"
-              min="0"
+          
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
               className="w-full p-3 border-2 border-blue-100 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200"

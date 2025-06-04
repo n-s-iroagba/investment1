@@ -95,6 +95,7 @@ export default function InvestorOffCanvas({ children }: InvestorOffcanvasProps) 
               { href: "/investor/manager-list", text: "Invest", icon: UserGroupIcon },
               { href: "/investor/referrals", text: "My Referrals", icon: UserGroupIcon },
                  { href: "/investor/withdraw", text: "Withdraw", icon: CurrencyDollarIcon },
+            
 
             ].map((item, index) => (
               <Link

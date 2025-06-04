@@ -116,9 +116,7 @@ const {roleId} = useAuth()
     )
   }
 
-  const portfolioPayments = portfolio?.payments?.filter(payment => 
-    payment.paymentType === 'INVESTMENT' 
-  ) || []
+  const portfolioPayments = portfolio?.payments||[]
 
   return (
     <InvestorOffCanvas>
