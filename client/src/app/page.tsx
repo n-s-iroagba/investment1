@@ -15,7 +15,8 @@ import ReferAndEarn from "@/components/ReferAndEarn"
 import Contact from "@/components/Contact"
 import PopupToast from "@/components/PopupToast"
 import Testimonial from "@/components/Testimonial"
-
+import Image from "next/image"
+import logo from '../assets/logo/logo.png'
 export default function Page() {
   const { loading } = useAuth()
   const router = useRouter()
@@ -46,6 +47,9 @@ export default function Page() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
       <PopupToast/>
       {/* Hero Section */}
+      <div className=" flex items-center justify-center">
+        <Image src={logo} alt={""}        />
+      </div>
       <div className="relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="text-center">
