@@ -126,7 +126,7 @@ export default function PaymentList({ payments, isAdmin }: PaymentListProps) {
                 <div className="w-full md:w-32 h-32 relative group/image">
                   <div className="p-1 rounded-lg border-2 border-blue-100 bg-white flex justify-center overflow-hidden">
                     <Image
-                      src={payment.receipt || '/default-receipt.png'}
+                      src={payment.imageUrl || '/default-receipt.png'}
                       alt={`Payment receipt for ${payment.amount}`}
                       className="rounded-lg object-cover"
                       width={128}

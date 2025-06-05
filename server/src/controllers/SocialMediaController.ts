@@ -11,7 +11,7 @@ class SocialMediaController {
       const { name, link } = req.body;
 
           const file = req.file
-             if(!file || file.buffer){
+             if(!file || !file.buffer){
         throw  new CustomError(403,'no file in request body')
     }
       

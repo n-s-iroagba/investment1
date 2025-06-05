@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { useGetList } from "@/hooks/useFetch"
 import { apiRoutes } from "@/constants/apiRoutes"
 import type { SocialMedia } from "@/types/socialMedia"
@@ -7,8 +8,54 @@ import { Spinner } from "./Spinner"
 import { ShareIcon, ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline"
 import Image from "next/image"
 
+interface SocialMediaWithImage extends SocialMedia {
+  imageUrl: string
+}
+
 export default function SocialMediaLinks() {
   const { data: socialMediaLinks, loading, error } = useGetList<SocialMedia>(apiRoutes.socialMedia.list())
+  const [processedLinks, setProcessedLinks] = useState<SocialMediaWithImage[]>([])
+
+  useEffect(() => {
+    if (!socialMediaLinks) return
+
+    const convertImage = (logo:unknown): string => {
+      if (!logo) return "/default-avatar.png"
+
+      try {
+        if (typeof logo === "string") {
+          return logo.startsWith("data:") ? logo : `data:image/jpeg;base64,${logo}`
+        }
+
+        if (Array.isArray(logo)) {
+          const uint8Array = new Uint8Array(logo)
+          const blob = new Blob([uint8Array], { type: "image/jpeg" })
+          return URL.createObjectURL(blob)
+        }
+
+        return "/default-avatar.png"
+      } catch (err) {
+        console.error("Error converting social media image:", err)
+        return "/default-avatar.png"
+      }
+    }
+
+    const updated = socialMediaLinks.map((link) => ({
+      ...link,
+      imageUrl: convertImage(link.logo),
+    }))
+
+    setProcessedLinks(updated)
+
+    return () => {
+      // Cleanup object URLs if any were created
+      updated.forEach(link => {
+        if (Array.isArray(link.logo)) {
+          URL.revokeObjectURL(link.imageUrl)
+        }
+      })
+    }
+  }, [socialMediaLinks])
 
   if (loading) {
     return (
@@ -26,7 +73,7 @@ export default function SocialMediaLinks() {
     )
   }
 
-  if (!socialMediaLinks || socialMediaLinks.length === 0) {
+  if (!processedLinks || processedLinks.length === 0) {
     return (
       <div className="text-center p-4 bg-gray-50 rounded-lg">
         <ShareIcon className="w-8 h-8 text-gray-400 mx-auto mb-2" />
@@ -43,7 +90,7 @@ export default function SocialMediaLinks() {
       </h3>
 
       <div className="grid gap-3">
-        {socialMediaLinks.map((link) => (
+        {processedLinks.map((link) => (
           <a
             key={link.id}
             href={link.link}
@@ -53,11 +100,14 @@ export default function SocialMediaLinks() {
           >
             <div className="w-8 h-8 relative">
               <Image
-                src={link.logo}
+                src={link.imageUrl}
                 alt={`${link.name} logo`}
                 width={32}
                 height={32}
                 className="object-contain"
+                onError={(e) => {
+                  e.currentTarget.src = "/default-avatar.png"
+                }}
               />
             </div>
 

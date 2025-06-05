@@ -16,8 +16,8 @@ export class Referral extends Model<
 > {
   declare id: CreationOptional<number>;
   declare amount: CreationOptional<number>;;
-  declare referrerId: ForeignKey<Investor['id']>;
-  declare referredId: ForeignKey<Investor['id']>;
+  declare referrerId: number;
+  declare referredId: number;
   declare settled: boolean;
 
   declare referrer: NonAttribute<Investor>;
@@ -59,24 +59,17 @@ Referral.init(
 );
 
 // Associations
-Investor.hasMany(Referral, {
-  foreignKey: 'referrerId',
-  as: 'referralsGiven',
-});
+// Investor.hasMany(Referral, {
+//   foreignKey: 'referrerId',
+//   as: 'referralsGiven',
+// });
 
-Investor.hasMany(Referral, {
-  foreignKey: 'referredId',
-  as: 'referralsReceived',
-});
 
-Referral.belongsTo(Investor, {
-  foreignKey: 'referrerId',
-  as: 'referrer',
-});
+// Referral.belongsTo(Investor, {
+//   foreignKey: 'referrerId',
+//   as: 'referrer',
+// });
 
-Referral.belongsTo(Investor, {
-  foreignKey: 'referredId',
-  as: 'referred',
-});
+
 
 export default Referral;

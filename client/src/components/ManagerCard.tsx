@@ -32,14 +32,14 @@ export default function ManagerCard({ manager, showInvestButton = true }: Manage
             }
             return;
           }
-          
+
           // If it's an array (serialized Buffer), convert to Uint8Array then Blob
           if (Array.isArray(manager.image)) {
             const uint8Array = new Uint8Array(manager.image);
             const blob = new Blob([uint8Array], { type: 'image/jpeg' });
             const url = URL.createObjectURL(blob);
             setImageUrl(url);
-            
+
             // Cleanup function to revoke object URL
             return () => URL.revokeObjectURL(url);
           }
