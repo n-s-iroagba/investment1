@@ -10,9 +10,10 @@ import { PlusIcon } from '@heroicons/react/24/outline';
 import ErrorComponent from '@/components/ErrorComponent'; // Use the ErrorComponent we created earlier
 import AdminOffcanvas from '@/components/AdminOffCanvas';
 import AdminOffCanvas from '@/components/AdminOffCanvas';
+import { apiRoutes } from '@/constants/apiRoutes';
 
 export default function SocialMediaPage() {
-  const { data: socialMedias, loading, error } = useGetList<SocialMedia>('social-media');
+  const { data: socialMedias, loading, error } = useGetList<SocialMedia>(apiRoutes.socialMedia.list());
   const [itemToDelete, setItemToDelete] = useState<SocialMedia | null>(null);
   const [itemToUpdate, setItemToUpdate] = useState<SocialMedia | null>(null);
   const [createItem, setCreateItem] = useState(false);
