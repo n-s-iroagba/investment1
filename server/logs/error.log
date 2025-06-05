@@ -259,3 +259,30 @@
     at MailService.sendCustomEmail (file:///home/udorakpuenyi/tem/server/src/services/MailService.ts:155:23)
     at sendEmailToInvestor (file:///home/udorakpuenyi/tem/server/src/controllers/EmailController.ts:22:31)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-06-02T22:52:33.655Z [ERROR]: Error: connect ETIMEDOUT - URL: /api/managers - Stack: SequelizeConnectionError: connect ETIMEDOUT
+    at ConnectionManager.connect (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/connection-manager.js:102:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async ConnectionManager._connect (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:222:24)
+2025-06-02T23:11:53.789Z [ERROR]: Failed to fetch all investors: SequelizeConnectionError: connect ETIMEDOUT
+2025-06-02T23:11:53.790Z [ERROR]: Error: connect ETIMEDOUT - URL: /api/investors - Stack: SequelizeConnectionError: connect ETIMEDOUT
+    at ConnectionManager.connect (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/connection-manager.js:102:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async ConnectionManager._connect (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:222:24)
+2025-06-02T23:16:11.797Z [ERROR]: Failed to credit amount deposited ManagedPortfolio: Error: Portfolio not found
+2025-06-02T23:55:22.618Z [ERROR]: Error in getUnpaidReferrals
+2025-06-02T23:55:22.619Z [ERROR]: Error: connect ETIMEDOUT - URL: /api/referrals/unpaid - Stack: SequelizeConnectionError: connect ETIMEDOUT
+    at ConnectionManager.connect (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/connection-manager.js:102:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async ConnectionManager._connect (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:222:24)
+2025-06-03T20:30:03.068Z [ERROR]: Error: connect ETIMEDOUT - URL: /api/auth/me - Stack: SequelizeConnectionError: connect ETIMEDOUT
+    at ConnectionManager.connect (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/connection-manager.js:102:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async ConnectionManager._connect (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:222:24)
+2025-06-04T06:52:44.207Z [ERROR]: Error: connect ETIMEDOUT - URL: /api/managed-portfolios/investor/1 - Stack: SequelizeConnectionError: connect ETIMEDOUT
+    at ConnectionManager.connect (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/connection-manager.js:102:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async ConnectionManager._connect (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:222:24)
+2025-06-04T06:52:44.282Z [ERROR]: Error: connect ETIMEDOUT - URL: /api/verification-fees/unpaid/1 - Stack: SequelizeConnectionError: connect ETIMEDOUT
+    at ConnectionManager.connect (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/connection-manager.js:102:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async ConnectionManager._connect (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:222:24)

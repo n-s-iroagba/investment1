@@ -21,8 +21,8 @@ class MailService {
     host: "smtp.gmail.com",
     port: 465,
     auth: {
-      user: "hauteequity@gmail.com",
-      pass: "cprf immt omzt espd",
+      user: "wealthfundingtradestation@gmail.com",
+      pass: "anft vmyj ianz sftx",
     },
     logger: true, // Enable logger
     debug: true, // Enable debug output

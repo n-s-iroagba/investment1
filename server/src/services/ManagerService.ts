@@ -6,7 +6,7 @@ import logger from '../utils/logger/logger.js';
 interface ManagerInput {
   lastName: string;
   firstName: string;
-  image: string;
+  image: Buffer;
   minimumInvestmentAmount: number;
   percentageYield: number;
   duration: number;
@@ -16,6 +16,7 @@ interface ManagerInput {
 export class ManagerService {
   // Create a new manager - all fields required
   static async createManager(data: ManagerInput) {
+    
     try {
       const manager = await Manager.create(data);
       logger.info(`Created Manager id=${manager.id}`);
@@ -50,7 +51,7 @@ export class ManagerService {
     try {
       manager.lastName = data.lastName;
       manager.firstName = data.firstName;
-      manager.image = data.image;
+      manager.image = data.image||manager.image;
       manager.minimumInvestmentAmount = data.minimumInvestmentAmount;
       manager.percentageYield = data.percentageYield;
       manager.duration = data.duration;

@@ -17,7 +17,7 @@ export class SocialMedia extends Model<
   declare id: CreationOptional<number>;
   declare name: string;
   declare link: string;
-  declare logo: string;
+  declare logo: Buffer;
 
 
 
@@ -42,7 +42,7 @@ SocialMedia.init(
       allowNull: false,
     },
     logo: {
-      type: DataTypes.STRING,
+      type: DataTypes.BLOB('long'),
       allowNull: false,
     },
     createdAt: {

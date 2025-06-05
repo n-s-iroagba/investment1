@@ -5,11 +5,13 @@ import Investor from "../models/Investor.js"
 import ManagedPortfolio from "../models/ManagedPortfolio.js"
 import User from "../models/User.js"
 import Kyc from "../models/Kyc.js"
+import VerificationFee from "../models/VerificationFee.js"
 
 export default class InvestorController {
   static async getInvestorProfile(req: Request, res: Response) {
     try {
       const investorId = req.params.investorId
+    
       const investor = await InvestorService.getInvestorById(Number(investorId))
       res.status(200).json(investor)
     } catch (error) {
@@ -62,9 +64,14 @@ export default class InvestorController {
           {
             model:User,
             as: 'user',
+          },
+             {
+            model:VerificationFee,
+            as: 'verificationFees',
           }
         ]
       })
+ 
       res.status(200).json(investor)
     } catch (error) {
       errorHandler(error, req, res)

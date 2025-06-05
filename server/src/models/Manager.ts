@@ -17,7 +17,7 @@ export class Manager extends Model<
   declare id: CreationOptional<number>;
   declare lastName: string;
   declare firstName: string;
-  declare image: string;
+  declare image: Buffer;
   declare minimumInvestmentAmount: number;
   declare percentageYield: number;
   declare duration: number;
@@ -45,7 +45,7 @@ Manager.init(
       allowNull: false,
     },
     image: {
-      type: DataTypes.STRING,
+    type:DataTypes.BLOB('long'),
       allowNull: false,
     },
     minimumInvestmentAmount: {

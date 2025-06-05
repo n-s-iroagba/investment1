@@ -45,7 +45,9 @@ router.get('/kyc/unverified',KycController.getUnverified)
 
 router.get("/managers", ManagerController.getAllManagers)
 router.get("/managers/:id", ManagerController.getManagerById)
-router.post("/managers", upload.single("image"), ManagerController.createManager)
+router.post("/managers", 
+  upload.single("image"), 
+  ManagerController.createManager)
 router.patch("/managers/:id", upload.single("image"), ManagerController.updateManager)
 router.delete("/managers/:id", ManagerController.deleteManager)
 

@@ -2,6 +2,7 @@
 
 import type { Manager } from "@/types/manager"
 import Image from "next/image"
+import { useState, useEffect } from "react"
 import {
   AcademicCapIcon,
   CurrencyDollarIcon,
@@ -16,24 +17,50 @@ interface ManagerCardProps {
 }
 
 export default function ManagerCard({ manager, showInvestButton = true }: ManagerCardProps) {
-    let imageUrl = '';
+  const [imageUrl, setImageUrl] = useState<string>('/default-avatar.png');
 
-  // Check if 'image' is a Buffer before converting to Blob
-  const image = manager.image 
-  if (image && image && Array.isArray(image)) {
-    const blob = new Blob([new Uint8Array(image)], { type: 'image/jpeg' });
-    imageUrl = URL.createObjectURL(blob);
-  } else {
-    console.error("Invalid image data format.");
-  }
+  useEffect(() => {
+    const convertImageToUrl = () => {
+      if (manager.image) {
+        try {
+          // If it's already a string (base64), use it
+          if (typeof manager.image === 'string') {
+            if (manager.image.startsWith('data:')) {
+              setImageUrl(manager.image);
+            } else {
+              setImageUrl(`data:image/jpeg;base64,${manager.image}`);
+            }
+            return;
+          }
+          
+          // If it's an array (serialized Buffer), convert to Uint8Array then Blob
+          if (Array.isArray(manager.image)) {
+            const uint8Array = new Uint8Array(manager.image);
+            const blob = new Blob([uint8Array], { type: 'image/jpeg' });
+            const url = URL.createObjectURL(blob);
+            setImageUrl(url);
+            
+            // Cleanup function to revoke object URL
+            return () => URL.revokeObjectURL(url);
+          }
+        } catch (error) {
+          console.error("Error converting image:", error);
+          setImageUrl('/default-avatar.png');
+        }
+      }
+    };
+
+    const cleanup = convertImageToUrl();
+    return cleanup;
+  }, [manager.image]);
+
   return (
-
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-blue-200 transition-all duration-300 overflow-hidden group ">
+    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-blue-200 transition-all duration-300 overflow-hidden group">
       {/* Mobile Layout - Vertical card */}
-      <div className="block ">
+      <div className="block">
         <div className="p-6 text-center">
           {/* Status Indicator */}
-          <div className="flex-col justify-center  mb-4">
+          <div className="flex-col justify-center mb-4">
             <div className="flex items-center gap-1">
               <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
               <span className="text-xs text-blue-600 font-medium">Available</span>
@@ -53,6 +80,10 @@ export default function ManagerCard({ manager, showInvestButton = true }: Manage
                 className="rounded-full object-cover w-full h-full"
                 width={96}
                 height={96}
+                onError={(e) => {
+                  // Fallback if image fails to load
+                  e.currentTarget.src = '/default-avatar.png';
+                }}
               />
             </div>
           </div>
@@ -100,8 +131,6 @@ export default function ManagerCard({ manager, showInvestButton = true }: Manage
           )}
         </div>
       </div>
-
-
     </div>
   )
 }

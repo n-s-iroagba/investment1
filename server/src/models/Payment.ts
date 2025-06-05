@@ -9,7 +9,7 @@ import Investor from './Investor.js';
 export interface PaymentAttributes {
   id: number;
   date: Date;
-  receipt: string;
+  receipt: Buffer;
   depositType: string;
    paymentType:'FEE'|'INVESTMENT';
   amount: number;
@@ -31,7 +31,7 @@ export class Payment
   implements PaymentAttributes {
   public id!: number;
   public date!: Date;
-  public receipt!: string;
+  public receipt!: Buffer;
   public depositType!: string;
   public paymentType!:'FEE'|'INVESTMENT';
   public paymentID!:string;
@@ -58,7 +58,7 @@ Payment.init(
       allowNull: false,
     },
     receipt: {
-      type: DataTypes.STRING,
+      type: DataTypes.BLOB('long'),
       allowNull: false,
     },
     depositType: {

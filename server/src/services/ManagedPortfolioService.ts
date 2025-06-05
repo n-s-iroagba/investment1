@@ -44,6 +44,8 @@ export class ManagedPortfolioService {
 static async creditAmountDeposited(id:string, amount:number){
   try{
   const portfolio = await ManagedPortfolio.findByPk(id)
+  const pors = await ManagedPortfolio.findAll()
+  console.log(pors)
   if(!portfolio){
     throw new CustomError(404, 'Portfolio not found')
   }
@@ -59,6 +61,8 @@ catch (error) {
 static async creditEarnings(id:string, amount:number){
   try{
   const portfolio = await ManagedPortfolio.findByPk(id)
+    const pors = await ManagedPortfolio.findAll()
+  console.log(pors)
   if(!portfolio){
     throw new CustomError(404, 'Portfolio not found')
   }

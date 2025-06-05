@@ -6,13 +6,13 @@ import logger from '../utils/logger/logger.js';
 interface SocialMediaCreateInput {
   name: string;
   link: string;
-  logo: string;
+  logo: Buffer;
 }
 
 interface SocialMediaUpdateInput {
   name?: string;
   link?: string;
-  logo?: string;
+  logo?: Buffer;
 }
 
 export class SocialMediaService {
@@ -42,8 +42,18 @@ export class SocialMediaService {
   static async getAllSocialMedias() {
     logger.info('SocialMediaService.getAllSocialMedias called');
     const socialMedias = await SocialMedia.findAll();
+      const sociaMediaswithBase64Images = socialMedias.map(socialMedia => {
+      const socialMediaData = socialMedia.toJSON() as any; // Type assertion
+      
+      // Convert Buffer to base64 if image exists
+      if (socialMediaData.image && Buffer.isBuffer(socialMediaData.image)) {
+        socialMediaData.image = `data:image/png;base64,${socialMediaData.image.toString('base64')}`;
+      }
+      
+      return socialMediaData;
+    });
     logger.info(`Retrieved ${socialMedias.length} social media records`);
-    return socialMedias;
+    return sociaMediaswithBase64Images;
   }
 
   static async updateSocialMedia(id: number, updates: SocialMediaUpdateInput) {

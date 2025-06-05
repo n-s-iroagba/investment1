@@ -35,23 +35,24 @@ static async verifyEmail(req: Request, res: Response) {
    
 
     if ('loginToken' in result) {
-      res.cookie('token', result.loginToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'lax',
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-      });
-// res.cookie('token', result.loginToken, {
-//   httpOnly: true,
-//   secure: true,
-//   sameSite: 'none', // MUST be 'none' for cross-domain
-//   maxAge: 7 * 24 * 60 * 60 * 1000,
-// });
+      // res.cookie('token', result.loginToken, {
+      //   httpOnly: true,
+      //   secure: process.env.NODE_ENV === 'production',
+      //   sameSite: 'lax',
+      //   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      // });
+res.cookie('token', result.loginToken, {
+  httpOnly: true,
+  secure: true,
+  sameSite: 'none', // MUST be 'none' for cross-domain
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+});
 console.log('Cookie set, response headers:', res.getHeaders());
    const role = user.role
     console.log('role is', role)
       return res.status(200).json({
-          role
+          role,
+          token: result.loginToken
       }); 
     } else {
        throw new CustomError(500,'malformed token')
@@ -78,22 +79,23 @@ console.log('Cookie set, response headers:', res.getHeaders());
             const result = await  UserService.login({ email, password })
             
         if ('loginToken' in result && 'user'in result) {
-         res.cookie('token', result.loginToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'lax',
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-      });
-// res.cookie('token', result.loginToken, {
-//   httpOnly: true,
-//   secure: true,
-//   sameSite: 'none', // MUST be 'none' for cross-domain
-//   maxAge: 7 * 24 * 60 * 60 * 1000,
-// });
+      //    res.cookie('token', result.loginToken, {
+      //   httpOnly: true,
+      //   secure: process.env.NODE_ENV === 'production',
+      //   sameSite: 'lax',
+      //   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      // });
+res.cookie('token', result.loginToken, {
+  httpOnly: true,
+  secure: true,
+  sameSite: 'none', // MUST be 'none' for cross-domain
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+});
 console.log('Cookie set, response headers:', res.getHeaders());
       return res.status(200).json({
         message: 'Login successful',
           role: result.user.role,
+           token: result.loginToken,
       });
     } else {
       return res.status(200).json({
@@ -122,16 +124,23 @@ console.log('Cookie set, response headers:', res.getHeaders());
             const { resetPasswordToken, password } = req.body
            const result = await UserService.resetPassword({ resetPasswordToken, password })
                  if ('loginToken' in result && 'user'in result) {
-         res.cookie('token', result.loginToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'lax',
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-      });
+      //         res.cookie('token', result.loginToken, {
+      //   httpOnly: true,
+      //   secure: process.env.NODE_ENV === 'production',
+      //   sameSite: 'lax',
+      //   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      // });
+res.cookie('token', result.loginToken, {
+  httpOnly: true,
+  secure: true,
+  sameSite: 'none', // MUST be 'none' for cross-domain
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+});
 
       return res.status(200).json({
         message: 'Login successful',
           role: result.user.role,
+           token: result.loginToken,
       });
     } else {
       return res.status(200).json({

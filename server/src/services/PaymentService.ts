@@ -9,7 +9,7 @@ interface CreatePaymentData {
   amount: number
   paymentID: string
   depositType: string
-  receipt?: string
+  receipt?: Buffer
   investorId: number
   managedPortfolioId?: number
   verificationFeeId?: number
@@ -19,7 +19,7 @@ interface UpdatePaymentData {
   amount?: number
   paymentID?: string
   depositType?: string
-  receipt?: string
+  receipt?: Buffer
   verificationStatus?: 'PENDING' | 'VERIFIED' | 'REJECTED'
 }
 
@@ -28,7 +28,19 @@ class PaymentService {
   static async getUnverifiedPayments(){
     try{
       const payments = await Payment.findAll({where:{isVerified: false}})
-      return payments
+       const paymentssWithBase64Images = payments.map(payment => {
+      const paymentData = payment.toJSON() as any; // Type assertion
+      
+      // Convert Buffer to base64 if image exists
+      if (paymentData.image && Buffer.isBuffer(paymentData.image)) {
+        paymentData.image = `data:image/png;base64,${paymentData.image.toString('base64')}`;
+      }
+      
+      return paymentData;
+    }
+  )
+    return paymentssWithBase64Images
+
     }catch(error){
       logger.error(error)
       throw error
@@ -170,10 +182,21 @@ class PaymentService {
         where: whereClause,
         order: [['createdAt', 'DESC']]
       })
+       const paymentssWithBase64Images = payments.map(payment => {
+      const paymentData = payment.toJSON() as any; // Type assertion
+      
+      // Convert Buffer to base64 if image exists
+      if (paymentData.image && Buffer.isBuffer(paymentData.image)) {
+        paymentData.image = `data:image/png;base64,${paymentData.image.toString('base64')}`;
+      }
+      
+      return paymentData;
+    }
+  )
+    return paymentssWithBase64Images
 
-      return payments
-    } catch (error) {
-      console.error('Error fetching investor payments:', error)
+    }catch(error){
+      logger.error(error)
       throw error
     }
   }

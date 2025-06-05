@@ -40,7 +40,7 @@ class PaymentController {
     try {
       const { type, amount, paymentID, depositType, managedPortfolioId, verificationFeeId } = req.body
       const investorId = Number(req.params.investorId)
-      const receipt = req.file.filename
+      const receipt = req.file.buffer
       if (!investorId) {
         throw new CustomError(401, 'Unauthorized: User not authenticated')
       }
@@ -108,12 +108,11 @@ class PaymentController {
       if (verificationStatus && !['PENDING', 'VERIFIED', 'REJECTED'].includes(verificationStatus)) {
         throw new CustomError(400, 'Invalid verification status')
       }
-
+//no file
       const updateData = {
         amount,
         paymentID,
         depositType,
-        receipt,
         verificationStatus
       }
 

@@ -3,37 +3,50 @@ import { Request, Response } from 'express';
 import { errorHandler } from '../utils/error/errorHandler.js';
 import { ManagerService } from '../services/ManagerService.js';
 import { CustomError } from '../utils/error/CustomError.js';
+import Manager from '../models/Manager.js';
 
 class ManagerController {
   static async createManager(req: Request, res: Response) {
     try {
          const file = req.file
-             if(!file){
+             if(!file || !file.buffer){
         throw  new CustomError(403,'no file in request body')
     }
-         const imagePath = `/uploads/${file.filename}`;
-
+      
+          if(!file.buffer){
+        throw  new CustomError(403,'no file buffer in file')
+    }
       const data = {
         ...req.body,
-        image: imagePath,
-      };
+        image: file.buffer,
+      }; 
       const newManager = await ManagerService.createManager(data);
       res.status(201).json(newManager);
     } catch (error: any) {
       errorHandler(error,req,res)
     }
   }
+static async getAllManagers(req: Request, res: Response) {
+  try {
+    const managers = await Manager.findAll();
+    
+    // Convert Buffer to base64 for each manager
+    const managersWithBase64Images = managers.map(manager => {
+      const managerData = manager.toJSON() as any; // Type assertion
+      
+      // Convert Buffer to base64 if image exists
+      if (managerData.image && Buffer.isBuffer(managerData.image)) {
+        managerData.image = `data:image/png;base64,${managerData.image.toString('base64')}`;
+      }
+      
+      return managerData;
+    });
 
-  static async getAllManagers(req: Request, res: Response) {
-
-    try {
-      const managers = await ManagerService.getAllManagers();
-      return res.status(200).json(managers);
-
-    } catch (error: any) {
-      errorHandler(error,req,res)
-    }
+    return res.status(200).json(managersWithBase64Images);
+  } catch (error: any) {
+    errorHandler(error, req, res);
   }
+}
 
   static async getManagerById(req: Request, res: Response) {
     try {

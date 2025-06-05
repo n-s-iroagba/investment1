@@ -41,18 +41,20 @@ if (!fs.existsSync(uploadDir)) {
 // CORS configuration - MOVED BEFORE STATIC MIDDLEWARE
 app.use(cors({
   origin:  
-  // 'https://www.wealthfundingtradestationopportunities.com',
-     'http://localhost:3001',
+  ['https://www.wealthfundingtradestationopportunities.com'], 
+    //  'http://localhost:3001',
+  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization', 'Cookie'],
+  methods: ['POST', 'GET', 'DELETE', 'PATCH', 'OPTIONS'],
   credentials: true,
 }));
 
 // Additional CORS headers
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin',     
-    //  'https://www.wealthfundingtradestationopportunities.com' 
-     'http://localhost:3001'
+['https://www.wealthfundingtradestationopportunities.com'], 
+    //  'http://localhost:3001'
     )
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cookie')
   res.header('Access-Control-Allow-Methods', 'POST, GET, DELETE, PATCH')
   next()
 })
@@ -215,7 +217,7 @@ app.use('/api', router)
 // Database sync
 sequelize
   .sync({
-    // force: true
+    force: true
   })
   .then(() => console.log('Models formed'))
   .catch((err: any) => console.log('Database sync error:', err));

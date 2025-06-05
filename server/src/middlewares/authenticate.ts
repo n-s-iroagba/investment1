@@ -12,7 +12,19 @@ export interface AuthenticatedRequest extends Request {
 }
 
 export function authenticate(req: AuthenticatedRequest, res: Response, next: NextFunction) {
-  const token = req.cookies?.token;
+
+console.log('Received cookies:', req.headers.cookie);
+console.log('Request origin:', req.headers.origin);
+console.log('Request headers:', req.headers);
+  let token = null;
+  
+  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer ')) {
+    token = req.headers.authorization.replace('Bearer ', '');
+    console.log('Token from Authorization header:', token ? 'present' : 'missing');
+  } else if (req.cookies?.token) {
+    token = req.cookies.token;
+    console.log('Token from cookie:', token ? 'present' : 'missing');
+  }
 
   if (!token) {
     throw new CustomError(401,'Unauthorized: No token provided' );

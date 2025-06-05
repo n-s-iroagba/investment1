@@ -10,11 +10,12 @@ class SocialMediaController {
     try {
       const { name, link } = req.body;
 
-        const file = req.file
-             if(!file){
+          const file = req.file
+             if(!file || file.buffer){
         throw  new CustomError(403,'no file in request body')
     }
-         const logo = `/uploads/${file.filename}`;
+      
+         const logo = file.buffer;
     
      
 
@@ -54,7 +55,7 @@ class SocialMediaController {
 
       const updateData: any = { name, link };
 
-       const imagePath = req.file ? req.file.path : undefined;
+       const imagePath = req.file ? req.file.buffer : undefined;
        const data = {
         ...req.body,
         ...(imagePath && { image: imagePath }),
