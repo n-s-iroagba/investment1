@@ -3,6 +3,7 @@
 // components/ManagerCard.tsx
 import type { Manager } from "@/types/manager"
 import Image from "next/image"
+import { useState, useEffect } from "react"
 import {
   UserCircleIcon,
   AcademicCapIcon,
@@ -20,16 +21,43 @@ interface ManagerCardProps {
 }
 
 export default function AdminManagerCard({ manager, onEdit, onDelete }: ManagerCardProps) {
-     let imageUrl = '';
+  const [imageUrl, setImageUrl] = useState<string>('/default-avatar.png');
 
-  // Check if 'image' is a Buffer before converting to Blob
-  const image = manager.image 
-  if (image && image && Array.isArray(image)) {
-    const blob = new Blob([new Uint8Array(image)], { type: 'image/jpeg' });
-    imageUrl = URL.createObjectURL(blob);
-  } else {
-    console.error("Invalid image data format.");
-  }
+  useEffect(() => {
+    const convertImageToUrl = () => {
+      if (manager.image) {
+        try {
+          // If it's already a string (base64), use it
+          if (typeof manager.image === 'string') {
+            if (manager.image.startsWith('data:')) {
+              setImageUrl(manager.image);
+            } else {
+              setImageUrl(`data:image/jpeg;base64,${manager.image}`);
+            }
+            return;
+          }
+          
+          // If it's an array (serialized Buffer), convert to Uint8Array then Blob
+          if (Array.isArray(manager.image)) {
+            const uint8Array = new Uint8Array(manager.image);
+            const blob = new Blob([uint8Array], { type: 'image/jpeg' });
+            const url = URL.createObjectURL(blob);
+            setImageUrl(url);
+            
+            // Cleanup function to revoke object URL
+            return () => URL.revokeObjectURL(url);
+          }
+        } catch (error) {
+          console.error("Error converting image:", error);
+          setImageUrl('/default-avatar.png');
+        }
+      }
+    };
+
+    const cleanup = convertImageToUrl();
+    return cleanup;
+  }, [manager.image]);
+
   return (
     <div className="bg-white p-6 rounded-2xl shadow-sm border-2 border-blue-50 hover:border-blue-100 transition-all relative group">
       {/* Decorative Corner Borders */}
@@ -43,9 +71,13 @@ export default function AdminManagerCard({ manager, onEdit, onDelete }: ManagerC
             <Image
               src={imageUrl}
               alt={`${manager.firstName} ${manager.lastName}`}
-              className="rounded-full object-fit"
+              className="rounded-full object-cover"
               width={128}
               height={128}
+              onError={(e) => {
+                // Fallback if image fails to load
+                e.currentTarget.src = '/default-avatar.png';
+              }}
             />
           </div>
           <div className="absolute inset-0 rounded-full border-2 border-blue-800 opacity-0 group-hover/image:opacity-10 transition-opacity" />
