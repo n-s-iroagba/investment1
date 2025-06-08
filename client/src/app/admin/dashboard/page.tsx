@@ -101,7 +101,7 @@ useEffect(() => {
     todos.push(
       <TodoAlert
         key="Pending-payment"
-        message="You do not have any social media links, add social media to start managing transactions"
+        message="You have pending unverified payments, kindly verify them."
         link="/admin/unverified-payments"
       />,
     )
