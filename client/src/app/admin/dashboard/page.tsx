@@ -15,7 +15,7 @@ import { Kyc } from "@/types/Kyc"
 import AdminRouteGuard from "@/components/AdminRouteGuard"
 
 const AdminDashboard = () => {
-  const { loading: authLoading, isAdmin, displayName } = useAuth()
+  const { loading: authLoading, displayName } = useAuth()
  
 
   const {
