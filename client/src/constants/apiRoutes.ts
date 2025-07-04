@@ -6,8 +6,10 @@ export const apiRoutes = {
     signup: (): string => `/auth/signup`,
     forgotPassword: (): string => `/auth/forgot-password`,
     resetPassword: (): string => `/auth/reset-password`,
+    verifyResetToken: (): string => `/auth/verify-reset-token`,
     verifyEmail: (): string => `/auth/verify-email`,
     resendVerificationEmail: (): string => `/auth/resend-verification-token`,
+    refreshToken: (): string => `/auth/refresh-token`,
     me: (): string => `/auth/me`,
   },
 

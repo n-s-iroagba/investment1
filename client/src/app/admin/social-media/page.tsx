@@ -7,10 +7,10 @@ import { SocialMediaCard } from '@/components/AdminSocialMediaCard';
 import { SocialMedia } from '@/types/socialMedia';
 import { Spinner } from '@/components/Spinner';
 import { PlusIcon } from '@heroicons/react/24/outline';
-import ErrorComponent from '@/components/ErrorComponent'; // Use the ErrorComponent we created earlier
+import ErrorComponent from '@/components/ErrorComponent';
 import AdminOffcanvas from '@/components/AdminOffCanvas';
-import AdminOffCanvas from '@/components/AdminOffCanvas';
 import { apiRoutes } from '@/constants/apiRoutes';
+import AdminRouteGuard from '@/components/AdminRouteGuard';
 
 export default function SocialMediaPage() {
   const { data: socialMedias, loading, error } = useGetList<SocialMedia>(apiRoutes.socialMedia.list());
@@ -20,109 +20,116 @@ export default function SocialMediaPage() {
 
   if (loading) {
     return (
-      <AdminOffCanvas>
-      <div className="flex justify-center items-center h-64">
-        <Spinner className="w-10 h-10 text-blue-600" />
-      </div>
-      </AdminOffCanvas>
+      <AdminRouteGuard>
+        <AdminOffcanvas>
+          <div className="flex justify-center items-center h-64">
+            <Spinner className="w-10 h-10 text-blue-600" />
+          </div>
+        </AdminOffcanvas>
+      </AdminRouteGuard>
     );
   }
 
   if (error) {
-    return <AdminOffCanvas>
-    
-    <ErrorComponent message={error || "Failed to load social media accounts"} />;
-    </AdminOffCanvas>
+    return (
+      <AdminRouteGuard>
+        <AdminOffcanvas>
+          <ErrorComponent message={error || "Failed to load social media accounts"} />
+        </AdminOffcanvas>
+      </AdminRouteGuard>
+    );
   }
 
   return (
-    <AdminOffcanvas>
-    <div className="bg-blue-50 min-h-screen p-4">
-      <div className="max-w-4xl mx-auto">
-        {/* Header with decorative elements */}
-        <div className="bg-white rounded-2xl shadow-sm border-2 border-blue-100 p-6 mb-6 relative">
-          {/* Decorative Corner Borders */}
-          <div className="absolute top-2 right-2 w-8 h-8 border-t-2 border-r-2 border-blue-800 opacity-20" />
-          <div className="absolute bottom-2 left-2 w-8 h-8 border-b-2 border-l-2 border-blue-800 opacity-20" />
+    <AdminRouteGuard>
+      <AdminOffcanvas>
+        <div className="bg-blue-50 min-h-screen p-4">
+          <div className="max-w-4xl mx-auto">
+            {/* Header Card */}
+            <div className="bg-white rounded-2xl shadow-sm border-2 border-blue-100 p-6 mb-6 relative">
+              {/* Decorative Corner Borders */}
+              <div className="absolute top-2 right-2 w-8 h-8 border-t-2 border-r-2 border-blue-800 opacity-20" />
+              <div className="absolute bottom-2 left-2 w-8 h-8 border-b-2 border-l-2 border-blue-800 opacity-20" />
 
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <h1 className="text-2xl font-bold text-blue-900">Social Media Accounts</h1>
-            <button
-              onClick={() => setCreateItem(true)}
-              className="flex items-center gap-2 px-5 py-2.5 bg-blue-700 text-white rounded-xl hover:bg-blue-800 transition-colors"
-            >
-              <PlusIcon className="w-5 h-5" />
-              <span>Add New Account</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Forms */}
-        <div className="space-y-6 mb-8">
-          {createItem && (
-            <div className="bg-white rounded-2xl shadow-sm border-2 border-blue-100 overflow-hidden">
-              <SocialMediaForm onClose={() => setCreateItem(false)} />
+              <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+                <h1 className="text-2xl font-bold text-blue-900">Social Media Links</h1>
+                <button
+                  onClick={() => setCreateItem(true)}
+                  className="flex items-center gap-2 px-5 py-2.5 bg-blue-700 text-white rounded-xl hover:bg-blue-800 transition-colors"
+                >
+                  <PlusIcon className="w-5 h-5" />
+                  <span>Add Social Media</span>
+                </button>
+              </div>
             </div>
-          )}
 
-          {itemToUpdate && (
-            <div className="bg-white rounded-2xl shadow-sm border-2 border-blue-100 overflow-hidden">
-              <SocialMediaForm 
-                existingSocialMedia={itemToUpdate}
-                onClose={() => setItemToUpdate(null)}
+            {/* Forms */}
+            <div className="space-y-6 mb-8">
+              {createItem && (
+                <div className="bg-white rounded-2xl shadow-sm border-2 border-blue-100 overflow-hidden">
+                  <SocialMediaForm onClose={() => setCreateItem(false)} />
+                </div>
+              )}
+
+              {itemToUpdate && (
+                <div className="bg-white rounded-2xl shadow-sm border-2 border-blue-100 overflow-hidden">
+                  <SocialMediaForm 
+                    existingSocialMedia={itemToUpdate}
+                    onClose={() => setItemToUpdate(null)}
+                  />
+                </div>
+              )}
+            </div>
+
+            {/* Social Media List */}
+            {socialMedias && socialMedias.length > 0 ? (
+              <div className="grid grid-cols-1 gap-4">
+                {socialMedias.map((item) => (
+                  <div 
+                    key={item.id}
+                    className="bg-white rounded-2xl shadow-sm border-2 border-blue-100 hover:border-blue-200 transition-colors"
+                  >
+                    <SocialMediaCard
+                      socialMedia={item}
+                      onEdit={() => setItemToUpdate(item)}
+                      onDelete={() => setItemToDelete(item)}
+                    />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="bg-white rounded-2xl shadow-sm border-2 border-blue-100 p-8 text-center">
+                <div className="max-w-md mx-auto">
+                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <PlusIcon className="w-8 h-8 text-blue-700" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-blue-900 mb-2">No Social Media Accounts</h3>
+                  <p className="text-blue-600 mb-4">
+                    Add your first social media account to connect with your audience
+                  </p>
+                  <button
+                    onClick={() => setCreateItem(true)}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-700 text-white rounded-xl hover:bg-blue-800 transition-colors"
+                  >
+                    <PlusIcon className="w-5 h-5" />
+                    Add Social Media
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Delete Confirmation Modal */}
+            {itemToDelete && (
+              <DeleteConfirmationModal
+                onClose={() => setItemToDelete(null)}
+                id={itemToDelete.id}
+                message={`${itemToDelete.name} social media account`}
+                type="social-media"
               />
-            </div>
-          )}
+            )}
+          </div>
         </div>
-
-        {/* Social Media List */}
-        {socialMedias.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {socialMedias.map((socialMedia) => (
-              <div 
-                key={socialMedia.id}
-                className="bg-white rounded-2xl shadow-sm border-2 border-blue-100 hover:border-blue-200 transition-colors"
-              >
-                <SocialMediaCard
-                  socialMedia={socialMedia}
-                  onEdit={() => setItemToUpdate(socialMedia)}
-                  onDelete={() => setItemToDelete(socialMedia)}
-                />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="bg-white rounded-2xl shadow-sm border-2 border-blue-100 p-8 text-center">
-            <div className="max-w-md mx-auto">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <PlusIcon className="w-8 h-8 text-blue-700" />
-              </div>
-              <h3 className="text-lg font-semibold text-blue-900 mb-2">No Social Media Accounts</h3>
-              <p className="text-blue-600 mb-4">
-                Add your first social media account to start connecting with your audience
-              </p>
-              <button
-                onClick={() => setCreateItem(true)}
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-700 text-white rounded-xl hover:bg-blue-800 transition-colors"
-              >
-                <PlusIcon className="w-5 h-5" />
-                Add Account
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Delete Confirmation Modal */}
-        {itemToDelete && (
-          <DeleteConfirmationModal
-            onClose={() => setItemToDelete(null)}
-            id={itemToDelete.id}
-            message={itemToDelete.name}
-            type="social-media"
-          />
-        )}
-      </div>
-    </div>
-    </AdminOffcanvas>
+      </AdminOffcanvas>
+    </AdminRouteGuard>
   );
 }

@@ -15,7 +15,7 @@ interface AuthContextValue {
   refetch: () => Promise<void>
 }
 
-const AuthContext = createContext<AuthContextValue>({
+export const AuthContext = createContext<AuthContextValue>({
   loading: true,
   isAdmin: false,
   isInvestor: false,
