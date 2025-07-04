@@ -3,7 +3,7 @@
 import InvestorOffCanvas from "@/components/InvestorOffCanvas"
 import SocialMediaLinks from "@/components/SocialMediaLinks"
 import { UploadProofModal } from "@/components/UploadProofModal"
-import { useAuth } from "@/hooks/useAuth"
+import { AuthProvider, useAuth } from "@/hooks/useAuth"
 import type { ManagedPortfolio } from "@/types/managedPortfolio"
 import type { Payment } from "@/types/Payment"
 import { useState, useEffect } from "react"
@@ -112,7 +112,7 @@ useEffect(() => {
 
   if (authLoading || (shouldFetchPortfolio && loading)) {
     return (
-      <InvestorOffCanvas>
+      <AuthProvider><InvestorOffCanvas>
         <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
           <div className="text-center bg-white p-8 rounded-2xl shadow-sm border border-blue-100 w-full max-w-md">
             <Spinner className="w-8 h-8 text-blue-600 mx-auto mb-4" />
@@ -120,12 +120,13 @@ useEffect(() => {
           </div>
         </div>
       </InvestorOffCanvas>
+      </AuthProvider>
     )
   }
 
   if (error) {
     return (
-      <InvestorOffCanvas>
+      <AuthProvider><InvestorOffCanvas>
         <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
           <div className="text-center w-full max-w-md">
             <div className="bg-red-50 p-8 rounded-2xl border border-red-100 shadow-sm">
@@ -144,12 +145,13 @@ useEffect(() => {
           </div>
         </div>
       </InvestorOffCanvas>
+      </AuthProvider>
     )
   }
 
   if (!portfolio || !portfolio.manager) {
     return (
-      <InvestorOffCanvas>
+      <AuthProvider><InvestorOffCanvas>
         <div className="min-h-screen bg-gray-50 flex flex-col">
           <div className="flex-1 max-w-md mx-auto px-4 py-8 flex flex-col">
             <header className="text-center mb-8">
@@ -182,6 +184,7 @@ useEffect(() => {
           </div>
         </div>
       </InvestorOffCanvas>
+      </AuthProvider>
     )
   }
 
@@ -260,7 +263,7 @@ const chartSeries = [
 
   return (
     <>
-      <InvestorOffCanvas>
+      <AuthProvider><InvestorOffCanvas>
         <div className="min-h-screen bg-gray-50">
           {/* Responsive container */}
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -411,6 +414,7 @@ const chartSeries = [
           </div>
         </div>
       </InvestorOffCanvas>
+      </AuthProvider>
 
       {portfolio && (
         <UploadProofModal

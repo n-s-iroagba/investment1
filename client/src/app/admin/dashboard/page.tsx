@@ -4,7 +4,7 @@ import AdminOffcanvas from "@/components/AdminOffCanvas"
 import TodoAlert from "@/components/TodoAlert"
 import { apiRoutes } from "@/constants/apiRoutes"
 import { useGetList } from "@/hooks/useFetch"
-import { useAuth } from "@/hooks/useAuth"
+import { AuthProvider, useAuth } from "@/hooks/useAuth"
 import type { AdminWallet } from "@/types/adminWallet"
 import { type ReactNode } from "react"
 import { Spinner } from "@/components/Spinner"
@@ -12,7 +12,7 @@ import type { Manager } from "@/types/manager"
 import type { SocialMedia } from "@/types/socialMedia"
 import { Payment } from "@/types/Payment"
 import { Kyc } from "@/types/Kyc"
-import AdminRouteGuard from "@/components/AdminRouteGuard"
+
 
 const AdminDashboard = () => {
   const { loading: authLoading, displayName } = useAuth()
@@ -87,7 +87,8 @@ const AdminDashboard = () => {
   const isLoading = authLoading || walletLoading || managerLoading || kycLoading || paymentLoading || socialMediaLoading
 
   return (
-    <AdminRouteGuard>
+    
+    <AuthProvider>
       <AdminOffcanvas>
         {isLoading ? (
           <div className="flex justify-center items-center h-screen px-4">
@@ -139,7 +140,7 @@ const AdminDashboard = () => {
           </div>
         )}
       </AdminOffcanvas>
-    </AdminRouteGuard>
+    </AuthProvider>
   )
 }
 
