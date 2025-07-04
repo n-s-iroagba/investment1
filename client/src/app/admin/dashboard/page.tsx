@@ -4,7 +4,7 @@ import AdminOffcanvas from "@/components/AdminOffCanvas"
 import TodoAlert from "@/components/TodoAlert"
 import { apiRoutes } from "@/constants/apiRoutes"
 import { useGetList } from "@/hooks/useFetch"
-import { AuthProvider, useAuth } from "@/hooks/useAuth"
+import { useAuth } from "@/hooks/useAuth"
 import type { AdminWallet } from "@/types/adminWallet"
 import { type ReactNode } from "react"
 import { Spinner } from "@/components/Spinner"
@@ -88,7 +88,6 @@ const AdminDashboard = () => {
 
   return (
     
-    <AuthProvider>
       <AdminOffcanvas>
         {isLoading ? (
           <div className="flex justify-center items-center h-screen px-4">
@@ -140,7 +139,7 @@ const AdminDashboard = () => {
           </div>
         )}
       </AdminOffcanvas>
-    </AuthProvider>
+   
   )
 }
 

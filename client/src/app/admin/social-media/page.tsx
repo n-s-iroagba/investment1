@@ -10,7 +10,7 @@ import { PlusIcon } from '@heroicons/react/24/outline';
 import ErrorComponent from '@/components/ErrorComponent';
 import AdminOffcanvas from '@/components/AdminOffCanvas';
 import { apiRoutes } from '@/constants/apiRoutes';
-import { AuthProvider } from "@/hooks/useAuth"
+
 
 export default function SocialMediaPage() {
   const { data: socialMedias, loading, error } = useGetList<SocialMedia>(apiRoutes.socialMedia.list());
@@ -20,28 +20,28 @@ export default function SocialMediaPage() {
 
   if (loading) {
     return (
-      <AuthProvider>
+   
         <AdminOffcanvas>
           <div className="flex justify-center items-center h-64">
             <Spinner className="w-10 h-10 text-blue-600" />
           </div>
         </AdminOffcanvas>
-      </AuthProvider>
+      
     );
   }
 
   if (error) {
     return (
-      <AuthProvider>
+   
         <AdminOffcanvas>
           <ErrorComponent message={error || "Failed to load social media accounts"} />
         </AdminOffcanvas>
-      </AuthProvider>
+      
     );
   }
 
   return (
-    <AuthProvider>
+ 
       <AdminOffcanvas>
         <div className="bg-blue-50 min-h-screen p-4">
           <div className="max-w-4xl mx-auto">
@@ -130,6 +130,6 @@ export default function SocialMediaPage() {
           </div>
         </div>
       </AdminOffcanvas>
-    </AuthProvider>
+    
   );
 }
