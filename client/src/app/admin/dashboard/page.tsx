@@ -75,7 +75,10 @@ const AdminDashboard = () => {
     todos.push(
       <TodoAlert
         key="Pending-payment"
-        message="You have pending payments to verify"
+
+
+        message="You have pending unverified payments, kindly verify them."
+
         link="/admin/unverified-payments"
       />,
     )

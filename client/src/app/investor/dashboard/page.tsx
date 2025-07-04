@@ -58,7 +58,7 @@ const InvestorDashboard = () => {
   const shouldFetchPortfolio = !authLoading && roleId && roleId !== 0 && roleId !== null && roleId !== undefined
 
   const { data: portfolio, loading, error } = useGetSingle<ManagedPortfolio>(
-    shouldFetchPortfolio ? apiRoutes.investment.getInvestment(roleId) : null
+     apiRoutes.investment.getInvestment(roleId) 
   )
 
   const [showPaymentProofModal, setShowPaymentProofModal] = useState(false)

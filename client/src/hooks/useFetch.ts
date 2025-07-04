@@ -4,11 +4,13 @@ import { useState, useEffect } from "react"
 
 export function useGetList<T>(endpoint: string) {
   const [data, setData] = useState<T[]>([])
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
+      setError(null); 
       try {
         // Replace with actual API call
         const response = await get<T[]>(endpoint)
@@ -28,17 +30,17 @@ export function useGetList<T>(endpoint: string) {
   return { data, loading, error }
 }
 
-export function useGetSingle<T>(endpoint: string | null) {
+export function useGetSingle<T>(endpoint: string ) {
   const [data, setData] = useState<T | null>(null);
-  const [loading, setLoading] = useState<boolean>(!!endpoint); // set to true only if endpoint exists
+  const [loading, setLoading] = useState<boolean>(false); 
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!endpoint) return;
+
 
     const fetchData = async () => {
       setLoading(true);
-      setError(null); // reset error state
+      setError(null); 
       try {
         const response = await get<T>(endpoint);
         setData(response);
