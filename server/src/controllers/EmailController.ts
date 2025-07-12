@@ -28,7 +28,7 @@ export default class EmailController {
         return res.status(404).json({ error: "user not found" })
       }
       // Send email using MailService
-      await MailService.sendCustomEmail(user.email, subject, message, 'Investment Team')
+      await MailService.sendCustomEmail(user.email, subject, message)
 
       res.status(200).json({
         success: true,
@@ -45,7 +45,7 @@ export default class EmailController {
       const {  subject, message } = req.body
       const users = await User.findAll({where:{role:'INVESTOR'}})
       for (const  user of users){
-            await MailService.sendCustomEmail(user.email, subject, message, 'Investment Team')   
+            await MailService.sendCustomEmail(user.email, subject, message)   
       }
       res.status(200).json({
         success: true,

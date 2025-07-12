@@ -10,7 +10,9 @@ import SocialMediaController from "./controllers/SocialMediaController.js"
 import ManagedPortfolioController from "./controllers/ManagedPortfolioController.js"
 import { VerificationFeeController } from "./controllers/VerificationFeeController.js"
 import InvestorController from "./controllers/InvestorController.js"
-import { authenticate, type AuthenticatedRequest } from "./middlewares/authenticate.js"
+import { authenticate, 
+  // adminAuth,
+   type AuthenticatedRequest } from "./middlewares/authenticate.js"
 import Investor from "./models/Investor.js"
 import Admin from "./models/Admin.js"
 import { CustomError } from "./utils/error/CustomError.js"
@@ -19,84 +21,175 @@ import { PaymentController } from "./controllers/PaymentController.js"
 import User from "./models/User.js"
 import ReferralController from "./controllers/ReferralController.js"
 const router = Router()
-router.post("/investment/new/:investorId", ManagedPortfolioController.createInvestment)
-router.get("/managed-portfolios/investor/:investorId", ManagedPortfolioController.getInvestment)
-router.patch('/managed-portfolios/credit-amount-deposited/:portfolioId', ManagedPortfolioController.creditAmountDeposited)
-router.patch('/managed-portfolios/credit-earnings/:portfolioId', ManagedPortfolioController.creditEarnings)
 
-router.get('/investors', InvestorController.getAllInvestors)
+// =====================================
+// ADMIN-ONLY ROUTES (Protected)
+// =====================================
 
-router.get('/get-investor/:investorId', InvestorController.getInvestor)
+// Investment Management (Admin only)
+router.post("/investment/new/:investorId", 
+  // adminAuth,
+   ManagedPortfolioController.createInvestment)
+router.patch('/managed-portfolios/credit-amount-deposited/:portfolioId', 
+  // adminAuth,
+   ManagedPortfolioController.creditAmountDeposited)
+router.patch('/managed-portfolios/credit-earnings/:portfolioId', 
+  // adminAuth,
+   ManagedPortfolioController.creditEarnings)
 
-router.delete("/investors/:id", InvestorController.deleteInvestor)
+// Investor Management (Admin only)
+router.get('/investors', 
+  // adminAuth,
+   InvestorController.getAllInvestors)
+router.get('/get-investor/:investorId', 
+  // adminAuth,
+   InvestorController.getInvestor)
+router.delete("/investors/:id", 
+  // adminAuth,
+   InvestorController.deleteInvestor)
 
-router.get('/investors/:investorId/referrals',ReferralController.getInvestorReferrals)
-router.get('/investors/:investorId/referrals/settled',ReferralController.getInvestorSettledReferrals)
-router.get('/investors/:investorId/referrals/unsettled', ReferralController.getInvestorUnsettledReferrals)
+// Referral Management (Admin only)
+router.get('/investors/:investorId/referrals', 
+  // adminAuth,
+   ReferralController.getInvestorReferrals)
+router.get('/investors/:investorId/referrals/settled', 
+  // adminAuth,
+   ReferralController.getInvestorSettledReferrals)
+router.get('/investors/:investorId/referrals/unsettled', 
+  // adminAuth,
+   ReferralController.getInvestorUnsettledReferrals)
+router.get('/referrals/unpaid', 
+  // adminAuth,
+   ReferralController.getUnpaidReferrals)
 
-// New investor profile routes
-router.get("/investors/me/:investorId",  InvestorController.getMyProfile)
+// KYC Management (Admin only)
+router.patch("/kyc/:id", 
+  // adminAuth,
+   KycController.update)
+router.get("/kyc/verify/:id", 
+  // adminAuth,
+   KycController.verify)
+router.get('/kyc/unverified', 
+  // adminAuth,
+   KycController.getUnverified)
+
+// Manager Management (Admin only)
+router.get("/managers", 
+  // adminAuth,
+   ManagerController.getAllManagers)
+router.get("/managers/:id", 
+  // adminAuth,
+   ManagerController.getManagerById)
+router.post("/managers", 
+  // adminAuth,
+   upload.single("image"), ManagerController.createManager)
+router.patch("/managers/:id", 
+  // adminAuth,
+   upload.single("image"), ManagerController.updateManager)
+router.delete("/managers/:id", 
+  // adminAuth,
+   ManagerController.deleteManager)
+
+// Admin Wallet routes (Admin only)
+router.get("/admin-wallets", 
+  // adminAuth,
+   AdminWalletController.getAllAdminWallets)
+router.get("/admin-wallets/:id", 
+  // adminAuth,
+   AdminWalletController.getAdminWalletById)
+router.post("/admin-wallets", 
+  // adminAuth,
+   AdminWalletController.createAdminWallet)
+router.patch("/admin-wallets/:id", 
+  // adminAuth,
+   AdminWalletController.updateAdminWallet)
+router.delete("/admin-wallets/:id", 
+  // adminAuth,
+   AdminWalletController.deleteAdminWallet)
+
+// Social Media routes (Admin only)
+router.get("/social-media", 
+  // adminAuth,
+   SocialMediaController.getAll)
+router.get("/social-media/:id", 
+  // adminAuth,
+   SocialMediaController.getById)
+router.post("/social-media", 
+  // adminAuth,
+   upload.single("logo"), SocialMediaController.create)
+router.patch("/social-media/:id", 
+  // adminAuth,
+   upload.single("logo"), SocialMediaController.update)
+router.delete("/social-media/:id", 
+  // adminAuth,
+   SocialMediaController.delete)
+
+// Verification Fees routes (Admin only)
+router.post("/verification-fees/:investorId", 
+  // adminAuth,
+   VerificationFeeController.create)
+router.patch("/verification-fees/:id", 
+  // adminAuth,
+   VerificationFeeController.update)
+router.delete("/verification-fees/:id", 
+  // adminAuth,
+   VerificationFeeController.delete)
+router.get('/verification-fees/unpaid/:investorId', 
+  // adminAuth,
+   VerificationFeeController.getUnpaidVerificationFees)
+
+// Payment Management (Admin only)
+router.put("/payments/:id", 
+  // adminAuth,
+   PaymentController.updatePayment)
+router.patch("/payments/verify/:id", 
+  // adminAuth,
+   PaymentController.verifyPayment)
+router.patch("/payments/unverify/:id", 
+  // adminAuth,
+   PaymentController.unverifyPayment)
+router.get("/payments/unverified", 
+  // adminAuth,
+   PaymentController.getUnverifiedPayments)
+router.get("/payments/investor/:investorId", 
+  // adminAuth,
+   PaymentController.getPaymentsByInvestorId)
+router.get("/investor-payments/:id", 
+  // adminAuth,
+   PaymentController.getInvestorPayments)
+router.delete("/:id", 
+  // adminAuth,
+   PaymentController.deletePayment)
+
+// Email routes (Admin only)
+router.post("/email/send", 
+  // adminAuth,
+   EmailController.sendGeneralEmail)
+router.post("/email/send-to-investor/:investorId", 
+  // adminAuth,
+   EmailController.sendEmailToInvestor)
+
+// =====================================
+// INVESTOR ROUTES (Protected)
+// =====================================
+
+// Investment viewing (Investor can view their own)
+router.get("/managed-portfolios/investor/:investorId", authenticate, ManagedPortfolioController.getInvestment)
+
+// Investor profile routes
+router.get("/investors/me/:investorId", authenticate, InvestorController.getMyProfile)
 router.patch("/investors/me/:investorId", authenticate, InvestorController.updateMyProfile)
 
-router.post("/kyc/:investorId", KycController.create)
-router.patch("/kyc/:id", KycController.update)
-router.get("/kyc/verify/:id", KycController.verify)
-router.get('/kyc/unverified',KycController.getUnverified)
+// KYC creation (Investors can create their own KYC)
+router.post("/kyc/:investorId", authenticate, KycController.create)
 
-router.get("/managers", ManagerController.getAllManagers)
-router.get("/managers/:id", ManagerController.getManagerById)
-router.post("/managers", 
-  upload.single("image"), 
-  ManagerController.createManager)
-router.patch("/managers/:id", upload.single("image"), ManagerController.updateManager)
-router.delete("/managers/:id", ManagerController.deleteManager)
+// Payment creation (Investors can create payments)
+router.post("/create/:investorId", authenticate, upload.single('file'), PaymentController.createPayment)
 
-// Admin Wallet routes
-router.get("/admin-wallets", AdminWalletController.getAllAdminWallets)
-router.get("/admin-wallets/:id", AdminWalletController.getAdminWalletById)
-router.post("/admin-wallets", AdminWalletController.createAdminWallet)
-router.patch("/admin-wallets/:id", AdminWalletController.updateAdminWallet)
-router.delete("/admin-wallets/:id", AdminWalletController.deleteAdminWallet)
+// =====================================
+// PUBLIC ROUTES (No authentication)
+// =====================================
 
-router.get('/referrals/unpaid', ReferralController.getUnpaidReferrals)
-// Social Media routes
-router.get("/social-media", SocialMediaController.getAll)
-router.get("/social-media/:id", SocialMediaController.getById)
-router.post("/social-media", upload.single("logo"), SocialMediaController.create)
-router.patch("/social-media/:id", upload.single("logo"), SocialMediaController.update)
-router.delete("/social-media/:id", SocialMediaController.delete)
-
-// Verification Fees routes
-
-router.post("/verification-fees/:investorId", VerificationFeeController.create)
-router.patch("/verification-fees/:id", VerificationFeeController.update)
-router.delete("/verification-fees/:id", VerificationFeeController.delete)
-router.get('/verification-fees/unpaid/:investorId',VerificationFeeController.getUnpaidVerificationFees)
-
-
-
-router.post("/create/:investorId",upload.single('file'), PaymentController.createPayment)
-
-// Update a payment
-router.put("/payments/:id", PaymentController.updatePayment)
-
-// Verify a payment
-router.patch("/payments/verify/:id", PaymentController.verifyPayment)
-
-// Unverify a payment
-router.patch("/payments/unverify/:id", PaymentController.unverifyPayment)
-
-// Get all unverified payments
-router.get("/payments/unverified", PaymentController.getUnverifiedPayments)
-
-// Get all payments for a specific investor
-router.get("/payments/investor/:investorId", PaymentController.getPaymentsByInvestorId)
-
-// Get investor payments (alternate route)
-router.get("/investor-payments/:id", PaymentController.getInvestorPayments)
-
-// Delete a payment
-router.delete("/:id", PaymentController.deletePayment)
 // Auth routes
 router.post("/auth/forgot-password", AuthController.forgotPassword)
 router.post("/auth/reset-password", AuthController.resetPassword)
@@ -106,14 +199,16 @@ router.post("/auth/admin/signup", AuthController.adminSignup)
 router.post("/auth/verify-email", AuthController.verifyEmail)
 router.post(`/auth/resend-verification-token`, AuthController.resendVerificationToken)
 router.get("/auth/logout", (req, res) => {
-  
   res.clearCookie("token")
   return res.status(200).json({ message: "Logged out successfully" })
 })
 
-// Email routes
-router.post("/email/send", EmailController.sendGeneralEmail)
-router.post("/email/send-to-investor/:investorId", EmailController.sendEmailToInvestor)
+// Token verification (public for password reset flow)
+router.post("/auth/verify-reset-token", AuthController.verifyResetToken)
+
+// =====================================
+// AUTHENTICATED USER INFO
+// =====================================
 
 async function getInvestorById(id: string): Promise<Investor | null> {
   // Replace with real DB query

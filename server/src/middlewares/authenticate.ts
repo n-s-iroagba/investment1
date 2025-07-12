@@ -42,3 +42,24 @@ console.log('Request headers:', req.headers);
     return res.status(401).json({ message: 'Unauthorized: Invalid token' });
   }
 }
+
+// Admin authorization middleware - must be used after authenticate
+export function requireAdmin(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+  if (!req.user) {
+    return res.status(401).json({ message: 'Unauthorized: Authentication required' });
+  }
+
+  if (req.user.role !== 'ADMIN') {
+    return res.status(403).json({ message: 'Forbidden: Admin access required' });
+  }
+
+  next();
+}
+
+// Combined middleware for admin routes (authenticate + requireAdmin)
+export function adminAuth(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+  authenticate(req, res, (err?: any) => {
+    if (err) return next(err);
+    requireAdmin(req, res, next);
+  });
+}

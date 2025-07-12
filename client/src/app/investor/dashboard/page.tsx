@@ -13,7 +13,6 @@ import {
   ArrowTrendingUpIcon,
   CurrencyDollarIcon,
   WalletIcon,
-  ChartBarIcon,
   SparklesIcon,
   ArrowUpOnSquareIcon,
   UserIcon,
@@ -22,6 +21,8 @@ import {
 import { Spinner } from "@/components/Spinner"
 import { useGetSingle } from "@/hooks/useFetch"
 import { apiRoutes } from "@/constants/apiRoutes"
+import BitcoinValue from "@/components/BitcoinValue"
+import TradingViewWidget from "@/components/TradingViewWidget"
 
 // Dynamically import Chart component
 const Chart = dynamic(() => import("react-apexcharts"), {
@@ -281,23 +282,37 @@ const chartSeries = [
             {/* Grid with responsive columns */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
               {[
-                {
+                // {
+                //   icon: WalletIcon,
+                //   title: "Total Value",
+                //   value: `$${((portfolio.earnings ?? 0) + (portfolio.amountDeposited ?? 0)).toLocaleString()}`,
+                //   color: "bg-blue-100 text-blue-700",
+                // },
+                // {
+                //   icon: ArrowTrendingUpIcon,
+                //   title: "Daily Returns",
+                //   value: `+$${portfolio.earnings ? ((portfolio.earnings ?? 0) / Math.max(days, 1)).toFixed(2) : "0.00"}`,
+                //   color: "bg-emerald-100 text-emerald-700",
+                // },
+
+                // {
+                //   icon: ChartBarIcon,
+                //   title: "Yield Rate",
+                //   value: `${portfolio.manager?.percentageYield ?? 0}%`,
+                //   color: "bg-teal-100 text-teal-700",
+                // },
+
+                     {
                   icon: WalletIcon,
-                  title: "Total Value",
-                  value: `$${((portfolio.earnings ?? 0) + (portfolio.amountDeposited ?? 0)).toLocaleString()}`,
+                  title: "Amount Deposited",
+                  value: `$${portfolio.amountDeposited}`,
                   color: "bg-blue-100 text-blue-700",
                 },
-                {
+                   {
                   icon: ArrowTrendingUpIcon,
-                  title: "Daily Returns",
-                  value: `+$${portfolio.earnings ? ((portfolio.earnings ?? 0) / Math.max(days, 1)).toFixed(2) : "0.00"}`,
+                  title: "Earnings",
+                  value: `+$${portfolio.earnings}`,
                   color: "bg-emerald-100 text-emerald-700",
-                },
-                {
-                  icon: ChartBarIcon,
-                  title: "Yield Rate",
-                  value: `${portfolio.manager?.percentageYield ?? 0}%`,
-                  color: "bg-teal-100 text-teal-700",
                 },
                 {
                   icon: UserIcon,
@@ -321,9 +336,11 @@ const chartSeries = [
                   <p className="text-sm font-bold text-gray-900 truncate">
                     {metric.value}
                   </p>
+                <BitcoinValue value={metric.value} />
                 </div>
               ))}
             </div>
+            <TradingViewWidget/>
 
             {/* Responsive chart container */}
             {days > 0 && (
