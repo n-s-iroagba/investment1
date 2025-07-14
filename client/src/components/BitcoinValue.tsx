@@ -6,24 +6,20 @@ export default function BitcoinValue({ value }: { value: number }) {
 
 
   const [btc, setBtc] = useState(0)
-  const [rate, setRate] = useState<number | null>(null)
+  
 
   useEffect(() => {
     const fetchRate = async () => {
-      const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd')
+      const res = await fetch(`https://blockchain.info/tobtc?currency=USD&value=${value}`)
       const data = await res.json()
-      console.log(rate)
-      setRate(data.rate)
+      console.log(data)
+      setBtc(data)
     }
 
     fetchRate()
   }, [])
 
-  useEffect(() => {
-    if (rate) {
-      setBtc(Number((value / rate).toFixed(8)))
-    }
-  }, [rate, value])
+ 
   return (
     <p className="text-xs font-medium text-gray-500 truncate">
       ≈ {btc} BTC
