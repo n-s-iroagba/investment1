@@ -52,7 +52,7 @@ const TradingViewWidget: React.FC = () => {
       headerFontSize: 'medium',
       autosize: true,
       width: '100%',
-      height: '100%',
+      height: '6cm',
       noTimeScale: false,
       hideDateRanges: false,
       hideMarketStatus: false,
