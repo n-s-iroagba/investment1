@@ -16,13 +16,14 @@ import { motion } from "framer-motion"
 import { ManagedPortfolio } from "@/types/managedPortfolio"
 import { VerificationFee } from "@/types/VerificationFee"
 import { useRouter } from "next/navigation"
-
+import { useState } from "react"
+import { Dialog } from "@headlessui/react"
 interface WithdrawalStatus {
   canWithdraw: boolean
   daysLeft?: number
   requiresVerification: boolean
   maturityDate: Date
-  totalEarnings: number 
+ 
 }
 
 export default function InvestorWithdraw() {
@@ -31,7 +32,8 @@ export default function InvestorWithdraw() {
 
   const {data: verificationFees, loading: feeLoading, error: feeError} = useGetList<VerificationFee>(apiRoutes.verificationFee.investorUpaid(roleId))
   const {data: investment, loading: investLoading, error: investError} = useGetSingle<ManagedPortfolio>(apiRoutes.investment.getInvestment(roleId))
-
+ const [withdrawalType, setWithdrawalType] = useState<"deposit" | "earnings" | "">("")
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const calculateWithdrawalStatus = (investment: ManagedPortfolio): WithdrawalStatus => {
     const now = new Date()
     console.log('investment is',investment)
@@ -41,12 +43,7 @@ export default function InvestorWithdraw() {
     
     const isMatured = now >= maturityDate
     const daysLeft = Math.ceil((maturityDate.getTime() - now.getTime()) / (24 * 60 * 60 * 1000))
-    
-    // Calculate earnings based on percentage yield
-    const principalAmount = investment.amount
-    const yieldPercentage = investment.manager?.percentageYield || 0
-    const totalEarnings = investment.earnings||0
-    
+
     // Check if verification fees are required and unpaid
     const unpaidFees = verificationFees?.filter(fee => !fee.isPaid) || []
     const requiresVerification = isMatured && unpaidFees.length > 0
@@ -56,7 +53,7 @@ export default function InvestorWithdraw() {
       daysLeft: isMatured ? 0 : Math.max(0, daysLeft),
       requiresVerification,
       maturityDate,
-      totalEarnings
+      
     }
   }
 
@@ -79,6 +76,14 @@ export default function InvestorWithdraw() {
     return verificationFees
       ?.filter(fee => !fee.isPaid)
       .reduce((total, fee) => total + fee.amount, 0) || 0
+  }
+
+   const handleWithdraw = () => {
+    if (!withdrawalType) return
+    setIsModalOpen(true)
+    setTimeout(() => {
+      setIsModalOpen(false)
+    }, 3000) // Simulate processing
   }
 
   if (feeLoading || investLoading) {
@@ -160,6 +165,81 @@ export default function InvestorWithdraw() {
               Manage your investment withdrawal and earnings
             </p>
           </header>
+              <header>
+            <h1 className="text-2xl sm:text-3xl font-bold text-blue-900 flex items-center gap-2">
+              <BanknotesIcon className="h-6 w-6 text-blue-600" />
+              Withdraw Investment
+            </h1>
+            <p className="text-sm text-blue-600 mt-1">
+              Manage your investment withdrawal and earnings
+            </p>
+          </header>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            {/* Amounts, Returns, Days, Fees Cards – unchanged */}
+            {/* ... Use your original cards here exactly as you had ... */}
+          </div>
+
+          <div className="bg-white rounded-xl sm:rounded-2xl shadow-sm border border-blue-50 sm:border-2 p-4 sm:p-6 space-y-4">
+            <h2 className="text-lg font-semibold text-gray-900">Withdrawal Options</h2>
+
+            {status.canWithdraw ? (
+              <>
+                <label className="text-sm font-medium text-gray-700">Select Withdrawal Type</label>
+                <select
+                  value={withdrawalType}
+                  onChange={(e) => setWithdrawalType(e.target.value as "deposit" | "earnings")}
+                  className="w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm"
+                >
+                  <option value="">-- Choose an Option --</option>
+                  <option value="deposit">Amount Deposited</option>
+                  <option value="earnings">Investment Earnings</option>
+                </select>
+
+                <button
+                  disabled={!withdrawalType}
+                  onClick={handleWithdraw}
+                  className={`w-full sm:w-auto mt-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                    withdrawalType
+                      ? "bg-blue-600 text-white hover:bg-blue-700"
+                      : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  }`}
+                >
+                  Withdraw Now
+                </button>
+              </>
+            ) : status.requiresVerification ? (
+              <div className="bg-orange-100 text-orange-800 p-4 rounded-lg space-y-2">
+                <p className="font-medium">You need to pay verification fees before you can withdraw.</p>
+                <button
+                  onClick={() => router.push(`/investor/payments/${roleId}`)}
+                  className="bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700 text-sm"
+                >
+                  Pay Verification Fee
+                </button>
+              </div>
+            ) : (
+              <p className="text-sm text-gray-600">Your investment is not yet matured for withdrawal.</p>
+            )}
+          </div>
+
+          {/* Modal */}
+          <Dialog open={isModalOpen} onClose={() => setIsModalOpen(false)} className="fixed z-50 inset-0 overflow-y-auto">
+            <div className="flex items-center justify-center min-h-screen px-4 bg-black/40">
+              <Dialog.Panel className="bg-white max-w-sm mx-auto p-6 rounded-lg shadow-lg text-center">
+                <Dialog.Title className="text-lg font-semibold text-blue-800 mb-2">
+                  Withdrawal Processing
+                </Dialog.Title>
+                <p className="text-sm text-gray-700">
+                  Your withdrawal of{" "}
+                  <span className="font-semibold text-blue-700">
+                    {withdrawalType === "earnings" ? "Investment Earnings" : "Deposited Amount"}
+                  </span>{" "}
+                  is being processed...
+                </p>
+              </Dialog.Panel>
+            </div>
+          </Dialog>
 
           {/* Stats Cards - Mobile Optimized */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
@@ -170,7 +250,7 @@ export default function InvestorWithdraw() {
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="text-xs sm:text-sm text-blue-600 truncate">Investment Amount</p>
-                  <p className="text-lg sm:text-2xl font-semibold text-blue-900 truncate">{formatCurrency(investment.amount)}</p>
+                  <p className="text-lg sm:text-2xl font-semibold text-blue-900 truncate">{formatCurrency(investment.amountDeposited||0)}</p>
                 </div>
               </div>
             </div>
@@ -182,7 +262,7 @@ export default function InvestorWithdraw() {
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="text-xs sm:text-sm text-blue-600 truncate">Expected Returns</p>
-                  <p className="text-lg sm:text-2xl font-semibold text-blue-900 truncate">{formatCurrency(status.totalEarnings)}</p>
+                  <p className="text-lg sm:text-2xl font-semibold text-blue-900 truncate">{formatCurrency(investment.earnings||0)}</p>
                 </div>
               </div>
             </div>
@@ -274,10 +354,10 @@ export default function InvestorWithdraw() {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-1 sm:gap-2">
                         <CurrencyDollarIcon className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 flex-shrink-0" />
-                        <span className="text-base sm:text-lg font-semibold text-gray-900">{formatCurrency(investment.amount)}</span>
+                        <span className="text-base sm:text-lg font-semibold text-gray-900">{formatCurrency(investment.amountDeposited||0)}</span>
                       </div>
                       <div className="text-xs sm:text-sm text-blue-600 text-right">
-                        Expected: {formatCurrency(status.totalEarnings)}
+                        Expected: {formatCurrency(investment.earnings||0)}
                       </div>
                     </div>
 
