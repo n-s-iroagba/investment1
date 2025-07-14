@@ -67,7 +67,7 @@ const TradingViewWidget: React.FC = () => {
   }, []);
 
   return (
-    <div className="tradingview-widget-container" style={{ height: '6cm' }} ref={containerRef}>
+    <div className="tradingview-widget-container"  ref={containerRef}>
       <div className="tradingview-widget-container__widget" />
       <div className="tradingview-widget-copyright">
         <a
