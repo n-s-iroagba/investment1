@@ -58,7 +58,7 @@ const TradingViewWidget: React.FC = () => {
       hideMarketStatus: false,
       hideSymbolLogo: false,
     });
-
+containerRef.current.innerHTML = ''; 
     containerRef.current.appendChild(script);
 
     return () => {

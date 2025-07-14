@@ -11,7 +11,8 @@ const __dirname = path.dirname(__filename);
 // Configuration
 const EMAIL_USER = 'wealthfundingtradestationopportunities';
 const COMPANY_NAME = 'Wealth Funding Trade Station Opportunities';
-const LOGO_PATH = path.join(__dirname, './ts-Logo.png'); // Update this path
+const LOGO_PATH = path.resolve(__dirname, '../../public/ts-Logo.png');
+
 const PRIMARY_COLOR = '#10B981';
 
 class MailService {
