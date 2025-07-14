@@ -51,7 +51,7 @@ const TradingViewWidget: React.FC = () => {
       fontSize: '10',
       headerFontSize: 'medium',
       autosize: false,
-      width: '5rem',
+      width: '20rem',
       height: '20rem',
       noTimeScale: false,
       hideDateRanges: false,
@@ -67,7 +67,7 @@ const TradingViewWidget: React.FC = () => {
   }, []);
 
   return (
-    <div className="tradingview-widget-container"  ref={containerRef}>
+    <div className="tradingview-widget-container" ref={containerRef}>
       <div className="tradingview-widget-container__widget" />
       <div className="tradingview-widget-copyright">
         <a
