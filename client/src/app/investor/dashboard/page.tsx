@@ -278,6 +278,7 @@ const chartSeries = [
                 {displayName || 'User'} 🌱
               </p>
             </header>
+             <TradingViewWidget/>
 
             {/* Grid with responsive columns */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
@@ -340,7 +341,7 @@ const chartSeries = [
                 </div>
               ))}
             </div>
-            <TradingViewWidget/>
+           
 
             {/* Responsive chart container */}
             {days > 0 && (
