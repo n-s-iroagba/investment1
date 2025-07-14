@@ -50,7 +50,7 @@ const TradingViewWidget: React.FC = () => {
       ],
       fontSize: '10',
       headerFontSize: 'medium',
-      autosize: true,
+      autosize: false,
       width: '100%',
       height: '100%',
       noTimeScale: false,
