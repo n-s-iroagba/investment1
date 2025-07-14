@@ -12,6 +12,7 @@ export default function BitcoinValue({ value }: { value: number }) {
     const fetchRate = async () => {
       const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd')
       const data = await res.json()
+      console.log(rate)
       setRate(data.rate)
     }
 
