@@ -20,7 +20,7 @@ export default function BitcoinValue({ value }: { value: number }) {
 
   useEffect(() => {
     if (rate) {
-      setBtc(value / rate)
+      setBtc(Number((value / rate).toFixed(8)))
     }
   }, [rate, value])
   return (
