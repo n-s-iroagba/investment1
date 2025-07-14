@@ -305,13 +305,13 @@ const chartSeries = [
                      {
                   icon: WalletIcon,
                   title: "Amount Deposited",
-                  value: `$${portfolio.amountDeposited}`,
+                  value: portfolio.amountDeposited,
                   color: "bg-blue-100 text-blue-700",
                 },
                    {
                   icon: ArrowTrendingUpIcon,
                   title: "Earnings",
-                  value: `+$${portfolio.earnings}`,
+                  value: portfolio.earnings,
                   color: "bg-emerald-100 text-emerald-700",
                 },
                 {
@@ -334,9 +334,9 @@ const chartSeries = [
                     </p>
                   </div>
                   <p className="text-sm font-bold text-gray-900 truncate">
-                    {metric.value}
+                    +${metric.value}
                   </p>
-                <BitcoinValue value={metric.value} />
+                {metric.title!=='Manager'&&<BitcoinValue value={metric.value||0} />}
                 </div>
               ))}
             </div>
