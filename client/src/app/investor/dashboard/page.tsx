@@ -279,7 +279,7 @@ const chartSeries = [
               </p>
             </header>
                <h1 className="text-xl md:text-2xl font-bold text-black mb-1">
-                BTCUSD CHART.
+                BTCUSD CHART
               </h1>
              <TradingViewWidget/>
 
