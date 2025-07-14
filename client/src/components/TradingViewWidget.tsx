@@ -9,7 +9,7 @@ interface TradingViewWidgetProps {
 }
 
 const TradingViewWidget: React.FC<TradingViewWidgetProps> = ({
-  symbol = 'BITSTAMP:BTCUSD|1D',
+  symbol = 'BITSTAMP:BTCUSD',
   colorTheme = 'light',
   isTransparent = false,
   height = '5cm',
