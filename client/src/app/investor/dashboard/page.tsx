@@ -334,9 +334,9 @@ const chartSeries = [
                     </p>
                   </div>
                   <p className="text-sm font-bold text-gray-900 truncate">
-                    +${metric.value}
+                    {metric.title!=='Manager'? `$+${metric.value}`: metric.value}
                   </p>
-                {metric.title!=='Manager'&&<BitcoinValue value={metric.value||0} />}
+                {metric.title!=='Manager'&&<BitcoinValue value={Number(metric.value)||0} />}
                 </div>
               ))}
             </div>

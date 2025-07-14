@@ -34,6 +34,7 @@ export default function InvestorWithdraw() {
 
   const calculateWithdrawalStatus = (investment: ManagedPortfolio): WithdrawalStatus => {
     const now = new Date()
+    console.log('investment is',investment)
     const investmentDate = new Date(investment.createdAt)
     const durationInMs = (investment.manager?.duration || 0) * 24 * 60 * 60 * 1000
     const maturityDate = new Date(investmentDate.getTime() + durationInMs)

@@ -1,31 +1,20 @@
-import React, { useEffect, useRef, memo } from 'react';
+'use client';
 
-interface TradingViewWidgetProps {
-  symbol?: string;
-  colorTheme?: 'light' | 'dark';
-  isTransparent?: boolean;
-  height?: string | number;
-  width?: string | number;
-}
+import React, { useEffect, useRef } from 'react';
 
-const TradingViewWidget: React.FC<TradingViewWidgetProps> = ({
-  symbol = 'BITSTAMP:BTCUSD',
-  colorTheme = 'light',
-  isTransparent = false,
-  height = '5cm',
-  width = '100%'
-}) => {
-  const container = useRef<HTMLDivElement>(null);
+const TradingViewWidget: React.FC = () => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (!container.current) return;
+    if (!containerRef.current) return;
 
     const script = document.createElement('script');
     script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js';
-    script.type = 'text/javascript';
     script.async = true;
+    script.type = 'text/javascript';
+
     script.innerHTML = JSON.stringify({
-      lineWidth: 2,
+      lineWidth: '2',
       lineType: 0,
       chartType: 'area',
       fontColor: 'rgb(106, 109, 120)',
@@ -40,49 +29,52 @@ const TradingViewWidget: React.FC<TradingViewWidgetProps> = ({
       borderDownColor: '#f7525f',
       wickUpColor: '#22ab94',
       wickDownColor: '#f7525f',
-      colorTheme,
-      isTransparent,
+      colorTheme: 'light',
+      isTransparent: false,
       locale: 'en',
       chartOnly: false,
       scalePosition: 'right',
       scaleMode: 'Normal',
-      fontFamily: '-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif',
+      fontFamily:
+        '-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif',
       valuesTracking: '1',
       changeMode: 'price-and-percent',
-      symbols: [[symbol]],
+      symbols: [['BITSTAMP:BTCUSD|1D']],
       dateRanges: [
         '1d|1',
         '1m|30',
         '3m|60',
         '12m|1D',
         '60m|1W',
-        'all|1M'
+        'all|1M',
       ],
       fontSize: '10',
       headerFontSize: 'medium',
       autosize: true,
-      width,
-      height,
+      width: '100%',
+      height: '100%',
       noTimeScale: false,
       hideDateRanges: false,
       hideMarketStatus: false,
-      hideSymbolLogo: false
+      hideSymbolLogo: false,
     });
 
-    container.current.appendChild(script);
+    containerRef.current.appendChild(script);
 
     return () => {
-      if (container.current) {
-        container.current.innerHTML = '';
-      }
+      containerRef.current!.innerHTML = '';
     };
-  }, [symbol, colorTheme, isTransparent, height, width]);
+  }, []);
 
   return (
-    <div className="tradingview-widget-container" ref={container} style={{ height, width }}>
-      <div className="tradingview-widget-container__widget"></div>
+    <div className="tradingview-widget-container" style={{ height: '500px' }} ref={containerRef}>
+      <div className="tradingview-widget-container__widget" />
       <div className="tradingview-widget-copyright">
-        <a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank">
+        <a
+          href="https://www.tradingview.com/"
+          rel="noopener nofollow"
+          target="_blank"
+        >
           <span className="blue-text">Track all markets on TradingView</span>
         </a>
       </div>
@@ -90,4 +82,4 @@ const TradingViewWidget: React.FC<TradingViewWidgetProps> = ({
   );
 };
 
-export default memo(TradingViewWidget);
+export default TradingViewWidget;
