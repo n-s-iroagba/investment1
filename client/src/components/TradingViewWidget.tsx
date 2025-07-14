@@ -32,7 +32,7 @@ const TradingViewWidget: React.FC = () => {
       colorTheme: 'light',
       isTransparent: false,
       locale: 'en',
-      chartOnly: false,
+      chartOnly: true,
       scalePosition: 'right',
       scaleMode: 'Normal',
       fontFamily:
@@ -51,8 +51,8 @@ const TradingViewWidget: React.FC = () => {
       fontSize: '10',
       headerFontSize: 'medium',
       autosize: false,
-      width: '20rem',
-      height: '20rem',
+      width: '100%',
+      height: '100%',
       noTimeScale: false,
       hideDateRanges: false,
       hideMarketStatus: false,
@@ -67,7 +67,7 @@ const TradingViewWidget: React.FC = () => {
   }, []);
 
   return (
-    <div className="tradingview-widget-container" ref={containerRef}>
+    <div className="tradingview-widget-container"  ref={containerRef}>
       <div className="tradingview-widget-container__widget" />
       <div className="tradingview-widget-copyright">
         <a
