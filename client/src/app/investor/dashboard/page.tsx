@@ -258,7 +258,7 @@ const chartSeries = [
     name: "Portfolio Value",
     data: Array.from(
       { length: chartDataPoints },
-      (_, i) => Number((safeAmountDeposited * (1 + (safePercentageYield / 100 / 365) * i)).toFixed(2))),
+      (_, i) => Number((safeAmountDeposited * (1 + (safePercentageYield / 100 /portfolio.manager.duration) * i)).toFixed(2))),
   },
 ]
 
