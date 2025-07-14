@@ -1,31 +1,31 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { fiatToBitcoin } from 'bitcoin-conversion'
 
 export default function BitcoinValue({ value }: { value: number }) {
-  const [btcValue, setBtcValue] = useState<string>('...')
-  
-  useEffect(() => {
-    async function convert() {
-      try {
-        // Extract numeric value from string (removes $ sign if present)
-     
-          const converted = await fiatToBitcoin(value, 'USD')
-          setBtcValue(converted.toFixed(8)) // Format to 8 decimal places
-        
-      } catch (error) {
-        console.error('Bitcoin conversion failed:', error)
-        setBtcValue('Error')
-      }
-    }
-    
-    convert()
-  }, [value])
 
+
+  const [btc, setBtc] = useState(0)
+  const [rate, setRate] = useState<number | null>(null)
+
+  useEffect(() => {
+    const fetchRate = async () => {
+      const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd')
+      const data = await res.json()
+      setRate(data.rate)
+    }
+
+    fetchRate()
+  }, [])
+
+  useEffect(() => {
+    if (rate) {
+      setBtc(value / rate)
+    }
+  }, [rate, value])
   return (
     <p className="text-xs font-medium text-gray-500 truncate">
-      ≈ {btcValue} BTC
+      ≈ {btc} BTC
     </p>
   )
 }
