@@ -44,7 +44,7 @@ export default function InvestorWithdraw() {
     // Calculate earnings based on percentage yield
     const principalAmount = investment.amount
     const yieldPercentage = investment.manager?.percentageYield || 0
-    const totalEarnings = principalAmount + (principalAmount * yieldPercentage / 100)
+    const totalEarnings = investment.earnings||0
     
     // Check if verification fees are required and unpaid
     const unpaidFees = verificationFees?.filter(fee => !fee.isPaid) || []
