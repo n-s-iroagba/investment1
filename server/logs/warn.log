@@ -309,3 +309,5 @@
     at ConnectionManager.connect (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/mysql/connection-manager.js:102:17)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
     at async ConnectionManager._connect (/home/udorakpuenyi/tem/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:222:24)
+2025-07-26T19:18:29.902Z [WARN]: CustomError - 400: Missing or invalid 'depositMeans' - URL: /api/investment/new/1
+2025-07-26T19:18:53.535Z [WARN]: CustomError - 400: Missing 'wallet' details for CRYPTO deposit - URL: /api/investment/new/1

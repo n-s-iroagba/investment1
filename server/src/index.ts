@@ -10,7 +10,7 @@ import cookieParser from 'cookie-parser';
 import { fileURLToPath } from 'url';
 
 export const app = express();
-const PORT = 3000;
+const PORT =process.env.NODE_ENV === 'production'? 3000:5000;
 
 // Get __dirname equivalent for ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -38,26 +38,32 @@ if (!fs.existsSync(uploadDir)) {
   }
 }
 
-// CORS configuration - MOVED BEFORE STATIC MIDDLEWARE
+
+const allowedOrigins =
+  process.env.NODE_ENV === 'production'
+    ? ['https://wealthfundingtradestationopportunities.vercel.app']
+    : ['http://localhost:3000']; // dev client
+
+// CORS middleware (place before static files middleware)
 app.use(cors({
-  origin:  
-  ['https://wealthfundingtradestationopportunities.vercel.app'], 
-    //  'http://localhost:3001',
+  origin: allowedOrigins,
   allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization', 'Cookie'],
   methods: ['POST', 'GET', 'DELETE', 'PATCH', 'OPTIONS'],
   credentials: true,
 }));
 
-// Additional CORS headers
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin',     
-['https://wealthfundingtradestationopportunities.vercel.app'], 
-    //  'http://localhost:3001'
-    )
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cookie')
-  res.header('Access-Control-Allow-Methods', 'POST, GET, DELETE, PATCH')
-  next()
-})
+// Optional: Additional manual headers (only if really needed)
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cookie');
+  res.header('Access-Control-Allow-Methods', 'POST, GET, DELETE, PATCH, OPTIONS');
+  next();
+});
 
 // Add middleware to log all requests to /uploads - FIXED PATH HANDLING
 app.use('/uploads', (req, res, next) => {
